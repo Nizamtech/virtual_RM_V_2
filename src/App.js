@@ -27,6 +27,7 @@ function App() {
             <Route path="/createteam/:id" element={<CreateTeam />} />
             <Route path="/manageteam" element={<ManageTeam />} />
             <Route path="/manageuser" element={<ManageUser />} />
+            <Route path="/manageuser/:userId" element={<ManageUser />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/cardcommission" element={<CardCommission />} />
             <Route path="/loanommission" element={<LoanCommission />} />
