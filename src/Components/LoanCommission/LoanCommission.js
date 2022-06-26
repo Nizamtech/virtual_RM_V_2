@@ -33,9 +33,6 @@ const LoanCommission = () => {
         />
       </div>
       <LoanCommissionTable />
-      <button className=" bg-green-400  hover:shadow-2xl rounded py-2 px-4 text-white mt-4 ">
-        SAVE
-      </button>
     </div>
   );
 };

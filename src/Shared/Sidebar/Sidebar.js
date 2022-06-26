@@ -108,6 +108,16 @@ const Sidebar = () => {
                   <span className="ml-2 text-xs">Card Commission</span>
                 </NavLink>
                 <NavLink
+                  to="/cclist"
+                  className={`${
+                    loccation.pathname.includes("cclist") && "activeLink"
+                  } use" h-10 ml-2  flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+                >
+                  <FontAwesomeIcon icon={faCreditCard} />
+
+                  <span className="ml-2 text-xs">Card Commission List</span>
+                </NavLink>
+                <NavLink
                   to="/loancommission"
                   className={`${
                     loccation.pathname.includes("loanommission") && "activeLink"
@@ -116,6 +126,16 @@ const Sidebar = () => {
                   <FontAwesomeIcon icon={faHandHoldingDollar} />
 
                   <span className="ml-2 text-xs">Loan Commission</span>
+                </NavLink>
+                <NavLink
+                  to="/lclist"
+                  className={`${
+                    loccation.pathname.includes("lclist") && "activeLink"
+                  } use" h-10 ml-2  flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+                >
+                  <FontAwesomeIcon icon={faHandHoldingDollar} />
+
+                  <span className="ml-2 text-xs">Loan Commission List</span>
                 </NavLink>
               </div>
             </details>

@@ -12,6 +12,8 @@ import ManageUser from "./Components/ManageUser/ManageUser";
 import CreateUser from "./Components/CreateUser/CreateUser";
 import CardCommission from "./Components/CardCommission/CardCommission";
 import LoanCommission from "./Components/LoanCommission/LoanCommission";
+import CardCommissionList from "./Components/CardCommissionList/CardCommissionList";
+import LoanCommissionList from "./Components/LoanCommissionList/LoanCommissionList";
 function App() {
   return (
     <div className="grid grid-cols-12 mt-5 mx-10">
@@ -30,7 +32,9 @@ function App() {
             <Route path="/manageuser/:userId" element={<ManageUser />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/cardcommission" element={<CardCommission />} />
+            <Route path="/cclist" element={<CardCommissionList />} />
             <Route path="/loancommission" element={<LoanCommission />} />
+            <Route path="/lclist" element={<LoanCommissionList />} />
 
             <Route path="/test1" element={<Test1 />} />
             <Route path="/test2" element={<Test2 />} />
