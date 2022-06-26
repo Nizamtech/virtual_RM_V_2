@@ -23,7 +23,8 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/createteam" element={<CreateTeam />} />
+            <Route path="/createteam/:id" element={<CreateTeam />} />
+            <Route path="/createteam/" element={<CreateTeam />} />
             <Route path="/manageteam" element={<ManageTeam />} />
             <Route path="/manageuser" element={<ManageUser />} />
             <Route path="/createuser" element={<CreateUser />} />

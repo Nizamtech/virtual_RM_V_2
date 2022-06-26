@@ -3,7 +3,7 @@ import UserForm from "./UserForm";
 
 const CreateUser = () => {
   return (
-    <div className=" h-screen p-3 my-3">
+    <div className=" h-screen p-3 my-3 overflow-scroll">
       <UserForm />
     </div>
   );

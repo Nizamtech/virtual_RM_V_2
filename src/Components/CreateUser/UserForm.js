@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 const UserForm = () => {
   const [profession, setProfession] = useState(null);
+  const [district, setDistrict] = useState(null);
   const professionData = [
     { value: "Banani, Dhaka-1230", label: "Banani, Dhaka-1230" },
     { value: "Mohakhali, Dhaka-1230", label: "Mohakhali, Dhaka-1230" },
     { value: "Badda, Dhaka-1230", label: "Badda, Dhaka-1230" },
     { value: "Gazipur, Dhaka-1230", label: "Gazipur, Dhaka-1230" },
   ];
+
+  useEffect(() => {
+    fetch("https://admin.aamartaka.com/api/v1/division/")
+      .then((response) => response.json())
+      .then((json) => setDistrict(json?.results));
+  }, []);
+
+  const dataBinding = () => {
+    let options;
+    if (district) {
+      options = district?.map(function (item) {
+        return { value: item?.name, label: item?.name };
+      });
+    }
+    return options;
+  };
+  const results = dataBinding();
+  console.log(district);
   return (
     <form className=" mx-2">
       <div className="flex flex-wrap -mx-3 mb-6">
@@ -63,6 +82,43 @@ const UserForm = () => {
         </div>
       </div>
 
+      {/* distric and divition  */}
+      <div className="flex flex-wrap -mx-3 mb-6">
+        <div className="w-full md:w-1/2 px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="grid-last-name"
+          >
+            Division
+          </label>
+          <Select
+            required
+            name="profession"
+            onChange={setDistrict}
+            options={results}
+            className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
+          />
+        </div>
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="grid-first-name"
+          >
+            District
+          </label>
+          <Select
+            required
+            name="profession"
+            onChange={setDistrict}
+            options={results}
+            className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
+          />
+          {/* <p className="text-red-500 text-xs italic">
+            Please fill out this field.
+          </p> */}
+        </div>
+      </div>
+
       <div className="w-full mb-6 md:mb-0">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -79,7 +135,7 @@ const UserForm = () => {
         />
       </div>
       <button
-        className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28"
+        className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28 "
         type="submit"
       >
         Submit
