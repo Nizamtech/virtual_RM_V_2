@@ -43,7 +43,7 @@ const Table = ({ module }) => {
                     type="checkbox"
                     name="view"
                     id=""
-                    checked={item?.isChecked ? "checked" : ""}
+                    checked={item?.isChecked ? "checked" : null}
                   />
                 </td>
               ))}
@@ -64,7 +64,7 @@ const Table = ({ module }) => {
                     type="checkbox"
                     name="view"
                     id=""
-                    checked={item?.isChecked ? "checked" : ""}
+                    checked={item?.isChecked ? "checked" : null}
                   />
                 </td>
               ))}
