@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Table from "../../Shared/Table/Table";
 import { useParams } from "react-router-dom";
 import { teamData } from "../../MockData/MockTeam";
+import Table2 from "./Table2";
 
 const Catalogues = [
   {
@@ -23,7 +24,6 @@ const Catalogues = [
 ];
 const CreateTeam = () => {
   const { id } = useParams();
-  console.log(id);
 
   const teamSingleData = teamData?.find((item) => item.id == id);
 
@@ -43,7 +43,7 @@ const CreateTeam = () => {
             name="name"
             id=""
             placeholder="Name"
-            defaultValue={teamSingleData ? teamSingleData.team_name : ""}
+            defaultValue={teamSingleData ? teamSingleData?.team_name : ""}
           />
         </div>
         {/* name end  */}
@@ -51,7 +51,7 @@ const CreateTeam = () => {
           <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium">
             Permission
           </h1>
-          <Table module={teamSingleData.module} />
+          {id ? <Table module={teamSingleData?.module} /> : <Table2 />}
         </div>
         <button
           className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28 mr-3 text-white "

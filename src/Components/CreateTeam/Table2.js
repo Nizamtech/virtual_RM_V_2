@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Checkbox from "../../lib/Checkbox";
 
-const Table = ({ module }) => {
-  const { team, user } = module;
-
+const Table2 = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -36,17 +33,18 @@ const Table = ({ module }) => {
               <input type="checkbox" name="view" id="" className=" mx-2" />
             </th>
 
-            {team &&
-              team.map((item) => (
-                <td className="px-6 py-4">
-                  <input
-                    type="checkbox"
-                    name="view"
-                    id=""
-                    checked={item?.isChecked ? "checked" : ""}
-                  />
-                </td>
-              ))}
+            <td className="px-6 py-4">
+              <input type="checkbox" name="view" id="" />
+            </td>
+            <td className="px-6 py-4">
+              <input type="checkbox" name="view" id="" />
+            </td>
+            <td className="px-6 py-4">
+              <input type="checkbox" name="view" id="" />
+            </td>
+            <td className="px-6 py-4">
+              <input type="checkbox" name="view" id="" />
+            </td>
           </tr>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th
@@ -57,17 +55,18 @@ const Table = ({ module }) => {
               <input type="checkbox" name="view" id="" className=" mx-3" />
             </th>
 
-            {team &&
-              user.map((item) => (
-                <td className="px-6 py-4">
-                  <input
-                    type="checkbox"
-                    name="view"
-                    id=""
-                    checked={item?.isChecked ? "checked" : ""}
-                  />
-                </td>
-              ))}
+            <td className="px-6 py-4">
+              <input type="checkbox" name="view" id="" />
+            </td>
+            <td className="px-6 py-4">
+              <input type="checkbox" name="view" id="" />
+            </td>
+            <td className="px-6 py-4">
+              <input type="checkbox" name="view" id="" />
+            </td>
+            <td className="px-6 py-4">
+              <input type="checkbox" name="view" id="" />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -75,4 +74,4 @@ const Table = ({ module }) => {
   );
 };
 
-export default Table;
+export default Table2;
