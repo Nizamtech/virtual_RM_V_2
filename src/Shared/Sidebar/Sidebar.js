@@ -25,7 +25,7 @@ const Sidebar = () => {
         <hr className=" border-dotted my-2" />
 
         <ul className="space-y-2  ">
-          <li >
+          <li>
             <NavLink
               to="/test1"
               className={`${
@@ -108,7 +108,7 @@ const Sidebar = () => {
                   <span className="ml-2 text-xs">Card Commission</span>
                 </NavLink>
                 <NavLink
-                  to="/loanommission"
+                  to="/loancommission"
                   className={`${
                     loccation.pathname.includes("loanommission") && "activeLink"
                   } use" h-10 ml-2  flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}

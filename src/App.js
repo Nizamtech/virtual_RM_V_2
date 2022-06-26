@@ -30,7 +30,7 @@ function App() {
             <Route path="/manageuser/:userId" element={<ManageUser />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/cardcommission" element={<CardCommission />} />
-            <Route path="/loanommission" element={<LoanCommission />} />
+            <Route path="/loancommission" element={<LoanCommission />} />
 
             <Route path="/test1" element={<Test1 />} />
             <Route path="/test2" element={<Test2 />} />
