@@ -64,10 +64,10 @@ const CardCommissionTable = () => {
   };
 
   return (
-    <div className="">
+    <div>
       {/* start table  */}
-      <div className=" overflow-x-auto  sm:rounded-lg  mt-3 ">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <div className=" min-h-full overflow-x-auto  sm:rounded-lg  mt-3 h-auto ">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs  uppercase bg-slate-800 text-white dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3 ">

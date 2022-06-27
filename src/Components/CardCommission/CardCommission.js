@@ -61,7 +61,7 @@ const CardCommission = () => {
   };
   console.log(addCommission);
   return (
-    <div className=" h-screen overflow-scroll p-3 my-3">
+    <div className="h-screen  overflow-scroll p-3 my-3 ">
       <div className="w-full mb-6 md:mb-0">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -80,7 +80,7 @@ const CardCommission = () => {
 
       {addCommission && addCommission.map((item) => <CardCommissionTable />)}
 
-      <div className=" flex justify-between items-center">
+      <div className=" flex justify-between items-center ">
         <input
           className=" bg-sky-500 py-1 px-8 rounded-[15px] text-white  mt-3 "
           type="submit"
