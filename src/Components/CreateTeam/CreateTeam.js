@@ -3,6 +3,7 @@ import Table from "../../Shared/Table/Table";
 import { useParams } from "react-router-dom";
 import { teamData } from "../../MockData/MockTeam";
 import Table2 from "./Table2";
+import TestCheck from "./TestCheck";
 
 const Catalogues = [
   {
@@ -72,7 +73,7 @@ const CreateTeam = () => {
           <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium">
             Permission
           </h1>
-          {id ? <Table module={teamSingleData?.module} /> : <Table2 />}
+          {id ? <Table module={teamSingleData?.module} /> : <TestCheck />}
         </div>
         <button
           className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28 mr-3 text-white "
