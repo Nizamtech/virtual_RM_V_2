@@ -20,11 +20,11 @@ import Account from "./Components/Account/Account";
 function App() {
   return (
     <div className="grid grid-cols-12 mt-5 mx-10">
-      <div className="col-span-2 overflow-x-hidden ">
+      <div className=" hidden lg:block col-span-2 overflow-x-hidden ">
         <Sidebar />
       </div>
 
-      <div className="col-span-10 ">
+      <div className=" lg:col-span-10 col-span-12 ">
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />

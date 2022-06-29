@@ -41,7 +41,7 @@ const Table2 = () => {
       setUsers(tempUser);
     }
   };
-console.log(users);
+  console.log(users);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -73,7 +73,6 @@ console.log(users);
               <h1>Team</h1>
               <input
                 type="checkbox"
-              
                 name="allSelect"
                 // checked={
                 //   users.filter((user) => user?.isChecked !== true).length < 1
@@ -83,18 +82,17 @@ console.log(users);
                 className=" mx-2"
               />
             </th>
-            {
-              userData.map((user) => (
-                <td className="px-6 py-4">
-                  <input
-                   type="checkbox"
-                   className="form-check-input"
-                   name={user.name}
-                   checked={user?.isChecked || false}
-                   onChange={handleChange}
-                  />
-                </td>
-              ))}
+            {userData.map((user) => (
+              <td className="px-6 py-4">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  name={user.name}
+                  checked={user?.isChecked || false}
+                  onChange={handleChange}
+                />
+              </td>
+            ))}
           </tr>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th

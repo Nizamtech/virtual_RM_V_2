@@ -161,9 +161,6 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink
-              style={(isActive) => ({
-                background: isActive ? "green" : "blue",
-              })}
               to="/test2"
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"
             >
