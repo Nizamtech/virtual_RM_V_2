@@ -62,10 +62,10 @@ const NewLead = () => {
   ];
 
   const statusData = [
-    { label: "In Process", value: "in process" },
-    { label: "Rejected", value: "rejected" },
-    { label: "Other Bank", value: "other Bank" },
-    { label: "Document Collection", value: "document collection" },
+    { label: "New", value: "New" },
+    { label: "CNI", value: "CNI" },
+    { label: "Non Eligible", value: "Non Eligible" },
+    { label: "Follow", value: "Follow" },
   ];
   const scheduleDateData = [
     { label: "Jun-15 Wed", value: "Jun-15 Wed" },
