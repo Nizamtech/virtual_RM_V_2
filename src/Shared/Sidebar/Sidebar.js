@@ -180,10 +180,7 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <a
-              href="#"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"
-            >
+            <NavLink to="/">
               <svg
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                 fill="currentColor"
@@ -196,13 +193,15 @@ const Sidebar = () => {
               <span className="flex-1 ml-3 whitespace-nowrap text-white">
                 Submitted Lead
               </span>
-            </a>
+            </NavLink>
           </li>
 
           <li>
-            <a
-              href="#"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"
+            <NavLink
+              to="/paymentstatus"
+              className={`${
+                loccation.pathname.includes("paymentstatus") && "activeLink"
+              } use"  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
             >
               <svg
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -219,7 +218,7 @@ const Sidebar = () => {
               <span className="flex-1 ml-3 whitespace-nowrap text-white">
                 Payment Status
               </span>
-            </a>
+            </NavLink>
           </li>
           <li>
             <a

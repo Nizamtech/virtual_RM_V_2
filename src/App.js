@@ -20,6 +20,7 @@ import Account from "./Components/Account/Account";
 import LeadList from "./Components/LeadList/LeadList";
 import Agent from "./Components/Agent/Agent";
 import NewLead from "./Components/LeadList/NewLead/NewLead";
+import PaymentStatus from "./Components/PaymentStatus/PaymentStatus";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path="/leadlist" element={<LeadList />} />
             <Route path="/newagent" element={<Agent />} />
             <Route path="/newlead" element={<NewLead />} />
+            <Route path="/paymentstatus" element={<PaymentStatus />} />
             <Route path="/test2" element={<Test2 />} />
           </Routes>
         </Layout>

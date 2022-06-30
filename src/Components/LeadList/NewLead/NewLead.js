@@ -125,7 +125,7 @@ const NewLead = () => {
   //   );
   return (
     <div className=" m-3 p-3 h-screen">
-      <div className="mx-2 w-1/2 ">
+      <div className="mx-2 w-full lg:w-1/2 ">
         <form onSubmit={handleSubmit}>
           <label> Name</label>
           <input
