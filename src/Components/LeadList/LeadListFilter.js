@@ -105,8 +105,8 @@ const LeadListFilter = () => {
           </div>
         </div>
       </div>
-      <div className=" col-span-1 mt-14">
-        <h1 className=" bg-green-400 py-1 px-10 rounded-lg text-white font-bold">
+      <div className=" col-span-1 mt-12">
+        <h1 className=" bg-green-400 py-[10px] px-10 rounded-lg text-white font-bold">
           Go
         </h1>
       </div>

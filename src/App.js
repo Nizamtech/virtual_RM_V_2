@@ -18,6 +18,8 @@ import VRMList from "./Components/VRMList/VRMList";
 import VRMAccount from "./Components/VRMAccount/VRMAccount";
 import Account from "./Components/Account/Account";
 import LeadList from "./Components/LeadList/LeadList";
+import Agent from "./Components/Agent/Agent";
+import NewLead from "./Components/LeadList/NewLead/NewLead";
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />
             <Route path="/account" element={<Account />} />
             <Route path="/leadlist" element={<LeadList />} />
+            <Route path="/newagent" element={<Agent />} />
+            <Route path="/newlead" element={<NewLead />} />
             <Route path="/test2" element={<Test2 />} />
           </Routes>
         </Layout>
