@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { DateRangePicker, DateRange, Calendar } from "react-date-range";
+// import "rsuite/styles/index.less";
+// import "rsuite/dist/rsuite.min.css";
+// import { DateRangePicker, DateRange, Calendar } from "react-date-range";
+import { DateRangePicker } from "rsuite";
 const LeadListFilter = () => {
   const [vrmAgent, setVrmAgent] = useState(null);
   const [status, setStatus] = useState(null);
@@ -38,7 +41,7 @@ const LeadListFilter = () => {
     { value: "Credit Cart", label: "Credit Cart" },
   ];
   return (
-    <div className=" grid grid-cols-12 place-content-center place-items-center ">
+    <div className=" grid grid-cols-12 place-content-center  ">
       <div className=" col-span-11">
         <div className=" grid grid-cols-6 gap-3 place-content-center place-items-center my-2 p-2 ">
           <div className="w-full">
@@ -102,8 +105,8 @@ const LeadListFilter = () => {
           </div>
         </div>
       </div>
-      <div className=" col-span-1 mt-8">
-        <h1 className=" bg-green-400 py-1 px-8 rounded-lg text-white font-bold">
+      <div className=" col-span-1 mt-14">
+        <h1 className=" bg-green-400 py-1 px-10 rounded-lg text-white font-bold">
           Go
         </h1>
       </div>
