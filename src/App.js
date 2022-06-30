@@ -21,6 +21,9 @@ import LeadList from "./Components/LeadList/LeadList";
 import Agent from "./Components/Agent/Agent";
 import NewLead from "./Components/LeadList/NewLead/NewLead";
 import PaymentStatus from "./Components/PaymentStatus/PaymentStatus";
+import PaymentHistory from "./Components/PaymentStatus/PaymentHistory";
+import Feature from "./Components/Feature/Feature";
+import Inbox from "./Components/Inbox/Inbox";
 
 function App() {
   return (
@@ -50,6 +53,9 @@ function App() {
             <Route path="/newagent" element={<Agent />} />
             <Route path="/newlead" element={<NewLead />} />
             <Route path="/paymentstatus" element={<PaymentStatus />} />
+            <Route path="/paymenthistory" element={<PaymentHistory />} />
+            <Route path="/feature" element={<Feature />} />
+            <Route path="/inbox" element={<Inbox />} />
             <Route path="/test2" element={<Test2 />} />
           </Routes>
         </Layout>
