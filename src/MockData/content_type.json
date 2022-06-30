@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "app_label": "admin",
+    "model": "logentry"
+  },
+  {
+    "id": 2,
+    "app_label": "auth",
+    "model": "permission"
+  },
+  {
+    "id": 3,
+    "app_label": "auth",
+    "model": "group"
+  },
+  {
+    "id": 4,
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  },
+  {
+    "id": 5,
+    "app_label": "sessions",
+    "model": "session"
+  },
+  {
+    "id": 6,
+    "app_label": "authtoken",
+    "model": "token"
+  },
+  {
+    "id": 7,
+    "app_label": "authtoken",
+    "model": "tokenproxy"
+  },
+  {
+    "id": 8,
+    "app_label": "account",
+    "model": "user"
+  },
+  {
+    "id": 9,
+    "app_label": "account",
+    "model": "vrmuser"
+  },
+  {
+    "id": 10,
+    "app_label": "account",
+    "model": "userprofile"
+  },
+  {
+    "id": 11,
+    "app_label": "location_service",
+    "model": "division"
+  },
+  {
+    "id": 12,
+    "app_label": "location_service",
+    "model": "zone"
+  },
+  {
+    "id": 13,
+    "app_label": "location_service",
+    "model": "upazila"
+  },
+  {
+    "id": 14,
+    "app_label": "location_service",
+    "model": "area"
+  },
+  {
+    "id": 15,
+    "app_label": "agent_lead",
+    "model": "virtualagentlead"
+  },
+  {
+    "id": 16,
+    "app_label": "benefit",
+    "model": "cardcommission"
+  },
+  {
+    "id": 17,
+    "app_label": "benefit",
+    "model": "creditcardtype"
+  },
+  {
+    "id": 18,
+    "app_label": "benefit",
+    "model": "institute"
+  },
+  {
+    "id": 19,
+    "app_label": "benefit",
+    "model": "loancommission"
+  },
+  {
+    "id": 20,
+    "app_label": "benefit",
+    "model": "loantype"
+  }
+]
