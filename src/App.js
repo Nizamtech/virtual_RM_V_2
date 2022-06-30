@@ -17,6 +17,7 @@ import LoanCommissionList from "./Components/LoanCommissionList/LoanCommissionLi
 import VRMList from "./Components/VRMList/VRMList";
 import VRMAccount from "./Components/VRMAccount/VRMAccount";
 import Account from "./Components/Account/Account";
+import LeadList from "./Components/LeadList/LeadList";
 function App() {
   return (
     <div className="grid grid-cols-12 mt-5 mx-10">
@@ -41,8 +42,7 @@ function App() {
             <Route path="/vrmlist" element={<VRMList />} />
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />
             <Route path="/account" element={<Account />} />
-
-            <Route path="/test1" element={<Test1 />} />
+            <Route path="/leadlist" element={<LeadList />} />
             <Route path="/test2" element={<Test2 />} />
           </Routes>
         </Layout>
