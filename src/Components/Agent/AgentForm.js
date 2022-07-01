@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 
-const CreateUserForm = () => {
+const AgentForm = () => {
   const [user, setUser] = useState({
     userName: "",
     email: "",
@@ -79,14 +79,14 @@ const CreateUserForm = () => {
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-last-name"
           >
-            Email
+            Mobile
           </label>
           <input
             className="appearance-none block w-full text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-last-name"
-            type="email"
-            name="email"
-            placeholder="email"
+            type="text"
+            name="mobile"
+            placeholder="Mobile"
             required
             onBlur={handleBlur}
           />
@@ -98,25 +98,22 @@ const CreateUserForm = () => {
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-password"
           >
-            Password
+            Location
           </label>
           <input
             className="appearance-none block w-full  text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-password"
-            type="password"
+            type="text"
             name="password"
             minLength={6}
             onBlur={handleBlur}
-            placeholder="******************"
+            placeholder="Location"
           />
-          <p className="text-gray-600 text-xs italic">
-            Make it as long and as crazy as you'd like
-          </p>
         </div>
       </div>
 
       {/* distric and divition  */}
-      <div className="flex flex-wrap -mx-3 mb-6">
+      {/* <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full  px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -134,7 +131,7 @@ const CreateUserForm = () => {
             className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
           />
         </div>
-      </div>
+      </div> */}
 
       <button
         className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28 "
@@ -146,4 +143,4 @@ const CreateUserForm = () => {
   );
 };
 
-export default CreateUserForm;
+export default AgentForm;
