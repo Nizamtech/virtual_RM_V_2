@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PermissionForm from "./PermissionForm";
 import restData from "../../MockData/content_type.json";
 import axios from "axios";
+import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 const CreateTeamForm = () => {
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [users, setUsers] = useState([]);
@@ -59,7 +60,11 @@ const CreateTeamForm = () => {
     };
     axios
       .post("http://127.0.0.1:8000/api/team/", data)
-      .then((response) => console.log(response))
+      .then((response) => {
+        if (response.status === 201) {
+          SuccessAlert("Team Created", "success");
+        }
+      })
       .catch((error) => {
         console.log({ errorMessage: error.message });
         console.error("There was an error!", error);
