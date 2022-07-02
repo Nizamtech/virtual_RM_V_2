@@ -24,6 +24,7 @@ import PaymentStatus from "./Components/PaymentStatus/PaymentStatus";
 import PaymentHistory from "./Components/PaymentStatus/PaymentHistory";
 import Feature from "./Components/Feature/Feature";
 import Inbox from "./Components/Inbox/Inbox";
+import EditTeam from "./Components/EditTeam/EditTeam";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/createteam/" element={<CreateTeam />} />
-            <Route path="/createteam/:id" element={<CreateTeam />} />
+            <Route path="/createteam/:id" element={<EditTeam />} />
             <Route path="/manageteam" element={<ManageTeam />} />
             <Route path="/manageuser" element={<ManageUser />} />
             <Route path="/manageuser/:userId" element={<ManageUser />} />

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { deleteAlert } from "../../Shared/Alert/deleteAlert";
 import { Link } from "react-router-dom";
-const UserTable = ({ data }) => {
+const UserTable = ({ data, deleteAlert }) => {
   return (
     <div className="flex flex-col mt-8">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -18,14 +18,15 @@ const UserTable = ({ data }) => {
                   Name
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  Team
+                </th>
+                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                   Phone
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                   Create at
                 </th>
-                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Address
-                </th>
+
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                   Action
                 </th>
@@ -53,12 +54,17 @@ const UserTable = ({ data }) => {
 
                         <div className="ml-4">
                           <div className="text-sm font-medium leading-5 text-gray-900">
-                            {item?.userName}
+                            {item?.username}
                           </div>
                         </div>
                       </div>
                     </td>
 
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                      <div className="text-sm leading-5 text-gray-500">
+                        {item?.team}
+                      </div>
+                    </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
                         {item?.phone}
@@ -67,15 +73,10 @@ const UserTable = ({ data }) => {
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                        {item?.create_At}
+                        {item?.created_at}
                       </span>
                     </td>
 
-                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                      <div className="text-sm leading-5 text-gray-500">
-                        {item?.address}
-                      </div>
-                    </td>
                     <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
                       <button>
                         {" "}
@@ -97,7 +98,7 @@ const UserTable = ({ data }) => {
                           />
                         </svg>
                       </Link>
-                      <button onClick={() => deleteAlert()}>
+                      <button onClick={() => deleteAlert(item?.id)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="w-6 h-6 text-red-400"

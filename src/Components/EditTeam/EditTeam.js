@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
+import { useParams } from "react-router-dom";
+const EditTeam = () => {
+  const { id } = useParams();
 
-const CreateTeamForm = () => {
   const [users, setUsers] = useState([]);
   const [permission, setPermission] = useState([]);
   const [team, setTeam] = useState([]);
+  const [singleTeam, setSingleTeam] = useState([]);
 
   const [content_type, setContent_type] = useState([]);
 
@@ -39,9 +42,15 @@ const CreateTeamForm = () => {
       const rest = await content_type.json();
       setContent_type(rest);
     };
+    const loadSingleData = async () => {
+      const content_type = await fetch(`http://127.0.0.1:8000/api/team/${id}`);
+      const rest = await content_type.json();
+      setSingleTeam(rest);
+    };
 
+    loadSingleData();
     loadPermission();
-  }, []);
+  }, [id]);
 
   const handleName = (e) => {
     setTeam(e.target.value);
@@ -65,6 +74,8 @@ const CreateTeamForm = () => {
       });
   };
 
+  console.log("singleTeam", content_type, singleTeam);
+
   return (
     <div className=" h-screen overflow-y-scroll overflow-x-hidden">
       <form onSubmit={handleSubmitFile}>
@@ -73,6 +84,7 @@ const CreateTeamForm = () => {
             Team Name
           </h1>
           <input
+            defaultValue={singleTeam?.name}
             required
             className=" w-full h-12 ml-1 px-4 rounded-md"
             type="text"
@@ -96,27 +108,18 @@ const CreateTeamForm = () => {
           {content_type &&
             content_type?.map((item) => (
               <div className=" grid grid-cols-5 p-3 border place-content-center  border-gray-200 my-1">
-                <div className=" flex">
-                  <h1 className=" text-start mx-2 text-lg uppercase">
-                    {item?.model}{" "}
-                  </h1>
-                  {/* <input
-                    type="checkbox"
-                    checked={
-                      !content_type.some((user) => user?.isChecked !== true)
-                    }
-                    onChange={handleChange}
-                    name="allSelect"
-                    id=""
-                  /> */}
-                </div>
+                <h1 className=" text-start mx-2 text-lg uppercase">
+                  {item?.model}{" "}
+                </h1>
 
                 <div>
                   <input
                     type="checkbox"
                     value={item?.permissions?.view}
                     name={item?.permissions?.view}
-                    checked={item ? item?.isChecked : false}
+                    checked={singleTeam?.permissions?.find((it) =>
+                      it === item?.permissions?.view ? true : false
+                    )}
                     onChange={handleChange}
                     className=" mt-2 mx-auto w-full"
                   />
@@ -126,7 +129,9 @@ const CreateTeamForm = () => {
                     type="checkbox"
                     value={item?.permissions?.add}
                     name={item?.permissions?.add}
-                    checked={item ? item?.isChecked : false}
+                    checked={singleTeam?.permissions?.find((it) =>
+                      it === item?.permissions?.view ? true : false
+                    )}
                     onChange={handleChange}
                     className=" mt-2  mx-auto w-full"
                   />
@@ -136,7 +141,9 @@ const CreateTeamForm = () => {
                     type="checkbox"
                     value={item?.permissions?.change}
                     name={item?.permissions?.change}
-                    checked={item ? item?.isChecked : false}
+                    checked={singleTeam?.permissions?.find((it) =>
+                      it === item?.permissions?.view ? true : false
+                    )}
                     onChange={handleChange}
                     className=" mt-2  mx-auto w-full"
                   />
@@ -146,7 +153,9 @@ const CreateTeamForm = () => {
                     type="checkbox"
                     value={item?.permissions?.delete}
                     name={item?.permissions?.delete}
-                    checked={item ? item?.isChecked : false}
+                    checked={singleTeam?.permissions?.find((it) =>
+                      it === item?.permissions?.view ? true : false
+                    )}
                     onChange={handleChange}
                     className=" mt-2  mx-auto w-full"
                   />
@@ -166,4 +175,4 @@ const CreateTeamForm = () => {
   );
 };
 
-export default CreateTeamForm;
+export default EditTeam;

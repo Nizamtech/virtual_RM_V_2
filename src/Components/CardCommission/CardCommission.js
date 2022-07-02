@@ -28,7 +28,13 @@ const CardCommission = () => {
   useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/institutes/")
       .then((response) => response.json())
-      .then((json) => setData(json.results));
+      .then((res) => {
+        const rest = res.results;
+        console.log(rest);
+        const result = rest.filter((item) => item.is_partner === true);
+        console.log(result);
+        setData(res.results);
+      });
   }, []);
 
   let options = data?.map(function (item) {
@@ -37,19 +43,36 @@ const CardCommission = () => {
   const handleChange = (e) => {
     setCommission(e.target.value);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      institute: institute?.value,
-      cardType: cardType?.value,
-      from: from?.value,
-      to: to?.value,
-      commission: commission,
-    };
-    console.log("from function", data);
-    selectInputRef.current.clearValue();
-    e.target.reset();
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     institute: institute?.value,
+  //     cardType: cardType?.value,
+  //     from: from?.value,
+  //     to: to?.value,
+  //     commission: commission,
+  //   };
+  //   console.log("from function", data);
+  //   selectInputRef.current.clearValue();
+  //   e.target.reset();
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     institute_name: institute_name,
+  //     card_name: card_name,
+  //     from_range: from_range,
+  //     to_range: to_range,
+  //     commissionn: commissionn,
+  //   };
+
+  //   await axios
+  //     .post("http://127.0.0.1:8000/benefit/card_commision/add/", data)
+  //     .then((result) => console.log(result));
+  //   selectInputRef.current.clearValue();
+  //   e.target.reset();
+  // };
 
   const handleCounter = () => {
     setCounter(counter + 1);

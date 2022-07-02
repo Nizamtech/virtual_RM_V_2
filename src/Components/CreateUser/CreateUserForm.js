@@ -1,38 +1,51 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
+import axios from "axios";
 
 const CreateUserForm = () => {
   const [user, setUser] = useState({
-    userName: "",
+    username: "",
+    phone: "",
     email: "",
     password: "",
   });
-  const [district, setDistrict] = useState(null);
+
   const [team, setTeam] = useState(null);
-  const teamList = [
-    { value: "Operation", label: "Operation" },
-    { value: "RTC", label: "RTC" },
-    { value: "Support", label: "Support" },
-    { value: "Bank Return", label: "Bank Return" },
-  ];
+  const [teamName, setTeamName] = useState("");
 
   useEffect(() => {
-    fetch("https://admin.aamartaka.com/api/v1/division/")
+    fetch("http://127.0.0.1:8000/api/team/")
       .then((response) => response.json())
-      .then((json) => setDistrict(json?.results));
+      .then((json) => setTeam(json.results));
   }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    user.team = teamName?.value;
+    console.log(user);
+    await axios
+      .post("http://127.0.0.1:8000/api/user/register/", user)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 201) {
+          SuccessAlert("User Created", "success");
+        }
+      })
+      .catch((error) => {
+        SuccessAlert(error.message, "error");
+      });
+  };
 
   const dataBinding = () => {
     let options;
-    if (district) {
-      options = district?.map(function (item) {
+    if (team) {
+      options = team?.map(function (item) {
         return { value: item?.name, label: item?.name };
       });
     }
     return options;
   };
-  const results = dataBinding();
 
   const handleBlur = (e) => {
     const newData = { ...user };
@@ -40,16 +53,7 @@ const CreateUserForm = () => {
     setUser(newData);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const data = {
-      ...user,
-      teamName: team.value,
-    };
-    SuccessAlert("Your work has been saved", "success");
-    console.log(data);
-  };
+  const teamData = dataBinding();
 
   return (
     <form onSubmit={handleSubmit} className=" mx-2">
@@ -65,7 +69,7 @@ const CreateUserForm = () => {
             className="appearance-none block w-full text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="grid-first-name"
             type="text"
-            name="userName"
+            name="username"
             placeholder="Jane"
             required
             onBlur={handleBlur}
@@ -93,7 +97,29 @@ const CreateUserForm = () => {
         </div>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="grid-first-name"
+          >
+            Phone
+          </label>
+          <input
+            className="appearance-none block w-full text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="grid-first-name"
+            type="number"
+            name="phone"
+            ng-pattern="/^(?:\+88|01)?\d{11}\r?$/"
+            maxLength={11}
+            required
+            onBlur={handleBlur}
+          />
+          {/* <p className="text-red-500 text-xs italic">
+            Please fill out this field.
+          </p> */}
+        </div>
+
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-password"
@@ -109,13 +135,9 @@ const CreateUserForm = () => {
             onBlur={handleBlur}
             placeholder="******************"
           />
-          <p className="text-gray-600 text-xs italic">
-            Make it as long and as crazy as you'd like
-          </p>
         </div>
       </div>
 
-      {/* distric and divition  */}
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full  px-3">
           <label
@@ -127,10 +149,8 @@ const CreateUserForm = () => {
           <Select
             required
             name="teamName"
-            onChange={setTeam}
-            // options={results}
-            options={teamList}
-            // onBlur={handleBlur}
+            onChange={setTeamName}
+            options={teamData}
             className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
           />
         </div>
