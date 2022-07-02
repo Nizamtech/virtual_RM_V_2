@@ -72,7 +72,7 @@ const CreateUserForm = () => {
             name="username"
             placeholder="Jane"
             required
-            onChange={(e) => setUsername(e.target.value)}
+            onBlur={handleBlur}
           />
           {/* <p className="text-red-500 text-xs italic">
             Please fill out this field.
@@ -92,7 +92,7 @@ const CreateUserForm = () => {
             name="email"
             placeholder="email"
             required
-            onChange={(e) => setEmail(e.target.value)}
+            onBlur={handleBlur}
           />
         </div>
       </div>
@@ -132,7 +132,7 @@ const CreateUserForm = () => {
             type="password"
             name="password"
             minLength={6}
-            onChange={(e) => setPassword(e.target.value)}
+            onBlur={handleBlur}
             placeholder="******************"
           />
         </div>

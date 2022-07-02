@@ -4,7 +4,6 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { deleteAlert } from "../../Shared/Alert/deleteAlert";
 import { Link } from "react-router-dom";
 
-
 const VrmListTable = ({ users }) => {
   return (
     <div className="flex flex-col mt-8">
@@ -40,13 +39,13 @@ const VrmListTable = ({ users }) => {
                   <tr>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
                       <div className="text-sm leading-5 text-gray-500">
-                       {item.username}
+                        {item.username}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="ml-4">
                         <div className="text-sm font-medium leading-5 text-gray-900">
-                         {item.status_name}
+                          {item.status_name}
                         </div>
                       </div>
                     </td>
