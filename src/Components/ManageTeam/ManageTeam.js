@@ -1,20 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { teamData } from "../../MockData/MockTeam";
-
+import axios from "axios";
 import DataShowTable from "../../Shared/Table/DataShowTable";
+import Swal from "sweetalert2";
+
+const deleteAlert = (id) => {
+  console.log(id);
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      axios.delete(`http://127.0.0.1:8000/api/team/${id}`).then((res) => {
+        if (res.status === 204) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+      });
+    }
+  });
+};
 
 const ManageTeam = () => {
-  // const [teamData, setTeamData] = useState(null);
+  const handleDelete = (e) => {
+    deleteAlert(e.id);
+  };
 
-  // console.log(teamData);
-  useEffect(() => {
-    // fetch(teamData)
-    //   .then((response) => response.json())
-    //   .then((json) => console.log(json));
-  }, []);
   return (
     <div className=" h-screen p-3">
-      <DataShowTable item={teamData} />
+      <DataShowTable handleDelete={handleDelete} item={teamData} />
     </div>
   );
 };

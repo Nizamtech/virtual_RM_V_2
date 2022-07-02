@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { deleteAlert } from "../Alert/deleteAlert";
 
-const DataShowTable = ({ item }) => {
+const DataShowTable = ({ item, handleDelete }) => {
   return (
     <div className="flex flex-col mt-8">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -80,7 +80,7 @@ const DataShowTable = ({ item }) => {
                           />
                         </svg>
                       </Link>
-                      <button onClick={() => deleteAlert()}>
+                      <button onClick={() => handleDelete(team)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="w-6 h-6 text-red-400"

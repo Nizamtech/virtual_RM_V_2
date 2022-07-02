@@ -66,8 +66,7 @@ const CreateTeamForm = () => {
         }
       })
       .catch((error) => {
-        console.log({ errorMessage: error.message });
-        console.error("There was an error!", error);
+        SuccessAlert(error.message, "error");
       });
   };
 
