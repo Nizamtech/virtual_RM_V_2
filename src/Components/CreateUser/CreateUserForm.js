@@ -63,7 +63,7 @@ const CreateUserForm = () => {
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-first-name"
           >
-            Name
+            Username
           </label>
           <input
             className="appearance-none block w-full text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -72,7 +72,7 @@ const CreateUserForm = () => {
             name="username"
             placeholder="Jane"
             required
-            onBlur={handleBlur}
+            onChange={(e) => setUsername(e.target.value)}
           />
           {/* <p className="text-red-500 text-xs italic">
             Please fill out this field.
@@ -92,7 +92,7 @@ const CreateUserForm = () => {
             name="email"
             placeholder="email"
             required
-            onBlur={handleBlur}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
       </div>
@@ -132,7 +132,7 @@ const CreateUserForm = () => {
             type="password"
             name="password"
             minLength={6}
-            onBlur={handleBlur}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="******************"
           />
         </div>

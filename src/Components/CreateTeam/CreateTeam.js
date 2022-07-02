@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Table from "../../Shared/Table/Table";
 import { useParams } from "react-router-dom";
 import { teamData } from "../../MockData/MockTeam";
-import Table2 from "./Table2";
 import CreateTeamForm from "./CreateTeamForm";
 import permission from "../../MockData/permission.json";
 import content_type from "../../MockData/content_type.json";

@@ -11,6 +11,15 @@ import axios from "axios";
 const ManageUser = () => {
   const [users, setUsers] = useState([]);
   const { userId } = useParams();
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    axios.get(`http://127.0.0.1:8000/accounts/user/list/`).then((res) => {
+      setUser(res.data.results);
+    });
+  }, []);
+
+ 
 
   const singleUser = userId && users.find((item) => item?.id == userId);
 
