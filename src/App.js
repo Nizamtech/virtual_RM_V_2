@@ -1,10 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Layout from "./Components/Layout/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Sidebar from "./Shared/Sidebar/Sidebar";
-import Test1 from "./Components/Test1/Test1";
 import Test2 from "./Components/Test1/Test2";
 import CreateTeam from "./Components/CreateTeam/CreateTeam";
 import ManageTeam from "./Components/ManageTeam/ManageTeam";
@@ -17,14 +15,22 @@ import LoanCommissionList from "./Components/LoanCommissionList/LoanCommissionLi
 import VRMList from "./Components/VRMList/VRMList";
 import VRMAccount from "./Components/VRMAccount/VRMAccount";
 import Account from "./Components/Account/Account";
+import LeadList from "./Components/LeadList/LeadList";
+import Agent from "./Components/Agent/Agent";
+import NewLead from "./Components/LeadList/NewLead/NewLead";
+import PaymentStatus from "./Components/PaymentStatus/PaymentStatus";
+import PaymentHistory from "./Components/PaymentStatus/PaymentHistory";
+import Feature from "./Components/Feature/Feature";
+import Inbox from "./Components/Inbox/Inbox";
+
 function App() {
   return (
     <div className="grid grid-cols-12 mt-5 mx-10">
-      <div className="col-span-2 overflow-x-hidden ">
+      <div className=" hidden lg:block col-span-2 overflow-x-hidden ">
         <Sidebar />
       </div>
 
-      <div className="col-span-10 ">
+      <div className=" lg:col-span-10 col-span-12 ">
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -41,8 +47,13 @@ function App() {
             <Route path="/vrmlist" element={<VRMList />} />
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />
             <Route path="/account" element={<Account />} />
-
-            <Route path="/test1" element={<Test1 />} />
+            <Route path="/leadlist" element={<LeadList />} />
+            <Route path="/newagent" element={<Agent />} />
+            <Route path="/newlead" element={<NewLead />} />
+            <Route path="/paymentstatus" element={<PaymentStatus />} />
+            <Route path="/paymenthistory" element={<PaymentHistory />} />
+            <Route path="/feature" element={<Feature />} />
+            <Route path="/inbox" element={<Inbox />} />
             <Route path="/test2" element={<Test2 />} />
           </Routes>
         </Layout>

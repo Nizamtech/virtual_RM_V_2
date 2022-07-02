@@ -66,7 +66,7 @@ const CardCommissionTable = () => {
   return (
     <div>
       {/* start table  */}
-      <div className=" min-h-full overflow-x-auto  sm:rounded-lg  mt-3 h-auto ">
+      <div className=" min-h-full sm:rounded-lg  mt-3 h-auto ">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs  uppercase bg-slate-800 text-white dark:bg-gray-700 dark:text-gray-400">
             <tr>

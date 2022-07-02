@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { teamData } from "../../MockData/MockTeam";
 
+const userData = [
+  {
+    name: "view",
+    id: 1,
+  },
+  {
+    name: "add",
+    id: 2,
+  },
+  {
+    name: "change",
+    id: 3,
+  },
+  {
+    name: "delete",
+    id: 4,
+  },
+];
+
 const Table2 = () => {
   const [users, setUsers] = useState([]);
-
-  const userData = [
-    {
-      name: "view",
-      id: 1,
-    },
-    {
-      name: "add",
-      id: 2,
-    },
-    {
-      name: "change",
-      id: 3,
-    },
-    {
-      name: "delete",
-      id: 4,
-    },
-  ];
 
   useEffect(() => {
     setUsers(userData);
@@ -29,24 +29,19 @@ const Table2 = () => {
 
   const handleChange = (e) => {
     const { name, checked } = e.target;
-
-    if (name === "all") {
-      let temUser = users.map((user) => {
-        return {
-          ...user,
-          isChecked: checked,
-        };
+    if (name === "allSelect") {
+      let tempUser = users.map((user) => {
+        return { ...user, isChecked: checked };
       });
-      setUsers(temUser);
+      setUsers(tempUser);
     } else {
       let tempUser = users.map((user) =>
         user.name === name ? { ...user, isChecked: checked } : user
       );
-      console.table(checked, tempUser);
       setUsers(tempUser);
     }
   };
-
+  console.log(users);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -77,26 +72,27 @@ const Table2 = () => {
             >
               <h1>Team</h1>
               <input
-                onChange={handleChange}
                 type="checkbox"
-                name="all"
-                checked={
-                  users?.filter((user) => user?.isChecked === false).length < 1
-                }
+                name="allSelect"
+                // checked={
+                //   users.filter((user) => user?.isChecked !== true).length < 1
+                // }
+                checked={!users.some((user) => user?.isChecked !== true)}
+                onChange={handleChange}
                 className=" mx-2"
               />
             </th>
-            {userData &&
-              userData?.map((user) => (
-                <td className="px-6 py-4">
-                  <input
-                    type="checkbox"
-                    name={user.name}
-                    checked={users ? users?.isChecked : false}
-                    onChange={handleChange}
-                  />
-                </td>
-              ))}
+            {userData.map((user) => (
+              <td className="px-6 py-4">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  name={user.name}
+                  checked={user?.isChecked || false}
+                  onChange={handleChange}
+                />
+              </td>
+            ))}
           </tr>
           <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th

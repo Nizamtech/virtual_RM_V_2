@@ -11,7 +11,7 @@ import {
 const Menu = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   return (
-    <div className="">
+    <div className=" ">
       <div className="flex flex-wrap ">
         <div className="w-full">
           <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-[#F1F5F9] rounded-full ">
@@ -23,8 +23,7 @@ const Menu = () => {
                 >
                   Hello, Jhon
                 </a>
-               
-            
+
                 <ul className="flex justify-between items-center">
                   <li className="nav-item">
                     <a
@@ -45,7 +44,7 @@ const Menu = () => {
         </div>
       </div>
       {menuOpen && (
-        <div className="bg-[#1E40AF] w-60 float-right relative top-[-15px] text-white p-3 rounded-md mr-2">
+        <div className="bg-[#1E40AF] w-60 float-right absolute top-20 right-10 text-white p-3 rounded-md mr-2">
           <h1 className=" font-bold text-sm">Mr.Jhon</h1>
           <h1>Frontend Developer</h1>
           <hr className=" border-dotted my-3" />
