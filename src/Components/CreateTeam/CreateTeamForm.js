@@ -1,21 +1,42 @@
 import React, { useEffect, useState } from "react";
 import PermissionForm from "./PermissionForm";
 import restData from "../../MockData/content_type.json";
+import axios from "axios";
 const CreateTeamForm = () => {
+  const [isCheckAll, setIsCheckAll] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [isCheck, setIsCheck] = useState([]);
+  const [list, setList] = useState([]);
+  const [teamPermList, setTeamPermList] = useState([]);
   const [permission, setPermission] = useState([]);
-  const [content_type, setContent_type] = useState([]);
-  const [result, setResult] = useState([]);
+  const [team, setTeam] = useState([]);
 
+  const [content_type, setContent_type] = useState([]);
+
+  const handleChange = (e) => {
+    const { name, checked } = e.target;
+    console.log(checked);
+    if (checked) {
+      setPermission([...permission, name]);
+    } else {
+      const restData = permission.filter((item) => item !== name);
+      setPermission(restData);
+    }
+    if (name === "allSelect") {
+      let tempUser = content_type.map((user) => {
+        return { ...user, isChecked: checked };
+      });
+      setUsers(tempUser);
+    } else {
+      let tempUser = content_type.map((user) =>
+        user.name === name ? { ...user, isChecked: checked } : user
+      );
+      setUsers(tempUser);
+    }
+  };
   // console.log(permission, content_type);
   useEffect(() => {
     const loadPermission = async () => {
-      const permission = await fetch(
-        "http://localhost:8000/accounts/user/perm/"
-      );
-      const result = await permission.json();
-      setPermission(result);
-      // console.log(permission);
-
       const content_type = await fetch(
         "http://localhost:8000/accounts/content_type/"
       );
@@ -23,57 +44,125 @@ const CreateTeamForm = () => {
       setContent_type(rest);
     };
 
-    // loadContent_type();
     loadPermission();
   }, []);
 
-  // let result = [];
+  const handleName = (e) => {
+    setTeam(e.target.value);
+  };
 
-  for (const key of content_type) {
-    let perm = permission.filter(
-      (item) => item?.content_type?.model === key.model
-    );
-
-    console.log(perm);
-
-    let permId = {};
-
-    for (const item of perm) {
-      if (item.codename.includes("add_")) {
-        permId.add = item.id;
-      } else if (item.codename.includes("change_")) {
-        permId.change = item.id;
-      } else if (item.codename.includes("view_")) {
-        permId.view = item.id;
-      } else if (item.codename.includes("delete_")) {
-        permId.delete = item.id;
-      }
-    }
-    console.log(permId);
-    // setResult(...(result[key.model] = permId));
-  }
-
-  // const handleChange = (e) => {
-  //   const { name, checked } = e.target;
-  //   if (name === "allSelect") {
-  //     let tempUser = users.map((user) => {
-  //       return { ...user, isChecked: checked };
-  //     });
-  //     setUsers(tempUser);
-  //   } else {
-  //     let tempUser = users.map((user) =>
-  //       user.name === name ? { ...user, isChecked: checked } : user
-  //     );
-  //     setUsers(tempUser);
-  //   }
-  // };
-
-  // console.log(result);
+  const handleSubmitFile = async (event) => {
+    event.preventDefault();
+    const data = {
+      name: team,
+      permissions: permission,
+    };
+    axios
+      .post("http://127.0.0.1:8000/api/team/", data)
+      .then((response) => console.log(response))
+      .catch((error) => {
+        console.log({ errorMessage: error.message });
+        console.error("There was an error!", error);
+      });
+  };
 
   return (
-    <div>
-      <h1>Permission</h1>
-      {result && result?.map((item) => <h1>Hi</h1>)}
+    <div className=" h-screen overflow-y-scroll overflow-x-hidden">
+      <form onSubmit={handleSubmitFile}>
+        <div className=" mx-2 p-2 mt-1 ">
+          <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium">
+            Team Name
+          </h1>
+          <input
+            required
+            className=" w-full h-12 ml-1 px-4 rounded-md"
+            type="text"
+            name="name"
+            id=""
+            placeholder="Name"
+            onChange={handleName}
+          />
+        </div>
+        <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium mt-8">
+          Permission
+        </h1>
+        <div className=" grid grid-cols-5 p-2 place-content-center place-items-center text-start mx-2 text-lg uppercase ">
+          <div>Model</div>
+          <div>View</div>
+          <div>Add</div>
+          <div>Change</div>
+          <div>Delete</div>
+        </div>
+        <div>
+          {content_type &&
+            content_type?.map((item) => (
+              <div className=" grid grid-cols-5 p-3 border place-content-center  border-gray-200 my-1">
+                <div className=" flex">
+                  <h1 className=" text-start mx-2 text-lg uppercase">
+                    {item?.model}{" "}
+                  </h1>
+                  {/* <input
+                    type="checkbox"
+                    checked={
+                      !content_type.some((user) => user?.isChecked !== true)
+                    }
+                    onChange={handleChange}
+                    name="allSelect"
+                    id=""
+                  /> */}
+                </div>
+
+                <div>
+                  <input
+                    type="checkbox"
+                    value={item?.permissions?.view}
+                    name={item?.permissions?.view}
+                    checked={item ? item?.isChecked : false}
+                    onChange={handleChange}
+                    className=" mt-2 mx-auto w-full"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    value={item?.permissions?.add}
+                    name={item?.permissions?.add}
+                    checked={item ? item?.isChecked : false}
+                    onChange={handleChange}
+                    className=" mt-2  mx-auto w-full"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    value={item?.permissions?.change}
+                    name={item?.permissions?.change}
+                    checked={item ? item?.isChecked : false}
+                    onChange={handleChange}
+                    className=" mt-2  mx-auto w-full"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    value={item?.permissions?.delete}
+                    name={item?.permissions?.delete}
+                    checked={item ? item?.isChecked : false}
+                    onChange={handleChange}
+                    className=" mt-2  mx-auto w-full"
+                  />
+                </div>
+              </div>
+            ))}
+        </div>
+
+        <button
+          className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28 mr-3 text-white "
+          type="submit"
+        >
+          SAVE
+        </button>
+      </form>
     </div>
   );
 };
