@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PermissionForm from "./PermissionForm";
-import restData from "../../MockData/content_type.json";
 const CreateTeamForm = () => {
   const [permission, setPermission] = useState([]);
   const [content_type, setContent_type] = useState([]);

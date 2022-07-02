@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { teamData } from "../../MockData/MockTeam";
 
 const userData = [
   {
-    name: "view",
-    id: 1,
+    "name": "view",
+    "id": "1",
   },
   {
-    name: "add",
-    id: 2,
+    "name": "add",
+    "id": "2",
   },
   {
-    name: "change",
-    id: 3,
+    "name": "change",
+    "id":"3",
   },
   {
-    name: "delete",
-    id: 4,
+    "name": "delete",
+    "id": "4",
   },
 ];
 
@@ -41,7 +40,7 @@ const Table2 = () => {
       setUsers(tempUser);
     }
   };
-  console.log(users);
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -74,9 +73,6 @@ const Table2 = () => {
               <input
                 type="checkbox"
                 name="allSelect"
-                // checked={
-                //   users.filter((user) => user?.isChecked !== true).length < 1
-                // }
                 checked={!users.some((user) => user?.isChecked !== true)}
                 onChange={handleChange}
                 className=" mx-2"

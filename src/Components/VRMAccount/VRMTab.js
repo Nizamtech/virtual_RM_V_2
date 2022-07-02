@@ -1,13 +1,5 @@
 import React from "react";
-{
-  /* <div className=" flex justify-start items-center">
-<h1 className=" mx-4 py-2 text-lg text-gray-600">Dashboard</h1>
-<h1 className=" mx-4 py-2 text-lg text-gray-600">Account</h1>
-<h1 className=" mx-4 py-2 text-lg text-gray-600">Lead</h1>
-<h1 className=" mx-4 py-2 text-lg text-gray-600">Commission</h1>
-<h1 className=" mx-4 py-2 text-lg text-gray-600">Activity</h1>
-</div> */
-}
+
 const VRMTab = () => {
   return (
     <div>

@@ -5,7 +5,6 @@ import {
   faCog,
   faUser,
   faUnlock,
-  faBars,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 const Menu = () => {

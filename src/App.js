@@ -1,10 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Layout from "./Components/Layout/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Sidebar from "./Shared/Sidebar/Sidebar";
-import Test1 from "./Components/Test1/Test1";
 import Test2 from "./Components/Test1/Test2";
 import CreateTeam from "./Components/CreateTeam/CreateTeam";
 import ManageTeam from "./Components/ManageTeam/ManageTeam";

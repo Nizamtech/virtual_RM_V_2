@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
+import axios from "axios";
 
 const CreateUserForm = () => {
   const [user, setUser] = useState({
@@ -8,8 +9,13 @@ const CreateUserForm = () => {
     email: "",
     password: "",
   });
-  const [district, setDistrict] = useState(null);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+
   const [team, setTeam] = useState(null);
+
   const teamList = [
     { value: "Operation", label: "Operation" },
     { value: "RTC", label: "RTC" },
@@ -17,38 +23,19 @@ const CreateUserForm = () => {
     { value: "Bank Return", label: "Bank Return" },
   ];
 
-  useEffect(() => {
-    fetch("https://admin.aamartaka.com/api/v1/division/")
-      .then((response) => response.json())
-      .then((json) => setDistrict(json?.results));
-  }, []);
-
-  const dataBinding = () => {
-    let options;
-    if (district) {
-      options = district?.map(function (item) {
-        return { value: item?.name, label: item?.name };
-      });
-    }
-    return options;
-  };
-  const results = dataBinding();
-
-  const handleBlur = (e) => {
-    const newData = { ...user };
-    newData[e.target.name] = e.target.value;
-    setUser(newData);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const data = {
-      ...user,
-      teamName: team.value,
+    const userData = {
+      username: username,
+      email: email,
+      phone: phone,
+      password: password,
     };
-    SuccessAlert("Your work has been saved", "success");
-    console.log(data);
+    // const user=JSON.stringify(userData)
+    console.log(user);
+    await axios
+      .post("http://127.0.0.1:8000/accounts/user/register/", userData)
+      .then((result) => console.log(result));
   };
 
   return (
@@ -59,7 +46,7 @@ const CreateUserForm = () => {
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-first-name"
           >
-            Name
+            Username
           </label>
           <input
             className="appearance-none block w-full text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -68,7 +55,7 @@ const CreateUserForm = () => {
             name="userName"
             placeholder="Jane"
             required
-            onBlur={handleBlur}
+            onChange={(e) => setUsername(e.target.value)}
           />
           {/* <p className="text-red-500 text-xs italic">
             Please fill out this field.
@@ -88,12 +75,29 @@ const CreateUserForm = () => {
             name="email"
             placeholder="email"
             required
-            onBlur={handleBlur}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
+        <div className="w-full md:w-1/2 px-3">
+          <label
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+            for="grid-last-name"
+          >
+            Phone Number
+          </label>
+          <input
+            className="appearance-none block w-full text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            id="grid-last-name"
+            type="text"
+            name="text"
+            placeholder="Enter Phone Number"
+            required
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+        <div className="w-full md:w-1/2 px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-password"
@@ -106,7 +110,7 @@ const CreateUserForm = () => {
             type="password"
             name="password"
             minLength={6}
-            onBlur={handleBlur}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="******************"
           />
           <p className="text-gray-600 text-xs italic">
