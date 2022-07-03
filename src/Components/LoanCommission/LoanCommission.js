@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-
+import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
+import { useNavigate } from "react-router-dom";
 const LoanCommission = () => {
+  let navigate = useNavigate();
   const [inst, setInst] = useState([]);
   const [loan, setLoan] = useState([]);
   const [institute_name, setInstitute] = useState("");
@@ -34,8 +36,8 @@ const LoanCommission = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
-      institute_name: institute_name,
-      loan_name: loan_name,
+      institute_name: institute_name.value,
+      loan_name: loan_name.value,
       from_range: from_range,
       to_range: to_range,
       commissionn: commissionn,
@@ -43,7 +45,12 @@ const LoanCommission = () => {
 
     await axios
       .post("http://127.0.0.1:8000/benefit/loan_commision/add/", data)
-      .then((result) => console.log(result));
+      .then((result) => {
+        if (result.status === 201) {
+          SuccessAlert("Successfully Added", "success");
+          navigate(-1);
+        }
+      });
   };
 
   return (

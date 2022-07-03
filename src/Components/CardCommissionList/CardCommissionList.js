@@ -12,7 +12,7 @@ const CardCommissionList = () => {
         setCommission(res.data.results);
       });
   }, []);
-
+  console.log(commissions);
   return (
     <div className=" h-screen p-3 m-3">
       <div className="flex flex-col mt-8">
@@ -43,7 +43,7 @@ const CardCommissionList = () => {
               </thead>
               <tbody className="bg-white">
                 {commissions &&
-                  commissions.map((item, index) => (
+                  commissions?.commissionn?.map((item, index) => (
                     <tr>
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-3">
                         <div className="text-sm leading-5 text-gray-500">
@@ -62,24 +62,24 @@ const CardCommissionList = () => {
 
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <div className="text-sm leading-5 text-gray-500">
-                          {item?.card_name}
+                          {item?.card_type}
                         </div>
                       </td>
 
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                          {item?.from_range}
+                          {item?.from}
                         </span>
                       </td>
 
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <div className="text-sm leading-5 text-gray-500">
-                          {item?.to_range}
+                          {item?.to}
                         </div>
                       </td>
                       <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
                         <div className="text-sm leading-5 text-gray-500">
-                          {item?.commissionn}
+                          {item?.commission}
                         </div>
                         <button onClick={() => deleteAlert()}>
                           <svg

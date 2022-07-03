@@ -1,42 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
-
+import axios from "axios";
 const NewLead = () => {
-  const [profession, setProfession] = useState(null);
-  const [salaryType, setSalaryType] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [interestBank, setInterestBank] = useState(null);
-  const [interestProducts, setInterestProducts] = useState(null);
-  // const [yearlyTransaction, setYearlyTransaction] = useState(null);
-  const [companyName, setcompanyName] = useState(null);
-  const [scheduleDate, setScheduleDate] = useState(null);
-  const [scheduleTime, setScheduleTime] = useState(null);
+  const [profession, setProfession] = useState("");
+  const [salaryType, setSalaryType] = useState("");
+  const [status, setStatus] = useState("");
+  const [interestBank, setInterestBank] = useState("");
+  const [interestProducts, setInterestProducts] = useState("");
+  // const [yearlyTransaction, setYearlyTransaction] = useState("");
+  const [companyName, setcompanyName] = useState([]);
+  const [company, setCompany] = useState("");
+  const [scheduleDate, setScheduleDate] = useState("");
+  const [scheduleTime, setScheduleTime] = useState("");
+  const [data, setData] = useState([]);
 
   const [selectedOption, setSelectedOption] = useState({
     name: "",
-    phone: "",
-    salaryType: "",
-    yearlyTransaction: "",
-    rentalIncome: "",
+    mobile_no: "",
+    // salary_type: "",
+    yearly_transaction: "",
+    rental_income: "",
   });
 
-  const colourOptions = [
-    { label: "aamartaka" },
-    { label: "Robi" },
-    { label: "Grameen" },
-    { label: "Asha" },
-    { label: "Lonka Bangla" },
-    { label: "Indigo" },
-    { label: "Nizam" },
-  ];
+  useEffect(() => {
+    fetch("https://admin.aamartaka.com/api/v1/institutes/")
+      .then((response) => response.json())
+      .then((res) => {
+        const rest = res.results;
+        // const result = rest.filter((item) => item.is_partner === true);
+        // console.log(result);
+        setData(rest);
+      });
+    fetch("https://admin.aamartaka.com/api/v1/company/")
+      .then((response) => response.json())
+      .then((res) => {
+        const rest = res.results;
+        setcompanyName(rest);
+      });
+  }, []);
+
+  let instituteName = data?.map(function (item) {
+    return { value: item?.name, label: item?.name };
+  });
+  let compName = companyName?.map(function (item) {
+    return { value: item?.name, label: item?.name };
+  });
 
   const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "chocolate2", label: "Chocolate2" },
-    { value: "strawberry2", label: "Strawberry2" },
-    { value: "vanilla2", label: "Vanilla2" },
+    { value: "Personal Loan", label: "Personal Loan" },
+    { value: "Car Loan", label: "Car Loan" },
+    { value: "Home Loan", label: "Home Loan" },
+    { value: "Credit Cart", label: "Credit Cart" },
   ];
   const professionData = [
     { value: "salaried", label: "Salaried" },
@@ -67,62 +81,37 @@ const NewLead = () => {
     { label: "Non Eligible", value: "Non Eligible" },
     { label: "Follow", value: "Follow" },
   ];
-  const scheduleDateData = [
-    { label: "Jun-15 Wed", value: "Jun-15 Wed" },
-    { label: "Jun-16 Thu", value: "Jun-18 Thu" },
-    { label: "Jun-17 Fri", value: "Jun-17 Fri" },
-    { label: "Jun-18 Sat", value: "Jun-18 Sat" },
-    { label: "Jun-19 Sun", value: "Jun-19 Sun" },
-    { label: "Jun-20 Mon", value: "Jun-20 Mon" },
-    { label: "Jun-21 Tue", value: "Jun-21 Tue" },
-    { label: "Jun-22 Wed", value: "Jun-22 Wed" },
-  ];
-  const scheduleTimeData = [
-    { label: "8:00 AM - 10:00 AM", value: "8:00 AM - 10:00 AM" },
-    { label: "10:00 AM - 12:00 AM", value: "10:00 AM - 12:00 AM" },
-    { label: "12:00 PM - 02:00 PM", value: "12:00 PM - 02:00 PM" },
-    { label: "02:00 PM - 04:00 PM", value: "02:00 PM - 04:00 PM " },
-  ];
 
   const handleChange = (e) => {
     const field = e.target.name;
     const value = e.target.value;
-
     const newData = { ...selectedOption };
     newData[field] = value;
 
     setSelectedOption(newData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
       ...selectedOption,
-      profession: profession?.value,
-      salaryType: salaryType?.value,
-      status: status?.value,
-      interestBank: interestBank?.map((item) => item.value),
-      interestProducts: interestProducts?.map((item) => item.value),
-      //   yearlyTransaction: yearlyTransaction,
-      companyName: companyName?.value,
-      scheduleDate: scheduleDate?.value,
-      scheduleTime: scheduleTime?.value,
+      profession_name: profession?.value,
+      salary_type: salaryType?.value,
+      status_name: status?.value,
+      // interestBank: interestBank?.map((item) => item.value),
+      // interestProducts: interestProducts?.map((item) => item.value),
+      company_name: company?.value,
+      // yearlyTransaction: yearlyTransaction,
+      // scheduleDate: scheduleDate?.value,
+      // scheduleTime: scheduleTime?.value,
     };
     console.log(data);
+    await axios
+      .post("http://127.0.0.1:8000/api/lead/", data)
+      .then((result) => console.log(result.data));
   };
-  //   console.log(
-  //     selectedOption,
-  //     profession,
-  //     salaryType,
-  //     status,
-  //     interestBank,
-  //     interestProducts,
-  //     yearlyTransaction,
-  //     companyName,
-  //     scheduleDate,
-  //     scheduleTime
-  //   );
+
   return (
     <div className=" m-3 p-3 h-screen">
       <div className="mx-2 w-full lg:w-1/2 ">
@@ -141,7 +130,7 @@ const NewLead = () => {
           <input
             required
             type="text"
-            name="phone"
+            name="mobile_no"
             onInput={`() if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength)`}
             maxLength="11"
             // max={9999999999}
@@ -165,7 +154,7 @@ const NewLead = () => {
               <label> Salary Type</label>
               <Select
                 required
-                name="profession"
+                name="saraly_type"
                 onChange={setSalaryType}
                 options={salaryTypeData}
                 placeholder="Salary Type"
@@ -175,8 +164,8 @@ const NewLead = () => {
               <Select
                 required
                 name="companyName"
-                onChange={setcompanyName}
-                options={companyNameData}
+                onChange={setCompany}
+                options={compName}
                 placeholder="Company Name"
                 className="my-2"
               />
@@ -189,7 +178,7 @@ const NewLead = () => {
               <input
                 required
                 type="number"
-                name="yearlyTransaction"
+                name="yearly_transaction"
                 max="100000000"
                 min="1000"
                 onChange={handleChange}
@@ -200,8 +189,8 @@ const NewLead = () => {
               <Select
                 required
                 name="companyName"
-                onChange={setcompanyName}
-                options={companyNameData}
+                onChange={setCompany}
+                options={compName}
                 placeholder="Company Name"
                 className="my-2"
               />
@@ -231,7 +220,7 @@ const NewLead = () => {
             closeMenuOnSelect={false}
             isMulti
             name="Interested Bank"
-            options={options}
+            options={instituteName}
             className="basic-multi-select font-exo my-2"
             placeholder="Select At least One"
             classNamePrefix="select "

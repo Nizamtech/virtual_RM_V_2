@@ -23,6 +23,7 @@ import PaymentHistory from "./Components/PaymentStatus/PaymentHistory";
 import Feature from "./Components/Feature/Feature";
 import Inbox from "./Components/Inbox/Inbox";
 import EditTeam from "./Components/EditTeam/EditTeam";
+import VRMListEdit from "./Components/VRMList/VRMListEdit";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/loancommission" element={<LoanCommission />} />
             <Route path="/lclist" element={<LoanCommissionList />} />
             <Route path="/vrmlist" element={<VRMList />} />
+            <Route path="/vrmlist/:id" element={<VRMListEdit />} />
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />
             <Route path="/account" element={<Account />} />
             <Route path="/leadlist" element={<LeadList />} />

@@ -1,18 +1,41 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { deleteAlert } from "../../Shared/Alert/deleteAlert";
+import Swal from "sweetalert2";
+
+const api = `http://127.0.0.1:8000/api/loan_commission/`;
 
 const LoanCommissionList = () => {
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/benefit/loan_commision/list/`)
-      .then((res) => {
-        setCommission(res.data.results);
-      });
+    axios.get(`http://127.0.0.1:8000/api/loan_commission/`).then((res) => {
+      setCommission(res.data.results);
+    });
   }, []);
 
+  const deleteAlert = (api, id) => {
+    console.log(api + id);
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${api}${id}/`).then((res) => {
+          if (res.status === 204) {
+            const rest = commissions.filter((item) => item.id !== id);
+            setCommission(rest);
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          }
+        });
+      }
+    });
+  };
   return (
     <div className=" h-screen p-3 m-3">
       <div className=" h-screen p-3 m-3">
@@ -82,7 +105,7 @@ const LoanCommissionList = () => {
                           <div className="text-sm leading-5 text-gray-500">
                             {item?.commissionn}
                           </div>
-                          <button onClick={() => deleteAlert()}>
+                          <button onClick={() => deleteAlert(api, item?.id)}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="w-6 h-6 text-red-400"
