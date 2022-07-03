@@ -1,19 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
 import Select from "react-select";
-const CardCommissionTable = () => {
+
+const dataStucture = {
+  card_type: "",
+  from: null,
+  to: null,
+  commission: "",
+};
+const CardCommissionTable = ({
+  cardType,
+  setCardType,
+  institute,
+  setInstitute,
+  from,
+  setFrom,
+  to,
+  setTo,
+  commission,
+  setCommission,
+  handleChange,
+  mockData,
+  setMockData,
+}) => {
   const [addCommission, setAddCommission] = useState([{ id: 1 }]);
   const [counter, setCounter] = useState(2);
   const selectInputRef = useRef();
   const [data, setData] = useState([]);
-  const [cardType, setCardType] = useState(null);
-  const [institute, setInstitute] = useState(null);
-  const [from, setFrom] = useState(null);
-  const [to, setTo] = useState(null);
-  const [commission, setCommission] = useState(null);
-
+  const [cardTypeData, setCardTypeData] = useState([]);
   const cardCommissionData = [
     { value: "Silver", label: "Silver" },
-    { value: "Platinum, Dhaka-1230", label: "Platinum" },
+    { value: "Platinum", label: "Platinum" },
     { value: "Gold", label: "Gold" },
     { value: "Classic", label: "Classic" },
   ];
@@ -25,30 +41,21 @@ const CardCommissionTable = () => {
   ];
 
   useEffect(() => {
+    fetch("  http://127.0.0.1:8000/benefit/card_type/list/")
+      .then((response) => response.json())
+      .then((data) => setCardTypeData(data?.results));
+  }, []);
+
+  useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/institutes/")
       .then((response) => response.json())
       .then((json) => setData(json.results));
   }, []);
 
-  let options = data?.map(function (item) {
+  let options = cardTypeData?.map(function (item) {
     return { value: item?.name, label: item?.name };
   });
-  const handleChange = (e) => {
-    setCommission(e.target.value);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = {
-      institute: institute?.value,
-      cardType: cardType?.value,
-      from: from?.value,
-      to: to?.value,
-      commission: commission,
-    };
-    console.log("from function", data);
-    selectInputRef.current.clearValue();
-    e.target.reset();
-  };
+
   const handleCounter = () => {
     setCounter(counter + 1);
     const id = {
@@ -56,13 +63,19 @@ const CardCommissionTable = () => {
     };
     const newArray = [...addCommission, id];
     setAddCommission(newArray);
+    setMockData([...mockData, dataStucture]);
   };
 
   const handleDelete = (e) => {
     const result = addCommission.filter((item) => item.id !== e.id);
     setAddCommission(result);
+    const index = parseInt(e.id) - 1;
+    if (index > -1) {
+      mockData.splice(index, 1);
+      setMockData(mockData);
+    }
   };
-
+  console.log(mockData);
   return (
     <div>
       {/* start table  */}
@@ -95,9 +108,9 @@ const CardCommissionTable = () => {
                   >
                     <Select
                       required
-                      name="profession"
-                      onChange={setCardType}
-                      options={cardCommissionData}
+                      name="cardType"
+                      onChange={(e) => setCardType(e.value)}
+                      options={options}
                       className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
                     />
                   </td>
@@ -107,8 +120,8 @@ const CardCommissionTable = () => {
                   >
                     <Select
                       required
-                      name="profession"
-                      onChange={setFrom}
+                      name="from_range"
+                      onChange={(e) => setFrom(e.value)}
                       options={numberCount}
                       className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
                     />
@@ -119,8 +132,8 @@ const CardCommissionTable = () => {
                   >
                     <Select
                       required
-                      name="profession"
-                      onChange={setTo}
+                      name="to_range"
+                      onChange={(e) => setTo(e.value)}
                       options={numberCount}
                       className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
                     />
@@ -132,10 +145,10 @@ const CardCommissionTable = () => {
                     <input
                       required
                       type="text"
-                      name="name"
+                      name="commission"
                       maxLength={4}
                       max="3000"
-                      onChange={handleChange}
+                      onBlur={(e) => setCommission(e.target.value)}
                       placeholder="BDT"
                       className="my-2 focus:outline-[#2684FF] focus:duration-400 font-exo w-full h-8 border py-4 px-3 rounded-[3px] border-[#CCCCCC] "
                     />

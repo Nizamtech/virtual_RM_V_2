@@ -1,6 +1,6 @@
 export const teamData = [
   {
-    id: 1,
+    id: 6,
     team_name: "Operation",
     module: {
       team: [
@@ -19,7 +19,7 @@ export const teamData = [
   },
 
   {
-    id: 2,
+    id: 7,
     team_name: "RTC",
     module: {
       team: [
@@ -38,7 +38,7 @@ export const teamData = [
   },
 
   {
-    id: 3,
+    id: 8,
     team_name: "Support",
     module: {
       team: [
@@ -57,7 +57,7 @@ export const teamData = [
   },
 
   {
-    id: 4,
+    id: 9,
     team_name: "Bank Return",
     module: {
       team: [

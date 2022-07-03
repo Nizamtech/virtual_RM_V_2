@@ -1,10 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Layout from "./Components/Layout/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Sidebar from "./Shared/Sidebar/Sidebar";
-import Test1 from "./Components/Test1/Test1";
 import Test2 from "./Components/Test1/Test2";
 import CreateTeam from "./Components/CreateTeam/CreateTeam";
 import ManageTeam from "./Components/ManageTeam/ManageTeam";
@@ -24,6 +22,8 @@ import PaymentStatus from "./Components/PaymentStatus/PaymentStatus";
 import PaymentHistory from "./Components/PaymentStatus/PaymentHistory";
 import Feature from "./Components/Feature/Feature";
 import Inbox from "./Components/Inbox/Inbox";
+import EditTeam from "./Components/EditTeam/EditTeam";
+import VRMListEdit from "./Components/VRMList/VRMListEdit";
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/createteam/" element={<CreateTeam />} />
-            <Route path="/createteam/:id" element={<CreateTeam />} />
+            <Route path="/createteam/:id" element={<EditTeam />} />
             <Route path="/manageteam" element={<ManageTeam />} />
             <Route path="/manageuser" element={<ManageUser />} />
             <Route path="/manageuser/:userId" element={<ManageUser />} />
@@ -47,6 +47,7 @@ function App() {
             <Route path="/loancommission" element={<LoanCommission />} />
             <Route path="/lclist" element={<LoanCommissionList />} />
             <Route path="/vrmlist" element={<VRMList />} />
+            <Route path="/vrmlist/:id" element={<VRMListEdit />} />
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />
             <Route path="/account" element={<Account />} />
             <Route path="/leadlist" element={<LeadList />} />
