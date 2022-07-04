@@ -1,4 +1,5 @@
 import React from "react";
+import Account from "../Account/Account";
 
 const VRMTab = () => {
   return (
@@ -20,7 +21,7 @@ const VRMTab = () => {
               aria-controls="profile"
               aria-selected="true"
             >
-              Profile
+              Account
             </button>
           </li>
           <li class="mr-2" role="presentation">
@@ -71,15 +72,7 @@ const VRMTab = () => {
           role="tabpanel"
           aria-labelledby="profile-tab"
         >
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-            This is some placeholder content the{" "}
-            <strong class="font-medium text-gray-800 dark:text-white">
-              Profile tab's associated content
-            </strong>
-            . Clicking another tab will toggle the visibility of this one for
-            the next. The tab JavaScript swaps classes to control the content
-            visibility and styling.
-          </p>
+          <Account />
         </div>
         <div
           class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800"

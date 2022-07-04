@@ -18,7 +18,7 @@ const VRMAccount = () => {
     loadData();
   }, [vrmID]);
   return (
-    <div className=" h-screen m-2 p-3 ">
+    <div className=" m-2 p-3 ">
       {/* vrm Account header  */}
       <div className="myShadow8">
         <div className=" grid grid-cols-3  py-3 rounded-lg ">

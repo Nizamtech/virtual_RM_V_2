@@ -85,7 +85,7 @@ const Account = () => {
       <div className="  grid grid-cols-1 lg:grid-cols-2 gap-4 mx-2 px-2 py-4  ">
         {/* personal Details  start */}
         <form onSubmit={handlePersonalSubmit}>
-          <div className="myShadow8 bg-gray-100 pb-4 rounded-lg">
+          <div className="myShadow8 bg-gray-100 pb-4 rounded-lg pt-2">
             <div className=" flex flex-col mx-auto lg:mx-4 my-3">
               <label className=" ml-2 text-lg mb-2 text-">Name</label>
               <input
@@ -123,7 +123,7 @@ const Account = () => {
                 {/* <legend className=" ml-2 text-lg mb-2 ">location</legend> */}
                 <div className=" grid grid-cols-2 bg-white">
                   <div className=" flex  justify-start items-center border-r rounded">
-                    <label className="   h-full w-full bg-gray-300 text-lg flex justify-center items-center text-gray-600   ">
+                    <label className="   h-full w-full bg-gray-300  flex justify-center items-center text-gray-600   ">
                       District
                     </label>
                     <Select
@@ -146,7 +146,7 @@ const Account = () => {
                     />
                   </div>
                   <div className=" flex justify-start items-center border-l rounded">
-                    <label className=" h-full w-full bg-gray-300  text-lg flex justify-center items-center text-gray-600  ">
+                    <label className=" h-full w-full bg-gray-300  flex justify-center items-center text-gray-600  ">
                       Sub District
                     </label>
                     <input
