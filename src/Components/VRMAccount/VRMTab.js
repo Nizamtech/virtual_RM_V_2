@@ -21,7 +21,7 @@ const VRMTab = () => {
               aria-controls="profile"
               aria-selected="true"
             >
-              Account
+              Dashboard
             </button>
           </li>
           <li class="mr-2" role="presentation">
@@ -34,7 +34,7 @@ const VRMTab = () => {
               aria-controls="dashboard"
               aria-selected="false"
             >
-              Dashboard
+              Account
             </button>
           </li>
           <li class="mr-2" role="presentation">
@@ -47,7 +47,7 @@ const VRMTab = () => {
               aria-controls="settings"
               aria-selected="false"
             >
-              Settings
+              Leads
             </button>
           </li>
           <li role="presentation">
@@ -60,7 +60,20 @@ const VRMTab = () => {
               aria-controls="contacts"
               aria-selected="false"
             >
-              Contacts
+              Commission
+            </button>
+          </li>
+          <li role="presentation">
+            <button
+              class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
+              id="contacts-tab"
+              data-tabs-target="#contacts"
+              type="button"
+              role="tab"
+              aria-controls="contacts"
+              aria-selected="false"
+            >
+              Transaction
             </button>
           </li>
         </ul>
@@ -96,15 +109,7 @@ const VRMTab = () => {
           role="tabpanel"
           aria-labelledby="settings-tab"
         >
-          <p class="text-sm text-gray-500 dark:text-gray-400">
-            This is some placeholder content the{" "}
-            <strong class="font-medium text-gray-800 dark:text-white">
-              Settings tab's associated content
-            </strong>
-            . Clicking another tab will toggle the visibility of this one for
-            the next. The tab JavaScript swaps classes to control the content
-            visibility and styling.
-          </p>
+          <h1> Lead list Table </h1>
         </div>
         <div
           class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
