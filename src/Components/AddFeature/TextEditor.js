@@ -1,13 +1,11 @@
-import React from "react";
-import { Editor, EditorState } from "draft-js";
-import "draft-js/dist/Draft.css";
+import React, { Component } from "react";
+import { Editor } from "react-draft-wysiwyg";
+// import "../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
 const TextEditor = () => {
-  const [editorState, setEditorState] = React.useState(() =>
-    EditorState.createEmpty()
-  );
   return (
-    <div>
-      <Editor editorState={editorState} onChange={setEditorState} />
+    <div className=" h-60 w-60">
+      <Editor />
     </div>
   );
 };
