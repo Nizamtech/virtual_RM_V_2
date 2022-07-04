@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import axios from "axios";
 import { SuccessAlert } from "../../../Shared/Alert/SuccessAlert";
-import { useNavigate } from "react-router-dom";
-const NewLead = () => {
+import { useNavigate, useParams } from "react-router-dom";
+const EditLeadList = () => {
+  const { id } = useParams();
+
   const [profession, setProfession] = useState("");
   const [salaryType, setSalaryType] = useState("");
   const [status, setStatus] = useState("");
@@ -15,6 +17,7 @@ const NewLead = () => {
   const [scheduleDate, setScheduleDate] = useState("");
   const [scheduleTime, setScheduleTime] = useState("");
   const [data, setData] = useState([]);
+  const [leadData, setLeadData] = useState([]);
 
   const [selectedOption, setSelectedOption] = useState({
     name: "",
@@ -26,6 +29,14 @@ const NewLead = () => {
 
   const router = useNavigate();
 
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/api/lead/${id}/`)
+      .then((response) => response.json())
+      .then((res) => {
+        setLeadData(res);
+      });
+  }, [id]);
+  console.log(leadData);
   useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/institutes/")
       .then((response) => response.json())
@@ -102,16 +113,19 @@ const NewLead = () => {
       // scheduleDate: scheduleDate?.value,
       // scheduleTime: scheduleTime?.value,
     };
-
-    await axios.post("http://127.0.0.1:8000/api/lead/", data).then((result) => {
-      if (result.status === 201) {
-        SuccessAlert("Lead Created Successfully", "success");
-        router(-1);
-      } else {
-        SuccessAlert("Something Wrong", "error");
-        router(-1);
-      }
-    });
+    console.log(leadData);
+    await axios
+      .put(`http://127.0.0.1:8000/api/lead/${id}/`, data)
+      .then((result) => {
+        console.log(result);
+        if (result.status === 204) {
+          SuccessAlert("Lead Update Successfully", "success");
+          router(-1);
+        } else {
+          SuccessAlert("Something Wrong", "error");
+          router(-1);
+        }
+      });
   };
 
   return (
@@ -120,6 +134,7 @@ const NewLead = () => {
         <form onSubmit={handleSubmit}>
           <label> Name</label>
           <input
+            defaultValue={leadData?.company_name}
             required
             type="text"
             name="name"
@@ -130,6 +145,7 @@ const NewLead = () => {
 
           <label> Phone</label>
           <input
+            defaultValue={leadData?.mobile_no}
             required
             type="text"
             name="mobile_no"
@@ -144,10 +160,11 @@ const NewLead = () => {
           <label> Profession</label>
           <Select
             required
+            defaultValue={leadData?.profession}
             name="profession"
             onChange={setProfession}
             options={professionData}
-            placeholder="Profession"
+            placeholder={leadData?.profession || "Profession"}
             className="my-2"
           />
           {(profession?.value === "salaried" ||
@@ -155,11 +172,12 @@ const NewLead = () => {
             <div>
               <label> Salary Type</label>
               <Select
+                defaultValue={leadData?.salary_type}
                 required
                 name="salary_type"
                 onChange={setSalaryType}
                 options={salaryTypeData}
-                placeholder="Salary Type"
+                placeholder={leadData?.salary_type || "Salary Type"}
                 className="my-2"
               />
               <label> Company Name</label>
@@ -168,7 +186,7 @@ const NewLead = () => {
                 onChange={setCompany}
                 name="company_name"
                 options={compName}
-                placeholder="Company Name"
+                placeholder={leadData?.company_name || "Company Name"}
                 className="my-2"
               />
             </div>
@@ -183,8 +201,8 @@ const NewLead = () => {
                 name="yearly_transaction"
                 max="100000000"
                 min="1000"
+                placeholder={leadData?.yearly_transaction || "ex: 45000"}
                 onChange={handleChange}
-                placeholder="ex: 45000"
                 className="my-2 focus:outline-[#2684FF] focus:duration-400 font-exo w-full h-8 border py-4 px-3 rounded-[3px] border-[#CCCCCC] "
               />
               <label> Company Name</label>
@@ -193,7 +211,7 @@ const NewLead = () => {
                 name="company_name"
                 onChange={setCompany}
                 options={compName}
-                placeholder="Company Name"
+                placeholder={leadData?.company_name || "Company Name"}
                 className="my-2"
               />
             </div>
@@ -208,7 +226,7 @@ const NewLead = () => {
                 max="1000000000"
                 min="1000"
                 onChange={handleChange}
-                placeholder="ex: 45000"
+                placeholder={leadData?.rental_income || "ex: 45000"}
                 className="my-2 focus:outline-[#2684FF] focus:duration-400 font-exo w-full h-8 border py-4 px-3 rounded-[3px] border-[#CCCCCC] "
               />
             </div>
@@ -224,7 +242,10 @@ const NewLead = () => {
             name="interested_bank"
             options={instituteName}
             className="basic-multi-select font-exo my-2"
-            placeholder="Select At least One"
+            placeholder={
+              leadData?.interested_bank?.map((item) => item) ||
+              "Select At Least One"
+            }
             classNamePrefix="select "
           />
 
@@ -238,7 +259,10 @@ const NewLead = () => {
             name="interested_product"
             options={options}
             className="basic-multi-select font-exo my-2"
-            placeholder="Select At least One"
+            placeholder={
+              leadData?.interested_product?.map((item) => item) ||
+              "Select At Least One"
+            }
             classNamePrefix="select"
           />
 
@@ -250,6 +274,7 @@ const NewLead = () => {
             onChange={setStatus}
             options={statusData}
             className="my-2"
+            placeholder={leadData?.status || "Status"}
           />
           <button
             className="my-4 mx-auto w-60 text-white bg-[#3ac47d] border-[#3ac47d]  text-lg px-5 py-3 rounded-md font-exo flex justify-center items-center"
@@ -263,4 +288,4 @@ const NewLead = () => {
   );
 };
 
-export default NewLead;
+export default EditLeadList;

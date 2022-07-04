@@ -82,6 +82,7 @@ body {
   top: 0px;
   right: 20px;
   margin-right: -1.25rem;
+  color: black;
 }
 .activeLink::after {
   content: " ";
@@ -95,6 +96,7 @@ body {
   top: 0px;
   right: 20px;
   margin-right: -1.25rem;
+  color: black;
 }
 
 .deleteBtn {

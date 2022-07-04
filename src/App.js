@@ -24,6 +24,8 @@ import Feature from "./Components/Feature/Feature";
 import Inbox from "./Components/Inbox/Inbox";
 import EditTeam from "./Components/EditTeam/EditTeam";
 import VRMListEdit from "./Components/VRMList/VRMListEdit";
+import AddFeature from "./Components/AddFeature/AddFeature";
+import EditLeadList from "./Components/LeadList/EditLeadList/EditLeadList";
 
 function App() {
   return (
@@ -51,11 +53,13 @@ function App() {
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />
             <Route path="/account" element={<Account />} />
             <Route path="/leadlist" element={<LeadList />} />
+            <Route path="/leadlist/:id" element={<EditLeadList />} />
             <Route path="/newagent" element={<Agent />} />
             <Route path="/newlead" element={<NewLead />} />
             <Route path="/paymentstatus" element={<PaymentStatus />} />
             <Route path="/paymenthistory" element={<PaymentHistory />} />
             <Route path="/feature" element={<Feature />} />
+            <Route path="/addfeature" element={<AddFeature />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/test2" element={<Test2 />} />
           </Routes>
