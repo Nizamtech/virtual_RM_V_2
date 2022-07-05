@@ -33,7 +33,7 @@ const VRMAccount = () => {
     {
       id: "Account",
       label: "Account",
-      content: <Account />,
+      content: <Account data={vrmUser} />,
     },
     {
       id: "Leads",

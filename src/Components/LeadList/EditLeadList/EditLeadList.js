@@ -36,7 +36,7 @@ const EditLeadList = () => {
         setLeadData(res);
       });
   }, [id]);
-  console.log(leadData);
+
   useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/institutes/")
       .then((response) => response.json())
@@ -59,6 +59,10 @@ const EditLeadList = () => {
   });
   let compName = companyName?.map(function (item) {
     return { value: item?.name, label: item?.name };
+  });
+
+  let loadDataaa = leadData?.interested_bank?.map(function (item) {
+    return { value: item, label: item };
   });
 
   const options = [
@@ -113,7 +117,7 @@ const EditLeadList = () => {
       // scheduleDate: scheduleDate?.value,
       // scheduleTime: scheduleTime?.value,
     };
-    console.log(leadData);
+
     await axios
       .put(`http://127.0.0.1:8000/api/lead/${id}/`, data)
       .then((result) => {
@@ -127,7 +131,8 @@ const EditLeadList = () => {
         }
       });
   };
-
+  // console.log(loadDataaa);
+  // loadDataaa.map((item) => console.log(item));
   return (
     <div className=" m-3 p-3 h-screen">
       <div className="mx-2 w-full lg:w-1/2 ">
@@ -235,17 +240,14 @@ const EditLeadList = () => {
           <label> Interested Bank</label>
           <Select
             requred
-            // defaultValue={[
-            //   leadData?.interested_bank[0],
-            //   leadData?.interested_bank[1],
-            // ]}
+            value={[loadDataaa[0]]}
             onChange={setInterestBank}
             closeMenuOnSelect={false}
             isMulti
             name="interested_bank"
             options={instituteName}
             className="basic-multi-select font-exo my-2"
-            placeholder={"Select At Least One"}
+            // placeholder={"Select At Least One"}
             classNamePrefix="select "
           />
 

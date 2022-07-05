@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import VrmListTable from "../VRMList/VrmListTable";
 import VRMStatusTable from "../VRMStatusTable/VRMStatusTable";
 import Select from "react-select";
-const Account = () => {
+const Account = ({ data }) => {
+  console.log("from account", data);
   const [userAccount, setUserAccount] = useState([]);
   const [division, setDivision] = useState([]);
   const [divName, setDivName] = useState("");
@@ -53,22 +54,26 @@ const Account = () => {
     setRemarks(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       status: status?.value,
       remarks: remarks,
     };
+    const response = await axios.post("https://reqres.in/api/articles", data);
     console.log(data);
   };
 
   const handlePersonalSubmit = (e) => {
     e.preventDefault();
-    const data = {
-      ...personalDetails,
+    const res = {
+      name: personalDetails?.name || data?.username,
+      email: personalDetails?.email || data?.email,
+      phone: personalDetails?.phone || data?.phone,
+
       division: divName?.value,
     };
-    console.log(data);
+    console.log(res);
   };
 
   const submitPassword = (e) => {
@@ -89,6 +94,7 @@ const Account = () => {
             <div className=" flex flex-col mx-auto lg:mx-4 my-3">
               <label className=" ml-2 text-lg mb-2 text-">Name</label>
               <input
+                defaultValue={data?.username}
                 onBlur={handlechange}
                 className=" h-12 rounded px-4 text-lg accent-sky-600 border-gray-300 border  "
                 type="text"
@@ -99,6 +105,7 @@ const Account = () => {
             <div className=" flex flex-col mx-auto lg:mx-4 my-3">
               <label className=" ml-2 text-lg mb-2 text-">Email</label>
               <input
+                defaultValue={data?.email}
                 onBlur={handlechange}
                 className=" h-12 rounded px-4 text-lg accent-sky-600 border-gray-300 border  "
                 type="email"
@@ -109,6 +116,7 @@ const Account = () => {
             <div className=" flex flex-col mx-auto lg:mx-4 my-3">
               <label className=" ml-2 text-lg mb-2 text-">Mobile</label>
               <input
+                defaultValue={data?.phone}
                 onBlur={handlechange}
                 className=" h-12 rounded px-4 text-lg accent-sky-600 border-gray-300 border  "
                 type="text"

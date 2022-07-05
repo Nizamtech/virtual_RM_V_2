@@ -13,7 +13,7 @@ function Content({ children, active, id }) {
   );
 }
 
-export default function Tabs({ items }) {
+export default function Tabs({ items, data }) {
   const [active, setActive] = useState(items[0]);
 
   // useEffect(() => {
