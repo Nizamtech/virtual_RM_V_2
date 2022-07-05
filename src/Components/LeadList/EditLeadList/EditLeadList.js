@@ -235,17 +235,17 @@ const EditLeadList = () => {
           <label> Interested Bank</label>
           <Select
             requred
-            defaultValue={interestBank}
+            // defaultValue={[
+            //   leadData?.interested_bank[0],
+            //   leadData?.interested_bank[1],
+            // ]}
             onChange={setInterestBank}
             closeMenuOnSelect={false}
             isMulti
             name="interested_bank"
             options={instituteName}
             className="basic-multi-select font-exo my-2"
-            placeholder={
-              leadData?.interested_bank?.map((item) => item) ||
-              "Select At Least One"
-            }
+            placeholder={"Select At Least One"}
             classNamePrefix="select "
           />
 
@@ -276,6 +276,13 @@ const EditLeadList = () => {
             className="my-2"
             placeholder={leadData?.status || "Status"}
           />
+
+          <select name="select" id="aaa" placeholder="Select">
+            <label> SELECT One</label>
+            <option value="0">CCC</option>
+            <option value="1">AAA</option>
+            <option value="2">BBB</option>
+          </select>
           <button
             className="my-4 mx-auto w-60 text-white bg-[#3ac47d] border-[#3ac47d]  text-lg px-5 py-3 rounded-md font-exo flex justify-center items-center"
             type="submit"

@@ -1,11 +1,22 @@
-import React, { Component } from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-// import "../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { convertToHTML } from "draft-convert";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-const TextEditor = () => {
+const TextEditor = ({ handleEditorChange, editorState }) => {
   return (
-    <div className=" h-60 w-60">
-      <Editor />
+    <div className=" mx-auto w-full  ">
+      <Editor
+        editorState={editorState}
+        onEditorStateChange={handleEditorChange}
+        wrapperClassName="wrapper"
+        editorClassName="editor"
+        toolbarClassName="toolbar"
+      />
     </div>
   );
 };

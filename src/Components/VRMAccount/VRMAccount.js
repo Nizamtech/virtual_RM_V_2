@@ -2,7 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import VRMChart from "../../Shared/Chart/VRMChart";
+import Account from "../Account/Account";
+import LeadList from "../LeadList/LeadList";
+import LeadListTable from "../LeadList/LeadListTable";
+import PaymentStatusTable from "../PaymentStatus/PaymentStatusTable";
+import Tabs from "./Tabs";
 import VRMTab from "./VRMTab";
+import VRMTabCom from "./VRMTabCom";
 
 const VRMAccount = () => {
   const { vrmID } = useParams();
@@ -17,8 +23,37 @@ const VRMAccount = () => {
     };
     loadData();
   }, [vrmID]);
+
+  const items = [
+    {
+      id: "Dahboard",
+      label: "Dahboard",
+      content: "Dashboard",
+    },
+    {
+      id: "Account",
+      label: "Account",
+      content: <Account />,
+    },
+    {
+      id: "Leads",
+      label: "Leads",
+      content: <LeadList />,
+    },
+    {
+      id: "Commission",
+      label: "Commission",
+      content: "Commission Table",
+    },
+    {
+      id: "Transaction",
+      label: "Transaction",
+      content: <PaymentStatusTable />,
+    },
+  ];
+
   return (
-    <div className=" m-2 p-3 ">
+    <div className=" h-screen m-2 p-3 overflow-y-scroll ">
       {/* vrm Account header  */}
       <div className="myShadow8">
         <div className=" grid grid-cols-3  py-3 rounded-lg ">
@@ -125,7 +160,8 @@ const VRMAccount = () => {
 
         {/* VRM Tab  */}
         <div className=" mx-2 p-2 border-t">
-          <VRMTab />
+          {/* <VRMTab /> */}
+          <Tabs items={items} />
         </div>
       </div>
     </div>

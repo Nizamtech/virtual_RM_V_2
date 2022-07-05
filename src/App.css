@@ -136,3 +136,23 @@ body {
 input[type="checkbox"] {
   transform: scale(1.7, 1.7);
 }
+
+div.DraftEditor-root {
+  border: 1px solid #000;
+  background-color: rgb(250, 250, 244);
+  height: 200px;
+  width: 100%;
+  padding: 10px;
+  overflow-y: auto;
+}
+div.DraftEditor-editorContainer,
+div.public-DraftEditor-content {
+  /* height: 100%; */
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}

@@ -12,7 +12,7 @@ const LeadList = () => {
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/lead/")
       .then((response) => response.json())
-      .then((data) => setLeadList(data.results));
+      .then((data) => setLeadList(data));
   }, []);
 
   const deleteAlert = (api, id) => {
@@ -40,7 +40,7 @@ const LeadList = () => {
   };
 
   return (
-    <div className=" mx-3 p-3">
+    <div className=" h-screen mx-3 p-3">
       <div className=" float-right bg-green-400 px-4 py-2 rounded-lg text-white font-bold">
         {" "}
         <Link to="/newlead">New Lead</Link>

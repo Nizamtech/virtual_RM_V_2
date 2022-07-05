@@ -21,6 +21,8 @@ const CardCommissionTable = ({
   handleChange,
   mockData,
   setMockData,
+  handleInputChange,
+  handleRemoveClick,
 }) => {
   const [addCommission, setAddCommission] = useState([{ id: 1 }]);
   const [counter, setCounter] = useState(2);
@@ -100,7 +102,7 @@ const CardCommissionTable = ({
           </thead>
           <tbody>
             {addCommission &&
-              addCommission.map((item) => (
+              addCommission.map((item, i) => (
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td
                     scope="row"
@@ -148,7 +150,8 @@ const CardCommissionTable = ({
                       name="commission"
                       maxLength={4}
                       max="3000"
-                      onBlur={(e) => setCommission(e.target.value)}
+                      value={item.commission}
+                      onChange={(e) => handleInputChange(e, i)}
                       placeholder="BDT"
                       className="my-2 focus:outline-[#2684FF] focus:duration-400 font-exo w-full h-8 border py-4 px-3 rounded-[3px] border-[#CCCCCC] "
                     />
@@ -166,7 +169,7 @@ const CardCommissionTable = ({
                       </button>
                     ) : (
                       <button
-                        onClick={() => handleDelete(item)}
+                        onClick={() => handleRemoveClick(i)}
                         className=" bg-[#fc544b] border-[#fc544b] shadow-red-400 deleteBtn hover:shadow-2xl rounded "
                       >
                         -
