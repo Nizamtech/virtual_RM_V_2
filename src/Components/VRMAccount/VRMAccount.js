@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import VRMChart from "../../Shared/Chart/VRMChart";
 import Account from "../Account/Account";
+import CardCommissionTable from "../CardCommission/CardCommissionTable";
+import CardCommissionList from "../CardCommissionList/CardCommissionList";
 import LeadList from "../LeadList/LeadList";
 import LeadListTable from "../LeadList/LeadListTable";
 import PaymentStatusTable from "../PaymentStatus/PaymentStatusTable";
@@ -43,7 +45,7 @@ const VRMAccount = () => {
     {
       id: "Commission",
       label: "Commission",
-      content: "Commission Table",
+      content: <CardCommissionList data={vrmUser} />,
     },
     {
       id: "Transaction",

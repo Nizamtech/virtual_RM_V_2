@@ -157,12 +157,22 @@ const Account = ({ data }) => {
                     <label className=" h-full w-full bg-gray-300  flex justify-center items-center text-gray-600  ">
                       Sub District
                     </label>
+
                     <input
                       className=" h-12 rounded px-4 text-lg accent-sky-600 border-gray-300   "
                       type="text"
                       name="name"
                       placeholder=" Name"
                     />
+                    {/* <input list="browsers"  />
+
+                    <datalist id="browsers">
+                      <option value="Internet Explorer" />
+                      <option value="Firefox" />
+                      <option value="Chrome" />
+                      <option value="Opera" />
+                      <option value="Safari" />
+                    </datalist> */}
                   </div>
                 </div>
                 <input
@@ -257,12 +267,22 @@ const Account = ({ data }) => {
               {error && (
                 <h1 className=" ml-4 text-red-600">Password does not match</h1>
               )}
+            </div>
+            <div className=" flex flex-col mx-auto lg:mx-4 my-3">
+              <label className=" ml-2 text-lg mb-2 text-">OTTP</label>
               <input
-                className=" w-20 bg-green-400 py-1 px-4 rounded text-white text-lg mt-4  mr-2 relative right-[-87%]"
-                type="submit"
-                value="SAVE"
+                className=" h-12 rounded px-4 text-lg accent-sky-600 border-gray-300 border  "
+                type="password"
+                name="password1"
+                placeholder=" Enter 4 Digit Code"
+                onBlur={handlePassword}
               />
             </div>
+            <input
+              className=" w-20 bg-green-400 py-1 px-4 rounded text-white text-lg mt-4  mr-2 relative right-[-87%]"
+              type="submit"
+              value="SAVE"
+            />
           </div>
         </form>
       </div>

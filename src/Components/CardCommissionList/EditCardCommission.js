@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
 function EditCardCommission({
-  institute,
   setInstitute,
-  inputList,
-  setInputList,
   error,
+  cardType,
+  setCardType,
+  cardCommissionData,
+  setCardCommissionData,
 }) {
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const [cardCommissionData, setCardCommissionData] = useState([]);
   const [cardTypeData, setCardTypeData] = useState([]);
-  const [cardType, setCardType] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/benefit/card_type/list/")
@@ -53,7 +52,6 @@ function EditCardCommission({
     return { value: item?.name, label: item?.name };
   });
 
-  console.log(cardType);
   return (
     <div>
       <div>
@@ -103,7 +101,9 @@ function EditCardCommission({
                   name="card_type"
                   id="cars"
                 >
-                  <option value="">Select </option>
+                  <option defaultValue={x?.card_type} value={x?.card_type}>
+                    {x?.card_type}
+                  </option>
                   {cardTypeData &&
                     cardTypeData.map((item) => (
                       <option defaultValue={item?.name} value={item?.name}>

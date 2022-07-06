@@ -53,6 +53,8 @@ const LoanCommission = () => {
       });
   };
 
+  console.log(loan);
+
   return (
     <div className=" w-full p-3 my-3">
       <form onSubmit={handleSubmit}>

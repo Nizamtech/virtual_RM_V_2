@@ -9,15 +9,15 @@ const EditCardCommissionList = () => {
   const router = useNavigate();
   const [institute, setInstitute] = useState(null);
   const [error, setError] = useState(false);
-  const [inputList, setInputList] = useState([
-    { card_type: "", from: 0, commission: 0, to: 0 },
-  ]);
+  const [cardCommissionData, setCardCommissionData] = useState([]);
+  const [cardType, setCardType] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
-      card_type: [...inputList],
-      bank_name: institute?.value,
+      card_type: [...cardType],
+      bank_name: institute?.value || cardCommissionData?.bank_name,
     };
     console.log(data);
     // if (institute?.value) {
@@ -32,14 +32,15 @@ const EditCardCommissionList = () => {
     //     });
     // } else setError(true);
   };
-  console.log(inputList);
+
   return (
     <div className="h-screen  overflow-scroll p-3 my-3 ">
       <EditCardCommission
-        institute={institute}
+        cardCommissionData={cardCommissionData}
+        cardType={cardType}
+        setCardType={setCardType}
+        setCardCommissionData={setCardCommissionData}
         setInstitute={setInstitute}
-        inputList={inputList}
-        setInputList={setInputList}
         error={error}
       />
 

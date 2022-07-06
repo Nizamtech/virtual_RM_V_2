@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { deleteAlert } from "../../Shared/Alert/deleteAlert";
+import Swal from "sweetalert2";
 
-const CardCommissionList = () => {
+const api = `http://127.0.0.1:8000/api/card_commission/`;
+
+const CardCommissionList = (data) => {
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
@@ -11,7 +13,31 @@ const CardCommissionList = () => {
       setCommission(res.data.results);
     });
   }, []);
-  console.log(commissions);
+
+  const deleteAlert = (api, id) => {
+    console.log(api + id);
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${api}${id}/`).then((res) => {
+          if (res.status === 204) {
+            const rest = commissions?.filter((item) => item?.id !== id);
+            setCommission(rest);
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          }
+        });
+      }
+    });
+  };
+
   return (
     <div className=" h-screen p-3 m-3">
       <div className="flex flex-col mt-8">
@@ -23,60 +49,79 @@ const CardCommissionList = () => {
                   <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     #
                   </th>
-                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Institute Name
                   </th>
-                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Card Name
                   </th>
-                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     From
                   </th>
-                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     To
                   </th>
-                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Commission
+                  </th>
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    Action
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white">
                 {commissions &&
                   commissions?.map((item, index) => (
-                    <tr>
-                      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-3">
+                    <tr className="border-b">
+                      <td className="px-6 py-4 whitespace-no-wrap  border-gray-200 w-3">
                         <div className="text-sm leading-5 text-gray-500">
                           {index + 1}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div className="flex items-center">
-                          <div className="ml-4">
-                            <div className="text-sm font-medium leading-5 text-gray-900">
-                              {item?.bank_name}
+                      <td className="px-6 py-4 whitespace-no-wrap  border-gray-200 ">
+                        <div className="text-sm leading-5 text-gray-500">
+                          {item?.bank_name}
+                        </div>
+                      </td>
+
+                      <td>
+                        {item?.card_type?.map((i) => (
+                          <div className="px-6 py-4 whitespace-no-wrap  border-gray-200 flex justify-center items-center">
+                            <div className="text-sm leading-5 text-gray-500">
+                              {i?.card_type}
                             </div>
                           </div>
-                        </div>
+                        ))}
+                      </td>
+                      <td>
+                        {item?.card_type?.map((i) => (
+                          <div className="px-6 py-4 whitespace-no-wrap  border-gray-200 flex justify-center items-center">
+                            <div className="text-sm leading-5 text-gray-500">
+                              {i?.from}
+                            </div>
+                          </div>
+                        ))}
+                      </td>
+                      <td>
+                        {item?.card_type?.map((i) => (
+                          <div className="px-6 py-4 whitespace-no-wrap  border-gray-200 flex justify-center items-center">
+                            <div className="text-sm leading-5 text-gray-500">
+                              {i?.to}
+                            </div>
+                          </div>
+                        ))}
+                      </td>
+                      <td>
+                        {item?.card_type?.map((i) => (
+                          <div className="px-6 py-4 whitespace-no-wrap border-gray-200 flex justify-center items-center">
+                            <div className="text-sm leading-5 text-gray-500">
+                              {i?.commission}
+                            </div>
+                          </div>
+                        ))}
                       </td>
 
-                      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div className="text-sm leading-5 text-gray-500">
-                          {item?.card_type?.card_type}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                          {item?.card_type?.from}
-                        </span>
-                      </td>
-
-                      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        <div className="text-sm leading-5 text-gray-500">
-                          {item?.card_type?.to}
-                        </div>
-                      </td>
-
-                      <td className=" flex  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
+                      <td className=" flex justify-center items-center  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
                         <Link to={`/cclist/${item?.id}`}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +138,10 @@ const CardCommissionList = () => {
                             />
                           </svg>
                         </Link>
-                        <button onClick={() => deleteAlert()} className="mx-2">
+                        <button
+                          onClick={() => deleteAlert(api, item?.id)}
+                          className="mx-2"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="w-6 h-6 text-red-400"
