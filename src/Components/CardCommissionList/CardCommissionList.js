@@ -1,16 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { deleteAlert } from "../../Shared/Alert/deleteAlert";
 
 const CardCommissionList = () => {
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/benefit/card_commision/list/`)
-      .then((res) => {
-        setCommission(res.data.results);
-      });
+    axios.get(`http://127.0.0.1:8000/api/card_commission/`).then((res) => {
+      setCommission(res.data.results);
+    });
   }, []);
   console.log(commissions);
   return (
@@ -43,7 +42,7 @@ const CardCommissionList = () => {
               </thead>
               <tbody className="bg-white">
                 {commissions &&
-                  commissions?.commissionn?.map((item, index) => (
+                  commissions?.map((item, index) => (
                     <tr>
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-3">
                         <div className="text-sm leading-5 text-gray-500">
@@ -54,7 +53,7 @@ const CardCommissionList = () => {
                         <div className="flex items-center">
                           <div className="ml-4">
                             <div className="text-sm font-medium leading-5 text-gray-900">
-                              {item?.institute_name}
+                              {item?.bank_name}
                             </div>
                           </div>
                         </div>
@@ -62,26 +61,39 @@ const CardCommissionList = () => {
 
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <div className="text-sm leading-5 text-gray-500">
-                          {item?.card_type}
+                          {item?.card_type?.card_type}
                         </div>
                       </td>
-
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                          {item?.from}
+                          {item?.card_type?.from}
                         </span>
                       </td>
 
                       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <div className="text-sm leading-5 text-gray-500">
-                          {item?.to}
+                          {item?.card_type?.to}
                         </div>
                       </td>
-                      <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                        <div className="text-sm leading-5 text-gray-500">
-                          {item?.commission}
-                        </div>
-                        <button onClick={() => deleteAlert()}>
+
+                      <td className=" flex  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
+                        <Link to={`/cclist/${item?.id}`}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 text-blue-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                            />
+                          </svg>
+                        </Link>
+                        <button onClick={() => deleteAlert()} className="mx-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="w-6 h-6 text-red-400"

@@ -26,6 +26,7 @@ import EditTeam from "./Components/EditTeam/EditTeam";
 import VRMListEdit from "./Components/VRMList/VRMListEdit";
 import AddFeature from "./Components/AddFeature/AddFeature";
 import EditLeadList from "./Components/LeadList/EditLeadList/EditLeadList";
+import EditCardCommissionList from "./Components/CardCommissionList/EditCardCommissionList";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/cardcommission" element={<CardCommission />} />
             <Route path="/cclist" element={<CardCommissionList />} />
+            <Route path="/cclist/:id" element={<EditCardCommissionList />} />
             <Route path="/loancommission" element={<LoanCommission />} />
             <Route path="/lclist" element={<LoanCommissionList />} />
             <Route path="/vrmlist" element={<VRMList />} />

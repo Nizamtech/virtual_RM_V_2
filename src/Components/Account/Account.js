@@ -60,8 +60,8 @@ const Account = ({ data }) => {
       status: status?.value,
       remarks: remarks,
     };
-    const response = await axios.post("https://reqres.in/api/articles", data);
-    console.log(data);
+    // const response = await axios.post("https://reqres.in/api/articles", data);
+    // console.log(data);
   };
 
   const handlePersonalSubmit = (e) => {

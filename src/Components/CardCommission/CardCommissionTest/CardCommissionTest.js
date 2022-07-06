@@ -5,6 +5,7 @@ function CardCommissionTest({
   setInstitute,
   inputList,
   setInputList,
+  error,
 }) {
   const [data, setData] = useState([]);
 
@@ -71,6 +72,9 @@ function CardCommissionTest({
             options={options}
             className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
           />
+          {error && (
+            <label className=" text-red-400 my-1">Select Institute</label>
+          )}
         </div>
         <div className=" grid grid-cols-5 bg-black text-white py-2 px-3 font-bold uppercase">
           <div>

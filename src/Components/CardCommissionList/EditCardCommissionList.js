@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Router, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
-import CardCommissionTest from "./CardCommissionTest/CardCommissionTest";
+import EditCardCommission from "./EditCardCommission";
 
-const CardCommission = () => {
+const EditCardCommissionList = () => {
   const router = useNavigate();
   const [institute, setInstitute] = useState(null);
   const [error, setError] = useState(false);
@@ -14,28 +14,28 @@ const CardCommission = () => {
   ]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputList);
+
     const data = {
       card_type: [...inputList],
       bank_name: institute?.value,
     };
     console.log(data);
-    if (institute?.value) {
-      setError(false);
-      await axios
-        .post("http://127.0.0.1:8000/api/card_commission/", data)
-        .then((result) => {
-          if (result?.status === 201) {
-            SuccessAlert("Successfully Added", "success");
-            router("/cclist");
-          } else SuccessAlert("Something Wrong", "error");
-        });
-    } else setError(true);
+    // if (institute?.value) {
+    //   setError(false);
+    //   await axios
+    //     .post("http://127.0.0.1:8000/api/card_commission/", data)
+    //     .then((result) => {
+    //       if (result?.status === 201) {
+    //         SuccessAlert("Successfully Added", "success");
+    //         router("/cclist");
+    //       } else SuccessAlert("Something Wrong", "error");
+    //     });
+    // } else setError(true);
   };
-
+  console.log(inputList);
   return (
     <div className="h-screen  overflow-scroll p-3 my-3 ">
-      <CardCommissionTest
+      <EditCardCommission
         institute={institute}
         setInstitute={setInstitute}
         inputList={inputList}
@@ -61,4 +61,4 @@ const CardCommission = () => {
   );
 };
 
-export default CardCommission;
+export default EditCardCommissionList;
