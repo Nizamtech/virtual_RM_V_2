@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-function CardCommissionTest({
+function EditVRMCard({
   institute,
   setInstitute,
   inputList,
@@ -12,7 +12,7 @@ function CardCommissionTest({
   const [cardTypeData, setCardTypeData] = useState([]);
 
   useEffect(() => {
-    fetch("  http://127.0.0.1:8000/benefit/card_type/list/")
+    fetch("http://127.0.0.1:8000/benefit/card_type/")
       .then((response) => response.json())
       .then((data) => setCardTypeData(data?.results));
   }, []);
@@ -58,7 +58,7 @@ function CardCommissionTest({
   return (
     <div>
       <div>
-        <div className="w-full mb-6 md:mb-0  ">
+        <div className="w-full mb-6 md:mb-0">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             for="grid-first-name"
@@ -70,13 +70,13 @@ function CardCommissionTest({
             name="profession"
             onChange={setInstitute}
             options={options}
-            className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white   "
+            className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
           />
           {error && (
             <label className=" text-red-400 my-1">Select Institute</label>
           )}
         </div>
-        <div className=" hidden md:grid grid-cols-5 bg-black text-white py-2 px-3 font-bold uppercase">
+        <div className=" grid grid-cols-5 bg-black text-white py-2 px-3 font-bold uppercase">
           <div>
             <h1> Card Type</h1>
           </div>
@@ -95,10 +95,7 @@ function CardCommissionTest({
       <div className=" bg-white px-2">
         {inputList.map((x, i) => {
           return (
-            <div className=" grid grid-cols-1 md:grid-cols-5 bg-white mb-2">
-              <h1 className=" mt-2 text-sm  font-bold block md:hidden bg-black text-white p-2">
-                Card Type
-              </h1>
+            <div className=" grid  grid-cols-1 md:grid-cols-5 bg-white mb-2">
               <select
                 className="border border-gray-300 mr-2 my-2 rounded"
                 onChange={(e) => handleInputChange(e, i)}
@@ -113,9 +110,7 @@ function CardCommissionTest({
                     </option>
                   ))}
               </select>
-              <h1 className=" mt-2 text-sm  font-bold block md:hidden bg-black text-white p-2">
-                From
-              </h1>
+
               <input
                 className="ml10 p-2 border border-gray-300 mr-2 my-2 rounded "
                 name="from"
@@ -123,9 +118,6 @@ function CardCommissionTest({
                 value={x.from}
                 onChange={(e) => handleInputChange(e, i)}
               />
-              <h1 className=" mt-2 text-sm  font-bold block md:hidden bg-black text-white p-2">
-                To
-              </h1>
               <input
                 className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
                 name="to"
@@ -133,9 +125,6 @@ function CardCommissionTest({
                 value={x.to}
                 onChange={(e) => handleInputChange(e, i)}
               />
-              <h1 className=" mt-2 text-sm  font-bold block md:hidden bg-black text-white p-2 ">
-                Commission
-              </h1>
               <input
                 className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
                 name="commission"
@@ -146,7 +135,7 @@ function CardCommissionTest({
               <div className="btn-box flex flex-col items-center justify-center">
                 {i !== 0 && (
                   <button
-                    className=" bg-[#fc544b] border-[#fc544b] shadow-red-400  hover:shadow-2xl rounded  py-2 text-white w-full md:w-16"
+                    className=" bg-[#fc544b] border-[#fc544b] shadow-red-400  hover:shadow-2xl rounded w-16 py-2 text-white "
                     onClick={() => handleRemoveClick(i)}
                   >
                     Remove
@@ -155,7 +144,7 @@ function CardCommissionTest({
                 {i === 0 && (
                   <button
                     onClick={handleAddClick}
-                    className=" bg-green-400 deleteBtn hover:shadow-2xl rounded w-full md:w-16 "
+                    className=" bg-green-400 deleteBtn hover:shadow-2xl rounded  "
                   >
                     Add
                   </button>
@@ -169,4 +158,4 @@ function CardCommissionTest({
   );
 }
 
-export default CardCommissionTest;
+export default EditVRMCard;

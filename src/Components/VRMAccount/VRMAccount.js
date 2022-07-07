@@ -5,9 +5,11 @@ import VRMChart from "../../Shared/Chart/VRMChart";
 import Account from "../Account/Account";
 import CardCommissionTable from "../CardCommission/CardCommissionTable";
 import CardCommissionList from "../CardCommissionList/CardCommissionList";
+import Commission from "../Commission/Commission";
 import LeadList from "../LeadList/LeadList";
 import LeadListTable from "../LeadList/LeadListTable";
 import PaymentStatusTable from "../PaymentStatus/PaymentStatusTable";
+import VRMCommissionList from "../VRMCommission/VRMCommissionList";
 import Tabs from "./Tabs";
 import VRMTab from "./VRMTab";
 import VRMTabCom from "./VRMTabCom";
@@ -45,7 +47,7 @@ const VRMAccount = () => {
     {
       id: "Commission",
       label: "Commission",
-      content: <CardCommissionList data={vrmUser} />,
+      content: <Commission data={vrmUser} />,
     },
     {
       id: "Transaction",

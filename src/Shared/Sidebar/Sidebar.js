@@ -57,7 +57,10 @@ const Sidebar = () => {
               ></path>
             </svg>
             <details className=" text-white mx-2 mt-2 w-full ">
-              <summary className=" mb-1">User Section</summary>
+              <summary className=" mb-1 flex justify-between items-center">
+                <h1>User Section</h1> <h1>v</h1>
+              </summary>
+
               <div className=" bg-[#1B399D] mx-2 rounded-lg w-full">
                 <NavLink
                   to="/createteam"
@@ -116,9 +119,11 @@ const Sidebar = () => {
                 clip-rule="evenodd"
               ></path>
             </svg>
-            <details className=" text-white  mx-2 mt-2 w-full">
-              <summary className=" mb-1">Benefits</summary>
-              <div className=" bg-[#1B399D] mx-2 rounded-lg w-full ">
+            <details className=" text-white  mx-2 mt-1 w-full">
+              <summary className=" mb-1 flex justify-between items-center">
+                <h1>Benefits</h1> <h1>v</h1>
+              </summary>
+              <div className=" bg-[#1B399D] rounded-lg w-full  ">
                 <NavLink
                   to="/cardcommission"
                   className={`${
@@ -143,7 +148,8 @@ const Sidebar = () => {
                 <NavLink
                   to="/loancommission"
                   className={`${
-                    loccation.pathname.includes("loanommission") && "activeLink"
+                    loccation.pathname.includes("loancommission") &&
+                    "activeLink"
                   } use" h-10 ml-2  flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
                 >
                   <FontAwesomeIcon icon={faHandHoldingDollar} />
@@ -179,7 +185,9 @@ const Sidebar = () => {
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>
-              <span className="ml-3 text-white">VRM List</span>
+              <span className="ml-3 text-white active:text-black ">
+                VRM List
+              </span>
             </NavLink>
           </li>
           <li>
