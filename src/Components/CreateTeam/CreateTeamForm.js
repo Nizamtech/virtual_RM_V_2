@@ -66,7 +66,7 @@ const CreateTeamForm = () => {
   };
 
   return (
-    <div className=" h-screen overflow-y-scroll overflow-x-hidden">
+    <div className=" h-screen overflow-scroll ">
       <form onSubmit={handleSubmitFile}>
         <div className=" mx-2 p-2 mt-1 ">
           <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium">
@@ -85,7 +85,7 @@ const CreateTeamForm = () => {
         <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium mt-8">
           Permission
         </h1>
-        <div className=" grid grid-cols-5 p-2 place-content-center place-items-center text-start mx-2 text-lg uppercase ">
+        <div className=" hidden md:grid grid-cols-5 place-items-center p-2 text-start mx-2 text-lg uppercase ">
           <div>Model</div>
           <div>View</div>
           <div>Add</div>
@@ -95,9 +95,9 @@ const CreateTeamForm = () => {
         <div>
           {content_type &&
             content_type?.map((item) => (
-              <div className=" grid grid-cols-5 p-3 border place-content-center  border-gray-200 my-1">
-                <div className=" flex">
-                  <h1 className=" text-start mx-2 text-lg uppercase">
+              <div className=" grid grid-cols-1 gap-4 md:grid-cols-5 p-3 border  border-gray-200 my-1">
+                <div className="">
+                  <h1 className="  text-sky-500 md:text-black text-start mx-2 text-lg uppercase">
                     {item?.model}{" "}
                   </h1>
                   {/* <input
@@ -111,44 +111,48 @@ const CreateTeamForm = () => {
                   /> */}
                 </div>
 
-                <div>
+                <div className=" grid  grid-cols-2   md:grid-cols-1">
+                  <h1 className=" block md:hidden text-lg">View</h1>
                   <input
                     type="checkbox"
                     value={item?.permissions?.view}
                     name={item?.permissions?.view}
                     checked={item ? item?.isChecked : false}
                     onChange={handleChange}
-                    className=" mt-2 mx-auto w-full"
+                    className=" mt-2 mx-auto "
                   />
                 </div>
-                <div>
+                <div className=" grid grid-cols-2">
+                  <h1 className=" block md:hidden text-lg">Add</h1>
                   <input
                     type="checkbox"
                     value={item?.permissions?.add}
                     name={item?.permissions?.add}
                     checked={item ? item?.isChecked : false}
                     onChange={handleChange}
-                    className=" mt-2  mx-auto w-full"
+                    className=" mt-2  mx-auto"
                   />
                 </div>
-                <div>
+                <div className=" grid grid-cols-2">
+                  <h1 className=" block md:hidden text-lg">Change</h1>
                   <input
                     type="checkbox"
                     value={item?.permissions?.change}
                     name={item?.permissions?.change}
                     checked={item ? item?.isChecked : false}
                     onChange={handleChange}
-                    className=" mt-2  mx-auto w-full"
+                    className=" mt-2  mx-auto "
                   />
                 </div>
-                <div>
+                <div className=" grid grid-cols-2">
+                  <h1 className=" block md:hidden text-lg">Delete</h1>
                   <input
                     type="checkbox"
                     value={item?.permissions?.delete}
                     name={item?.permissions?.delete}
                     checked={item ? item?.isChecked : false}
                     onChange={handleChange}
-                    className=" mt-2  mx-auto w-full"
+                    className=" mt-2  mx-auto "
                   />
                 </div>
               </div>

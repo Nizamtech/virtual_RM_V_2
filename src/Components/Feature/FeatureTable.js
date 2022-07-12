@@ -3,35 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { deleteAlert } from "../../Shared/Alert/deleteAlert";
 import { Link } from "react-router-dom";
+import DOMPurify from "dompurify";
 
-const mockData = [
-  {
-    id: 13254,
-    requestAmount: "Abcd",
-    requestedDate: "EFGH",
-    paymentDisverse: "IJk",
-    paymentDisverseDate: "LMN",
-    totalDisversementTime: "Op",
-  },
-  {
-    id: 13254,
-    requestAmount: "Abcd",
-    requestedDate: "EFGH",
-    paymentDisverse: "IJk",
-    paymentDisverseDate: "LMN",
-    totalDisversementTime: "Op",
-  },
-  {
-    id: 13254,
-    requestAmount: "Abcd",
-    requestedDate: "EFGH",
-    paymentDisverse: "IJk",
-    paymentDisverseDate: "LMN",
-    totalDisversementTime: "Op",
-  },
-];
-
-const FeatureTable = ({ data }) => {
+const api = "http://127.0.0.1:8000/api/feature/";
+const FeatureTable = ({ data, deleteAlert }) => {
+  const createMarkup = (html) => {
+    return {
+      __html: DOMPurify.sanitize(html),
+    };
+  };
   return (
     <div className="flex flex-col mt-12">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -61,8 +41,8 @@ const FeatureTable = ({ data }) => {
             </thead>
 
             <tbody className="bg-white">
-              {mockData &&
-                mockData.map((item, index) => (
+              {data &&
+                data?.map((item, index) => (
                   <tr>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-3">
                       <div className="text-sm leading-5 text-gray-500">
@@ -72,24 +52,31 @@ const FeatureTable = ({ data }) => {
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
-                        {item?.requestAmount}
+                        {item?.bank_name}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                      <div className="text-sm leading-5 text-gray-500">
-                        {item?.requestedDate}
-                      </div>
+                      <div
+                        className="text-sm leading-5 text-gray-500"
+                        dangerouslySetInnerHTML={createMarkup(item?.feature)}
+                      ></div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                      <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                        {item?.paymentDisverse}
-                      </span>
+                      <div
+                        className="text-sm leading-5 text-gray-500"
+                        dangerouslySetInnerHTML={createMarkup(
+                          item?.eligibility
+                        )}
+                      ></div>
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                      <div className="text-sm leading-5 text-gray-500">
-                        {item?.paymentDisverseDate}
-                      </div>
+                      <div
+                        className="text-sm leading-5 text-gray-500"
+                        dangerouslySetInnerHTML={createMarkup(
+                          item?.short_feature
+                        )}
+                      ></div>
                     </td>
                     <td className=" flex justify-center px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
                       <Link to="/account">
@@ -111,7 +98,7 @@ const FeatureTable = ({ data }) => {
                           />
                         </svg>
                       </Link>
-                      <button onClick={() => deleteAlert()}>
+                      <button onClick={() => deleteAlert(api, item?.id)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="w-6 h-6 text-red-400"

@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-// import "rsuite/styles/index.less";
-// import "rsuite/dist/rsuite.min.css";
+import RangeCalender from "./RangeCalender";
+
 // import { DateRangePicker, DateRange, Calendar } from "react-date-range";
-import { DateRangePicker } from "rsuite";
+
 const LeadListFilter = () => {
   const [vrmAgent, setVrmAgent] = useState(null);
   const [status, setStatus] = useState(null);
@@ -40,9 +40,10 @@ const LeadListFilter = () => {
     { value: "Home Loan", label: "Home Loan" },
     { value: "Credit Cart", label: "Credit Cart" },
   ];
+
   return (
-    <div className=" grid grid-cols-12 place-content-center  ">
-      <div className=" col-span-11">
+    <div className=" flex  ">
+      <div>
         <div className=" grid grid-cols-6 gap-3 place-content-center place-items-center my-2 p-2 ">
           <div className="w-full">
             <h1 className=" ml-1 my-1 text-lg">VRM Agent</h1>
@@ -93,20 +94,15 @@ const LeadListFilter = () => {
               className="py-2 px-2  w-full border border-gray-300  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
             />
           </div>
-          <div className="w-full">
+          <div className="w-full ">
             <h1 className=" ml-1 my-1 text-lg">Date </h1>
-            <Select
-              required
-              name="vrmAgent"
-              onChange={setStatus}
-              options={statusData}
-              className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
-            />
+
+            <RangeCalender />
           </div>
         </div>
       </div>
-      <div className=" col-span-1 mt-12">
-        <h1 className=" bg-green-400 py-[10px] px-10 rounded-lg text-white font-bold">
+      <div className=" mt-12 right-12 absolute">
+        <h1 className=" bg-green-400 py-[10px] px-5 rounded-lg text-white font-bold">
           Go
         </h1>
       </div>

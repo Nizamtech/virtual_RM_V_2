@@ -1,10 +1,63 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import VRMChart from "../../Shared/Chart/VRMChart";
+import Account from "../Account/Account";
+import CardCommissionTable from "../CardCommission/CardCommissionTable";
+import CardCommissionList from "../CardCommissionList/CardCommissionList";
+import Commission from "../Commission/Commission";
+import LeadList from "../LeadList/LeadList";
+import LeadListTable from "../LeadList/LeadListTable";
+import PaymentStatusTable from "../PaymentStatus/PaymentStatusTable";
+import VRMCommissionList from "../VRMCommission/VRMCommissionList";
+import Tabs from "./Tabs";
 import VRMTab from "./VRMTab";
+import VRMTabCom from "./VRMTabCom";
 
 const VRMAccount = () => {
+  const { vrmID } = useParams();
+  const [vrmUser, setVRMUser] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/agent/register/${vrmID}/`
+      );
+      setVRMUser(response?.data);
+    };
+    loadData();
+  }, [vrmID]);
+
+  const items = [
+    {
+      id: "Dahboard",
+      label: "Dahboard",
+      content: "Dashboard",
+    },
+    {
+      id: "Account",
+      label: "Account",
+      content: <Account data={vrmUser} />,
+    },
+    {
+      id: "Leads",
+      label: "Leads",
+      content: <LeadList />,
+    },
+    {
+      id: "Commission",
+      label: "Commission",
+      content: <Commission data={vrmUser} />,
+    },
+    {
+      id: "Transaction",
+      label: "Transaction",
+      content: <PaymentStatusTable />,
+    },
+  ];
+
   return (
-    <div className=" h-screen m-2 p-3 ">
+    <div className=" h-screen m-2 p-3 overflow-y-scroll ">
       {/* vrm Account header  */}
       <div className="myShadow8">
         <div className=" grid grid-cols-3  py-3 rounded-lg ">
@@ -18,12 +71,10 @@ const VRMAccount = () => {
               />
             </div>
             <div className=" mx-2">
-              <h1 className=" text-lg text-slate-900">Arnold Schwarzenegger</h1>
-              <h1 className=" text-sm text-gray-600">
-                Chairman Bari, Banani, Dhaka-1230
-              </h1>
+              <h1 className=" text-lg text-slate-900">{vrmUser?.username}</h1>
+              <h1 className=" text-sm text-gray-600">{vrmUser?.location}</h1>
               <div className=" flex  items-center ">
-                <h1>Active</h1>
+                <h1>{vrmUser?.status_name}</h1>
                 <h1 className="ml-2 w-2 h-2 rounded-full bg-green-500 border-green-500 ring-1 ring-green-300 "></h1>
                 {/* <h1 className="ml-2 w-2 h-2 rounded-full bg-red-500 border-red-500 ring-1 ring-red-300"></h1> */}
               </div>
@@ -53,7 +104,7 @@ const VRMAccount = () => {
                   <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
                 <h1 className=" text-sm text-gray-600 w-4 h-4 mr-2">
-                  +88018257612791
+                  {vrmUser?.phone}
                 </h1>
               </div>
               <div className="truncate sm:whitespace-normal flex items-center my-1">
@@ -76,7 +127,7 @@ const VRMAccount = () => {
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
                 <h1 className=" text-sm text-gray-600 w-4 h-4 mr-2">
-                  arnoldschwarzenegger@left4code.com
+                  {vrmUser?.email}
                 </h1>
               </div>
               <div className="truncate sm:whitespace-normal flex items-center my-1">
@@ -97,7 +148,7 @@ const VRMAccount = () => {
                   <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0023 3z"></path>
                 </svg>
                 <h1 className=" text-sm text-gray-600  h-4 mr-2">
-                  Joind: 27-6-2022
+                  Joind: {vrmUser?.created_at}
                 </h1>
               </div>
             </div>
@@ -113,7 +164,8 @@ const VRMAccount = () => {
 
         {/* VRM Tab  */}
         <div className=" mx-2 p-2 border-t">
-          <VRMTab />
+          {/* <VRMTab /> */}
+          <Tabs items={items} />
         </div>
       </div>
     </div>

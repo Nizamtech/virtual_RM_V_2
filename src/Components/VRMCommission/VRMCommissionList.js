@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const api = `http://127.0.0.1:8000/api/card_commission/`;
 
-const CardCommissionList = ({ data }) => {
+const VRMCommissionList = ({ data }) => {
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
@@ -122,7 +122,7 @@ const CardCommissionList = ({ data }) => {
                       </td>
 
                       <td className=" flex justify-center items-center  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                        <Link to={`/cclist/${item?.id}`}>
+                        <Link to={`/vrmedit/${item?.id}`}>
                           {/* to={`/cclist/${item?.id} query: ${"name"}`} */}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -170,4 +170,4 @@ const CardCommissionList = ({ data }) => {
   );
 };
 
-export default CardCommissionList;
+export default VRMCommissionList;

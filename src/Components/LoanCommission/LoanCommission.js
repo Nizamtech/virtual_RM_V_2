@@ -54,7 +54,7 @@ const LoanCommission = () => {
   };
 
   return (
-    <div className=" w-full p-3 my-3">
+    <div className="p-3 my-3">
       <form onSubmit={handleSubmit}>
         <div className="w-full mb-6 md:mb-0">
           <label
@@ -71,8 +71,8 @@ const LoanCommission = () => {
             className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
           />
         </div>
-        <div className=" overflow-x-auto  sm:rounded-lg  mt-3 h-screen ">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <div className="sm:rounded-lg  mt-3 h-screen  ">
+          <table className=" min-w-full text-sm text-left text-gray-500 dark:text-gray-400  ">
             <thead className="text-xs  uppercase bg-slate-800 text-white dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3 ">

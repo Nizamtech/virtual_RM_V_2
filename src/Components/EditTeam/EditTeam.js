@@ -97,7 +97,7 @@ const EditTeam = () => {
         <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium mt-8">
           Permission
         </h1>
-        <div className=" grid grid-cols-5 p-2 place-content-center place-items-center text-start mx-2 text-lg uppercase ">
+        <div className=" grid grid-cols-5 p-2  text-start mx-2 text-lg uppercase ">
           <div>Model</div>
           <div>View</div>
           <div>Add</div>
@@ -107,7 +107,7 @@ const EditTeam = () => {
         <div>
           {content_type &&
             content_type?.map((item) => (
-              <div className=" grid grid-cols-5 p-3 border place-content-center  border-gray-200 my-1">
+              <div className=" grid grid-cols-5 p-3 border  border-gray-200 my-1">
                 <h1 className=" text-start mx-2 text-lg uppercase">
                   {item?.model}{" "}
                 </h1>
@@ -121,7 +121,7 @@ const EditTeam = () => {
                       it === item?.permissions?.view ? true : false
                     )}
                     onChange={handleChange}
-                    className=" mt-2 mx-auto w-full"
+                    className=" mt-2 mx-auto "
                   />
                 </div>
                 <div>
@@ -133,7 +133,7 @@ const EditTeam = () => {
                       it === item?.permissions?.view ? true : false
                     )}
                     onChange={handleChange}
-                    className=" mt-2  mx-auto w-full"
+                    className=" mt-2  mx-auto "
                   />
                 </div>
                 <div>
@@ -145,7 +145,7 @@ const EditTeam = () => {
                       it === item?.permissions?.view ? true : false
                     )}
                     onChange={handleChange}
-                    className=" mt-2  mx-auto w-full"
+                    className=" mt-2  mx-auto "
                   />
                 </div>
                 <div>
@@ -157,7 +157,7 @@ const EditTeam = () => {
                       it === item?.permissions?.view ? true : false
                     )}
                     onChange={handleChange}
-                    className=" mt-2  mx-auto w-full"
+                    className=" mt-2  mx-auto "
                   />
                 </div>
               </div>

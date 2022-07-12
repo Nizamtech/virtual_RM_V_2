@@ -61,9 +61,9 @@ const UserTable = ({ data, deleteAlert }) => {
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                      <div className="text-sm leading-5 text-gray-500">
+                      <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                         {item?.team}
-                      </div>
+                      </span>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
@@ -72,9 +72,9 @@ const UserTable = ({ data, deleteAlert }) => {
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                      <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                      <div className="text-sm leading-5 text-gray-500">
                         {item?.created_at}
-                      </span>
+                      </div>
                     </td>
 
                     <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">

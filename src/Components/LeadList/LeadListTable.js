@@ -1,11 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { deleteAlert } from "../../Shared/Alert/deleteAlert";
 import { Link } from "react-router-dom";
-const LeadListTable = ({ data }) => {
+const api = `http://127.0.0.1:8000/api/lead/`;
+const LeadListTable = ({ data, deleteAlert }) => {
   return (
-    <div className="flex flex-col mt-8">
+    <div className="flex flex-col mt-8 ">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
           <table className="min-w-full overflow-scroll">
@@ -52,38 +52,50 @@ const LeadListTable = ({ data }) => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 w-10 h-10">
-                          <img
-                            className="w-10 h-10 rounded-full"
-                            src="https://source.unsplash.com/user/erondu"
-                            alt="admin dashboard ui"
-                          />
-                        </div>
-
-                        <div className="ml-4">
-                          <div className="text-sm font-medium leading-5 text-gray-900">
-                            {item?.userName}
-                          </div>
-                        </div>
+                      <div className="text-sm leading-5 text-gray-500 font-bold">
+                        {item?.name}
                       </div>
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
-                        {item?.phone}
+                        {item?.company_name}
                       </div>
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                        {item?.create_At}
+                        {item?.yearly_transaction}
                       </span>
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
-                        {item?.address}
+                        {item?.mobile_no}
+                      </div>
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                      <div className="text-sm leading-5 text-gray-500 ">
+                        {item?.interested_bank?.map((item) => (
+                          <h1 className=" bg-green-300 m-1  p-1 rounded">
+                            {item}
+                          </h1>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                      <div className="text-sm leading-5 text-gray-500 ">
+                        {item?.interested_product?.map((item) => (
+                          <h1 className=" bg-green-300 m-1 p-1 rounded">
+                            {item}
+                          </h1>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                      <div className="text-sm leading-5 text-gray-500">
+                        {item?.status}
                       </div>
                     </td>
                     <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
@@ -91,7 +103,7 @@ const LeadListTable = ({ data }) => {
                         {" "}
                         <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
                       </button>
-                      <Link to={`/manageuser/${item.id}`}>
+                      <Link to={`/leadlist/${item.id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="w-6 h-6 text-blue-400"
@@ -107,7 +119,7 @@ const LeadListTable = ({ data }) => {
                           />
                         </svg>
                       </Link>
-                      <button onClick={() => deleteAlert()}>
+                      <button onClick={() => deleteAlert(api, item.id)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="w-6 h-6 text-red-400"

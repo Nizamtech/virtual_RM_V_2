@@ -43,7 +43,7 @@ const Menu = () => {
         </div>
       </div>
       {menuOpen && (
-        <div className="bg-[#1E40AF] w-60 float-right absolute top-20 right-10 text-white p-3 rounded-md mr-2">
+        <div className="bg-[#1E40AF] w-60 float-right absolute top-20 right-10 text-white p-3 rounded-md mr-2 z-50">
           <h1 className=" font-bold text-sm">Mr.Jhon</h1>
           <h1>Frontend Developer</h1>
           <hr className=" border-dotted my-3" />

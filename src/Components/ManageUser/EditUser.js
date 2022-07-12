@@ -37,14 +37,14 @@ const EditUser = ({ data, deleteAlert, id }) => {
       phone: user.phone || data.phone,
       team: team?.value || data.team,
     };
-
+    console.log(userdata);
     axios
       .put(`http://localhost:8000/api/user/register/${id}/`, userdata)
       .then((response) => {
         if (response.status === 200) {
           SuccessAlert("Your work has been Updated", "success");
           navigate(-1);
-        }
+        } else SuccessAlert("something Wrong", "error");
       });
   };
 

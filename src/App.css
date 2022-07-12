@@ -82,6 +82,7 @@ body {
   top: 0px;
   right: 20px;
   margin-right: -1.25rem;
+  color: black;
 }
 .activeLink::after {
   content: " ";
@@ -95,10 +96,10 @@ body {
   top: 0px;
   right: 20px;
   margin-right: -1.25rem;
+  color: black;
 }
 
 .deleteBtn {
-  width: 3vmax;
   color: #fff;
   font-weight: 600;
   line-height: 24px;
@@ -133,4 +134,24 @@ body {
 }
 input[type="checkbox"] {
   transform: scale(1.7, 1.7);
+}
+
+div.DraftEditor-root {
+  border: 1px solid #000;
+  background-color: rgb(250, 250, 244);
+  height: 200px;
+  width: 100%;
+  padding: 10px;
+  overflow-y: auto;
+}
+div.DraftEditor-editorContainer,
+div.public-DraftEditor-content {
+  /* height: 100%; */
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
 }

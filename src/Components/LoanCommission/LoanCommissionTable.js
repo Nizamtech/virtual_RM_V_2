@@ -20,8 +20,8 @@ const LoanCommissionTable = () => {
 
   return (
     <div className=" overflow-x-auto  sm:rounded-lg  mt-3 h-screen ">
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs  uppercase bg-slate-800 text-white dark:bg-gray-700 dark:text-gray-400">
+      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 min-w-full">
+        <thead className="text-xs  uppercase bg-slate-800 text-white dark:bg-gray-700 dark:text-gray-400 ">
           <tr>
             <th scope="col" className="px-6 py-3 ">
               Product Type
@@ -38,7 +38,7 @@ const LoanCommissionTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <tr className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td
               scope="row"
               className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 "

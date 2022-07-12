@@ -70,7 +70,7 @@ const CreateUserForm = () => {
             id="grid-first-name"
             type="text"
             name="username"
-            placeholder="Jane"
+            placeholder="User Name"
             required
             onBlur={handleBlur}
           />
@@ -113,6 +113,7 @@ const CreateUserForm = () => {
             maxLength={11}
             required
             onBlur={handleBlur}
+            placeholder="01X0000000"
           />
           {/* <p className="text-red-500 text-xs italic">
             Please fill out this field.
