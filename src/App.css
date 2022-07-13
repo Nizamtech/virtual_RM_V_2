@@ -49,7 +49,7 @@ body {
   background-color: #f1f5f9;
   color: black;
   border-radius: 25px 0 0 25px;
-  width: 140px;
+  /* width: 140px; */
   position: relative;
   width: 100%;
 }
@@ -154,4 +154,23 @@ details > summary {
 }
 details > summary::-webkit-details-marker {
   display: none;
+}
+.Collapsible__trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  width: 100%;
+  padding: 0 10px 0 0;
+}
+
+.Collapsible__trigger.is-open svg {
+  transform: rotate(180deg);
+}
+.Collapsible {
+  width: 100%;
+  padding-left: 4px;
+  margin: 4px 8px;
+  font-size: 16px;
+  margin-top: 5px;
 }
