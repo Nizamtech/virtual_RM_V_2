@@ -11,7 +11,7 @@ const CreateTeamForm = () => {
 
   const handleChange = (e) => {
     const { name, checked } = e.target;
-    console.log(checked);
+
     if (checked) {
       setPermission([...permission, name]);
     } else {
@@ -85,7 +85,7 @@ const CreateTeamForm = () => {
         <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium mt-8">
           Permission
         </h1>
-        <div className=" hidden md:grid grid-cols-5 place-items-center p-2 text-start mx-2 text-lg uppercase ">
+        <div className=" hidden md:grid grid-cols-5 place-items-center p-2 text-start  text-lg uppercase bg-black text-white ">
           <div>Model</div>
           <div>View</div>
           <div>Add</div>
@@ -95,9 +95,9 @@ const CreateTeamForm = () => {
         <div>
           {content_type &&
             content_type?.map((item) => (
-              <div className=" grid grid-cols-1 gap-4 md:grid-cols-5 p-3 border  border-gray-200 my-1">
+              <div className=" grid grid-cols-1 gap-4 md:grid-cols-5 p-3 border  border-gray-200 my-1 ">
                 <div className="">
-                  <h1 className="  text-sky-500 md:text-black text-start mx-2 text-lg uppercase">
+                  <h1 className="text-sky-500 md:text-black  mx-2 text-lg uppercase">
                     {item?.model}{" "}
                   </h1>
                   {/* <input
@@ -111,7 +111,7 @@ const CreateTeamForm = () => {
                   /> */}
                 </div>
 
-                <div className=" grid  grid-cols-2   md:grid-cols-1">
+                <div className=" grid  grid-cols-2   md:grid-cols-1 place-items-center">
                   <h1 className=" block md:hidden text-lg">View</h1>
                   <input
                     type="checkbox"
@@ -122,7 +122,7 @@ const CreateTeamForm = () => {
                     className=" mt-2 mx-auto "
                   />
                 </div>
-                <div className=" grid grid-cols-2">
+                <div className=" grid grid-cols-2  md:grid-cols-1 place-items-center">
                   <h1 className=" block md:hidden text-lg">Add</h1>
                   <input
                     type="checkbox"
@@ -133,7 +133,7 @@ const CreateTeamForm = () => {
                     className=" mt-2  mx-auto"
                   />
                 </div>
-                <div className=" grid grid-cols-2">
+                <div className=" grid grid-cols-2  md:grid-cols-1 place-items-center">
                   <h1 className=" block md:hidden text-lg">Change</h1>
                   <input
                     type="checkbox"
@@ -144,7 +144,7 @@ const CreateTeamForm = () => {
                     className=" mt-2  mx-auto "
                   />
                 </div>
-                <div className=" grid grid-cols-2">
+                <div className=" grid grid-cols-2  md:grid-cols-1 place-items-center">
                   <h1 className=" block md:hidden text-lg">Delete</h1>
                   <input
                     type="checkbox"
@@ -160,7 +160,7 @@ const CreateTeamForm = () => {
         </div>
 
         <button
-          className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28 mr-3 text-white "
+          className="bg-green-400 py-3 px-4 float-right rounded-lg my-8 w-40 mr-3 text-white text-center text-lg  "
           type="submit"
         >
           SAVE

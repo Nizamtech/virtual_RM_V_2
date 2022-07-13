@@ -39,7 +39,7 @@ const Sidebar = () => {
         <ul className="space-y-2  ">
           <li>
             <NavLink
-              to="/test2"
+              to="/"
               className={`${
                 loccation.pathname.includes("test2") && "activeLink"
               } use"h-10  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
@@ -170,8 +170,8 @@ const Sidebar = () => {
             <NavLink
               to="/leadlist"
               className={`${
-                loccation.pathname.includes("leadlist") && "activeLink"
-              } use"  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+                loccation.pathname.includes("leadlist") && "activeLink "
+              } "  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3] "`}
             >
               <SiGoogleads className=" text-white" size={30} />
               <span className="flex-1 ml-3 text-base font-normal text-white">

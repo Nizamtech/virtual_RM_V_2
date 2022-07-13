@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { teamData } from "../../MockData/MockTeam";
 import axios from "axios";
 import DataShowTable from "../../Shared/Table/DataShowTable";
 import Swal from "sweetalert2";
 
 const deleteAlert = (id) => {
-  console.log(id);
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -26,10 +24,20 @@ const deleteAlert = (id) => {
 };
 
 const ManageTeam = () => {
+  const [teamData, setTeamData] = useState([]);
   const handleDelete = (e) => {
     deleteAlert(e.id);
   };
 
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await axios.get("http://127.0.0.1:8000/api/team/");
+      const data = await res.data;
+      setTeamData(data?.results);
+    };
+    loadData();
+  }, []);
+  console.log(teamData);
   return (
     <div className=" h-screen p-3">
       <DataShowTable handleDelete={handleDelete} item={teamData} />

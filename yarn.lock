@@ -8483,11 +8483,6 @@ react-resize-detector@^7.1.2:
   dependencies:
     lodash "^4.17.21"
 
-react-responsive-accordion@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-responsive-accordion/-/react-responsive-accordion-1.0.0.tgz#e2c39ee13e18daa40d9d78486beccd27f4988cba"
-  integrity sha512-8Y00m5WyqH7WYdIV1s4e15MfGIC9bbROFL57Gx2XUvLH++JDJ6CAJEJbpYKgPUMcZjtQRNP3ZsDamcr8TxZzLQ==
-
 react-router-dom@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.3.0.tgz#a0216da813454e521905b5fa55e0e5176123f43d"

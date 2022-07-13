@@ -1,37 +1,38 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const EditTeam = () => {
   const { id } = useParams();
+  const router = useNavigate();
 
-  const [users, setUsers] = useState([]);
-  const [permission, setPermission] = useState([]);
   const [team, setTeam] = useState([]);
   const [singleTeam, setSingleTeam] = useState([]);
+  const [singlePermission, setSinglePermission] = useState([]);
 
   const [content_type, setContent_type] = useState([]);
 
   const handleChange = (e) => {
-    const { name, checked } = e.target;
-    console.log(checked);
+    const { name, checked, value } = e.target;
     if (checked) {
-      setPermission([...permission, name]);
-    } else {
-      const restData = permission.filter((item) => item !== name);
-      setPermission(restData);
+      setSingleTeam([...singleTeam, parseInt(name)]);
     }
-    if (name === "allSelect") {
-      let tempUser = content_type.map((user) => {
-        return { ...user, isChecked: checked };
-      });
-      setUsers(tempUser);
-    } else {
-      let tempUser = content_type.map((user) =>
-        user.name === name ? { ...user, isChecked: checked } : user
-      );
-      setUsers(tempUser);
+    if (!checked) {
+      const restData = singleTeam.filter((item) => item !== parseInt(name));
+      console.log("filter data", restData);
+      setSingleTeam(restData);
     }
+    // if (name === "allSelect") {
+    //   let tempUser = content_type.map((user) => {
+    //     return { ...user, isChecked: checked };
+    //   });
+    //   setUsers(tempUser);
+    // } else {
+    //   let tempUser = content_type.map((user) =>
+    //     user.name === name ? { ...user, isChecked: checked } : user
+    //   );
+    //   setUsers(tempUser);
+    // }
   };
   // console.log(permission, content_type);
   useEffect(() => {
@@ -45,7 +46,8 @@ const EditTeam = () => {
     const loadSingleData = async () => {
       const content_type = await fetch(`http://127.0.0.1:8000/api/team/${id}`);
       const rest = await content_type.json();
-      setSingleTeam(rest);
+      setSingleTeam(rest?.permissions);
+      setSinglePermission(rest);
     };
 
     loadSingleData();
@@ -60,13 +62,15 @@ const EditTeam = () => {
     event.preventDefault();
     const data = {
       name: team,
-      permissions: permission,
+      permissions: singlePermission,
     };
     axios
-      .post("http://127.0.0.1:8000/api/team/", data)
+      .put(`http://127.0.0.1:8000/api/team/${id}/`, data)
       .then((response) => {
-        if (response.status === 201) {
-          SuccessAlert("Team Created", "success");
+        console.log(response);
+        if (response.status === 200) {
+          SuccessAlert("Team Permission Updated", "success");
+          router(-1);
         }
       })
       .catch((error) => {
@@ -74,17 +78,15 @@ const EditTeam = () => {
       });
   };
 
-  console.log("singleTeam", content_type, singleTeam);
-
   return (
-    <div className=" h-screen overflow-y-scroll overflow-x-hidden">
-      <form onSubmit={handleSubmitFile}>
+    <div className=" overflow-y-scroll overflow-x-hidden  ">
+      <form onSubmit={handleSubmitFile} className="my-8">
         <div className=" mx-2 p-2 mt-1 ">
           <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium">
             Team Name
           </h1>
           <input
-            defaultValue={singleTeam?.name}
+            defaultValue={singlePermission?.name}
             required
             className=" w-full h-12 ml-1 px-4 rounded-md"
             type="text"
@@ -97,14 +99,14 @@ const EditTeam = () => {
         <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium mt-8">
           Permission
         </h1>
-        <div className=" grid grid-cols-5 p-2  text-start mx-2 text-lg uppercase ">
+        <div className=" grid grid-cols-5 p-2  text-start mx-2 text-lg uppercase bg-black text-white ml-2 ">
           <div>Model</div>
           <div>View</div>
           <div>Add</div>
           <div>Change</div>
           <div>Delete</div>
         </div>
-        <div>
+        <div className="ml-2">
           {content_type &&
             content_type?.map((item) => (
               <div className=" grid grid-cols-5 p-3 border  border-gray-200 my-1">
@@ -117,7 +119,7 @@ const EditTeam = () => {
                     type="checkbox"
                     value={item?.permissions?.view}
                     name={item?.permissions?.view}
-                    checked={singleTeam?.permissions?.find((it) =>
+                    checked={singleTeam?.find((it) =>
                       it === item?.permissions?.view ? true : false
                     )}
                     onChange={handleChange}
@@ -129,8 +131,8 @@ const EditTeam = () => {
                     type="checkbox"
                     value={item?.permissions?.add}
                     name={item?.permissions?.add}
-                    checked={singleTeam?.permissions?.find((it) =>
-                      it === item?.permissions?.view ? true : false
+                    checked={singleTeam?.find((it) =>
+                      it === item?.permissions?.add ? true : false
                     )}
                     onChange={handleChange}
                     className=" mt-2  mx-auto "
@@ -141,8 +143,8 @@ const EditTeam = () => {
                     type="checkbox"
                     value={item?.permissions?.change}
                     name={item?.permissions?.change}
-                    checked={singleTeam?.permissions?.find((it) =>
-                      it === item?.permissions?.view ? true : false
+                    checked={singleTeam?.find((it) =>
+                      it === item?.permissions?.change ? true : false
                     )}
                     onChange={handleChange}
                     className=" mt-2  mx-auto "
@@ -153,8 +155,8 @@ const EditTeam = () => {
                     type="checkbox"
                     value={item?.permissions?.delete}
                     name={item?.permissions?.delete}
-                    checked={singleTeam?.permissions?.find((it) =>
-                      it === item?.permissions?.view ? true : false
+                    checked={singleTeam?.find((it) =>
+                      it === item?.permissions?.delete ? true : false
                     )}
                     onChange={handleChange}
                     className=" mt-2  mx-auto "
@@ -165,10 +167,10 @@ const EditTeam = () => {
         </div>
 
         <button
-          className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28 mr-3 text-white "
+          className="bg-green-400 py-3 px-4 float-right rounded-lg my-8 w-40 mr-3 text-white text-center text-lg  "
           type="submit"
         >
-          SAVE
+          Update
         </button>
       </form>
     </div>

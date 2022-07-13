@@ -6,29 +6,7 @@ import permission from "../../MockData/permission.json";
 import content_type from "../../MockData/content_type.json";
 
 const CreateTeam = () => {
-  const [data, setData] = useState([]);
   const { id } = useParams();
-
-  const [state, setState] = useState({
-    isAllSelected: false,
-    checkList: [
-      {
-        name: "city",
-        value: "bangalore",
-        checked: false,
-      },
-      {
-        name: "city",
-        value: "chennai",
-        checked: false,
-      },
-      {
-        name: "city",
-        value: "delhi",
-        checked: false,
-      },
-    ],
-  });
 
   const teamSingleData = teamData?.find((item) => item.id == id);
 

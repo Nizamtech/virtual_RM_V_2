@@ -12,6 +12,7 @@ const EditUser = ({ data, deleteAlert, id }) => {
     password: "",
     phone: "",
   });
+  const defVAlue = [data?.team];
 
   const [team, setTeam] = useState(null);
   const teamList = [
@@ -47,7 +48,7 @@ const EditUser = ({ data, deleteAlert, id }) => {
         } else SuccessAlert("something Wrong", "error");
       });
   };
-
+  console.log(data);
   return (
     <form onSubmit={handleSubmit} className=" mx-2">
       <div className="flex flex-wrap -mx-3 mb-6">
@@ -102,9 +103,14 @@ const EditUser = ({ data, deleteAlert, id }) => {
           <input
             className="appearance-none block w-full text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="grid-first-name"
-            type="text"
-            name="username"
-            placeholder="Jane"
+            type="number"
+            name="phone"
+            placeholder="Phone Number"
+            onInput={(e) => {
+              if (e.target.value.length > e.target.maxLength)
+                e.target.value = e.target.value.slice(0, e.target.maxLength);
+            }}
+            maxlength="11"
             required
             defaultValue={data?.phone}
             onBlur={handleBlur}
@@ -128,16 +134,15 @@ const EditUser = ({ data, deleteAlert, id }) => {
             required
             name="team"
             onChange={setTeam}
-            defaultValue={data?.team}
             options={teamList}
             // onBlur={handleBlur}
-            className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
+            className="  w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
           />
         </div>
       </div>
 
       <button
-        className="bg-green-400 py-2 px-4  rounded-lg my-4   float-right "
+        className="bg-green-400 py-3 px-4 float-right rounded-lg my-4 w-32 text-white text-lg "
         type="submit"
       >
         Submit

@@ -40,7 +40,7 @@ const DataShowTable = ({ item, handleDelete }) => {
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
-                        {team?.team_name}
+                        {team?.name}
                       </div>
                     </td>
 
