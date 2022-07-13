@@ -28,6 +28,8 @@ import AddFeature from "./Components/AddFeature/AddFeature";
 import EditLeadList from "./Components/LeadList/EditLeadList/EditLeadList";
 import EditCardCommissionList from "./Components/CardCommissionList/EditCardCommissionList";
 import EditVRMList from "./Components/VRMCommission/EditVRMList";
+import Editfeature from "./Components/Feature/Editfeature/Editfeature";
+import ViewFeature from "./Components/Feature/ViewFeature/ViewFeature";
 
 function App() {
   return (
@@ -64,6 +66,8 @@ function App() {
             <Route path="/paymenthistory" element={<PaymentHistory />} />
             <Route path="/feature" element={<Feature />} />
             <Route path="/addfeature" element={<AddFeature />} />
+            <Route path="/editfeature/:id" element={<Editfeature />} />
+            <Route path="/viewfeature/:id" element={<ViewFeature />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/test2" element={<Test2 />} />
           </Routes>

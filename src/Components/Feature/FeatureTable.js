@@ -58,14 +58,16 @@ const FeatureTable = ({ data, deleteAlert }) => {
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div
                         className="text-sm leading-5 text-gray-500"
-                        dangerouslySetInnerHTML={createMarkup(item?.feature)}
+                        dangerouslySetInnerHTML={createMarkup(
+                          item?.feature.slice(0, 50) + "..."
+                        )}
                       ></div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div
                         className="text-sm leading-5 text-gray-500"
                         dangerouslySetInnerHTML={createMarkup(
-                          item?.eligibility
+                          item?.eligibility.slice(0, 50) + "..."
                         )}
                       ></div>
                     </td>
@@ -74,15 +76,15 @@ const FeatureTable = ({ data, deleteAlert }) => {
                       <div
                         className="text-sm leading-5 text-gray-500"
                         dangerouslySetInnerHTML={createMarkup(
-                          item?.short_feature
+                          item?.short_feature.slice(0, 50) + "..."
                         )}
                       ></div>
                     </td>
                     <td className=" flex justify-center px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                      <Link to="/account">
+                      <Link to={`/viewfeature/${item?.id}`}>
                         <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
                       </Link>
-                      <Link to={`/`}>
+                      <Link to={`/editfeature/${item?.id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="w-6 h-6 text-blue-400 mx-2"
