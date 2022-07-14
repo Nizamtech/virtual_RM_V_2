@@ -110,8 +110,11 @@ const VRMListEdit = () => {
             id="grid-first-name"
             type="number"
             name="phone"
-            ng-pattern="/^(?:\+88|01)?\d{11}\r?$/"
-            maxLength={11}
+            onInput={(e) => {
+              if (e.target.value.length > e.target.maxLength)
+                e.target.value = e.target.value.slice(0, e.target.maxLength);
+            }}
+            maxlength="11"
             required
             defaultValue={user?.phone}
             onBlur={handleBlur}
@@ -119,7 +122,7 @@ const VRMListEdit = () => {
         </div>
 
         <button
-          className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-28 "
+          className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-40 text-white "
           type="submit"
         >
           Submit

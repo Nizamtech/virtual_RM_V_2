@@ -13,7 +13,9 @@ const EditCardCommissionList = () => {
   const [cardCommissionData, setCardCommissionData] = useState([]);
   const [cardType, setCardType] = useState([]);
   const [institute, setInstitute] = useState(cardCommissionData?.bank_name);
-
+  const [inputList, setInputList] = useState([
+    { card_type: "", from: 0, commission: 0, to: 0 },
+  ]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,6 +48,8 @@ const EditCardCommissionList = () => {
         setCardCommissionData={setCardCommissionData}
         setInstitute={setInstitute}
         error={error}
+        setInputList={setInputList}
+        inputList={inputList}
       />
 
       <div className=" flex justify-between items-center ">

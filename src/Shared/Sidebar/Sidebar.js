@@ -107,7 +107,7 @@ const Sidebar = () => {
               className="mx-3 px-1 w-full text-base font-normal "
               trigger={["Benefits", <BsChevronDown />]}
             >
-              <li className="  bg-[#1B399D] text-white w-full my-2 pb-2">
+              <li className="  bg-[#1B399D] text-white w-full my-2 pb-2 ">
                 <NavLink
                   to="/cardcommission"
                   className={`${
@@ -117,7 +117,7 @@ const Sidebar = () => {
                 >
                   <FontAwesomeIcon icon={faCreditCard} />
 
-                  <span className="ml-2 text-xs">Card Commission</span>
+                  <span className="ml-2 text-base">Card Commission</span>
                 </NavLink>
                 <NavLink
                   to="/cclist"
@@ -127,7 +127,7 @@ const Sidebar = () => {
                 >
                   <FontAwesomeIcon icon={faCreditCard} />
 
-                  <span className="ml-2 text-xs">Card Commission List</span>
+                  <span className="ml-2 text-base">Card Commission List</span>
                 </NavLink>
                 <NavLink
                   to="/loancommission"
@@ -138,7 +138,7 @@ const Sidebar = () => {
                 >
                   <FontAwesomeIcon icon={faHandHoldingDollar} />
 
-                  <span className="ml-2 text-xs">Loan Commission</span>
+                  <span className="ml-2 text-base">Loan Commission</span>
                 </NavLink>
                 <NavLink
                   to="/lclist"
@@ -148,7 +148,7 @@ const Sidebar = () => {
                 >
                   <FontAwesomeIcon icon={faHandHoldingDollar} />
 
-                  <span className="ml-2 text-xs">Loan Commission List</span>
+                  <span className="ml-2 text-base">Loan Commission List</span>
                 </NavLink>
               </li>
             </Collapsible>

@@ -118,6 +118,15 @@ function CardCommissionTest({
               </h1>
               <input
                 className="ml10 p-2 border border-gray-300 mr-2 my-2 rounded "
+                type="number"
+                onInput={(e) => {
+                  if (e.target.value.length > e.target.maxLength)
+                    e.target.value = e.target.value.slice(
+                      0,
+                      e.target.maxLength
+                    );
+                }}
+                maxlength="2"
                 name="from"
                 placeholder="From"
                 // value={x.from}
@@ -133,7 +142,16 @@ function CardCommissionTest({
                 To
               </h1>
               <input
+                type="number"
                 className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                onInput={(e) => {
+                  if (e.target.value.length > e.target.maxLength)
+                    e.target.value = e.target.value.slice(
+                      0,
+                      e.target.maxLength
+                    );
+                }}
+                maxlength="2"
                 name="to"
                 placeholder="To"
                 // value={x.to}
@@ -150,6 +168,14 @@ function CardCommissionTest({
               </h1>
               <input
                 className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                onInput={(e) => {
+                  if (e.target.value.length > e.target.maxLength)
+                    e.target.value = e.target.value.slice(
+                      0,
+                      e.target.maxLength
+                    );
+                }}
+                maxlength="3"
                 name="commission"
                 placeholder="Enter Commission"
                 value={x.commission}

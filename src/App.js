@@ -31,6 +31,7 @@ import EditVRMList from "./Components/VRMCommission/EditVRMList";
 import Editfeature from "./Components/Feature/Editfeature/Editfeature";
 import ViewFeature from "./Components/Feature/ViewFeature/ViewFeature";
 import ViewUser from "./Components/ManageUser/ViewUser";
+import EditLoanComission from "./Components/EditLoanComission/EditLoanComission";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
             <Route path="/vrmedit/:id" element={<EditVRMList />} />
             <Route path="/loancommission" element={<LoanCommission />} />
             <Route path="/lclist" element={<LoanCommissionList />} />
+            <Route path="/editloan/:id" element={<EditLoanComission />} />
             <Route path="/vrmlist" element={<VRMList />} />
             <Route path="/vrmlist/:id" element={<VRMListEdit />} />
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />

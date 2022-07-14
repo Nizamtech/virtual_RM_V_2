@@ -6,6 +6,7 @@ const CreateTeamForm = () => {
   const [users, setUsers] = useState([]);
   const [permission, setPermission] = useState([]);
   const [team, setTeam] = useState([]);
+  const [description, setDescription] = useState([]);
 
   const [content_type, setContent_type] = useState([]);
 
@@ -46,10 +47,14 @@ const CreateTeamForm = () => {
   const handleName = (e) => {
     setTeam(e.target.value);
   };
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
 
   const handleSubmitFile = async (event) => {
     event.preventDefault();
     const data = {
+      // description:description,
       name: team,
       permissions: permission,
     };
@@ -159,6 +164,20 @@ const CreateTeamForm = () => {
             ))}
         </div>
 
+        <div className=" mx-2 p-2 mt-1 ">
+          <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium">
+            Description
+          </h1>
+          <textarea
+            required
+            className=" w-full h-24 ml-1 px-4 rounded-md"
+            type="text"
+            name="description"
+            id=""
+            placeholder="Description"
+            onChange={handleDescription}
+          />
+        </div>
         <button
           className="bg-green-400 py-3 px-4 float-right rounded-lg my-8 w-40 mr-3 text-white text-center text-lg  "
           type="submit"

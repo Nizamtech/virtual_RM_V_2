@@ -8,6 +8,8 @@ function EditCardCommission({
   setCardType,
   cardCommissionData,
   setCardCommissionData,
+  setInputList,
+  inputList,
 }) {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -48,6 +50,20 @@ function EditCardCommission({
       });
   }, []);
 
+  // handle click event of the Remove button
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([
+      ...inputList,
+      { card_type: "", from: 0, commission: 0, to: 0 },
+    ]);
+  };
   return (
     <div>
       <div>
@@ -80,7 +96,7 @@ function EditCardCommission({
             <label className=" text-red-400 my-1">Select Institute</label>
           )}
         </div>
-        <div className=" grid grid-cols-4 bg-black text-white py-2 px-3 font-bold uppercase">
+        <div className=" grid grid-cols-5 bg-black text-white py-2 px-3 font-bold uppercase place-items-center">
           <div>
             <h1> Card Type</h1>
           </div>
@@ -93,14 +109,14 @@ function EditCardCommission({
           <div>
             <h1> Commission</h1>
           </div>
-          <div></div>
+          {/* <div>Action</div> */}
         </div>
       </div>
       <div className=" bg-white px-2">
         {cardCommissionData &&
           cardCommissionData?.card_type?.map((x, i) => {
             return (
-              <div className=" grid grid-cols-4 bg-white mb-2">
+              <div className=" grid grid-cols-5 bg-white mb-2">
                 <select
                   className="border border-gray-300 mr-2 my-2 rounded"
                   onChange={(e) => handleInputChange(e, i)}
@@ -120,6 +136,15 @@ function EditCardCommission({
 
                 <input
                   className="ml10 p-2 border border-gray-300 mr-2 my-2 rounded "
+                  type="number"
+                  onInput={(e) => {
+                    if (e.target.value.length > e.target.maxLength)
+                      e.target.value = e.target.value.slice(
+                        0,
+                        e.target.maxLength
+                      );
+                  }}
+                  maxlength="2"
                   name="from"
                   placeholder="From"
                   // value={x.from}
@@ -134,6 +159,15 @@ function EditCardCommission({
                 </datalist>
                 <input
                   className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                  type="number"
+                  onInput={(e) => {
+                    if (e.target.value.length > e.target.maxLength)
+                      e.target.value = e.target.value.slice(
+                        0,
+                        e.target.maxLength
+                      );
+                  }}
+                  maxlength="2"
                   name="to"
                   placeholder="To"
                   // value={x.to}
@@ -147,12 +181,38 @@ function EditCardCommission({
                   ))}
                 </datalist>
                 <input
+                  onInput={(e) => {
+                    if (e.target.value.length > e.target.maxLength)
+                      e.target.value = e.target.value.slice(
+                        0,
+                        e.target.maxLength
+                      );
+                  }}
+                  maxlength="3"
                   className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
                   name="commission"
                   placeholder="Enter Commission"
                   value={x.commission}
                   onChange={(e) => handleInputChange(e, i)}
                 />
+                <div className="btn-box flex flex-col items-center justify-center">
+                  {i !== 0 && (
+                    <button
+                      className=" bg-[#fc544b] border-[#fc544b] shadow-red-400  hover:shadow-2xl rounded  py-2 text-white w-full md:w-16"
+                      onClick={() => handleRemoveClick(i)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                  {i === 0 && (
+                    <button
+                      onClick={handleAddClick}
+                      className=" bg-green-400 deleteBtn hover:shadow-2xl rounded w-full md:w-16 "
+                    >
+                      Add
+                    </button>
+                  )}
+                </div>
               </div>
             );
           })}

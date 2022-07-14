@@ -1,9 +1,13 @@
 import axios from "axios";
+
+import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import { useNavigate } from "react-router-dom";
-const LoanCommission = () => {
+const EditLoanComission = () => {
+  const [loanCommission, setLoanCommission] = useState([]);
+  const { id } = useParams();
+
   let navigate = useNavigate();
   const [inst, setInst] = useState([]);
   const [loan, setLoan] = useState([]);
@@ -14,42 +18,46 @@ const LoanCommission = () => {
   const [commissionn, setCommission] = useState(0);
 
   useEffect(() => {
-    fetch("https://admin.aamartaka.com/api/v1/institutes/")
-      .then((response) => response.json())
-      .then((json) => setInst(json.results));
+    const loadinstitute = async () => {
+      await fetch("https://admin.aamartaka.com/api/v1/institutes/")
+        .then((response) => response.json())
+        .then((json) => setInst(json.results));
+    };
+
+    const loadLoanType = async () => {
+      await fetch("http://127.0.0.1:8000/benefit/loan_type/")
+        .then((response) => response.json())
+        .then((json) => setLoan(json.results));
+    };
+    loadLoanType();
+    loadinstitute();
   }, []);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/benefit/loan_type/")
-      .then((response) => response.json())
-      .then((json) => setLoan(json.results));
-  }, []);
-
-  let options = inst?.map(function (item) {
-    return { value: item?.name, label: item?.name };
-  });
-
-  let loanOpt = loan?.map(function (item) {
-    return { value: item?.name, label: item?.name };
-  });
+    axios
+      .get(`http://127.0.0.1:8000/api/loan_commission/${id}/`)
+      .then((res) => {
+        setLoanCommission(res?.data);
+      });
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
-      institute_name: institute_name.value,
-      loan_name: loan_name.value,
-      from_range: from_range,
-      to_range: to_range,
-      commissionn: commissionn,
+      institute_name: institute_name || loanCommission?.institute_name,
+      loan_name: loan_name || loanCommission?.loan_name,
+      from_range: from_range || loanCommission?.from_range,
+      to_range: to_range || loanCommission?.to_range,
+      commissionn: commissionn || loanCommission?.commissionn,
     };
-
+    console.log(data);
     await axios
-      .post("http://127.0.0.1:8000/benefit/loan_commision/add/", data)
+      .put(`http://127.0.0.1:8000/benefit/loan_commision/add/${id}/`, data)
       .then((result) => {
-        if (result.status === 201) {
-          SuccessAlert("Successfully Added", "success");
+        if (result.status === 200) {
+          SuccessAlert("Successfully Update", "success");
           navigate(-1);
-        }
+        } else SuccessAlert("Something Wrong ", "error");
       });
   };
 
@@ -63,13 +71,23 @@ const LoanCommission = () => {
           >
             Institute Name
           </label>
-          <Select
-            required
-            name="profession"
-            onChange={setInstitute}
-            options={options}
-            className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
-          />
+
+          <select
+            className="w-full my-2 border-gray-300 rounded"
+            name="institite"
+            onChange={(e) => setInstitute(e.target.value)}
+          >
+            <option
+              defaultValue={loanCommission?.institute_name}
+              value={loanCommission?.institute_name}
+            >
+              {loanCommission?.institute_name}
+            </option>
+            {inst &&
+              inst.map((item) => (
+                <option value={item?.name}>{item?.name}</option>
+              ))}
+          </select>
         </div>
         <div className="sm:rounded-lg  mt-3 h-screen  ">
           <table className=" min-w-full text-sm text-left text-gray-500 dark:text-gray-400  ">
@@ -95,19 +113,29 @@ const LoanCommission = () => {
                   scope="row"
                   className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 "
                 >
-                  <Select
-                    required
-                    name="profession"
-                    onChange={setLoanName}
-                    options={loanOpt}
-                    className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
-                  />
+                  <select
+                    className="w-full my-2 border-gray-300 rounded"
+                    name="institite"
+                    onChange={(e) => setLoanName(e.target.value)}
+                  >
+                    <option
+                      defaultValue={loanCommission?.loan_name}
+                      value={loanCommission?.loan_name}
+                    >
+                      {loanCommission?.loan_name}
+                    </option>
+                    {loan &&
+                      loan.map((item) => (
+                        <option value={item?.name}>{item?.name}</option>
+                      ))}
+                  </select>
                 </td>
                 <td
                   scope="row"
                   className="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
                 >
                   <input
+                    defaultValue={loanCommission?.from_range}
                     required
                     type="number"
                     name="from"
@@ -129,6 +157,7 @@ const LoanCommission = () => {
                   className="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
                 >
                   <input
+                    defaultValue={loanCommission?.to_range}
                     required
                     type="number"
                     name="to"
@@ -150,9 +179,10 @@ const LoanCommission = () => {
                   className="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
                 >
                   <input
+                    defaultValue={loanCommission?.commissionn}
                     required
                     type="number"
-                    name="name"
+                    name="commissionn"
                     onChange={(e) => setCommission(e.target.value)}
                     onInput={(e) => {
                       if (e.target.value.length > e.target.maxLength)
@@ -161,7 +191,7 @@ const LoanCommission = () => {
                           e.target.maxLength
                         );
                     }}
-                    maxlength="3"
+                    maxlength="5"
                     placeholder="Per Lac BDT"
                     className="my-2  focus:duration-400 font-exo w-full h-8 border py-4 px-3 rounded-[3px] border-[#CCCCCC] "
                   />
@@ -170,7 +200,7 @@ const LoanCommission = () => {
             </tbody>
           </table>
           <button className=" bg-green-400  hover:shadow-2xl rounded py-2 px-4 text-white mt-4 float-right w-40 ">
-            SAVE
+            Update
           </button>
         </div>
       </form>
@@ -178,4 +208,4 @@ const LoanCommission = () => {
   );
 };
 
-export default LoanCommission;
+export default EditLoanComission;
