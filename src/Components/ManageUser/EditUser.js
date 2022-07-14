@@ -48,7 +48,7 @@ const EditUser = ({ data, deleteAlert, id }) => {
         } else SuccessAlert("something Wrong", "error");
       });
   };
-  console.log(data);
+
   return (
     <form onSubmit={handleSubmit} className=" mx-2">
       <div className="flex flex-wrap -mx-3 mb-6">

@@ -78,11 +78,10 @@ const UserTable = ({ data, deleteAlert }) => {
                     </td>
 
                     <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                      <button>
-                        {" "}
+                      <Link to={`/vieweuser/${item?.id}`}>
                         <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
-                      </button>
-                      <Link to={`/manageuser/${item.id}`}>
+                      </Link>
+                      <Link to={`/manageuser/${item?.id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="w-6 h-6 text-blue-400"

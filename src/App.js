@@ -30,6 +30,7 @@ import EditCardCommissionList from "./Components/CardCommissionList/EditCardComm
 import EditVRMList from "./Components/VRMCommission/EditVRMList";
 import Editfeature from "./Components/Feature/Editfeature/Editfeature";
 import ViewFeature from "./Components/Feature/ViewFeature/ViewFeature";
+import ViewUser from "./Components/ManageUser/ViewUser";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
             <Route path="/manageteam" element={<ManageTeam />} />
             <Route path="/manageuser" element={<ManageUser />} />
             <Route path="/manageuser/:userId" element={<ManageUser />} />
+            <Route path="/vieweuser/:id" element={<ViewUser />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/cardcommission" element={<CardCommission />} />
             <Route path="/cclist" element={<CardCommissionList />} />

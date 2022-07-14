@@ -19,20 +19,16 @@ const ManageUser = () => {
     });
   }, []);
 
- 
-
   const singleUser = userId && users.find((item) => item?.id == userId);
 
   useEffect(() => {
-    const loadPermission = async () => {
-      const content_type = await fetch(
-        "http://127.0.0.1:8000/api/user/register/"
-      );
-      const rest = await content_type.json();
+    const loadUsers = async () => {
+      const userData = await fetch("http://127.0.0.1:8000/api/user/register/");
+      const rest = await userData.json();
       setUsers(rest?.results);
     };
 
-    loadPermission();
+    loadUsers();
   }, [userId]);
 
   const deleteAlert = (id) => {
@@ -50,7 +46,8 @@ const ManageUser = () => {
           .delete(`http://127.0.0.1:8000/api/user/register/${id}`)
           .then((res) => {
             if (res.status === 204) {
-              const singleUser = users?.filter((item) => item?.id !== userId);
+              const singleUser = users?.filter((item) => item?.id !== id);
+              console.log(singleUser);
               setUsers(singleUser);
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
             }

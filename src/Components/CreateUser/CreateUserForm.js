@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateUserForm = () => {
+  const router = useNavigate();
   const [user, setUser] = useState({
     username: "",
     phone: "",
@@ -30,6 +32,7 @@ const CreateUserForm = () => {
         console.log(response);
         if (response.status === 201) {
           SuccessAlert("User Created", "success");
+          router("/manageuser");
         }
       })
       .catch((error) => {
