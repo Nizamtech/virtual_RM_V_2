@@ -60,7 +60,7 @@ const VRMAccount = () => {
     <div className=" h-screen m-2 p-3 overflow-y-scroll ">
       {/* vrm Account header  */}
       <div className="myShadow8">
-        <div className=" grid grid-cols-3  py-3 rounded-lg ">
+        <div className=" grid grid-cols-1 md:grid-cols-3  py-3 rounded-lg p-2  ">
           <div className="flex justify-center items-center p-2">
             <div className=" h-24 w-24 flex relative mx-2">
               <img
@@ -75,7 +75,7 @@ const VRMAccount = () => {
               <h1 className=" text-sm text-gray-600">{vrmUser?.location}</h1>
               <div className=" flex  items-center ">
                 <h1>{vrmUser?.status_name}</h1>
-                <h1 className="ml-2 w-2 h-2 rounded-full bg-green-500 border-green-500 ring-1 ring-green-300 "></h1>
+                {/* <h1 className="ml-2 w-2 h-2 rounded-full bg-green-500 border-green-500 ring-1 ring-green-300 "></h1> */}
                 {/* <h1 className="ml-2 w-2 h-2 rounded-full bg-red-500 border-red-500 ring-1 ring-red-300"></h1> */}
               </div>
             </div>
@@ -163,7 +163,7 @@ const VRMAccount = () => {
         </div>
 
         {/* VRM Tab  */}
-        <div className=" mx-2 p-2 border-t">
+        <div className=" mx-2 p-2 border-t overflow-x-scroll">
           {/* <VRMTab /> */}
           <Tabs items={items} />
         </div>

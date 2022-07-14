@@ -4,9 +4,13 @@ import VrmListTable from "../VRMList/VrmListTable";
 import VRMStatusTable from "../VRMStatusTable/VRMStatusTable";
 import Select from "react-select";
 const Account = ({ data }) => {
-  console.log("from account", data);
   const [userAccount, setUserAccount] = useState([]);
   const [division, setDivision] = useState([]);
+  const [district, setDistrict] = useState([]);
+  const [districtID, setDistrictID] = useState(1);
+  const [upazilas, setUpazilas] = useState([]);
+  const [upazila, setUpazila] = useState([]);
+  const [districts, setDistricts] = useState([]);
   const [divName, setDivName] = useState("");
   const [status, setStatus] = useState("");
   const [remarks, setRemarks] = useState("");
@@ -27,8 +31,24 @@ const Account = ({ data }) => {
       );
       setDivision(response?.data?.results);
     };
+    const loadDistrict = async () => {
+      const response = await axios.get(
+        `https://raw.githubusercontent.com/realfahimreza/bangladesh-geojson/master/bd-districts.json`
+      );
+      setDistricts(response?.data?.districts);
+    };
+    const loadSubDistrict = async () => {
+      const response = await axios.get(
+        `https://raw.githubusercontent.com/realfahimreza/bangladesh-geojson/master/bd-upazilas.json`
+      );
+      setUpazilas(response?.data?.upazilas);
+    };
+
+    loadSubDistrict();
+    loadDistrict();
     loadData();
   }, []);
+
   let divisionData = division?.map(function (item) {
     return { value: item?.name, label: item?.name };
   });
@@ -85,6 +105,16 @@ const Account = ({ data }) => {
     } else setError(true);
   };
 
+  const handleDistrict = (e) => {
+    setDistrictID(e.target.value);
+    // const rest =
+    //   districtID &&
+    //   upazilas?.filter((item) => item?.district_id === districtID);
+    // setUpazila(rest);
+  };
+  const rest =
+    districtID && upazilas?.filter((item) => item?.district_id === districtID);
+
   return (
     <div className=" h-screen">
       <div className="  grid grid-cols-1 lg:grid-cols-2 gap-4 mx-2 px-2 py-4  ">
@@ -130,11 +160,11 @@ const Account = ({ data }) => {
               <fieldset>
                 {/* <legend className=" ml-2 text-lg mb-2 ">location</legend> */}
                 <div className=" grid grid-cols-2 bg-white">
-                  <div className=" flex  justify-start items-center border-r rounded">
+                  <div className=" flex  justify-start items-center border-r rounded h-12">
                     <label className="   h-full w-full bg-gray-300  flex justify-center items-center text-gray-600   ">
                       District
                     </label>
-                    <Select
+                    {/* <Select
                       styles={{
                         control: (base) => ({
                           ...base,
@@ -151,19 +181,39 @@ const Account = ({ data }) => {
                       onChange={setDivName}
                       options={divisionData}
                       className="w-full mx-1  border-none outline-none rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
-                    />
+                    /> */}
+                    <select
+                      onChange={handleDistrict}
+                      placeholder="Select"
+                      type="text"
+                      name="district"
+                      className=" h-full  outline-none w-full mx-1  border-none  rounded  mb-1 leading-tight focus:border-0 focus:outline-none focus:bg-white py-1"
+                    >
+                      <option>Select </option>
+                      {districts &&
+                        districts.map((item) => (
+                          <option value={item.id}>{item.name}</option>
+                        ))}
+                    </select>
                   </div>
                   <div className=" flex justify-start items-center border-l rounded">
                     <label className=" h-full w-full bg-gray-300  flex justify-center items-center text-gray-600  ">
                       Sub District
                     </label>
 
-                    <input
-                      className=" h-12 rounded px-4 text-lg accent-sky-600 border-gray-300   "
+                    <select
+                      // onChange={handleDistrict}
+                      placeholder="Select"
                       type="text"
-                      name="name"
-                      placeholder=" Name"
-                    />
+                      name="subdistrict"
+                      className=" h-full  outline-none w-full mx-1  border-none  rounded  mb-1 leading-tight focus:border-0 focus:outline-none focus:bg-white py-1"
+                    >
+                      <option>Select </option>
+                      {rest &&
+                        rest.map((item) => (
+                          <option value={item?.name}>{item.name}</option>
+                        ))}
+                    </select>
                     {/* <input list="browsers"  />
 
                     <datalist id="browsers">
@@ -269,7 +319,7 @@ const Account = ({ data }) => {
               )}
             </div>
             <div className=" flex flex-col mx-auto lg:mx-4 my-3">
-              <label className=" ml-2 text-lg mb-2 text-">OTTP</label>
+              <label className=" ml-2 text-lg mb-2 text-">OTP</label>
               <input
                 className=" h-12 rounded px-4 text-lg accent-sky-600 border-gray-300 border  "
                 type="password"
