@@ -122,16 +122,30 @@ function EditCardCommission({
                   className="ml10 p-2 border border-gray-300 mr-2 my-2 rounded "
                   name="from"
                   placeholder="From"
-                  value={x.from}
+                  // value={x.from}
+                  defaultValue={x.from}
                   onChange={(e) => handleInputChange(e, i)}
+                  list="from"
                 />
+                <datalist id="from">
+                  {[...Array(20)].map((_, index) => (
+                    <option value={index + 1}> {index + 1}</option>
+                  ))}
+                </datalist>
                 <input
                   className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
                   name="to"
                   placeholder="To"
-                  value={x.to}
+                  // value={x.to}
+                  defaultValue={x.to}
                   onChange={(e) => handleInputChange(e, i)}
+                  list="to"
                 />
+                <datalist id="to">
+                  {[...Array(20)].map((_, index) => (
+                    <option value={index + 1}> {index + 1}</option>
+                  ))}
+                </datalist>
                 <input
                   className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
                   name="commission"

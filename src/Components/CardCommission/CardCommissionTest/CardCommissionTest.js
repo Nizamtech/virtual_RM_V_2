@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
 function CardCommissionTest({
   institute,
   setInstitute,
@@ -51,10 +50,6 @@ function CardCommissionTest({
       });
   }, []);
 
-  let options = data?.map(function (item) {
-    return { value: item?.name, label: item?.name };
-  });
-
   return (
     <div>
       <div>
@@ -65,13 +60,6 @@ function CardCommissionTest({
           >
             Institute Name
           </label>
-          {/* <Select
-            required
-            name="profession"
-            onChange={setInstitute}
-            options={options}
-            className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white   "
-          /> */}
 
           <select
             className="w-full my-2 border-gray-300 rounded"
@@ -132,9 +120,15 @@ function CardCommissionTest({
                 className="ml10 p-2 border border-gray-300 mr-2 my-2 rounded "
                 name="from"
                 placeholder="From"
-                value={x.from}
+                // value={x.from}
                 onChange={(e) => handleInputChange(e, i)}
+                list="from"
               />
+              <datalist id="from">
+                {[...Array(20)].map((_, index) => (
+                  <option value={index + 1}> {index + 1}</option>
+                ))}
+              </datalist>
               <h1 className=" mt-2 text-sm  font-bold block md:hidden bg-black text-white p-2">
                 To
               </h1>
@@ -142,9 +136,15 @@ function CardCommissionTest({
                 className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
                 name="to"
                 placeholder="To"
-                value={x.to}
+                // value={x.to}
                 onChange={(e) => handleInputChange(e, i)}
+                list="to"
               />
+              <datalist id="to">
+                {[...Array(20)].map((_, index) => (
+                  <option value={index + 1}> {index + 1}</option>
+                ))}
+              </datalist>
               <h1 className=" mt-2 text-sm  font-bold block md:hidden bg-black text-white p-2 ">
                 Commission
               </h1>
