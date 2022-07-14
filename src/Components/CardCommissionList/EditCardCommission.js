@@ -14,7 +14,7 @@ function EditCardCommission({
   const [cardTypeData, setCardTypeData] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/benefit/card_type/list/")
+    fetch("http://127.0.0.1:8000/benefit/card_type/")
       .then((response) => response.json())
       .then((data) => setCardTypeData(data?.results));
   }, []);
@@ -48,10 +48,6 @@ function EditCardCommission({
       });
   }, []);
 
-  let options = data?.map(function (item) {
-    return { value: item?.name, label: item?.name };
-  });
-
   return (
     <div>
       <div>
@@ -62,14 +58,24 @@ function EditCardCommission({
           >
             Institute Name
           </label>
-          <Select
-            placeholder={cardCommissionData?.bank_name}
-            required
-            name="profession"
-            onChange={setInstitute}
-            options={options}
-            className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
-          />
+
+          <select
+            className="w-full my-2 border-gray-300 rounded"
+            name="institite"
+            onChange={(e) => setInstitute(e.target.value)}
+          >
+            <option
+              defaultValue={cardCommissionData?.bank_name}
+              value={cardCommissionData?.bank_name}
+            >
+              {cardCommissionData?.bank_name}
+            </option>
+            {data &&
+              data.map((item) => (
+                <option value={item?.name}>{item?.name}</option>
+              ))}
+          </select>
+
           {error && (
             <label className=" text-red-400 my-1">Select Institute</label>
           )}

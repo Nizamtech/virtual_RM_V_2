@@ -12,7 +12,7 @@ function CardCommissionTest({
   const [cardTypeData, setCardTypeData] = useState([]);
 
   useEffect(() => {
-    fetch("  http://127.0.0.1:8000/benefit/card_type/list/")
+    fetch("http://127.0.0.1:8000/benefit/card_type/")
       .then((response) => response.json())
       .then((data) => setCardTypeData(data?.results));
   }, []);
@@ -65,13 +65,25 @@ function CardCommissionTest({
           >
             Institute Name
           </label>
-          <Select
+          {/* <Select
             required
             name="profession"
             onChange={setInstitute}
             options={options}
             className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white   "
-          />
+          /> */}
+
+          <select
+            className="w-full my-2 border-gray-300 rounded"
+            name="institite"
+            onChange={(e) => setInstitute(e.target.value)}
+          >
+            <option>Select</option>
+            {data &&
+              data.map((item) => (
+                <option value={item?.name}>{item?.name}</option>
+              ))}
+          </select>
           {error && (
             <label className=" text-red-400 my-1">Select Institute</label>
           )}

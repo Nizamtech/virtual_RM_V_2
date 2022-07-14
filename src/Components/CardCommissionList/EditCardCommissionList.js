@@ -19,7 +19,7 @@ const EditCardCommissionList = () => {
 
     const data = {
       card_type: [...cardType],
-      bank_name: institute?.value || cardCommissionData?.bank_name,
+      bank_name: institute || cardCommissionData?.bank_name,
     };
     console.log(data);
     // if (institute?.value) {
@@ -36,7 +36,7 @@ const EditCardCommissionList = () => {
       });
     // } else setError(true);
   };
-
+  console.log(institute);
   return (
     <div className="h-screen  overflow-scroll p-3 my-3 ">
       <EditCardCommission
@@ -51,7 +51,7 @@ const EditCardCommissionList = () => {
       <div className=" flex justify-between items-center ">
         <input
           onClick={handleSubmit}
-          className=" bg-sky-500 py-1 px-8 rounded-[15px] text-white  mt-3 "
+          className=" bg-sky-500 py-2 px-8 rounded-[15px] text-white  mt-3 text-[18px]"
           type="submit"
           value=" Submit"
         />

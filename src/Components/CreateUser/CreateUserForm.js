@@ -73,7 +73,7 @@ const CreateUserForm = () => {
             id="grid-first-name"
             type="text"
             name="username"
-            placeholder="User Name"
+            placeholder="UserName"
             required
             onBlur={handleBlur}
           />

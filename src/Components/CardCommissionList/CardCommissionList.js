@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const api = `http://127.0.0.1:8000/api/card_commission/`;
 
-const CardCommissionList = ({ data }) => {
+const CardCommissionList = () => {
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
@@ -15,8 +15,6 @@ const CardCommissionList = ({ data }) => {
   }, []);
 
   const deleteAlert = (api, id) => {
-    console.log(api + id);
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -37,7 +35,7 @@ const CardCommissionList = ({ data }) => {
       }
     });
   };
-  console.log(data);
+
   return (
     <div className=" h-screen p-3 m-3">
       <div className="flex flex-col mt-8">

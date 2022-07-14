@@ -14,13 +14,13 @@ const CardCommission = () => {
   ]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputList);
+
     const data = {
       card_type: [...inputList],
-      bank_name: institute?.value,
+      bank_name: institute,
     };
-    console.log(data);
-    if (institute?.value) {
+
+    if (institute) {
       setError(false);
       await axios
         .post("http://127.0.0.1:8000/api/card_commission/", data)
@@ -46,7 +46,7 @@ const CardCommission = () => {
       <div className=" flex justify-between items-center ">
         <input
           onClick={handleSubmit}
-          className=" bg-sky-500 py-1 px-8 rounded-[15px] text-white  mt-3 "
+          className=" bg-sky-500 py-2 px-8 rounded-[15px] text-white  mt-3 text-[18px] "
           type="submit"
           value=" Submit"
         />
