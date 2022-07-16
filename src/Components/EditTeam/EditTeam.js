@@ -6,11 +6,11 @@ const EditTeam = () => {
   const { id } = useParams();
   const router = useNavigate();
 
-  const [team, setTeam] = useState([]);
+  const [team, setTeam] = useState("");
   const [singleTeam, setSingleTeam] = useState([]);
   const [singlePermission, setSinglePermission] = useState([]);
-
   const [content_type, setContent_type] = useState([]);
+  const [description, setDescription] = useState("");
 
   const handleChange = (e) => {
     const { name, checked, value } = e.target;
@@ -58,12 +58,19 @@ const EditTeam = () => {
     setTeam(e.target.value);
   };
 
+  const handleDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
   const handleSubmitFile = async (event) => {
     event.preventDefault();
+
     const data = {
-      name: team,
-      permissions: singlePermission,
+      name: team || singlePermission?.name,
+      permissions: singleTeam,
+      description: description || singlePermission?.name,
     };
+    console.log(data);
     axios
       .put(`http://127.0.0.1:8000/api/team/${id}/`, data)
       .then((response) => {
@@ -165,7 +172,21 @@ const EditTeam = () => {
               </div>
             ))}
         </div>
-
+        <div className=" mx-2 p-2 mt-1 ">
+          <h1 className="mx-2 text-lg my-1 text-[#1E40AF] font-medium">
+            Description
+          </h1>
+          <textarea
+            required
+            defaultValue={singlePermission?.description}
+            className=" w-full h-24 ml-1 px-4 rounded-md"
+            type="text"
+            name="description"
+            id=""
+            placeholder="Description"
+            onChange={handleDescription}
+          />
+        </div>
         <button
           className="bg-green-400 py-3 px-4 float-right rounded-lg my-8 w-40 mr-3 text-white text-center text-lg  "
           type="submit"

@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
-function CardCommissionTest({
-  institute,
-  setInstitute,
-  inputList,
-  setInputList,
-  error,
-}) {
-  const [data, setData] = useState([]);
+function CardCommissionTest({ inputList, setInputList }) {
+  // const [data, setData] = useState([]);
 
   const [cardTypeData, setCardTypeData] = useState([]);
 
@@ -39,43 +33,9 @@ function CardCommissionTest({
     ]);
   };
 
-  useEffect(() => {
-    fetch("https://admin.aamartaka.com/api/v1/institutes/")
-      .then((response) => response.json())
-      .then((res) => {
-        const rest = res.results;
-        // const result = rest.filter((item) => item.is_partner === true);
-        // console.log(result);
-        setData(rest);
-      });
-  }, []);
-
   return (
     <div>
       <div>
-        <div className="w-full mb-6 md:mb-0  ">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="grid-first-name"
-          >
-            Institute Name
-          </label>
-
-          <select
-            className="w-full my-2 border-gray-300 rounded"
-            name="institite"
-            onChange={(e) => setInstitute(e.target.value)}
-          >
-            <option>Select</option>
-            {data &&
-              data.map((item) => (
-                <option value={item?.name}>{item?.name}</option>
-              ))}
-          </select>
-          {error && (
-            <label className=" text-red-400 my-1">Select Institute</label>
-          )}
-        </div>
         <div className=" hidden md:grid grid-cols-5 bg-black text-white py-2 px-3 font-bold uppercase">
           <div>
             <h1> Card Type</h1>

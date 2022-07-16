@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const VRMListEdit = () => {
+  const router = useNavigate();
   const { id } = useParams();
 
   const [user, setUser] = useState({
@@ -35,11 +36,12 @@ const VRMListEdit = () => {
     event.preventDefault();
     console.log(user);
     await axios
-      .put(`http://127.0.0.1:8000/api/agent/register/${id}/`, user)
+      .patch(`http://127.0.0.1:8000/api/agent/register/${id}/`, user)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
           SuccessAlert("User Updated", "success");
+          router(-1);
         }
       })
       .catch((error) => {

@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const EditUser = ({ data, deleteAlert, id }) => {
+  const [team, setTeam] = useState(null);
+  const [teamData, setTeamData] = useState([]);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
@@ -12,15 +14,11 @@ const EditUser = ({ data, deleteAlert, id }) => {
     password: "",
     phone: "",
   });
-  const defVAlue = [data?.team];
-
-  const [team, setTeam] = useState(null);
-  const teamList = [
-    { value: "Operation", label: "Operation" },
-    { value: "RTC", label: "RTC" },
-    { value: "Support", label: "Support" },
-    { value: "Bank Return", label: "Bank Return" },
-  ];
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/team/")
+      .then((response) => response.json())
+      .then((res) => setTeamData(res?.results));
+  }, []);
 
   const handleBlur = (e) => {
     const newData = { ...user };
@@ -40,7 +38,7 @@ const EditUser = ({ data, deleteAlert, id }) => {
     };
     console.log(userdata);
     axios
-      .put(`http://localhost:8000/api/user/register/${id}/`, userdata)
+      .patch(`http://localhost:8000/api/user/register/${id}/`, userdata)
       .then((response) => {
         if (response.status === 200) {
           SuccessAlert("Your work has been Updated", "success");
@@ -48,6 +46,10 @@ const EditUser = ({ data, deleteAlert, id }) => {
         } else SuccessAlert("something Wrong", "error");
       });
   };
+
+  const options = teamData?.map(function (item) {
+    return { value: item?.name, label: item?.name };
+  });
 
   return (
     <form onSubmit={handleSubmit} className=" mx-2">
@@ -134,7 +136,7 @@ const EditUser = ({ data, deleteAlert, id }) => {
             required
             name="team"
             onChange={setTeam}
-            options={teamList}
+            options={options}
             // onBlur={handleBlur}
             className="  w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
           />

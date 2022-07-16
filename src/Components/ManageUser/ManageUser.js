@@ -27,7 +27,6 @@ const ManageUser = () => {
       const rest = await userData.json();
       setUsers(rest?.results);
     };
-
     loadUsers();
   }, [userId]);
 

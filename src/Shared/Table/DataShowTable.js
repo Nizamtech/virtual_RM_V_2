@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { deleteAlert } from "../Alert/deleteAlert";
 
 const DataShowTable = ({ item, handleDelete }) => {
+  console.log(item);
   return (
     <div className="flex flex-col mt-8">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -46,21 +46,19 @@ const DataShowTable = ({ item, handleDelete }) => {
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
-                        {" "}
-                        Lorem ipsum, dolor sit amet consectetur adipisicing
-                        elit. Modi,
+                        {team?.description}
                       </div>
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                        aamartaka
+                        {team?.created_by}
                       </span>
                     </td>
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                        Jun 25 2022, 2:05 PM
+                        {team?.created_at}
                       </span>
                     </td>
                     <td className=" flex justify-between items-center px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b ">

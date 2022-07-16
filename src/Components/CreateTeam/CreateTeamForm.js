@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
+import { useNavigate } from "react-router-dom";
 
 const CreateTeamForm = () => {
+  const router = useNavigate();
   const [users, setUsers] = useState([]);
   const [permission, setPermission] = useState([]);
   const [team, setTeam] = useState([]);
-  const [description, setDescription] = useState([]);
+  const [description, setDescription] = useState("");
 
   const [content_type, setContent_type] = useState([]);
 
@@ -53,20 +55,23 @@ const CreateTeamForm = () => {
 
   const handleSubmitFile = async (event) => {
     event.preventDefault();
+
     const data = {
-      // description:description,
+      description: description,
       name: team,
       permissions: permission,
     };
+    console.log(data);
     axios
       .post("http://127.0.0.1:8000/api/team/", data)
       .then((response) => {
         if (response.status === 201) {
           SuccessAlert("Team Created", "success");
+          router("/manageteam");
         }
       })
       .catch((error) => {
-        SuccessAlert(error.message, "error");
+        SuccessAlert("Name already exist", "error");
       });
   };
 

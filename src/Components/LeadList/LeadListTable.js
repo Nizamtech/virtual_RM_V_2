@@ -77,20 +77,16 @@ const LeadListTable = ({ data, deleteAlert }) => {
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500 ">
-                        {item?.interested_bank?.map((item) => (
-                          <h1 className=" bg-green-300 m-1  p-1 rounded">
-                            {item}
-                          </h1>
-                        ))}
+                        <h1 className=" bg-green-300 m-1  p-1 rounded">
+                          {item?.interested_bank}
+                        </h1>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500 ">
-                        {item?.interested_product?.map((item) => (
-                          <h1 className=" bg-green-300 m-1 p-1 rounded">
-                            {item}
-                          </h1>
-                        ))}
+                        <h1 className=" bg-green-300 m-1 p-1 rounded">
+                          {item?.interested_product}
+                        </h1>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">

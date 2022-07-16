@@ -7,7 +7,7 @@ const Account = ({ data }) => {
   const [userAccount, setUserAccount] = useState([]);
   const [division, setDivision] = useState([]);
   const [district, setDistrict] = useState([]);
-  const [districtID, setDistrictID] = useState(1);
+  const [districtName, setDistrictName] = useState(1);
   const [upazilas, setUpazilas] = useState([]);
   const [upazila, setUpazila] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -39,9 +39,10 @@ const Account = ({ data }) => {
     };
     const loadSubDistrict = async () => {
       const response = await axios.get(
-        `https://raw.githubusercontent.com/realfahimreza/bangladesh-geojson/master/bd-upazilas.json`
+        `https://admin.aamartaka.com/api/v1/upazila/`
       );
-      setUpazilas(response?.data?.upazilas);
+
+      setUpazilas(response?.data?.results);
     };
 
     loadSubDistrict();
@@ -49,9 +50,6 @@ const Account = ({ data }) => {
     loadData();
   }, []);
 
-  let divisionData = division?.map(function (item) {
-    return { value: item?.name, label: item?.name };
-  });
   const statusData = [
     { label: "Active", value: "Active" },
     { label: "Hold", value: "Hold" },
@@ -91,7 +89,7 @@ const Account = ({ data }) => {
       email: personalDetails?.email || data?.email,
       phone: personalDetails?.phone || data?.phone,
 
-      division: divName?.value,
+      district: districtName || data?.district,
     };
     console.log(res);
   };
@@ -106,15 +104,18 @@ const Account = ({ data }) => {
   };
 
   const handleDistrict = (e) => {
-    setDistrictID(e.target.value);
+    setDistrictName(e.target.value);
     // const rest =
-    //   districtID &&
-    //   upazilas?.filter((item) => item?.district_id === districtID);
+    //   districtName &&
+    //   upazilas?.filter((item) => item?.district_id === districtName);
     // setUpazila(rest);
   };
   const rest =
-    districtID && upazilas?.filter((item) => item?.district_id === districtID);
-
+    districtName &&
+    upazilas?.filter((item) => item?.division_name === districtName);
+  console.log(districtName);
+  console.log(upazilas);
+  console.log(upazila);
   return (
     <div className=" h-screen">
       <div className="  grid grid-cols-1 lg:grid-cols-2 gap-4 mx-2 px-2 py-4  ">
@@ -192,7 +193,7 @@ const Account = ({ data }) => {
                       <option>Select </option>
                       {districts &&
                         districts.map((item) => (
-                          <option value={item.id}>{item.name}</option>
+                          <option value={item.name}>{item.name}</option>
                         ))}
                     </select>
                   </div>
@@ -202,7 +203,9 @@ const Account = ({ data }) => {
                     </label>
 
                     <select
-                      // onChange={handleDistrict}
+                      onChange={(e) => {
+                        setUpazila(e.target.value);
+                      }}
                       placeholder="Select"
                       type="text"
                       name="subdistrict"

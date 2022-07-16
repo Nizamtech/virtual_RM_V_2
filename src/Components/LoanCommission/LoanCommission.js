@@ -44,7 +44,7 @@ const LoanCommission = () => {
     };
 
     await axios
-      .post("http://127.0.0.1:8000/benefit/loan_commision/add/", data)
+      .post("http://127.0.0.1:8000/api/loan_commission/", data)
       .then((result) => {
         if (result.status === 201) {
           SuccessAlert("Successfully Added", "success");

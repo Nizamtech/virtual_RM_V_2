@@ -12,8 +12,7 @@ const NewLead = () => {
   // const [yearlyTransaction, setYearlyTransaction] = useState("");
   const [companyName, setcompanyName] = useState([]);
   const [company, setCompany] = useState("");
-  const [scheduleDate, setScheduleDate] = useState("");
-  const [scheduleTime, setScheduleTime] = useState("");
+
   const [data, setData] = useState([]);
 
   const [selectedOption, setSelectedOption] = useState({
@@ -91,10 +90,10 @@ const NewLead = () => {
     const data = {
       ...selectedOption,
       profession: profession?.value,
-      salary_type: salaryType?.value,
+      salary_type: salaryType?.value || "",
       status: status?.value,
-      interested_bank: interestBank?.map((item) => item.value),
-      interested_product: interestProducts?.map((item) => item.value),
+      interested_bank: interestBank?.value,
+      interested_product: interestProducts?.value,
       company_name: company?.value,
       // rental_income: 0,
       // yearly_transaction: 0,
@@ -102,7 +101,7 @@ const NewLead = () => {
       // scheduleDate: scheduleDate?.value,
       // scheduleTime: scheduleTime?.value,
     };
-
+    console.log(data);
     await axios.post("http://127.0.0.1:8000/api/lead/", data).then((result) => {
       if (result.status === 201) {
         SuccessAlert("Lead Created Successfully", "success");
@@ -219,8 +218,6 @@ const NewLead = () => {
             requred
             defaultValue={interestBank}
             onChange={setInterestBank}
-            closeMenuOnSelect={false}
-            isMulti
             name="interested_bank"
             options={instituteName}
             className="basic-multi-select font-exo my-2"
@@ -233,8 +230,6 @@ const NewLead = () => {
             required
             defaultValue={interestProducts}
             onChange={setInterestProducts}
-            closeMenuOnSelect={false}
-            isMulti
             name="interested_product"
             options={options}
             className="basic-multi-select font-exo my-2"

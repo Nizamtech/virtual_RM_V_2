@@ -14,8 +14,7 @@ const EditLeadList = () => {
   // const [yearlyTransaction, setYearlyTransaction] = useState("");
   const [companyName, setcompanyName] = useState([]);
   const [company, setCompany] = useState("");
-  const [scheduleDate, setScheduleDate] = useState("");
-  const [scheduleTime, setScheduleTime] = useState("");
+
   const [data, setData] = useState([]);
   const [leadData, setLeadData] = useState([]);
 
@@ -54,41 +53,19 @@ const EditLeadList = () => {
       });
   }, []);
 
-  let instituteName = data?.map(function (item) {
-    return { value: item?.name, label: item?.name };
-  });
   let compName = companyName?.map(function (item) {
     return { value: item?.name, label: item?.name };
   });
 
-  let loadDataaa = leadData?.interested_bank?.map(function (item) {
-    return { value: item, label: item };
-  });
+  // let loadDataaa = leadData?.interested_bank?.map(function (item) {
+  //   return { value: item, label: item };
+  // });
 
-  const options = [
-    { value: "Personal Loan", label: "Personal Loan" },
-    { value: "Car Loan", label: "Car Loan" },
-    { value: "Home Loan", label: "Home Loan" },
-    { value: "Credit Cart", label: "Credit Cart" },
-  ];
-  const professionData = [
-    { value: "salaried", label: "Salaried" },
-    { value: "business", label: "Business" },
-    { value: "landloard", label: "Landloard" },
-    { value: "professional", label: "Professional" },
-  ];
   const salaryTypeData = [
     { value: "salary AC", label: "Salary AC" },
     { value: "hand cash", label: "Hand Cash" },
     { value: "handCash + salaryAC", label: "Hand Cash + SalaryAC" },
     { value: "cheque", label: "cheque" },
-  ];
-
-  const statusData = [
-    { label: "New", value: "New" },
-    { label: "CNI", value: "CNI" },
-    { label: "Non Eligible", value: "Non Eligible" },
-    { label: "Follow", value: "Follow" },
   ];
 
   const handleChange = (e) => {
@@ -104,20 +81,26 @@ const EditLeadList = () => {
     e.preventDefault();
 
     const data = {
-      ...selectedOption,
-      profession: profession?.value,
-      salary_type: salaryType?.value,
-      status: status?.value,
-      interested_bank: interestBank?.map((item) => item.value),
-      interested_product: interestProducts?.map((item) => item.value),
-      company_name: company?.value,
+      name: selectedOption?.name || leadData?.name,
+      mobile_no: selectedOption?.mobile_no || leadData?.mobile_no,
+      // salary_type: "",
+      yearly_transaction:
+        selectedOption?.yearly_transaction || leadData?.yearly_transaction,
+      rental_income: selectedOption?.rental_income || leadData?.rental_income,
+
+      profession: profession || leadData?.profession,
+      salary_type: salaryType?.value || leadData?.salary_type,
+      status: status || leadData?.status,
+      interested_bank: interestBank || leadData?.interested_bank,
+      interested_product: interestProducts || leadData?.interested_product,
+      company_name: company?.value || leadData?.company_name,
       // rental_income: 0,
       // yearly_transaction: 0,
       // yearlyTransaction: yearlyTransaction,
       // scheduleDate: scheduleDate?.value,
       // scheduleTime: scheduleTime?.value,
     };
-
+    console.log(data);
     await axios
       .put(`http://127.0.0.1:8000/api/lead/${id}/`, data)
       .then((result) => {
@@ -139,7 +122,7 @@ const EditLeadList = () => {
         <form onSubmit={handleSubmit}>
           <label> Name</label>
           <input
-            defaultValue={leadData?.company_name}
+            defaultValue={leadData?.name}
             required
             type="text"
             name="name"
@@ -163,7 +146,29 @@ const EditLeadList = () => {
             className="my-2 focus:outline-[#2684FF] focus:duration-400 font-exo w-full h-8 border py-4 px-3 rounded-[3px] border-[#CCCCCC] "
           />
           <label> Profession</label>
-          <Select
+
+          <select
+            className=" w-full h-10 border border-gray-300 px-2 rounded "
+            name="select"
+            id="aaa"
+            placeholder="Select"
+            onChange={(e) => setProfession(e.target.value)}
+          >
+            <label> SELECT One</label>
+            <option
+              defaultValue={leadData?.profession}
+              value={leadData?.profession}
+            >
+              {leadData?.profession}
+            </option>
+
+            <option value="salaried">Salaried</option>
+            <option value="business">Business</option>
+            <option value="landloard">Landloard</option>
+            <option value="professional">Professional</option>
+          </select>
+
+          {/* <Select
             required
             defaultValue={leadData?.profession}
             name="profession"
@@ -171,9 +176,8 @@ const EditLeadList = () => {
             options={professionData}
             placeholder={leadData?.profession || "Profession"}
             className="my-2"
-          />
-          {(profession?.value === "salaried" ||
-            profession?.value === "professional") && (
+          /> */}
+          {(profession === "salaried" || profession === "professional") && (
             <div>
               <label> Salary Type</label>
               <Select
@@ -197,7 +201,7 @@ const EditLeadList = () => {
             </div>
           )}
 
-          {profession?.value === "business" && (
+          {profession === "business" && (
             <div>
               <label>Yearly Transaction</label>
               <input
@@ -221,7 +225,7 @@ const EditLeadList = () => {
               />
             </div>
           )}
-          {profession?.value === "landloard" && (
+          {profession === "landloard" && (
             <div>
               <label>Rental Income</label>
               <input
@@ -237,53 +241,64 @@ const EditLeadList = () => {
             </div>
           )}
 
-          <label> Interested Bank</label>
-          <Select
-            requred
-            value={[loadDataaa[0]]}
-            onChange={setInterestBank}
-            closeMenuOnSelect={false}
-            isMulti
-            name="interested_bank"
-            options={instituteName}
-            className="basic-multi-select font-exo my-2"
-            // placeholder={"Select At Least One"}
-            classNamePrefix="select "
-          />
-
-          <label> Interested Products</label>
-          <Select
-            required
-            defaultValue={interestProducts}
-            onChange={setInterestProducts}
-            closeMenuOnSelect={false}
-            isMulti
-            name="interested_product"
-            options={options}
-            className="basic-multi-select font-exo my-2"
-            placeholder={
-              leadData?.interested_product?.map((item) => item) ||
-              "Select At Least One"
-            }
-            classNamePrefix="select"
-          />
-
-          <label> Status</label>
-          <Select
-            defaultValue={"in process"}
-            required
-            name="status"
-            onChange={setStatus}
-            options={statusData}
-            className="my-2"
-            placeholder={leadData?.status || "Status"}
-          />
-
-          <select name="select" id="aaa" placeholder="Select">
+          <label className="ml-1  mt-2"> Interested Bank</label>
+          <select
+            className=" w-full h-10 border border-gray-300 px-2 rounded my-2 "
+            name="select"
+            id="aaa"
+            placeholder="Select"
+            onChange={(e) => setInterestProducts(e.target.value)}
+          >
             <label> SELECT One</label>
-            <option value="0">CCC</option>
-            <option value="1">AAA</option>
-            <option value="2">BBB</option>
+            <option
+              defaultValue={leadData?.interested_bank}
+              value={leadData?.interested_bank}
+            >
+              {leadData?.interested_bank}
+            </option>
+            {data &&
+              data.map((item) => (
+                <option value={item.name}>{item.name}</option>
+              ))}
+          </select>
+
+          <label className="ml-1  my-2"> Interested Products</label>
+          <select
+            className=" w-full h-10 border border-gray-300 px-2 rounded my-2"
+            name="select"
+            id="aaa"
+            placeholder="Select"
+            onChange={(e) => setInterestProducts(e.target.value)}
+          >
+            <option
+              defaultValue={leadData?.interested_product}
+              value={leadData?.interested_product}
+            >
+              {leadData?.interested_product}
+            </option>
+            <option value="Personal Loan">Personal Loan</option>
+            <option value="Car Loan">Car Loan</option>
+            <option value="Home Loan">Home Loan</option>
+            <option value="Credit Cart">Credit Cart</option>
+          </select>
+
+          <label className="ml-1 my-2"> Status</label>
+
+          <select
+            defaultValue={leadData?.status}
+            className=" w-full h-10 border border-gray-300 px-2 rounded my-2"
+            name="select"
+            id="aaa"
+            placeholder="Select"
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option defaultValue={leadData?.status} value={leadData?.status}>
+              {leadData?.status}
+            </option>
+            <option value="New">New</option>
+            <option value="CNI">CNI</option>
+            <option value="Non Eligible">Non Eligible</option>
+            <option value="Follow">Follow</option>
           </select>
           <button
             className="my-4 mx-auto w-60 text-white bg-[#3ac47d] border-[#3ac47d]  text-lg px-5 py-3 rounded-md font-exo flex justify-center items-center"
