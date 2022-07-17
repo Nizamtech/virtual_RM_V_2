@@ -23,6 +23,7 @@ import { MdForwardToInbox } from "react-icons/md";
 import { TbActivityHeartbeat } from "react-icons/tb";
 import { AiOutlineLogout } from "react-icons/ai";
 import { BsListCheck } from "react-icons/bs";
+import { GiPayMoney } from "react-icons/gi";
 const Sidebar = () => {
   const loccation = useLocation();
   return (
@@ -238,6 +239,21 @@ const Sidebar = () => {
               </span>
             </a>
           </li>
+          <li>
+            <NavLink
+              to="/specialcommissionList"
+              className={`${
+                loccation.pathname.includes("specialcommissionList") &&
+                "activeLink"
+              } use"  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+            >
+              <GiPayMoney className=" text-white" size={30} />
+              <span className="flex-1 ml-3 text-base font-normal text-white">
+                Special Commission
+              </span>
+            </NavLink>
+          </li>
+
           <li>
             <a
               href="#"

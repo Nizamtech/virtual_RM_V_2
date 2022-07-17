@@ -1,9 +1,12 @@
 import React from "react";
+import ChatComponent from "../Chat/ChatComponent";
+import InboxChat from "./InboxChat";
 
 const Inbox = () => {
   return (
-    <div className=" h-screen m-3 p-3">
-      <h1>Index</h1>
+    <div className="  h-screen">
+      <InboxChat />
+      {/* <ChatComponent /> */}
     </div>
   );
 };

@@ -34,6 +34,7 @@ import ViewUser from "./Components/ManageUser/ViewUser";
 import EditLoanComission from "./Components/EditLoanComission/EditLoanComission";
 import TestCardComission from "./Components/Test1/TestCardComission/TestCardComission";
 import SpecialCommission from "./Components/SpecialCommission/SpecialCommission";
+import SpecialCommissionList from "./Components/SpecialCommissionList/SpecialCommissionList";
 
 function App() {
   return (
@@ -78,6 +79,10 @@ function App() {
             <Route
               path="/specialcommission/:id"
               element={<SpecialCommission />}
+            />
+            <Route
+              path="/specialcommissionList"
+              element={<SpecialCommissionList />}
             />
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test" element={<TestCardComission />} />
