@@ -5,7 +5,7 @@ import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import CardCommissionTest from "./CardCommissionTest/CardCommissionTest";
 
-const CardCommission = () => {
+const CardCommission = ({ vrmUser, commission }) => {
   const router = useNavigate();
   const [institute, setInstitute] = useState(null);
   const [error, setError] = useState(false);
@@ -32,18 +32,36 @@ const CardCommission = () => {
       card_type: [...inputList],
       bank_name: institute,
     };
+    if (vrmUser?.id) {
+      console.log("innnn");
+      data.expire_date = commission?.expire_date;
+      data.agent = vrmUser?.username;
 
-    if (institute) {
-      setError(false);
-      await axios
-        .post("http://127.0.0.1:8000/api/card_commission/", data)
-        .then((result) => {
-          if (result?.status === 201) {
-            SuccessAlert("Successfully Added", "success");
-            router("/cclist");
-          } else SuccessAlert("Something Wrong", "error");
-        });
-    } else setError(true);
+      console.log(commission, data);
+      if (institute) {
+        await axios
+          .post("http://127.0.0.1:8000/api/agent/commission/", data)
+          .then((result) => {
+            if (result.status === 201) {
+              SuccessAlert("Successfully Added", "success");
+              router(-1);
+            }
+          });
+      } else setError(true);
+    } else {
+      console.log("out");
+      if (institute) {
+        setError(false);
+        await axios
+          .post("http://127.0.0.1:8000/api/card_commission/", data)
+          .then((result) => {
+            if (result?.status === 201) {
+              SuccessAlert("Successfully Added", "success");
+              router("/cclist");
+            } else SuccessAlert("Something Wrong", "error");
+          });
+      } else setError(true);
+    }
   };
 
   return (

@@ -4,7 +4,7 @@ import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 // import "react-calendar/dist/Calendar.css";
 const RangeCalender = () => {
   const [value, onChange] = useState([new Date(), new Date()]);
-  console.log(value);
+
   return (
     <div className=" border-none">
       <DateRangePicker

@@ -18,7 +18,7 @@ const VRMStatusTable = ({ data }) => {
                   Status BY
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left  uppercase border-b border-gray-200 ">
-                  Date
+                  Created At
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left  uppercase border-b border-gray-200 ">
                   Time
@@ -32,19 +32,21 @@ const VRMStatusTable = ({ data }) => {
             <tbody className="bg-white">
               <tr>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 ">
-                  <div className="text-sm leading-5 text-gray-500">Active</div>
+                  <div className="text-sm leading-5 text-gray-500">
+                    {data?.status}
+                  </div>
                 </td>
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div className="ml-4">
                     <div className="text-sm font-medium leading-5 text-gray-900">
-                      Admin 1
+                      {/* {data?.created_by} */} Admin
                     </div>
                   </div>
                 </td>
 
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div className="text-sm leading-5 text-gray-500">
-                    22/6/2022
+                    {data?.created_at}
                   </div>
                 </td>
 
@@ -54,7 +56,7 @@ const VRMStatusTable = ({ data }) => {
 
                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div className="text-sm leading-5 text-gray-500">
-                    Wrong Document Submit
+                    {data?.remarks}
                   </div>
                 </td>
               </tr>

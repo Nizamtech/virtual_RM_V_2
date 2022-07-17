@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import { useNavigate } from "react-router-dom";
-const LoanCommission = () => {
+const LoanCommission = ({ vrmUser, commission }) => {
   let navigate = useNavigate();
   const [inst, setInst] = useState([]);
   const [loan, setLoan] = useState([]);
@@ -12,17 +12,17 @@ const LoanCommission = () => {
   const [from_range, setFrom] = useState(0);
   const [to_range, setTo] = useState(0);
   const [commissionn, setCommission] = useState(0);
-
+  console.log(vrmUser);
   useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/institutes/")
       .then((response) => response.json())
-      .then((json) => setInst(json.results));
+      .then((res) => setInst(res.results));
   }, []);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/benefit/loan_type/")
       .then((response) => response.json())
-      .then((json) => setLoan(json.results));
+      .then((res) => setLoan(res.results));
   }, []);
 
   let options = inst?.map(function (item) {
@@ -42,15 +42,27 @@ const LoanCommission = () => {
       to_range: to_range,
       commissionn: commissionn,
     };
-
-    await axios
-      .post("http://127.0.0.1:8000/api/loan_commission/", data)
-      .then((result) => {
-        if (result.status === 201) {
-          SuccessAlert("Successfully Added", "success");
-          navigate(-1);
-        }
-      });
+    if (vrmUser?.id) {
+      data.expire_date = commission?.expire_date;
+      data.agent = vrmUser?.username;
+      await axios
+        .post("http://127.0.0.1:8000/api/agent/commission/", data)
+        .then((result) => {
+          if (result.status === 201) {
+            SuccessAlert("Successfully Added", "success");
+            navigate(-1);
+          }
+        });
+    } else {
+      await axios
+        .post("http://127.0.0.1:8000/api/loan_commission/", data)
+        .then((result) => {
+          if (result.status === 201) {
+            SuccessAlert("Successfully Added", "success");
+            navigate(-1);
+          }
+        });
+    }
   };
 
   return (
