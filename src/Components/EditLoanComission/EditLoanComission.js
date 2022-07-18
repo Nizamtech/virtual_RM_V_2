@@ -58,16 +58,33 @@ const EditLoanComission = ({ specialData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {
-      institute_name: institute_name || loanCommission?.institute_name,
-      loan_name: loan_name || loanCommission?.loan_name,
-      from_range: from_range || loanCommission?.from_range,
-      to_range: to_range || loanCommission?.to_range,
-      commissionn: commissionn || loanCommission?.commissionn,
-    };
+    let data;
+    let API;
 
+    if (specialData) {
+      API = `api/agent/commission`;
+      const newData = {
+        to: to_range || loanCommission?.to_range,
+        from: from_range || loanCommission?.from_range,
+        commission: commissionn || loanCommission?.commissionn,
+        product_type: loan_name || loanCommission?.loan_name,
+      };
+      data = {
+        commission: [newData],
+        bank_name: institute_name || loanCommission?.institute_name,
+      };
+    } else {
+      API = `api/loan_commission`;
+      data = {
+        institute_name: institute_name || loanCommission?.institute_name,
+        loan_name: loan_name || loanCommission?.loan_name,
+        from_range: from_range || loanCommission?.from_range,
+        to_range: to_range || loanCommission?.to_range,
+        commissionn: commissionn || loanCommission?.commissionn,
+      };
+    }
     await axios
-      .put(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`, data)
+      .put(`${process.env.REACT_APP_HOST_URL}/${API}/${id}/`, data)
       .then((result) => {
         if (result.status === 200) {
           SuccessAlert("Successfully Update", "success");

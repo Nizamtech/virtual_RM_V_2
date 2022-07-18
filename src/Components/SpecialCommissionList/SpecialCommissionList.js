@@ -7,7 +7,6 @@ const api = `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`;
 
 const SpecialCommissionList = ({ data }) => {
   const [commissions, setCommission] = useState([]);
-
   useEffect(() => {
     if (data) {
       setCommission(data);
@@ -56,6 +55,9 @@ const SpecialCommissionList = ({ data }) => {
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Institute Name
                   </th>
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    Agent ID
+                  </th>
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Product Type
                   </th>
@@ -85,6 +87,11 @@ const SpecialCommissionList = ({ data }) => {
                       <td className="px-6 py-4 whitespace-no-wrap  border-gray-200 ">
                         <div className="text-sm leading-5 text-gray-500">
                           {item?.bank_name}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-no-wrap  border-gray-200 ">
+                        <div className="text-sm leading-5 text-gray-500">
+                          {item?.agent}
                         </div>
                       </td>
 
