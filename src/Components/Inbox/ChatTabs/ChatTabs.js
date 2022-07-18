@@ -3,8 +3,8 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 const ChatTabs = ({ data }) => {
   return (
-    <Tabs className=" w-full">
-      <TabList>
+    <Tabs className=" w-full ">
+      <TabList className=" bg-green-400 ">
         <Tab>Live</Tab>
         <Tab>Closed</Tab>
         <Tab>Pending </Tab>
