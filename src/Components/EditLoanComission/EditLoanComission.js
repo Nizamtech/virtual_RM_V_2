@@ -105,7 +105,7 @@ const EditLoanComission = ({ specialData }) => {
           </label>
 
           <select
-            className="w-full my-2 border-gray-300 rounded"
+            className="w-full my-2 border-gray-300 rounded h-12 border px-2"
             name="institite"
             onChange={(e) => setInstitute(e.target.value)}
           >
@@ -146,7 +146,7 @@ const EditLoanComission = ({ specialData }) => {
                   className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 "
                 >
                   <select
-                    className="w-full my-2 border-gray-300 rounded"
+                    className="w-full my-2 border-gray-300 rounded border h-9"
                     name="institite"
                     onChange={(e) => setLoanName(e.target.value)}
                   >

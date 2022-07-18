@@ -91,7 +91,7 @@ function EditCardCommission({
           </label>
 
           <select
-            className="w-full my-2 border-gray-300 rounded"
+            className="w-full my-2 border-gray-300 rounded h-12 border  px-2"
             name="institite"
             onChange={(e) => setInstitute(e.target.value)}
           >
