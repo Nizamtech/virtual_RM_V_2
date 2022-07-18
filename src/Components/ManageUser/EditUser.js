@@ -15,7 +15,7 @@ const EditUser = ({ data, deleteAlert, id }) => {
     phone: "",
   });
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/team/")
+    fetch(`/api/team/`)
       .then((response) => response.json())
       .then((res) => setTeamData(res?.results));
   }, []);
@@ -38,7 +38,10 @@ const EditUser = ({ data, deleteAlert, id }) => {
     };
     console.log(userdata);
     axios
-      .patch(`http://localhost:8000/api/user/register/${id}/`, userdata)
+      .patch(
+        `${process.env.REACT_APP_HOST_URL}/api/user/register/${id}/`,
+        userdata
+      )
       .then((response) => {
         if (response.status === 200) {
           SuccessAlert("Your work has been Updated", "success");

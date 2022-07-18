@@ -3,18 +3,20 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const api = `http://127.0.0.1:8000/api/agent/commission/`;
+const api = `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`;
 
 const SpecialCommissionList = ({ data }) => {
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
-    if (data?.id) {
+    if (data) {
       setCommission(data);
     } else {
-      axios.get(`http://127.0.0.1:8000/api/agent/commission/`).then((res) => {
-        setCommission(res.data.results);
-      });
+      axios
+        .get(`${process.env.REACT_APP_HOST_URL}/api/agent/commission/`)
+        .then((res) => {
+          setCommission(res.data.results);
+        });
     }
   }, [data]);
 
@@ -124,7 +126,7 @@ const SpecialCommissionList = ({ data }) => {
                       </td>
 
                       <td className=" flex justify-center items-center  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                        <Link to={`/cclist/${item?.id}`}>
+                        <Link to={`/specialcommissionedit/${item?.id}`}>
                           {/* to={`/cclist/${item?.id} query: ${"name"}`} */}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

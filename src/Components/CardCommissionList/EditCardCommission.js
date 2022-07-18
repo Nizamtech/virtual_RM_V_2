@@ -10,26 +10,36 @@ function EditCardCommission({
   setCardCommissionData,
   setInputList,
   inputList,
+  setProductTypeData,
+  productTypeData,
+  specialData,
 }) {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [cardTypeData, setCardTypeData] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/benefit/card_type/")
+    fetch(`${process.env.REACT_APP_HOST_URL}/benefit/card_type/`)
       .then((response) => response.json())
       .then((data) => setCardTypeData(data?.results));
   }, []);
 
   // load Card Commission Data
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/card_commission/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCardCommissionData(data);
-        setCardType(data?.product_type);
-      });
-  }, [id]);
+    if (specialData) {
+      console.log(specialData?.commission);
+      setCardCommissionData(specialData);
+      setCardType(specialData?.commission);
+    } else {
+      fetch(`${process.env.REACT_APP_HOST_URL}/api/card_commission/${id}/`)
+        .then((response) => response.json())
+        .then((data) => {
+          setCardCommissionData(data);
+          setCardType(data?.product_type);
+          console.log(data?.product_type);
+        });
+    }
+  }, [specialData, id]);
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -52,18 +62,23 @@ function EditCardCommission({
 
   // handle click event of the Remove button
   const handleRemoveClick = (index) => {
-    const list = [...inputList];
+    const list = [...cardType];
     list.splice(index, 1);
-    setInputList(list);
+    setCardType(list);
   };
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([
-      ...inputList,
+    console.log("added");
+    setCardType([
+      ...cardType,
       { product_type: "", from: 0, commission: 0, to: 0 },
     ]);
   };
+
+  console.log(cardCommissionData);
+
+  console.log(cardType);
   return (
     <div>
       <div>
@@ -113,8 +128,8 @@ function EditCardCommission({
         </div>
       </div>
       <div className=" bg-white px-2">
-        {cardCommissionData &&
-          cardCommissionData?.product_type?.map((x, i) => {
+        {cardType &&
+          cardType?.map((x, i) => {
             return (
               <div className=" grid grid-cols-5 bg-white mb-2">
                 <select
@@ -127,7 +142,7 @@ function EditCardCommission({
                     defaultValue={x?.product_type}
                     value={x?.product_type}
                   >
-                    {x?.product_type}
+                    {x?.product_type || "select"}
                   </option>
                   {cardTypeData &&
                     cardTypeData.map((item) => (

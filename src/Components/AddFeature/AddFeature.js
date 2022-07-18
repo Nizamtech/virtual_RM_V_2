@@ -35,7 +35,7 @@ const AddFeature = () => {
     console.log(data);
 
     axios
-      .post(`http://127.0.0.1:8000/api/feature/`, data)
+      .post(`${process.env.REACT_APP_HOST_URL}/api/feature/`, data)
       .then(function (response) {
         console.log("response", response);
         if (response?.status === 201) {

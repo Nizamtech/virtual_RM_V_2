@@ -19,7 +19,7 @@ const EditVRMList = () => {
   useEffect(() => {
     const loadUser = async () => {
       const res = await axios.get(
-        `http://127.0.0.1:8000/api/agent_profile/${id}/`
+        `${process.env.REACT_APP_HOST_URL}/api/agent_profile/${id}/`
       );
       setUser(res?.data);
     };
@@ -38,7 +38,7 @@ const EditVRMList = () => {
     // if (institute?.value) {
     //   setError(false);
     //   await axios
-    //     .post("http://127.0.0.1:8000/api/card_commission/", data)
+    //     .post("process.env.REACT_APP_HOST_URL/api/card_commission/", data)
     //     .then((result) => {
     //       if (result?.status === 201) {
     //         SuccessAlert("Successfully Added", "success");

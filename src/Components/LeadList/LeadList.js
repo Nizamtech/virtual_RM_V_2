@@ -10,7 +10,7 @@ const LeadList = () => {
   const [leadList, setLeadList] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/lead/")
+    fetch(`${process.env.REACT_APP_HOST_URL}/api/lead/`)
       .then((response) => response.json())
       .then((data) => setLeadList(data));
   }, []);

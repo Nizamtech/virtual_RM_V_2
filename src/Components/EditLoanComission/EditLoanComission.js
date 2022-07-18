@@ -25,7 +25,7 @@ const EditLoanComission = () => {
     };
 
     const loadLoanType = async () => {
-      await fetch("http://127.0.0.1:8000/benefit/loan_type/")
+      await fetch(`${process.env.REACT_APP_HOST_URL}/benefit/loan_type/`)
         .then((response) => response.json())
         .then((json) => setLoan(json.results));
     };
@@ -35,7 +35,7 @@ const EditLoanComission = () => {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/loan_commission/${id}/`)
+      .get(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`)
       .then((res) => {
         setLoanCommission(res?.data);
       });
@@ -52,7 +52,7 @@ const EditLoanComission = () => {
     };
     console.log(data);
     await axios
-      .put(`http://127.0.0.1:8000/api/loan_commission/${id}/`, data)
+      .put(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`, data)
       .then((result) => {
         if (result.status === 200) {
           SuccessAlert("Successfully Update", "success");

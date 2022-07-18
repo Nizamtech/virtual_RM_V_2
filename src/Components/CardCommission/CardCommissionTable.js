@@ -43,7 +43,7 @@ const CardCommissionTable = ({
   ];
 
   useEffect(() => {
-    fetch("  http://127.0.0.1:8000/benefit/card_type/list/")
+    fetch(` ${process.env.REACT_APP_HOST_URL}/benefit/card_type/list/`)
       .then((response) => response.json())
       .then((data) => setCardTypeData(data?.results));
   }, []);

@@ -10,9 +10,11 @@ const Commission = ({ data }) => {
   console.log(data?.id);
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/api/agent/commission/?agent=${data?.id}/`)
+      .get(
+        `${process.env.REACT_APP_HOST_URL}/api/agent/commission/?agent=${data?.id}`
+      )
       .then((res) => {
-        console.log(res);
+        console.log("commission", res);
         setCommission(res.data.results);
       });
   }, [data?.id]);

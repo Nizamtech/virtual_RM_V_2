@@ -14,16 +14,20 @@ const ManageUser = () => {
   const [user, setUser] = useState("");
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/accounts/user/list/`).then((res) => {
-      setUser(res.data.results);
-    });
+    axios
+      .get(`${process.env.REACT_APP_HOST_URL}/accounts/user/list/`)
+      .then((res) => {
+        setUser(res.data.results);
+      });
   }, []);
 
   const singleUser = userId && users.find((item) => item?.id == userId);
 
   useEffect(() => {
     const loadUsers = async () => {
-      const userData = await fetch("http://127.0.0.1:8000/api/user/register/");
+      const userData = await fetch(
+        `${process.env.REACT_APP_HOST_URL}/api/user/register/`
+      );
       const rest = await userData.json();
       setUsers(rest?.results);
     };
@@ -42,7 +46,7 @@ const ManageUser = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://127.0.0.1:8000/api/user/register/${id}`)
+          .delete(`${process.env.REACT_APP_HOST_URL}/api/user/register/${id}`)
           .then((res) => {
             if (res.status === 204) {
               const singleUser = users?.filter((item) => item?.id !== id);

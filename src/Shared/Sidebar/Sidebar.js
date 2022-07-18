@@ -171,8 +171,8 @@ const Sidebar = () => {
             <NavLink
               to="/leadlist"
               className={`${
-                loccation.pathname.includes("leadlist") && "activeLink "
-              } "  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3] "`}
+                loccation.pathname.includes("leadlist") && "activeLink  "
+              } " flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3] "`}
             >
               <SiGoogleads className=" text-white" size={30} />
               <span className="flex-1 ml-3 text-base font-normal text-white">

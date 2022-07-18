@@ -37,11 +37,15 @@ const Account = ({ data }) => {
       setDivision(response?.data?.results);
     };
     const loadDistrict = async () => {
-      const response = await axios.get(`http://127.0.0.1:8000/api/district/`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_HOST_URL}/api/district/`
+      );
       setDistricts(response?.data?.results);
     };
     const loadSubDistrict = async () => {
-      const response = await axios.get(`http://127.0.0.1:8000/api/upazila/`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_HOST_URL}/api/upazila/`
+      );
 
       setUpazilas(response?.data?.results);
     };
@@ -80,7 +84,7 @@ const Account = ({ data }) => {
     };
     const updatUser = async () => {
       const res = await axios.patch(
-        `http://127.0.0.1:8000/api/agent/register/${id}/`,
+        `${process.env.REACT_APP_HOST_URL}/api/agent/register/${id}/`,
         StatusData
       );
       if (res?.status === 200) {
@@ -103,7 +107,7 @@ const Account = ({ data }) => {
 
     const updatUser = async () => {
       const res = await axios.patch(
-        `http://127.0.0.1:8000/api/agent/register/${id}/`,
+        `${process.env.REACT_APP_HOST_URL}/api/agent/register/${id}/`,
         userdata
       );
       if (res?.status === 200) {
@@ -125,7 +129,7 @@ const Account = ({ data }) => {
         password2: password?.password2,
       };
       const res = await axios.post(
-        `http://127.0.0.1:8000/api/phone/reset/`,
+        `${process.env.REACT_APP_HOST_URL}/api/phone/reset/`,
         OTPdata
       );
       if (res.status === 200) {

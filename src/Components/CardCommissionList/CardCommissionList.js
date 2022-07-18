@@ -3,15 +3,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const api = `http://127.0.0.1:8000/api/card_commission/`;
+const api = `${process.env.REACT_APP_HOST_URL}/api/card_commission/`;
 
 const CardCommissionList = () => {
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/card_commission/`).then((res) => {
-      setCommission(res.data.results);
-    });
+    axios
+      .get(`${process.env.REACT_APP_HOST_URL}/api/card_commission/`)
+      .then((res) => {
+        setCommission(res.data.results);
+      });
   }, []);
 
   const deleteAlert = (api, id) => {

@@ -47,7 +47,10 @@ const CardCommission = ({ vrmUser, commission }) => {
       console.log(vrmUser?.id, newData);
       if (institute) {
         await axios
-          .post("http://127.0.0.1:8000/api/agent/commission/", newData)
+          .post(
+            `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`,
+            newData
+          )
           .then((result) => {
             if (result.status === 201) {
               SuccessAlert("Successfully Added", "success");
@@ -60,7 +63,7 @@ const CardCommission = ({ vrmUser, commission }) => {
       if (institute) {
         setError(false);
         await axios
-          .post("http://127.0.0.1:8000/api/card_commission/", data)
+          .post(`${process.env.REACT_APP_HOST_URL}/api/card_commission/`, data)
           .then((result) => {
             if (result?.status === 201) {
               SuccessAlert("Successfully Added", "success");

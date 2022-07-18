@@ -11,7 +11,9 @@ const ManageTeam = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      const res = await axios.get("http://127.0.0.1:8000/api/team/");
+      const res = await axios.get(
+        `${process.env.REACT_APP_HOST_URL}/api/team/`
+      );
       const data = await res.data;
       setTeamData(data?.results);
     };
@@ -29,13 +31,15 @@ const ManageTeam = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://127.0.0.1:8000/api/team/${id}`).then((res) => {
-          if (res.status === 204) {
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            const restdata = teamData?.filter((item) => item.id !== id);
-            setTeamData(restdata);
-          }
-        });
+        axios
+          .delete(`${process.env.REACT_APP_HOST_URL}/api/team/${id}`)
+          .then((res) => {
+            if (res.status === 204) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              const restdata = teamData?.filter((item) => item.id !== id);
+              setTeamData(restdata);
+            }
+          });
       }
     });
   };

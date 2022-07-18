@@ -5,12 +5,13 @@ import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import EditCardCommission from "./EditCardCommission";
 
-const EditCardCommissionList = () => {
+const EditCardCommissionList = ({ specialData }) => {
   const { id } = useParams();
   const router = useNavigate();
 
   const [error, setError] = useState(false);
   const [cardCommissionData, setCardCommissionData] = useState([]);
+  const [productTypeData, setProductTypeData] = useState([]);
   const [cardType, setCardType] = useState([]);
   const [institute, setInstitute] = useState(cardCommissionData?.bank_name);
   const [inputList, setInputList] = useState([
@@ -18,17 +19,26 @@ const EditCardCommissionList = () => {
   ]);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let data;
 
-    const data = {
-      product_type: [...cardType],
-      bank_name: institute || cardCommissionData?.bank_name,
-    };
-    console.log(data);
     // if (institute?.value) {
     //   setError(false);
-
+    let API;
+    if (specialData) {
+      data = {
+        commission: [...cardType],
+        bank_name: institute || cardCommissionData?.bank_name,
+      };
+      API = `api/agent/commission`;
+    } else {
+      data = {
+        product_type: [...cardType],
+        bank_name: institute || cardCommissionData?.bank_name,
+      };
+      API = `api/card_commission`;
+    }
     await axios
-      .put(`http://127.0.0.1:8000/api/card_commission/${id}/`, data)
+      .put(`${process.env.REACT_APP_HOST_URL}/${API}/${id}/`, data)
       .then((result) => {
         console.log(result);
         if (result.status === 200) {
@@ -38,7 +48,7 @@ const EditCardCommissionList = () => {
       });
     // } else setError(true);
   };
-  console.log(institute);
+
   return (
     <div className="h-screen  overflow-scroll p-3 my-3 ">
       <EditCardCommission
@@ -50,6 +60,9 @@ const EditCardCommissionList = () => {
         error={error}
         setInputList={setInputList}
         inputList={inputList}
+        productTypeData={productTypeData}
+        setProductTypeData={setProductTypeData}
+        specialData={specialData}
       />
 
       <div className=" flex justify-between items-center ">

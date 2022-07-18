@@ -17,7 +17,7 @@ const CreateUserForm = () => {
   const [teamName, setTeamName] = useState("");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/team/")
+    fetch(`${process.env.REACT_APP_HOST_URL}/api/team/`)
       .then((response) => response.json())
       .then((json) => setTeam(json.results));
   }, []);
@@ -27,7 +27,7 @@ const CreateUserForm = () => {
     user.team = teamName?.value;
     console.log(user);
     await axios
-      .post("http://127.0.0.1:8000/api/user/register/", user)
+      .post(`${process.env.REACT_APP_HOST_URL}/api/user/register/`, user)
       .then((response) => {
         console.log(response);
         if (response.status === 201) {

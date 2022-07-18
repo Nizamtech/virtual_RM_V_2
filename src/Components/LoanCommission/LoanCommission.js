@@ -20,7 +20,7 @@ const LoanCommission = ({ vrmUser, commission }) => {
   }, []);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/benefit/loan_type/")
+    fetch(`${process.env.REACT_APP_HOST_URL}/benefit/loan_type/`)
       .then((response) => response.json())
       .then((res) => setLoan(res.results));
   }, []);
@@ -58,7 +58,10 @@ const LoanCommission = ({ vrmUser, commission }) => {
       };
       console.log(newData);
       await axios
-        .post("http://127.0.0.1:8000/api/agent/commission/", newData)
+        .post(
+          `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`,
+          newData
+        )
         .then((result) => {
           if (result.status === 201) {
             SuccessAlert("Successfully Added", "success");
@@ -67,7 +70,7 @@ const LoanCommission = ({ vrmUser, commission }) => {
         });
     } else {
       await axios
-        .post("http://127.0.0.1:8000/api/loan_commission/", data)
+        .post(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/`, data)
         .then((result) => {
           if (result.status === 201) {
             SuccessAlert("Successfully Added", "success");

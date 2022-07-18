@@ -9,7 +9,9 @@ const Feature = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      const response = await axios.get("http://127.0.0.1:8000/api/feature/");
+      const response = await axios.get(
+        `${process.env.REACT_APP_HOST_URL}/api/feature/`
+      );
       setData(response?.data?.results);
     };
     loadData();

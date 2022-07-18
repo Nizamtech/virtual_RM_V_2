@@ -7,9 +7,11 @@ const VRMList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/agent/register/`).then((res) => {
-      setUsers(res.data.results);
-    });
+    axios
+      .get(`${process.env.REACT_APP_HOST_URL}/api/agent/register/`)
+      .then((res) => {
+        setUsers(res.data.results);
+      });
   }, []);
 
   const deleteAlert = (api, id) => {

@@ -38,13 +38,15 @@ const EditTeam = () => {
   useEffect(() => {
     const loadPermission = async () => {
       const content_type = await fetch(
-        "http://localhost:8000/accounts/content_type/"
+        `${process.env.REACT_APP_HOST_URL}/accounts/content_type/`
       );
       const rest = await content_type.json();
       setContent_type(rest);
     };
     const loadSingleData = async () => {
-      const content_type = await fetch(`http://127.0.0.1:8000/api/team/${id}`);
+      const content_type = await fetch(
+        `${process.env.REACT_APP_HOST_URL}/api/team/${id}`
+      );
       const rest = await content_type.json();
       setSingleTeam(rest?.permissions);
       setSinglePermission(rest);
@@ -72,7 +74,7 @@ const EditTeam = () => {
     };
     console.log(data);
     axios
-      .put(`http://127.0.0.1:8000/api/team/${id}/`, data)
+      .put(`${process.env.REACT_APP_HOST_URL}/api/team/${id}/`, data)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {

@@ -24,7 +24,7 @@ const SpecialCommission = () => {
   useEffect(() => {
     const loadData = async () => {
       const response = await axios.get(
-        `http://127.0.0.1:8000/api/agent/register/${id}/`
+        `${process.env.REACT_APP_HOST_URL}/api/agent/register/${id}/`
       );
       setVRMUser(response?.data);
     };

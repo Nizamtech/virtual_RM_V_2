@@ -29,7 +29,7 @@ const EditLeadList = () => {
   const router = useNavigate();
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/lead/${id}/`)
+    fetch(`${process.env.REACT_APP_HOST_URL}/api/lead/${id}/`)
       .then((response) => response.json())
       .then((res) => {
         setLeadData(res);
@@ -102,7 +102,7 @@ const EditLeadList = () => {
     };
     console.log(data);
     await axios
-      .put(`http://127.0.0.1:8000/api/lead/${id}/`, data)
+      .put(`${process.env.REACT_APP_HOST_URL}/api/lead/${id}/`, data)
       .then((result) => {
         console.log(result);
         if (result.status === 204) {

@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-const api = `http://127.0.0.1:8000/api/lead/`;
+const api = `${process.env.REACT_APP_HOST_URL}/api/lead/`;
 const LeadListTable = ({ data, deleteAlert }) => {
   return (
     <div className="flex flex-col mt-8 ">

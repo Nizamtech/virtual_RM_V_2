@@ -4,7 +4,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
 
-const api = "http://127.0.0.1:8000/api/feature/";
+const api = `${process.env.REACT_APP_HOST_URL}/api/feature/`;
 const FeatureTable = ({ data, deleteAlert }) => {
   const createMarkup = (html) => {
     return {

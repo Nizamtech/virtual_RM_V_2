@@ -102,15 +102,17 @@ const NewLead = () => {
       // scheduleTime: scheduleTime?.value,
     };
     console.log(data);
-    await axios.post("http://127.0.0.1:8000/api/lead/", data).then((result) => {
-      if (result.status === 201) {
-        SuccessAlert("Lead Created Successfully", "success");
-        router(-1);
-      } else {
-        SuccessAlert("Something Wrong", "error");
-        router(-1);
-      }
-    });
+    await axios
+      .post(`${process.env.REACT_APP_HOST_URL}/api/lead/`, data)
+      .then((result) => {
+        if (result.status === 201) {
+          SuccessAlert("Lead Created Successfully", "success");
+          router(-1);
+        } else {
+          SuccessAlert("Something Wrong", "error");
+          router(-1);
+        }
+      });
   };
 
   return (

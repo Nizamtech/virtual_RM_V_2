@@ -9,7 +9,7 @@ const ViewUser = () => {
   useEffect(() => {
     const loadUser = async () => {
       const singleUser = await fetch(
-        `http://127.0.0.1:8000/api/user/register/${id}/`
+        `${process.env.REACT_APP_HOST_URL}/api/user/register/${id}/`
       );
       const rest = await singleUser.json();
       setUser(rest);

@@ -5,15 +5,17 @@ import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-const api = `http://127.0.0.1:8000/api/loan_commission/`;
+const api = `${process.env.REACT_APP_HOST_URL}/api/loan_commission/`;
 
 const LoanCommissionList = () => {
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/loan_commission/`).then((res) => {
-      setCommission(res.data.results);
-    });
+    axios
+      .get(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/`)
+      .then((res) => {
+        setCommission(res.data.results);
+      });
   }, []);
 
   const deleteAlert = (api, id) => {

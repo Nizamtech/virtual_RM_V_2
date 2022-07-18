@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 import { Link } from "react-router-dom";
-const api = `http://localhost:8000/api/agent/register/`;
+const api = `${process.env.REACT_APP_HOST_URL}/api/agent/register/`;
 const VrmListTable = ({ deleteAlert, users }) => {
   return (
     <div className="flex flex-col mt-8">

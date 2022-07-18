@@ -37,7 +37,7 @@ const CreateTeamForm = () => {
   useEffect(() => {
     const loadPermission = async () => {
       const content_type = await fetch(
-        "http://localhost:8000/accounts/content_type/"
+        `${process.env.REACT_APP_HOST_URL}/accounts/content_type/`
       );
       const rest = await content_type.json();
       setContent_type(rest);
@@ -63,7 +63,7 @@ const CreateTeamForm = () => {
     };
     console.log(data);
     axios
-      .post("http://127.0.0.1:8000/api/team/", data)
+      .post(`${process.env.REACT_APP_HOST_URL}/api/team/`, data)
       .then((response) => {
         if (response.status === 201) {
           SuccessAlert("Team Created", "success");

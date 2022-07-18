@@ -17,7 +17,7 @@ const VRMListEdit = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      await fetch(`http://127.0.0.1:8000/api/agent/register/${id}/`)
+      await fetch(`${process.env.REACT_APP_HOST_URL}/api/agent/register/${id}/`)
         .then((response) => response.json())
         .then((res) => {
           const data = {
@@ -36,7 +36,10 @@ const VRMListEdit = () => {
     event.preventDefault();
     console.log(user);
     await axios
-      .patch(`http://127.0.0.1:8000/api/agent/register/${id}/`, user)
+      .patch(
+        `${process.env.REACT_APP_HOST_URL}/api/agent/register/${id}/`,
+        user
+      )
       .then((response) => {
         console.log(response);
         if (response.status === 200) {
