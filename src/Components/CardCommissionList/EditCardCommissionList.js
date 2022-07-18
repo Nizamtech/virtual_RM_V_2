@@ -40,7 +40,6 @@ const EditCardCommissionList = ({ specialData }) => {
     await axios
       .put(`${process.env.REACT_APP_HOST_URL}/${API}/${id}/`, data)
       .then((result) => {
-        console.log(result);
         if (result.status === 200) {
           SuccessAlert("Successfully Update", "success");
           router(-1);

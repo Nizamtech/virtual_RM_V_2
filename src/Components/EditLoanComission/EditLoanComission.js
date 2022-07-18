@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import { useNavigate } from "react-router-dom";
-const EditLoanComission = () => {
+const EditLoanComission = ({ specialData }) => {
   const [loanCommission, setLoanCommission] = useState([]);
   const { id } = useParams();
 
@@ -29,17 +29,32 @@ const EditLoanComission = () => {
         .then((response) => response.json())
         .then((json) => setLoan(json.results));
     };
+
     loadLoanType();
     loadinstitute();
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`)
-      .then((res) => {
-        setLoanCommission(res?.data);
-      });
-  }, [id]);
+    if (specialData) {
+      const { to, from, commission, product_type } = specialData?.commission[0];
+      const data = {
+        commissionn: commission,
+        from_range: from,
+
+        institute_name: specialData?.bank_name,
+        loan_name: product_type,
+        to_range: to,
+      };
+      setLoanCommission(data);
+    } else {
+      axios
+        .get(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`)
+        .then((res) => {
+          console.log("Sp", res?.data);
+          setLoanCommission(res?.data);
+        });
+    }
+  }, [specialData, id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +65,7 @@ const EditLoanComission = () => {
       to_range: to_range || loanCommission?.to_range,
       commissionn: commissionn || loanCommission?.commissionn,
     };
-    console.log(data);
+
     await axios
       .put(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`, data)
       .then((result) => {
@@ -81,7 +96,7 @@ const EditLoanComission = () => {
               defaultValue={loanCommission?.institute_name}
               value={loanCommission?.institute_name}
             >
-              {loanCommission?.institute_name}
+              {loanCommission?.institute_name || "Select"}
             </option>
             {inst &&
               inst.map((item) => (
@@ -122,7 +137,7 @@ const EditLoanComission = () => {
                       defaultValue={loanCommission?.loan_name}
                       value={loanCommission?.loan_name}
                     >
-                      {loanCommission?.loan_name}
+                      {loanCommission?.loan_name || "Select"}
                     </option>
                     {loan &&
                       loan.map((item) => (

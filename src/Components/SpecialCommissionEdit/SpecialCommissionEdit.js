@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import EditCardCommissionList from "../CardCommissionList/EditCardCommissionList";
+import EditLoanComission from "../EditLoanComission/EditLoanComission";
 
 // product =1 cardType
 
@@ -28,7 +29,11 @@ const SpecialCommissionEdit = () => {
         </div>
       )}
 
-      {specialCommission?.product === 2 && <h1>Loan Commission</h1>}
+      {specialCommission?.product === 2 && (
+        <div>
+          <EditLoanComission specialData={specialCommission} />
+        </div>
+      )}
     </div>
   );
 };
