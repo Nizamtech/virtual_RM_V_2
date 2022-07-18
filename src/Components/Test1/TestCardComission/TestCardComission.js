@@ -11,14 +11,17 @@ const TestCardComission = () => {
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
   const [inputList, setInputList] = useState([
-    { card_type: "", from: 0, commission: 0, to: 0 },
+    { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
   const [addMore, setAddMore] = useState([
-    { card_type: "", from: 0, commission: 0, to: 0 },
+    { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
 
   const handleAddMore = () => {
-    setAddMore([...addMore, { card_type: "", from: 0, commission: 0, to: 0 }]);
+    setAddMore([
+      ...addMore,
+      { product_type: "", from: 0, commission: 0, to: 0 },
+    ]);
   };
 
   useEffect(() => {
@@ -36,7 +39,7 @@ const TestCardComission = () => {
     e.preventDefault();
 
     const data = {
-      card_type: [...inputList],
+      product_type: [...inputList],
       bank_name: institute,
     };
 

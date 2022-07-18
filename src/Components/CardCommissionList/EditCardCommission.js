@@ -27,7 +27,7 @@ function EditCardCommission({
       .then((response) => response.json())
       .then((data) => {
         setCardCommissionData(data);
-        setCardType(data?.card_type);
+        setCardType(data?.product_type);
       });
   }, [id]);
 
@@ -61,7 +61,7 @@ function EditCardCommission({
   const handleAddClick = () => {
     setInputList([
       ...inputList,
-      { card_type: "", from: 0, commission: 0, to: 0 },
+      { product_type: "", from: 0, commission: 0, to: 0 },
     ]);
   };
   return (
@@ -114,17 +114,20 @@ function EditCardCommission({
       </div>
       <div className=" bg-white px-2">
         {cardCommissionData &&
-          cardCommissionData?.card_type?.map((x, i) => {
+          cardCommissionData?.product_type?.map((x, i) => {
             return (
               <div className=" grid grid-cols-5 bg-white mb-2">
                 <select
                   className="border border-gray-300 mr-2 my-2 rounded"
                   onChange={(e) => handleInputChange(e, i)}
-                  name="card_type"
+                  name="product_type"
                   id="cars"
                 >
-                  <option defaultValue={x?.card_type} value={x?.card_type}>
-                    {x?.card_type}
+                  <option
+                    defaultValue={x?.product_type}
+                    value={x?.product_type}
+                  >
+                    {x?.product_type}
                   </option>
                   {cardTypeData &&
                     cardTypeData.map((item) => (

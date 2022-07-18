@@ -35,6 +35,7 @@ import EditLoanComission from "./Components/EditLoanComission/EditLoanComission"
 import TestCardComission from "./Components/Test1/TestCardComission/TestCardComission";
 import SpecialCommission from "./Components/SpecialCommission/SpecialCommission";
 import SpecialCommissionList from "./Components/SpecialCommissionList/SpecialCommissionList";
+import Login from "./Components/Authentication/login/Login";
 
 function App() {
   return (
@@ -84,6 +85,7 @@ function App() {
               path="/specialcommissionList"
               element={<SpecialCommissionList />}
             />
+            <Route path="/login" element={<Login />} />
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test" element={<TestCardComission />} />
           </Routes>

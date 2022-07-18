@@ -85,16 +85,16 @@ const VRMCommissionList = ({ data }) => {
                       </td>
 
                       <td>
-                        {item?.card_type?.map((i) => (
+                        {item?.product_type?.map((i) => (
                           <div className="px-6 py-4 whitespace-no-wrap  border-gray-200 flex justify-center items-center">
                             <div className="text-sm leading-5 text-gray-500">
-                              {i?.card_type}
+                              {i?.product_type}
                             </div>
                           </div>
                         ))}
                       </td>
                       <td>
-                        {item?.card_type?.map((i) => (
+                        {item?.product_type?.map((i) => (
                           <div className="px-6 py-4 whitespace-no-wrap  border-gray-200 flex justify-center items-center">
                             <div className="text-sm leading-5 text-gray-500">
                               {i?.from}
@@ -103,7 +103,7 @@ const VRMCommissionList = ({ data }) => {
                         ))}
                       </td>
                       <td>
-                        {item?.card_type?.map((i) => (
+                        {item?.product_type?.map((i) => (
                           <div className="px-6 py-4 whitespace-no-wrap  border-gray-200 flex justify-center items-center">
                             <div className="text-sm leading-5 text-gray-500">
                               {i?.to}
@@ -112,7 +112,7 @@ const VRMCommissionList = ({ data }) => {
                         ))}
                       </td>
                       <td>
-                        {item?.card_type?.map((i) => (
+                        {item?.product_type?.map((i) => (
                           <div className="px-6 py-4 whitespace-no-wrap border-gray-200 flex justify-center items-center">
                             <div className="text-sm leading-5 text-gray-500">
                               {i?.commission}

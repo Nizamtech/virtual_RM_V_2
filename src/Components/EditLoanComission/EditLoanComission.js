@@ -52,7 +52,7 @@ const EditLoanComission = () => {
     };
     console.log(data);
     await axios
-      .put(`http://127.0.0.1:8000/benefit/loan_commision/add/${id}/`, data)
+      .put(`http://127.0.0.1:8000/api/loan_commission/${id}/`, data)
       .then((result) => {
         if (result.status === 200) {
           SuccessAlert("Successfully Update", "success");

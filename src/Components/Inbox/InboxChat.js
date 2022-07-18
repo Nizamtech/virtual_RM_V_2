@@ -1,11 +1,12 @@
 import React from "react";
-import profile from "../Chat/assets/akane.svg";
-import profile1 from "../Chat/assets/eliot.svg";
-import profile2 from "../Chat/assets/emily.svg";
-import profile3 from "../Chat/assets/joe.svg";
-import profile4 from "../Chat/assets/akane.svg";
+import profile from "../../assets/akane.svg";
+import profile1 from "../../assets/eliot.svg";
+import profile2 from "../../assets/emily.svg";
+import profile3 from "../../assets/joe.svg";
+import profile4 from "../../assets/akane.svg";
 
 import { FiSend } from "react-icons/fi";
+import ChatTabs from "./ChatTabs/ChatTabs";
 
 const data = [
   { id: 1, avatar: profile2, name: "Nizam" },
@@ -17,22 +18,23 @@ const InboxChat = () => {
   return (
     <div className=" grid grid-cols-12 ">
       <div className=" col-span-3">
-        <div className=" bg-[#F6FBFF] py-2 px-3 border-b border-gray-300 border-r">
+        <div className="  py-2 px-3  border-gray-300 border-r">
           {/* Header  */}
           <div className=" flex  items-center">
-            <img
+            <ChatTabs data={data} />
+            {/* <img
               className=" rounded-full h-12 w-12 mx-2"
               src={profile}
               alt=""
             />
-            <h1 className="text-[18px] ">Nizam</h1>
+            <h1 className="text-[18px] ">Nizam</h1> */}
           </div>
         </div>
 
-        <div className=" mt-3">
+        {/* <div className=" mt-3">
           {data &&
             data?.map((item) => (
-              <div className=" flex  items-center my-4 hover:bg-[#d8e6f1]">
+              <div className="p-2 flex  items-center my-4 hover:bg-[#d8e6f1]">
                 <img
                   className=" rounded-full h-12 w-12 mx-2"
                   src={item?.avatar}
@@ -41,7 +43,7 @@ const InboxChat = () => {
                 <h1 className="text-[18px] ">{item?.name}</h1>
               </div>
             ))}
-        </div>
+        </div> */}
       </div>
 
       {/* chat box  */}

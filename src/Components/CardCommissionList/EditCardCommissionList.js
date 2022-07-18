@@ -14,13 +14,13 @@ const EditCardCommissionList = () => {
   const [cardType, setCardType] = useState([]);
   const [institute, setInstitute] = useState(cardCommissionData?.bank_name);
   const [inputList, setInputList] = useState([
-    { card_type: "", from: 0, commission: 0, to: 0 },
+    { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
-      card_type: [...cardType],
+      product_type: [...cardType],
       bank_name: institute || cardCommissionData?.bank_name,
     };
     console.log(data);

@@ -11,7 +11,7 @@ const CardCommission = ({ vrmUser, commission }) => {
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
   const [inputList, setInputList] = useState([
-    { card_type: "", from: 0, commission: 0, to: 0 },
+    { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
 
   useEffect(() => {
@@ -29,22 +29,29 @@ const CardCommission = ({ vrmUser, commission }) => {
     e.preventDefault();
 
     const data = {
-      card_type: [...inputList],
+      product_type: [...inputList],
       bank_name: institute,
     };
     if (vrmUser?.id) {
       console.log("innnn");
-      data.expire_date = commission?.expire_date;
-      data.agent = vrmUser?.username;
 
-      console.log(commission, data);
+      // data.expire_date = commission?.expire_date;
+      const newData = {
+        expire_date: commission?.expire_date,
+        agent: vrmUser?.id,
+        bank_name: institute,
+        product: commission?.name,
+        commission: [...inputList],
+      };
+
+      console.log(vrmUser?.id, newData);
       if (institute) {
         await axios
-          .post("http://127.0.0.1:8000/api/agent/commission/", data)
+          .post("http://127.0.0.1:8000/api/agent/commission/", newData)
           .then((result) => {
             if (result.status === 201) {
               SuccessAlert("Successfully Added", "success");
-              router(-1);
+              router("/specialcommissionList");
             }
           });
       } else setError(true);

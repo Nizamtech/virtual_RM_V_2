@@ -12,7 +12,7 @@ const LoanCommission = ({ vrmUser, commission }) => {
   const [from_range, setFrom] = useState(0);
   const [to_range, setTo] = useState(0);
   const [commissionn, setCommission] = useState(0);
-  console.log(vrmUser);
+
   useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/institutes/")
       .then((response) => response.json())
@@ -38,19 +38,31 @@ const LoanCommission = ({ vrmUser, commission }) => {
     const data = {
       institute_name: institute_name.value,
       loan_name: loan_name.value,
-      from_range: from_range,
-      to_range: to_range,
-      commissionn: commissionn,
+      from_range: parseInt(from_range),
+      to_range: parseInt(to_range),
+      commissionn: parseInt(commissionn),
     };
     if (vrmUser?.id) {
-      data.expire_date = commission?.expire_date;
-      data.agent = vrmUser?.username;
+      const loan = {
+        product_type: loan_name.value,
+        from: parseInt(from_range),
+        to: parseInt(to_range),
+        commission: parseInt(commissionn),
+      };
+      const newData = {
+        expire_date: commission?.expire_date,
+        agent: vrmUser?.id,
+        bank_name: institute_name.value,
+        product: commission?.name,
+        commission: [loan],
+      };
+      console.log(newData);
       await axios
-        .post("http://127.0.0.1:8000/api/agent/commission/", data)
+        .post("http://127.0.0.1:8000/api/agent/commission/", newData)
         .then((result) => {
           if (result.status === 201) {
             SuccessAlert("Successfully Added", "success");
-            navigate(-1);
+            navigate("/specialcommissionList");
           }
         });
     } else {

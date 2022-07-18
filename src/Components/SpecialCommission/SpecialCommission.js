@@ -15,7 +15,7 @@ const SpecialCommission = () => {
   const [vrmUser, setVRMUser] = useState([]);
   const handleCommission = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+
     const newData = { ...commission };
     newData[name] = value;
     setCommission(newData);
@@ -42,8 +42,8 @@ const SpecialCommission = () => {
             name="name"
           >
             <option>Product Type</option>
-            <option value="credit_card">Credit Card</option>
-            <option value="loan">Loan</option>
+            <option value="1">Credit Card</option>
+            <option value="2">Loan</option>
           </select>
         </div>
         <div className="mx-2 w-1/2">
@@ -57,12 +57,12 @@ const SpecialCommission = () => {
         </div>
       </div>
 
-      {commission && commission?.name === "loan" && (
+      {commission && commission?.name === "2" && (
         <div>
           <LoanCommission vrmUser={vrmUser} commission={commission} />
         </div>
       )}
-      {commission && commission?.name === "credit_card" && (
+      {commission && commission?.name === "1" && (
         <div>
           <CardCommission vrmUser={vrmUser} commission={commission} />
         </div>

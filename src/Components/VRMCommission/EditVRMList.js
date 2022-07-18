@@ -11,7 +11,7 @@ const EditVRMList = () => {
   const [institute, setInstitute] = useState(null);
   const [error, setError] = useState(false);
   const [inputList, setInputList] = useState([
-    { card_type: "", from: 0, commission: 0, to: 0 },
+    { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
 
   const [user, setUser] = useState([]);
@@ -30,7 +30,7 @@ const EditVRMList = () => {
     e.preventDefault();
     console.log(inputList);
     const data = {
-      card_type: [...inputList],
+      product_type: [...inputList],
       bank_name: institute?.value,
     };
 

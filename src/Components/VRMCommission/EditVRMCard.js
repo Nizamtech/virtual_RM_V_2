@@ -36,7 +36,7 @@ function EditVRMCard({
   const handleAddClick = () => {
     setInputList([
       ...inputList,
-      { card_type: "", from: 0, commission: 0, to: 0 },
+      { product_type: "", from: 0, commission: 0, to: 0 },
     ]);
   };
 
@@ -99,7 +99,7 @@ function EditVRMCard({
               <select
                 className="border border-gray-300 mr-2 my-2 rounded"
                 onChange={(e) => handleInputChange(e, i)}
-                name="card_type"
+                name="product_type"
                 id="cars"
               >
                 <option value="">Select </option>
