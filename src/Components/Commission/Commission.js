@@ -33,7 +33,7 @@ const Commission = ({ data }) => {
         ) : (
           <h1 className=" text-2xl text-red-500 grid place-content-center place-items-center">
             {" "}
-            There is Special Commission{" "}
+            There is No Special Commission
           </h1>
         )}
       </div>
