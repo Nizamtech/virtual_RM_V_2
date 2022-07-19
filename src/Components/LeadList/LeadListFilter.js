@@ -6,21 +6,36 @@ import RangeCalender from "./RangeCalender";
 
 // import { DateRangePicker, DateRange, Calendar } from "react-date-range";
 
-const LeadListFilter = () => {
-  const [vrmAgent, setVrmAgent] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [productType, setProductType] = useState(null);
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: "selection",
-    },
-  ]);
-  const handleSelect = (date) => {
-    console.log(date);
+const LeadListFilter = ({
+  setVrmAgent,
+  setStatus,
+  setProductType,
+  setBank,
+  setState,
+  handleFilter,
+  setandSign,
+  setMobile,
+}) => {
+  const [ins, setIns] = useState([]);
+
+  const handleSelect = (e) => {
+    console.log(e.tartget.value);
+    setandSign(e.value);
   };
 
+  useEffect(() => {
+    const laodIns = () => {
+      fetch("https://admin.aamartaka.com/api/v1/institutes/")
+        .then((response) => response.json())
+        .then((res) => {
+          const rest = res.results;
+          // const result = rest.filter((item) => item.is_partner === true);
+          // console.log(result);
+          setIns(rest);
+        });
+    };
+    laodIns();
+  }, []);
   const cardCommissionData = [
     { value: "Silver", label: "Silver" },
     { value: "Platinum, Dhaka-1230", label: "Platinum" },
@@ -28,19 +43,22 @@ const LeadListFilter = () => {
     { value: "Classic", label: "Classic" },
   ];
   const statusData = [
-    { value: "New", label: "New" },
-    { value: "CNI", label: "CNI" },
-    { value: "Non Eligible", label: "Non Eligible" },
-    { value: "Follow Up Needed", label: "Follow Up Needed" },
+    { label: "New", value: "New" },
+    { label: "CNI", value: "CNI" },
+    { label: "Non Eligible", value: "Non Eligible" },
+    { label: "Follow", value: "Follow" },
     { value: "Submitted", label: "Submitted" },
   ];
   const productTypeData = [
-    { value: "Personal Load", label: "Personal Load" },
+    { value: "Personal Loan", label: "Personal Loan" },
     { value: "Car Loan", label: "Car Loan" },
     { value: "Home Loan", label: "Home Loan" },
     { value: "Credit Cart", label: "Credit Cart" },
   ];
 
+  const option = ins?.map((item) => {
+    return { value: item.name, label: item.name };
+  });
   return (
     <div className=" flex  ">
       <div>
@@ -50,6 +68,7 @@ const LeadListFilter = () => {
             <Select
               required
               name="vrmAgent"
+              // onClick={handleSelect}
               onChange={setVrmAgent}
               options={cardCommissionData}
               className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
@@ -60,6 +79,7 @@ const LeadListFilter = () => {
             <Select
               required
               name="vrmAgent"
+              // onClick={handleSelect}
               onChange={setStatus}
               options={statusData}
               className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
@@ -70,6 +90,7 @@ const LeadListFilter = () => {
             <Select
               required
               name="vrmAgent"
+              // onClick={handleSelect}
               onChange={setProductType}
               options={productTypeData}
               className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
@@ -80,14 +101,16 @@ const LeadListFilter = () => {
             <Select
               required
               name="vrmAgent"
-              onChange={setStatus}
-              options={statusData}
+              // onClick={handleSelect}
+              onChange={setBank}
+              options={option}
               className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
             />
           </div>
           <div className="w-full">
             <h1 className=" ml-1 my-1 text-lg">Mobile </h1>
             <input
+              onBlur={(e) => setMobile(e.target.value)}
               placeholder=" Mobile Number"
               type="text"
               maxLength={11}
@@ -101,11 +124,11 @@ const LeadListFilter = () => {
           </div>
         </div>
       </div>
-      <div className=" mt-12 right-12 absolute">
+      <button onClick={handleFilter} className=" mt-12 right-12 absolute">
         <h1 className=" bg-green-400 py-[10px] px-5 rounded-lg text-white font-bold">
           Go
         </h1>
-      </div>
+      </button>
     </div>
   );
 };

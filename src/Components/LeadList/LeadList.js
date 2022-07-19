@@ -8,13 +8,43 @@ import Swal from "sweetalert2";
 
 const LeadList = () => {
   const [leadList, setLeadList] = useState([]);
+  const [vrmAgent, setVrmAgent] = useState("");
+  const [status, setStatus] = useState("");
+  const [productType, setProductType] = useState("");
+  const [bank, setBank] = useState("");
+  const [andSign, setandSign] = useState([]);
+  const [mobile, setMobile] = useState("");
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
 
+  const [api, setApi] = useState("api/lead");
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_HOST_URL}/api/lead/`)
+    fetch(`${process.env.REACT_APP_HOST_URL}/${api}`)
       .then((response) => response.json())
       .then((data) => setLeadList(data));
-  }, []);
+  }, [api]);
 
+  const handleFilter = () => {
+    const data = {
+      statusValue: status?.value,
+      bankValue: bank?.value,
+      productTypeValue: productType?.value,
+      mobile_no: mobile,
+    };
+    console.log(data.length);
+    const URL = `api/lead/?${status && `status=${data?.statusValue}`}&${
+      productType && `interested_product=${data?.productTypeValue}`
+    }&${bank && `interested_bank=${data?.bankValue}`}&${
+      mobile && `mobile_no=${mobile}`
+    }`;
+    setApi(URL);
+  };
+  console.log(bank, productType, status);
   const deleteAlert = (api, id) => {
     console.log(api + id);
     console.log(id);
@@ -45,7 +75,16 @@ const LeadList = () => {
         {" "}
         <Link to="/newlead">New Lead</Link>
       </div>
-      <LeadListFilter />
+      <LeadListFilter
+        setandSign={setandSign}
+        setVrmAgent={setVrmAgent}
+        setStatus={setStatus}
+        setProductType={setProductType}
+        setBank={setBank}
+        setState={setState}
+        handleFilter={handleFilter}
+        setMobile={setMobile}
+      />
       <LeadListTable deleteAlert={deleteAlert} data={leadList} />
     </div>
   );
