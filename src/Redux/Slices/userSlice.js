@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { useEffect } from "react";
 
 const initialState = {
   value: 0,
   user: [],
+  commission: [],
 };
 
 export const userSlice = createSlice({
@@ -21,11 +24,19 @@ export const userSlice = createSlice({
     saveUser: (state, action) => {
       state.user = action.payload;
     },
+    specialCommission: (state, action) => {
+      state.commission = [...state.commission, action.payload];
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount, saveUser } =
-  userSlice.actions;
+export const {
+  increment,
+  decrement,
+  incrementByAmount,
+  saveUser,
+  specialCommission,
+} = userSlice.actions;
 
 export default userSlice.reducer;

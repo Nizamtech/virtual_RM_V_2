@@ -2,14 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const api = `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`;
 
-const SpecialCommissionList = ({ data }) => {
+const SCView = ({ data }) => {
   const [commissions, setCommission] = useState([]);
-  const [value, setValue] = useState("all");
   useEffect(() => {
     if (data) {
       setCommission(data);
@@ -20,13 +17,8 @@ const SpecialCommissionList = ({ data }) => {
           setCommission(res.data.results);
         });
     }
-  }, [data, value]);
+  }, [data]);
 
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setValue(value);
-  };
-  console.log(value);
   const deleteAlert = (api, id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -51,20 +43,6 @@ const SpecialCommissionList = ({ data }) => {
 
   return (
     <div className=" h-screen p-3 m-3">
-      <div className=" flex justify-between items-center mx-4">
-        <h1 className=" text-lg text-gray-500">Special Commission</h1>
-        <select
-          onChange={handleChange}
-          className=" h-10 p-2 border border-gray-300 focus:border-0"
-          name="Special Commission"
-        >
-          <option value="all">All</option>
-          <option value="Personal Loan">Personal Loan</option>
-          <option value="Credit card">Credit card</option>
-          <option value="Home Loan">Home Loan</option>
-          <option value="Car Loan">Car Loan</option>
-        </select>
-      </div>
       <div className="flex flex-col mt-8">
         <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
@@ -74,17 +52,24 @@ const SpecialCommissionList = ({ data }) => {
                   <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     #
                   </th>
-
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                    User Name
+                    Institute Name
                   </th>
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                    Expire Date
+                    Agent ID
                   </th>
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Product Type
                   </th>
-
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    From
+                  </th>
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    To
+                  </th>
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    Commission
+                  </th>
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Action
                   </th>
@@ -99,15 +84,14 @@ const SpecialCommissionList = ({ data }) => {
                           {index + 1}
                         </div>
                       </td>
-
                       <td className="px-6 py-4 whitespace-no-wrap  border-gray-200 ">
                         <div className="text-sm leading-5 text-gray-500">
-                          {item?.agent_name}
+                          {item?.bank_name}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-no-wrap  border-gray-200 ">
                         <div className="text-sm leading-5 text-gray-500">
-                          {item?.expire_date}
+                          {item?.agent}
                         </div>
                       </td>
 
@@ -120,7 +104,7 @@ const SpecialCommissionList = ({ data }) => {
                           </div>
                         ))}
                       </td>
-                      {/* <td>
+                      <td>
                         {item?.commission?.map((i) => (
                           <div className="px-6 py-4 whitespace-no-wrap  border-gray-200 flex justify-center items-center">
                             <div className="text-sm leading-5 text-gray-500">
@@ -146,16 +130,10 @@ const SpecialCommissionList = ({ data }) => {
                             </div>
                           </div>
                         ))}
-                      </td> */}
+                      </td>
 
                       <td className=" flex justify-center items-center  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                        <Link to={`/scview/${item.agent}`}>
-                          <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
-                        </Link>
-                        <Link
-                          className="mx-2"
-                          to={`/specialcommissionedit/${item?.id}`}
-                        >
+                        <Link to={`/specialcommissionedit/${item?.id}`}>
                           {/* to={`/cclist/${item?.id} query: ${"name"}`} */}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -203,4 +181,4 @@ const SpecialCommissionList = ({ data }) => {
   );
 };
 
-export default SpecialCommissionList;
+export default SCView;

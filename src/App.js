@@ -37,6 +37,7 @@ import SpecialCommission from "./Components/SpecialCommission/SpecialCommission"
 import SpecialCommissionList from "./Components/SpecialCommissionList/SpecialCommissionList";
 import Login from "./Components/Authentication/login/Login";
 import SpecialCommissionEdit from "./Components/SpecialCommissionEdit/SpecialCommissionEdit";
+import SpecialCommissionView from "./Components/SpecialCommissionView/SpecialCommissionView";
 
 function App() {
   return (
@@ -90,6 +91,7 @@ function App() {
               path="/specialcommissionedit/:id"
               element={<SpecialCommissionEdit />}
             />
+            <Route path="/scview/:id" element={<SpecialCommissionView />} />
             <Route path="/login" element={<Login />} />
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test" element={<TestCardComission />} />

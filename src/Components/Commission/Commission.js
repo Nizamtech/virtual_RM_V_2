@@ -18,7 +18,7 @@ const Commission = ({ data }) => {
         setCommission(res.data.results);
       });
   }, [data?.id]);
-  console.log("commissions", commissions, data);
+
   return (
     <div className=" h-screen overflow-scroll m-3 p-3">
       <Link
