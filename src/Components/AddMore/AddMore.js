@@ -4,7 +4,8 @@ import { Router, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import AddMoreCard from "./AddMoreCard";
-
+import { useSelector, useDispatch } from "react-redux";
+import { addMoreFn, specialCommission } from "../../Redux/Slices/userSlice";
 const AddMore = ({ vrmUser, commission }) => {
   const router = useNavigate();
   const [counter, setCounter] = useState(0);
@@ -15,9 +16,10 @@ const AddMore = ({ vrmUser, commission }) => {
   const [addM, setAddM] = useState([
     { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
-
-  console.log(addM);
-
+  const dispatch = useDispatch();
+  const commis = useSelector((state) => state.reducer.commission);
+  const addMoreData = useSelector((state) => state.reducer.addM);
+  console.log("addMoreData", addMoreData);
   useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/institutes/")
       .then((response) => response.json())
@@ -79,6 +81,7 @@ const AddMore = ({ vrmUser, commission }) => {
   };
   const handleAddMore = () => {
     setAddM([...addM, { product_type: "", from: 0, commission: 0, to: 0 }]);
+    dispatch(addMoreFn(commis));
   };
 
   return (

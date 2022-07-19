@@ -6,6 +6,7 @@ const initialState = {
   value: 0,
   user: [],
   commission: [],
+  addM: [],
 };
 
 export const userSlice = createSlice({
@@ -25,7 +26,11 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     specialCommission: (state, action) => {
-      state.commission = [...state.commission, action.payload];
+      state.commission = action.payload;
+    },
+    addMoreFn: (state, action) => {
+      console.log("from redux", action.payload);
+      state.addM = [...state.addM, action.payload];
     },
   },
 });
@@ -37,6 +42,7 @@ export const {
   incrementByAmount,
   saveUser,
   specialCommission,
+  addMoreFn,
 } = userSlice.actions;
 
 export default userSlice.reducer;

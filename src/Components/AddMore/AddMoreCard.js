@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { specialCommission } from "../../Redux/Slices/userSlice";
 function AddMoreCard() {
   // const [data, setData] = useState([]);
-  const commis = useSelector((state) => state.reducer.commission);
   const dispatch = useDispatch();
-  console.log("commis", commis);
+
   const [cardTypeData, setCardTypeData] = useState([]);
   const [inputList, setInputList] = useState([
     { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_URL}/benefit/card_type/`)
       .then((response) => response.json())
@@ -26,7 +26,6 @@ function AddMoreCard() {
     } else {
       list[index][name] = value;
     }
-    dispatch(specialCommission(list));
 
     setInputList(list);
   };
@@ -36,6 +35,7 @@ function AddMoreCard() {
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
+    dispatch(specialCommission(list));
   };
 
   // handle click event of the Add button
@@ -45,7 +45,7 @@ function AddMoreCard() {
       { product_type: "", from: 0, commission: 0, to: 0 },
     ]);
   };
-
+  console.log(inputList);
   return (
     <div>
       <div>
