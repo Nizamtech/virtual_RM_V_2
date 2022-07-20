@@ -9,48 +9,12 @@ function AddMoreCard() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.reducer.inputList);
   const [cardTypeData, setCardTypeData] = useState([]);
-  const [inputList, setInputList] = useState([
-    { product_type: "", from: 0, commission: 0, to: 0 },
-  ]);
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_URL}/benefit/card_type/`)
       .then((response) => response.json())
       .then((data) => setCardTypeData(data?.results));
   }, []);
-  useEffect(() => {
-    dispatch(inputChange(inputList));
-  }, [inputList]);
-
-  console.log("inputList", data);
-  // handle input change
-  const handleInputChange = async (e, index) => {
-    const { name, value } = e.target;
-
-    const list = [...inputList];
-    if (name !== "product_type") {
-      list[index][name] = parseInt(value);
-    } else {
-      list[index][name] = value;
-    }
-    setInputList(list);
-    // console.log("lfsdl", inputList);
-    // dispatch(inputChange(inputList));
-  };
-
-  // handle click event of the Remove button
-  const handleRemoveClick = (index) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    // setInputList(list);
-  };
-
-  // handle click event of the Add button
-  const handleAddClick = () => {
-    setInputList([
-      ...inputList,
-      { product_type: "", from: 0, commission: 0, to: 0 },
-    ]);
-  };
 
   return (
     <div>
@@ -72,7 +36,7 @@ function AddMoreCard() {
         </div>
       </div>
       <div className=" bg-white px-2">
-        {inputList?.map((x, i) => {
+        {data?.map((x, i) => {
           return (
             <div className=" grid grid-cols-1 md:grid-cols-5 bg-white mb-2">
               <h1 className=" mt-2 text-sm  font-bold block md:hidden bg-black text-white p-2">
@@ -80,16 +44,15 @@ function AddMoreCard() {
               </h1>
               <select
                 className="border border-gray-300 mr-2 my-2 rounded"
-                // onChange={(e) =>
-                //   dispatch(
-                //     inputChange({
-                //       name: e.target.name,
-                //       value: e.target.value,
-                //       index: i,
-                //     })
-                //   )
-                // }
-                onChange={(e) => handleInputChange(e, i)}
+                onChange={(e) =>
+                  dispatch(
+                    inputChange({
+                      name: e.target.name,
+                      value: e.target.value,
+                      index: i,
+                    })
+                  )
+                }
                 name="product_type"
                 id="cars"
               >
@@ -118,17 +81,15 @@ function AddMoreCard() {
                 name="from"
                 placeholder="From"
                 // value={x.from}
-                // onChange={(e) =>
-                //   dispatch(
-                //     inputChange({
-                //       name: e.target.name,
-                //       value: e.target.value,
-                //       index: i,
-                //     })
-                //   )
-                // }
-
-                onChange={(e) => handleInputChange(e, i)}
+                onChange={(e) =>
+                  dispatch(
+                    inputChange({
+                      name: e.target.name,
+                      value: e.target.value,
+                      index: i,
+                    })
+                  )
+                }
                 list="from"
               />
               <datalist id="from">
@@ -153,16 +114,15 @@ function AddMoreCard() {
                 name="to"
                 placeholder="To"
                 // value={x.to}
-                // onChange={(e) =>
-                //   dispatch(
-                //     inputChange({
-                //       name: e.target.name,
-                //       value: e.target.value,
-                //       index: i,
-                //     })
-                //   )
-                // }
-                onChange={(e) => handleInputChange(e, i)}
+                onChange={(e) =>
+                  dispatch(
+                    inputChange({
+                      name: e.target.name,
+                      value: e.target.value,
+                      index: i,
+                    })
+                  )
+                }
                 list="to"
               />
               <datalist id="to">
@@ -186,32 +146,28 @@ function AddMoreCard() {
                 name="commission"
                 placeholder="Enter Commission"
                 value={x.commission}
-                // onChange={(e) =>
-                //   dispatch(
-                //     inputChange({
-                //       name: e.target.name,
-                //       value: e.target.value,
-                //       index: i,
-                //     })
-                //   )
-                // }
-
-                onChange={(e) => handleInputChange(e, i)}
+                onChange={(e) =>
+                  dispatch(
+                    inputChange({
+                      name: e.target.name,
+                      value: e.target.value,
+                      index: i,
+                    })
+                  )
+                }
               />
               <div className="btn-box flex flex-col items-center justify-center">
                 {i !== 0 && (
                   <button
                     className=" bg-[#fc544b] border-[#fc544b] shadow-red-400  hover:shadow-2xl rounded  py-2 text-white w-full md:w-16"
-                    // onClick={(e) => dispatch(RemoveClick({ index: i }))}
-                    onClick={() => handleRemoveClick(i)}
+                    onClick={(e) => dispatch(RemoveClick({ index: i }))}
                   >
                     Remove
                   </button>
                 )}
                 {i === 0 && (
                   <button
-                    onClick={handleAddClick}
-                    // onClick={(e) => dispatch(AddClick())}
+                    onClick={(e) => dispatch(AddClick())}
                     className=" bg-green-400 deleteBtn hover:shadow-2xl rounded w-full md:w-16 "
                   >
                     Add

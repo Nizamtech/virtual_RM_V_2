@@ -1,10 +1,25 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import PaymentHistoryTable from "./PaymentHistoryTable";
 
 const PaymentHistory = () => {
+  const { id } = useParams();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_HOST_URL}/api/payment/${id}/`
+      );
+      setData([res?.data]);
+    };
+    loadData();
+  }, [id]);
+  console.log(data);
   return (
     <div className=" h-screen m-3 p-3">
-      <PaymentHistoryTable />
+      <PaymentHistoryTable data={data} />
     </div>
   );
 };

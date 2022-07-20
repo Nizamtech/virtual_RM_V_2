@@ -24,6 +24,7 @@ const CreateUserForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     user.team = teamName?.value;
     console.log(user);
     await axios
@@ -44,7 +45,7 @@ const CreateUserForm = () => {
     let options;
     if (team) {
       options = team?.map(function (item) {
-        return { value: item?.name, label: item?.name };
+        return { value: item?.id, label: item?.name };
       });
     }
     return options;

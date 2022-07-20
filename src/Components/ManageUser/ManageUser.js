@@ -15,7 +15,7 @@ const ManageUser = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_HOST_URL}/accounts/user/list/`)
+      .get(`${process.env.REACT_APP_HOST_URL}/api/user/register/`)
       .then((res) => {
         setUser(res.data.results);
       });

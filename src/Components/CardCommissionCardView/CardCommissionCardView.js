@@ -1,21 +1,22 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const api = `${process.env.REACT_APP_HOST_URL}/api/card_commission/`;
 
-const CardCommissionList = () => {
+const CardCommissionCardView = () => {
+  const { id } = useParams();
   const [commissions, setCommission] = useState([]);
-
+  console.log(commissions);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_HOST_URL}/api/card_commission/`)
+      .get(`${process.env.REACT_APP_HOST_URL}/api/card_commission/${id}/`)
       .then((res) => {
-        setCommission(res.data.results);
+        setCommission([res.data]);
       });
-  }, []);
+  }, [id]);
 
   const deleteAlert = (api, id) => {
     Swal.fire({
@@ -53,7 +54,7 @@ const CardCommissionList = () => {
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Institute Name
                   </th>
-                  {/* <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Card Name
                   </th>
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
@@ -64,7 +65,7 @@ const CardCommissionList = () => {
                   </th>
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center  text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Commission
-                  </th> */}
+                  </th>
                   <th className=" px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                     Action
                   </th>
@@ -85,7 +86,7 @@ const CardCommissionList = () => {
                         </div>
                       </td>
 
-                      {/* <td>
+                      <td>
                         {item?.product_type?.map((i) => (
                           <div className="px-6 py-4 whitespace-no-wrap  border-gray-200 flex justify-center items-center">
                             <div className="text-sm leading-5 text-gray-500">
@@ -120,11 +121,14 @@ const CardCommissionList = () => {
                             </div>
                           </div>
                         ))}
-                      </td> */}
+                      </td>
 
                       <td className=" flex justify-center items-center  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
                         <Link to={`/cclistview/${item?.id}`}>
-                          <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
+                          <FontAwesomeIcon
+                            icon={faEye}
+                            className="h-6 w-6 mx-2"
+                          />
                         </Link>
 
                         <Link to={`/cclist/${item?.id}`}>
@@ -175,4 +179,4 @@ const CardCommissionList = () => {
   );
 };
 
-export default CardCommissionList;
+export default CardCommissionCardView;

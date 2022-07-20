@@ -14,6 +14,7 @@ const LeadList = () => {
   const [bank, setBank] = useState("");
   const [andSign, setandSign] = useState([]);
   const [mobile, setMobile] = useState("");
+  const [vrmAgentData, setVrmAgentData] = useState([]);
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -35,16 +36,18 @@ const LeadList = () => {
       bankValue: bank?.value,
       productTypeValue: productType?.value,
       mobile_no: mobile,
+      user: vrmAgent?.value,
     };
-    console.log(data.length);
+
     const URL = `api/lead/?${status && `status=${data?.statusValue}`}&${
       productType && `interested_product=${data?.productTypeValue}`
     }&${bank && `interested_bank=${data?.bankValue}`}&${
-      mobile && `mobile_no=${mobile}`
-    }`;
+      vrmAgent && `user=${data?.user}`
+    }&${mobile && `mobile_no=${mobile}`}`;
+    console.log(URL);
     setApi(URL);
   };
-  console.log(bank, productType, status);
+
   const deleteAlert = (api, id) => {
     console.log(api + id);
     console.log(id);
@@ -68,6 +71,8 @@ const LeadList = () => {
       }
     });
   };
+
+  console.log(leadList);
 
   return (
     <div className=" h-screen mx-3 p-3">

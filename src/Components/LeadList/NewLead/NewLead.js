@@ -7,12 +7,13 @@ const NewLead = () => {
   const [profession, setProfession] = useState("");
   const [salaryType, setSalaryType] = useState("");
   const [status, setStatus] = useState("");
+  const [vrm, setVRM] = useState("");
   const [interestBank, setInterestBank] = useState("");
   const [interestProducts, setInterestProducts] = useState("");
   // const [yearlyTransaction, setYearlyTransaction] = useState("");
   const [companyName, setcompanyName] = useState([]);
   const [company, setCompany] = useState("");
-
+  const [vrmAgentData, setVrmAgentData] = useState([]);
   const [data, setData] = useState([]);
 
   const [selectedOption, setSelectedOption] = useState({
@@ -40,13 +41,26 @@ const NewLead = () => {
         const rest = res.results;
         setcompanyName(rest);
       });
+
+    const loadVRMAgent = () => {
+      fetch(`${process.env.REACT_APP_HOST_URL}/api/agent/register/`)
+        .then((response) => response.json())
+        .then((data) => setVrmAgentData(data?.results));
+    };
+    loadVRMAgent();
   }, []);
+
+  console.log(vrmAgentData);
 
   let instituteName = data?.map(function (item) {
     return { value: item?.name, label: item?.name };
   });
   let compName = companyName?.map(function (item) {
     return { value: item?.name, label: item?.name };
+  });
+
+  const option2 = vrmAgentData?.map((item) => {
+    return { value: item.id, label: item?.first_name + item?.last_name };
   });
 
   const options = [
@@ -95,6 +109,7 @@ const NewLead = () => {
       interested_bank: interestBank?.value,
       interested_product: interestProducts?.value,
       company_name: company?.value,
+      user: vrm?.value,
       // rental_income: 0,
       // yearly_transaction: 0,
       // yearlyTransaction: yearlyTransaction,
@@ -246,6 +261,15 @@ const NewLead = () => {
             name="status"
             onChange={setStatus}
             options={statusData}
+            className="my-2"
+          />
+
+          <label>VRM Agent</label>
+          <Select
+            required
+            name="vrmagent"
+            onChange={setVRM}
+            options={option2}
             className="my-2"
           />
           <button

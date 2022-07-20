@@ -1,20 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const api = `${process.env.REACT_APP_HOST_URL}/api/loan_commission/`;
 
-const LoanCommissionList = () => {
+const LoanCommissionView = () => {
+  const { id } = useParams();
   const [commissions, setCommission] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/`)
+      .get(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}`)
       .then((res) => {
-        setCommission(res.data.results);
+        setCommission([res.data]);
       });
   }, []);
 
@@ -56,7 +57,7 @@ const LoanCommissionList = () => {
                     <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                       Institute Name
                     </th>
-                    {/* <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                       Loan Type
                     </th>
                     <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
@@ -67,7 +68,7 @@ const LoanCommissionList = () => {
                     </th>
                     <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                       Commission
-                    </th> */}
+                    </th>
                     <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                       Action
                     </th>
@@ -92,7 +93,7 @@ const LoanCommissionList = () => {
                           </div>
                         </td>
 
-                        {/* <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                           <div className="text-sm leading-5 text-gray-500">
                             {item?.loan_name}
                           </div>
@@ -114,7 +115,7 @@ const LoanCommissionList = () => {
                           <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
                             {item?.commissionn}
                           </span>
-                        </td> */}
+                        </td>
 
                         <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                           <div className="text-sm leading-5 text-gray-500 flex justify-around">
@@ -170,4 +171,4 @@ const LoanCommissionList = () => {
   );
 };
 
-export default LoanCommissionList;
+export default LoanCommissionView;

@@ -17,6 +17,7 @@ const LeadListFilter = ({
   setMobile,
 }) => {
   const [ins, setIns] = useState([]);
+  const [vrmAgentData, setVrmAgentData] = useState([]);
 
   const handleSelect = (e) => {
     console.log(e.tartget.value);
@@ -34,6 +35,12 @@ const LeadListFilter = ({
           setIns(rest);
         });
     };
+    const loadVRMAgent = () => {
+      fetch(`${process.env.REACT_APP_HOST_URL}/api/agent/register/`)
+        .then((response) => response.json())
+        .then((data) => setVrmAgentData(data?.results));
+    };
+    loadVRMAgent();
     laodIns();
   }, []);
   const cardCommissionData = [
@@ -59,6 +66,9 @@ const LeadListFilter = ({
   const option = ins?.map((item) => {
     return { value: item.name, label: item.name };
   });
+  const option2 = vrmAgentData?.map((item) => {
+    return { value: item.id, label: item?.first_name + item?.last_name };
+  });
   return (
     <div className=" flex  ">
       <div>
@@ -70,7 +80,7 @@ const LeadListFilter = ({
               name="vrmAgent"
               // onClick={handleSelect}
               onChange={setVrmAgent}
-              options={cardCommissionData}
+              options={option2}
               className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
             />
           </div>

@@ -35,7 +35,8 @@ const Login = () => {
         `${process.env.REACT_APP_HOST_URL}/accounts/login/`,
         data
       );
-      if (res.status) {
+      if (res.status === 200) {
+        console.log(res);
         dispatch(saveUser(res?.data));
         navigate(from);
         dispatch(isLoaDing(false));

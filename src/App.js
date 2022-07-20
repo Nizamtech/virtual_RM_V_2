@@ -40,12 +40,15 @@ import SpecialCommissionEdit from "./Components/SpecialCommissionEdit/SpecialCom
 import SpecialCommissionView from "./Components/SpecialCommissionView/SpecialCommissionView";
 import PrivateRoute from "./Components/Authentication/login/PrivateRoute/PrivateRoute";
 import { useSelector } from "react-redux";
+import CardCommissionCardView from "./Components/CardCommissionCardView/CardCommissionCardView";
+import LoanCommissionView from "./Components/LoanCommissionView/LoanCommissionView";
 
 function App() {
-  const user = useSelector((state) => state.reducer.user);
+  const { token, user_data } = useSelector((state) => state.reducer.user);
+  console.log("from App", user_data);
   return (
     <div className="grid grid-cols-12 mt-5 mx-5">
-      {user.username && (
+      {user_data?.username && (
         <div className=" hidden lg:block col-span-2 overflow-x-hidden ">
           <Sidebar />
         </div>
@@ -53,7 +56,7 @@ function App() {
 
       <div
         className={`${
-          user.username ? "lg:col-span-10" : "lg:col-span-12"
+          user_data?.username ? "lg:col-span-10" : "lg:col-span-12"
         }  col-span-12 `}
       >
         <Layout>
@@ -76,9 +79,14 @@ function App() {
             <Route path="/cardcommission" element={<CardCommission />} />
             <Route path="/cclist" element={<CardCommissionList />} />
             <Route path="/cclist/:id" element={<EditCardCommissionList />} />
+            <Route
+              path="/cclistview/:id"
+              element={<CardCommissionCardView />}
+            />
             <Route path="/vrmedit/:id" element={<EditVRMList />} />
             <Route path="/loancommission" element={<LoanCommission />} />
             <Route path="/lclist" element={<LoanCommissionList />} />
+            <Route path="/viewloan/:id" element={<LoanCommissionView />} />
             <Route path="/editloan/:id" element={<EditLoanComission />} />
             <Route path="/vrmlist" element={<VRMList />} />
             <Route path="/vrmlist/:id" element={<VRMListEdit />} />
@@ -89,7 +97,7 @@ function App() {
             <Route path="/newagent" element={<Agent />} />
             <Route path="/newlead" element={<NewLead />} />
             <Route path="/paymentstatus" element={<PaymentStatus />} />
-            <Route path="/paymenthistory" element={<PaymentHistory />} />
+            <Route path="/paymenthistory/:id" element={<PaymentHistory />} />
             <Route path="/feature" element={<Feature />} />
             <Route path="/addfeature" element={<AddFeature />} />
             <Route path="/editfeature/:id" element={<Editfeature />} />

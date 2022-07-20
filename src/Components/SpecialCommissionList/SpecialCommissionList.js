@@ -10,21 +10,28 @@ const api = `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`;
 const SpecialCommissionList = ({ data }) => {
   const [commissions, setCommission] = useState([]);
   const [value, setValue] = useState("all");
+  const [api, setApi] = useState("api/agent/commission");
   useEffect(() => {
     if (data) {
       setCommission(data);
     } else {
-      axios
-        .get(`${process.env.REACT_APP_HOST_URL}/api/agent/commission/`)
-        .then((res) => {
-          setCommission(res.data.results);
-        });
+      axios.get(`${process.env.REACT_APP_HOST_URL}/${api}`).then((res) => {
+        setCommission(res.data.results);
+      });
     }
-  }, [data, value]);
+  }, [data, api]);
+
+  console.log(commissions);
 
   const handleChange = (e) => {
     const { value } = e.target;
-    setValue(value);
+    let URL;
+
+    if (value === "all") {
+      URL = "api/agent/commission/";
+    } else URL = `api/agent/commission/?${`product_type=${value}`}`;
+    console.log(URL);
+    setApi(URL);
   };
   console.log(value);
   const deleteAlert = (api, id) => {
@@ -59,10 +66,17 @@ const SpecialCommissionList = ({ data }) => {
           name="Special Commission"
         >
           <option value="all">All</option>
-          <option value="Personal Loan">Personal Loan</option>
-          <option value="Credit card">Credit card</option>
-          <option value="Home Loan">Home Loan</option>
-          <option value="Car Loan">Car Loan</option>
+          <optgroup label="Loan">
+            <option value="Personal Loan">Personal Loan</option>
+            <option value="Home Loan">Home Loan</option>
+            <option value="Car Loan">Car Loan</option>
+          </optgroup>
+          <optgroup label="Credit Card">
+            <option value="Classic">Classic</option>
+            <option value="Paltunum">Paltunum</option>
+            <option value="Gold">Gold</option>
+            <option value="Silver">Silver</option>
+          </optgroup>
         </select>
       </div>
       <div className="flex flex-col mt-8">
