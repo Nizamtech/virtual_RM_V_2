@@ -39,14 +39,23 @@ import Login from "./Components/Authentication/login/Login";
 import SpecialCommissionEdit from "./Components/SpecialCommissionEdit/SpecialCommissionEdit";
 import SpecialCommissionView from "./Components/SpecialCommissionView/SpecialCommissionView";
 import PrivateRoute from "./Components/Authentication/login/PrivateRoute/PrivateRoute";
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((state) => state.reducer.user);
   return (
-    <div className="grid grid-cols-12 mt-5 mx-10">
-      <div className=" hidden lg:block col-span-2 overflow-x-hidden ">
-        <Sidebar />
-      </div>
-      <div className=" lg:col-span-10 col-span-12 ">
+    <div className="grid grid-cols-12 mt-5 mx-5">
+      {user.username && (
+        <div className=" hidden lg:block col-span-2 overflow-x-hidden ">
+          <Sidebar />
+        </div>
+      )}
+
+      <div
+        className={`${
+          user.username ? "lg:col-span-10" : "lg:col-span-12"
+        }  col-span-12 `}
+      >
         <Layout>
           <Routes>
             <Route

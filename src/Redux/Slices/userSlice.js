@@ -8,7 +8,8 @@ const initialState = {
   commission: [],
   addMoreData: [],
   isLoaDing: true,
-  inputList: [{ product_type: "", from: 0, commission: 0, to: 0 }],
+  // inputList: [{ product_type: "", from: 0, commission: 0, to: 0 }],
+  inputList: [],
 };
 
 export const userSlice = createSlice({
@@ -38,15 +39,16 @@ export const userSlice = createSlice({
       state.isLoaDing = action.payload;
     },
     inputChange: (state, action) => {
-      const { name, value, index } = action.payload;
-
-      const list = [...state.inputList];
-      if (name !== "product_type") {
-        list[index][name] = parseInt(value);
-      } else {
-        list[index][name] = value;
-      }
-      state.inputList = list;
+      // const { name, value, index } = action.payload;
+      // console.log(name, value, index);
+      // const list = [...state.inputList];
+      // if (name !== "product_type") {
+      //   list[index][name] = parseInt(value);
+      // } else {
+      //   list[index][name] = value;
+      // }
+      console.log("From dedux", action.payload);
+      state.inputList = action.payload;
     },
 
     AddClick: (state, action) => {
@@ -61,13 +63,6 @@ export const userSlice = createSlice({
       list.splice(index, 1);
       state.inputList = list;
     },
-
-    // const handleRemoveClick = (index) => {
-    //   const list = [...inputList];
-    //   list.splice(index, 1);
-    //   setInputList(list);
-    //   dispatch(specialCommission(list));
-    // };
   },
 });
 

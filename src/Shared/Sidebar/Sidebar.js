@@ -26,6 +26,11 @@ import { BsListCheck } from "react-icons/bs";
 import { GiPayMoney } from "react-icons/gi";
 const Sidebar = () => {
   const loccation = useLocation();
+
+  let activeStyle = {
+    color: "black",
+  };
+
   return (
     <aside className="w-54  " aria-label="Sidebar ">
       <div className="overflow-y-auto overflow-x-hidden py-4  bg-[#1E40AF] rounded dark:bg-gray-800">
@@ -159,10 +164,10 @@ const Sidebar = () => {
               to="/vrmlist"
               className={`${
                 loccation.pathname.includes("vrmlist") && "activeLink"
-              } use"  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+              } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
             >
-              <BsListCheck className=" text-white" size={30} />
-              <span className="ml-3 text-white  text-base font-normal active:text-black ">
+              <BsListCheck size={30} />
+              <span className="ml-3   text-base font-normal active:text-black ">
                 VRM List
               </span>
             </NavLink>
@@ -172,10 +177,10 @@ const Sidebar = () => {
               to="/leadlist"
               className={`${
                 loccation.pathname.includes("leadlist") && "activeLink  "
-              } " flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3] "`}
+              } " flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3] "`}
             >
-              <SiGoogleads className=" text-white" size={30} />
-              <span className="flex-1 ml-3 text-base font-normal text-white">
+              <SiGoogleads className=" " size={30} />
+              <span className="flex-1 ml-3 text-base font-normal ">
                 Lead List
               </span>
             </NavLink>
@@ -194,10 +199,10 @@ const Sidebar = () => {
               to="/paymentstatus"
               className={`${
                 loccation.pathname.includes("paymentstatus") && "activeLink"
-              } use"  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+              } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
             >
-              <FaMoneyCheck className=" text-white" size={30} />
-              <span className="flex-1 ml-3 text-base font-normal text-white">
+              <FaMoneyCheck size={30} />
+              <span className="flex-1 ml-3 text-base font-normal ">
                 Payment Status
               </span>
             </NavLink>
@@ -207,12 +212,10 @@ const Sidebar = () => {
               to="/feature"
               className={`${
                 loccation.pathname.includes("feature") && "activeLink"
-              } use"  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+              } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
             >
-              <MdOutlineFeaturedPlayList className=" text-white" size={30} />
-              <span className="flex-1 ml-3 text-base font-normal text-white">
-                Feature
-              </span>
+              <MdOutlineFeaturedPlayList size={30} />
+              <span className="flex-1 ml-3 text-base font-normal">Feature</span>
             </NavLink>
           </li>
           <li>
@@ -220,21 +223,19 @@ const Sidebar = () => {
               to="/inbox"
               className={`${
                 loccation.pathname.includes("inbox") && "activeLink"
-              } use"  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+              } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
             >
-              <MdForwardToInbox className=" text-white" size={30} />
-              <span className="flex-1 ml-3 text-base font-normal text-white">
-                Inbox
-              </span>
+              <MdForwardToInbox size={30} />
+              <span className="flex-1 ml-3 text-base font-normal ">Inbox</span>
             </NavLink>
           </li>
           <li>
             <a
               href="/"
-              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"
+              className="flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"
             >
-              <TbActivityHeartbeat className=" text-white" size={30} />
-              <span className="flex-1 ml-3 text-base font-normal text-white">
+              <TbActivityHeartbeat size={30} />
+              <span className="flex-1 ml-3 text-base font-normal ">
                 VRM Activity
               </span>
             </a>
@@ -245,10 +246,10 @@ const Sidebar = () => {
               className={`${
                 loccation.pathname.includes("specialcommissionList") &&
                 "activeLink"
-              } use"  flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+              } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
             >
-              <GiPayMoney className=" text-white" size={30} />
-              <span className="flex-1 ml-3 text-base font-normal text-white">
+              <GiPayMoney size={30} />
+              <span className="flex-1 ml-3 text-base font-normal ">
                 Special Commission
               </span>
             </NavLink>

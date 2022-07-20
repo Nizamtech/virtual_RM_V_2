@@ -62,7 +62,7 @@ const Login = () => {
   // };
 
   return (
-    <div className=" h-screen grid place-content-center place-items-center">
+    <div className=" h-screen grid place-content-center place-items-center ">
       <div class="flex items-center justify-center min-h-screen bg-gray-100">
         <div class="px-8 py-6 mt-4 text-left bg-white shadow-lg">
           <div class="flex justify-center">
