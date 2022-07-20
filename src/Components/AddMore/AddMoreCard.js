@@ -4,17 +4,11 @@ import {
   AddClick,
   inputChange,
   RemoveClick,
-  specialCommission,
 } from "../../Redux/Slices/userSlice";
 function AddMoreCard() {
-  // const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const data = useSelector((state) => state.reducer.inputList);
-  console.log("sdfjksdj", data);
   const [cardTypeData, setCardTypeData] = useState([]);
-  const [inputList, setInputList] = useState([
-    { product_type: "", from: 0, commission: 0, to: 0 },
-  ]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_URL}/benefit/card_type/`)
@@ -22,36 +16,6 @@ function AddMoreCard() {
       .then((data) => setCardTypeData(data?.results));
   }, []);
 
-  // handle input change
-  const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    console.log(name, value);
-    const list = [...inputList];
-    if (name !== "product_type") {
-      list[index][name] = parseInt(value);
-    } else {
-      list[index][name] = value;
-    }
-
-    setInputList(list);
-  };
-
-  // handle click event of the Remove button
-  const handleRemoveClick = (index) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-    dispatch(specialCommission(list));
-  };
-
-  // handle click event of the Add button
-  const handleAddClick = () => {
-    setInputList([
-      ...inputList,
-      { product_type: "", from: 0, commission: 0, to: 0 },
-    ]);
-  };
-  console.log(inputList);
   return (
     <div>
       <div>
@@ -80,7 +44,15 @@ function AddMoreCard() {
               </h1>
               <select
                 className="border border-gray-300 mr-2 my-2 rounded"
-                onChange={(e) => handleInputChange(e, i)}
+                onChange={(e) =>
+                  dispatch(
+                    inputChange({
+                      name: e.target.name,
+                      value: e.target.value,
+                      index: i,
+                    })
+                  )
+                }
                 name="product_type"
                 id="cars"
               >

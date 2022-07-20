@@ -6,7 +6,7 @@ const initialState = {
   value: 0,
   user: [],
   commission: [],
-  addM: [],
+  addMoreData: [],
   isLoaDing: true,
   inputList: [{ product_type: "", from: 0, commission: 0, to: 0 }],
 };
@@ -29,8 +29,7 @@ export const userSlice = createSlice({
       state.commission = action.payload;
     },
     addMoreFn: (state, action) => {
-      console.log("from redux", action.payload);
-      state.addM = [...state.addM, action.payload];
+      state.addMoreData = [...state.addMoreData, action.payload];
     },
     saveUser: (state, action) => {
       state.user = action.payload;

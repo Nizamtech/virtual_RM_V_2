@@ -12,14 +12,14 @@ const AddMore = ({ vrmUser, commission }) => {
   const [institute, setInstitute] = useState(null);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
-
+  const dispatch = useDispatch();
+  const inputList = useSelector((state) => state.reducer.inputList);
+  const commissiom = useSelector((state) => state.reducer.addMoreData);
+  console.log(commissiom, commissiom);
   const [addM, setAddM] = useState([
     { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
-  const dispatch = useDispatch();
-  const commis = useSelector((state) => state.reducer.commission);
-  const addMoreData = useSelector((state) => state.reducer.addM);
-  console.log("addMoreData", addMoreData);
+
   useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/institutes/")
       .then((response) => response.json())
@@ -81,7 +81,7 @@ const AddMore = ({ vrmUser, commission }) => {
   };
   const handleAddMore = () => {
     setAddM([...addM, { product_type: "", from: 0, commission: 0, to: 0 }]);
-    dispatch(addMoreFn(commis));
+    dispatch(addMoreFn(inputList));
   };
 
   return (
