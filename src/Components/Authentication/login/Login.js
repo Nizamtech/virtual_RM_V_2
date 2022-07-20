@@ -1,7 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
-
+import { useLocation, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { isLoaDing, saveUser } from "../../../Redux/Slices/userSlice";
 const Login = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   const [loginData, setLoginData] = useState({
     phone: "",
     password: "",
@@ -15,20 +22,45 @@ const Login = () => {
     setLoginData(newData);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
       username: loginData?.phone,
       password: loginData?.password,
     };
+    const login = async () => {
+      dispatch(isLoaDing(true));
 
-    const res = await axios.get(
-      `${process.env.REACT_APP_HOST_URL}/accounts/login/`,
-      data
-    );
-    console.log(res);
+      const res = await axios.post(
+        `${process.env.REACT_APP_HOST_URL}/accounts/login/`,
+        data
+      );
+      if (res.status) {
+        dispatch(saveUser(res?.data));
+        navigate(from);
+        dispatch(isLoaDing(false));
+      }
+    };
+    login();
     e.target.reset();
   };
+
+  // const login = (data) => {
+  //   setIsLoading(true);
+  //   const { email, password } = data;
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then((result) => {
+  //       setUser(result.user);
+  //       navigate(from);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // };
+
   return (
     <div className=" h-screen grid place-content-center place-items-center">
       <div class="flex items-center justify-center min-h-screen bg-gray-100">
@@ -51,7 +83,7 @@ const Login = () => {
                   required
                   name="phone"
                   onBlur={handleBlure}
-                  type="number"
+                  type="text"
                   placeholder="Phone Number"
                   class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
                 />

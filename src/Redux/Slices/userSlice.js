@@ -7,6 +7,8 @@ const initialState = {
   user: [],
   commission: [],
   addM: [],
+  isLoaDing: true,
+  inputList: [{ product_type: "", from: 0, commission: 0, to: 0 }],
 };
 
 export const userSlice = createSlice({
@@ -22,9 +24,7 @@ export const userSlice = createSlice({
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
-    saveUser: (state, action) => {
-      state.user = action.payload;
-    },
+
     specialCommission: (state, action) => {
       state.commission = action.payload;
     },
@@ -32,11 +32,52 @@ export const userSlice = createSlice({
       console.log("from redux", action.payload);
       state.addM = [...state.addM, action.payload];
     },
+    saveUser: (state, action) => {
+      state.user = action.payload;
+    },
+    isLoaDing: (state, action) => {
+      state.isLoaDing = action.payload;
+    },
+    inputChange: (state, action) => {
+      const { name, value, index } = action.payload;
+
+      const list = [...state.inputList];
+      if (name !== "product_type") {
+        list[index][name] = parseInt(value);
+      } else {
+        list[index][name] = value;
+      }
+      state.inputList = list;
+    },
+
+    AddClick: (state, action) => {
+      state.inputList = [
+        ...state.inputList,
+        { product_type: "", from: 0, commission: 0, to: 0 },
+      ];
+    },
+    RemoveClick: (state, action) => {
+      const { index } = action.payload;
+      const list = [...state.inputList];
+      list.splice(index, 1);
+      state.inputList = list;
+    },
+
+    // const handleRemoveClick = (index) => {
+    //   const list = [...inputList];
+    //   list.splice(index, 1);
+    //   setInputList(list);
+    //   dispatch(specialCommission(list));
+    // };
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
+  RemoveClick,
+  AddClick,
+  inputChange,
+  isLoaDing,
   increment,
   decrement,
   incrementByAmount,

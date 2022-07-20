@@ -38,6 +38,7 @@ import SpecialCommissionList from "./Components/SpecialCommissionList/SpecialCom
 import Login from "./Components/Authentication/login/Login";
 import SpecialCommissionEdit from "./Components/SpecialCommissionEdit/SpecialCommissionEdit";
 import SpecialCommissionView from "./Components/SpecialCommissionView/SpecialCommissionView";
+import PrivateRoute from "./Components/Authentication/login/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
@@ -45,11 +46,17 @@ function App() {
       <div className=" hidden lg:block col-span-2 overflow-x-hidden ">
         <Sidebar />
       </div>
-
       <div className=" lg:col-span-10 col-span-12 ">
         <Layout>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
             <Route path="/createteam/" element={<CreateTeam />} />
             <Route path="/createteam/:id" element={<EditTeam />} />
             <Route path="/manageteam" element={<ManageTeam />} />
