@@ -4,72 +4,6 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const mockData = [
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-  {
-    id: 13254,
-    agentName: "Jamal",
-    totalEarned: 40000,
-    pendingMoney: 40000,
-    requestedMoney: 30000,
-  },
-];
-
 const PaymentStatusTable = ({ data }) => {
   console.log(data);
   return (
@@ -136,7 +70,7 @@ const PaymentStatusTable = ({ data }) => {
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                        {item?.request_method?.method_name}
+                        {item?.request_method?.payment_method}
                       </span>
                     </td>
 

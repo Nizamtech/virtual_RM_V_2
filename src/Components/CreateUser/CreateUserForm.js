@@ -72,9 +72,14 @@ const CreateUserForm = () => {
           <input
             className="appearance-none block w-full text-gray-700 border border-[#B3B3B3] rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             id="grid-first-name"
-            type="text"
+            type="number"
             name="username"
-            placeholder="UserName"
+            onInput={(e) => {
+              if (e.target.value.length > e.target.maxLength)
+                e.target.value = e.target.value.slice(0, e.target.maxLength);
+            }}
+            maxlength="11"
+            placeholder="01X0000000"
             required
             onBlur={handleBlur}
           />
@@ -140,6 +145,7 @@ const CreateUserForm = () => {
             type="password"
             name="password"
             minLength={6}
+            maxLength={11}
             onBlur={handleBlur}
             placeholder="******************"
           />

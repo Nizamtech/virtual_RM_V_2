@@ -235,15 +235,15 @@ const Sidebar = () => {
             </NavLink>
           </li>
           <li>
-            <a
-              href="/"
+            <NavLink
+              to="/"
               className="flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"
             >
               <TbActivityHeartbeat size={30} />
               <span className="flex-1 ml-3 text-base font-normal ">
                 VRM Activity
               </span>
-            </a>
+            </NavLink>
           </li>
           <li>
             <NavLink
