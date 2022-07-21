@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 // import Headers from "./Header";
 import "./style.css";
@@ -8,9 +9,7 @@ let renderCount = 0;
 
 const fieldArrayName = "array";
 
-const Edit = ({ update, index, value, control }) => {
-  const onSubmit = (data) => console.log("data", data);
-
+const Edit = ({ onSubmit }) => {
   return (
     <div>
       <TestForm onSubmit={onSubmit} />
@@ -19,6 +18,7 @@ const Edit = ({ update, index, value, control }) => {
 };
 
 export default function TestForm2() {
+  const [commissionData, setCommissionData] = useState([]);
   const { control, handleSubmit } = useForm();
   const { fields, append, update, remove } = useFieldArray({
     control,
@@ -27,22 +27,24 @@ export default function TestForm2() {
       [fieldArrayName]: [],
     },
   });
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data) => console.log("data44", data);
+  const handleData = () => {
+    console.log("dfddf");
   };
+
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  // };
+
   renderCount++;
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {/* onSubmit={handleSubmit(onSubmit)} */}
+      <form>
         {fields.map((field, index) => (
           <fieldset key={field.id}>
-            <Edit
-              control={control}
-              update={update}
-              index={index}
-              value={field}
-            />
+            <Edit onSubmit={onSubmit} />
             {/* <button
               className="remove"
               type="button"
@@ -61,6 +63,7 @@ export default function TestForm2() {
               lastName: "",
               working: false,
             });
+            handleData();
           }}
         >
           Add more
