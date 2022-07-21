@@ -10,9 +10,9 @@ const PaymentHistory = () => {
   useEffect(() => {
     const loadData = async () => {
       const res = await axios.get(
-        `${process.env.REACT_APP_HOST_URL}/api/payment/${id}/`
+        `${process.env.REACT_APP_HOST_URL}/api/payment/?agent=${id}`
       );
-      setData([res?.data]);
+      setData(res?.data.results);
     };
     loadData();
   }, [id]);

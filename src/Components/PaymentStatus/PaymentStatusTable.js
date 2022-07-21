@@ -142,7 +142,7 @@ const PaymentStatusTable = ({ data }) => {
 
                     <td className=" flex  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
                       <Link
-                        to={`/paymenthistory/${item?.id}`}
+                        to={`/paymenthistory/${item?.agent}`}
                         className=" mx-2"
                       >
                         {" "}
