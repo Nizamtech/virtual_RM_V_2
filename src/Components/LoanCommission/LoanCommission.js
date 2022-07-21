@@ -144,6 +144,9 @@ const LoanCommission = ({ vrmUser, commission }) => {
                           0,
                           e.target.maxLength
                         );
+                      e.target.value
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     }}
                     maxlength="8"
                     onChange={(e) => setFrom(e.target.value)}

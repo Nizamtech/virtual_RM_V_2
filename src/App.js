@@ -42,6 +42,8 @@ import PrivateRoute from "./Components/Authentication/login/PrivateRoute/Private
 import { useSelector } from "react-redux";
 import CardCommissionCardView from "./Components/CardCommissionCardView/CardCommissionCardView";
 import LoanCommissionView from "./Components/LoanCommissionView/LoanCommissionView";
+import SubmittedLead from "./Components/SubmittedLead/SubmittedLead";
+import SubmittedLeadView from "./Components/SubmittedLead/SubmittedLeadView";
 
 function App() {
   const { token, user_data } = useSelector((state) => state.reducer.user);
@@ -116,6 +118,8 @@ function App() {
               element={<SpecialCommissionEdit />}
             />
             <Route path="/scview/:id" element={<SpecialCommissionView />} />
+            <Route path="/submittedelead" element={<SubmittedLead />} />
+            <Route path="/slview/:id" element={<SubmittedLeadView />} />
             <Route path="/login" element={<Login />} />
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test" element={<TestCardComission />} />

@@ -74,7 +74,7 @@ const EditTeam = () => {
     };
     console.log(data);
     axios
-      .put(`${process.env.REACT_APP_HOST_URL}/api/team/${id}/`, data)
+      .patch(`${process.env.REACT_APP_HOST_URL}/api/team/${id}/`, data)
       .then((response) => {
         console.log(response);
         if (response.status === 200) {

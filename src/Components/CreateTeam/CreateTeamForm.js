@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const CreateTeamForm = () => {
+  const { token, user_data } = useSelector((state) => state.reducer.user);
   const router = useNavigate();
   const [users, setUsers] = useState([]);
   const [permission, setPermission] = useState([]);
@@ -60,18 +61,21 @@ const CreateTeamForm = () => {
       description: description,
       name: team,
       permissions: permission,
+      created_by: user_data && user_data.first_name + " " + user_data.last_name,
     };
     console.log(data);
     axios
       .post(`${process.env.REACT_APP_HOST_URL}/api/team/`, data)
       .then((response) => {
+        console.log("response", response);
         if (response.status === 201) {
           SuccessAlert("Team Created", "success");
           router("/manageteam");
         }
       })
       .catch((error) => {
-        SuccessAlert("Name already exist", "error");
+        console.log(error);
+        SuccessAlert(error?.message, "error");
       });
   };
 

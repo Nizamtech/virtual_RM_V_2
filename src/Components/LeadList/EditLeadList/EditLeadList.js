@@ -102,10 +102,10 @@ const EditLeadList = () => {
     };
     console.log(data);
     await axios
-      .put(`${process.env.REACT_APP_HOST_URL}/api/lead/${id}/`, data)
+      .patch(`${process.env.REACT_APP_HOST_URL}/api/lead/${id}/`, data)
       .then((result) => {
         console.log(result);
-        if (result.status === 204) {
+        if (result.status === 200) {
           SuccessAlert("Lead Update Successfully", "success");
           router(-1);
         } else {

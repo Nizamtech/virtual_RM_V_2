@@ -33,6 +33,7 @@ const NewLead = () => {
         const rest = res.results;
         // const result = rest.filter((item) => item.is_partner === true);
         // console.log(result);
+        console.log(rest);
         setData(rest);
       });
     fetch("https://admin.aamartaka.com/api/v1/company/")

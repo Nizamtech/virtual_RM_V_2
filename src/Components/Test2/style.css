@@ -1,4 +1,4 @@
-body {
+/* body {
   background: #0e101c;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -31,7 +31,7 @@ p {
 
 p::before {
   display: inline;
-  /* content: "⚠ "; */
+ 
 }
 
 input {
@@ -149,7 +149,7 @@ li {
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
   margin-bottom: 20px;
-  /* height: 30px; */
+ 
 }
 
 section {
@@ -178,4 +178,4 @@ li > button {
   position: fixed;
   top: 20px;
   right: 20px;
-}
+} */

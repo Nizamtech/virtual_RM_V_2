@@ -15,7 +15,7 @@ const EditUser = ({ data, deleteAlert, id }) => {
     phone: "",
   });
   useEffect(() => {
-    fetch(`/api/team/`)
+    fetch(`${process.env.REACT_APP_HOST_URL}/api/team/`)
       .then((response) => response.json())
       .then((res) => setTeamData(res?.results));
   }, []);
@@ -51,9 +51,9 @@ const EditUser = ({ data, deleteAlert, id }) => {
   };
 
   const options = teamData?.map(function (item) {
-    return { value: item?.name, label: item?.name };
+    return { value: item?.id, label: item?.name };
   });
-
+  console.log(teamData);
   return (
     <form onSubmit={handleSubmit} className=" mx-2">
       <div className="flex flex-wrap -mx-3 mb-6">

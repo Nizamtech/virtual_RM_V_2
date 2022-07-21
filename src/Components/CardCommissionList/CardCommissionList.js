@@ -124,7 +124,10 @@ const CardCommissionList = () => {
 
                       <td className=" flex justify-center items-center  px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
                         <Link to={`/cclistview/${item?.id}`}>
-                          <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
+                          <FontAwesomeIcon
+                            icon={faEye}
+                            className="h-6 w-6 mx-2"
+                          />
                         </Link>
 
                         <Link to={`/cclist/${item?.id}`}>

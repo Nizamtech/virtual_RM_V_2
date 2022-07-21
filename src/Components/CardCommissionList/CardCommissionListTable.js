@@ -77,7 +77,7 @@ const CardCommissionListTable = ({ data }) => {
                       </div>
                     </td>
                     <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                      <button>
+                      <button className=" mx-2">
                         {" "}
                         <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
                       </button>

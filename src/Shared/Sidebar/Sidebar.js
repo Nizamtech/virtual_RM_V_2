@@ -185,10 +185,15 @@ const Sidebar = () => {
               </span>
             </NavLink>
           </li>
-          <li className=" ml-2">
-            <NavLink to="/" className=" flex">
-              <BsFileCheckFill className=" text-white" size={30} />
-              <span className="flex-1 ml-3 text-base font-normal text-white">
+          <li>
+            <NavLink
+              to="/submittedelead"
+              className={`${
+                loccation.pathname.includes("submittedelead") && "activeLink"
+              } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+            >
+              <BsFileCheckFill size={30} />
+              <span className="flex-1 ml-3 text-base font-normal ">
                 Submitted Lead
               </span>
             </NavLink>
