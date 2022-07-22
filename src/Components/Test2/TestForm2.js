@@ -3,23 +3,25 @@ import { useState } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 // import Headers from "./Header";
 import "./style.css";
+import { useSelector } from "react-redux";
 import TestForm from "./TestForm";
-
-let renderCount = 0;
 
 const fieldArrayName = "array";
 
-const Edit = ({ onSubmit }) => {
+const Edit = ({ onSubmit, setTestData }) => {
+  const data = useSelector((state) => state.reducer.commissionData);
+  console.log("Dattataa", data);
   return (
     <div>
-      <TestForm onSubmit={onSubmit} />
+      <TestForm onSubmit={onSubmit} setTestData={setTestData} />
     </div>
   );
 };
 
 export default function TestForm2() {
-  const [commissionData, setCommissionData] = useState([]);
-  const { control, handleSubmit } = useForm();
+  const [testData, setTestData] = useState([]);
+  const [d, setD] = useState([]);
+  const { control, handleSubmit, getValues } = useForm();
   const { fields, append, update, remove } = useFieldArray({
     control,
     name: fieldArrayName,
@@ -27,16 +29,17 @@ export default function TestForm2() {
       [fieldArrayName]: [],
     },
   });
+
   const onSubmit = (data) => console.log("data44", data);
+  console.log("Dddd", d);
+
   const handleData = () => {
-    console.log("dfddf");
+    setD([...d, testData]);
   };
 
   // const onSubmit = (data) => {
   //   console.log(data);
   // };
-
-  renderCount++;
 
   return (
     <div>
@@ -44,7 +47,11 @@ export default function TestForm2() {
       <form>
         {fields.map((field, index) => (
           <fieldset key={field.id}>
-            <Edit onSubmit={onSubmit} />
+            <Edit
+              onSubmit={onSubmit}
+              setTestData={setTestData}
+              // getValues={getValues}
+            />
             {/* <button
               className="remove"
               type="button"

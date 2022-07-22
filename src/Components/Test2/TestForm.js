@@ -3,9 +3,15 @@ import { useForm, useFieldArray, Controller, useWatch } from "react-hook-form";
 import ReactDOM from "react-dom";
 
 import "./style.css";
+import { useDispatch } from "react-redux";
+import { addMoreFuncton } from "../../Redux/Slices/userSlice";
+import { useState } from "react";
 
-function TestForm({ onSubmit }) {
-  const { register, control, handleSubmit, reset, watch } = useForm({
+function TestForm({ onSubmit, setTestData }) {
+  const dispatch = useDispatch();
+  // dispatch(addMoreFuncton(testData));
+
+  const { register, control, handleSubmit, reset, watch, getValues } = useForm({
     defaultValues: {
       cardComission: [
         {
@@ -23,8 +29,15 @@ function TestForm({ onSubmit }) {
       name: "cardComission",
     });
 
+  function handleChange() {
+    const data = getValues();
+    // console.log(data);
+    setTestData(data);
+    // dispatch(addMoreFuncton([data]));
+  }
+
   return (
-    <form>
+    <form onChange={handleChange}>
       <div>
         {" "}
         <ul>
@@ -35,7 +48,7 @@ function TestForm({ onSubmit }) {
                 className="grid grid-cols-5 place-content-center place-items-center"
               >
                 <input {...register(`cardComission.${index}.to`)} />
-                <input {...register(`cardComission.${index}.fro`)} />
+                <input {...register(`cardComission.${index}.from`)} />
                 <input {...register(`cardComission.${index}.productType`)} />
                 {/* <input {...register(`cardComission.${index}.commission`)} /> */}
 
@@ -79,7 +92,7 @@ function TestForm({ onSubmit }) {
   >
     Add More
   </button> */}
-        <input onClick={handleSubmit(onSubmit)} type="submit" />
+        {/* <input onClick={handleSubmit(onSubmit)} type="submit" /> */}
       </div>
     </form>
   );

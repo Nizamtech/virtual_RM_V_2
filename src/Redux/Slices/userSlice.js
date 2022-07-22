@@ -8,6 +8,7 @@ const initialState = {
   commission: [],
   addMoreData: [],
   isLoaDing: true,
+  commissionData: [],
   inputList: [{ product_type: "", from: 0, commission: 0, to: 0 }],
 };
 
@@ -69,6 +70,11 @@ export const userSlice = createSlice({
     //   dispatch(specialCommission(list));
     // };
   },
+
+  addMoreFuncton: (state, action) => {
+    console.log(action.payload);
+    // state.commissionData = action.payload;
+  },
 });
 
 // Action creators are generated for each case reducer function
@@ -83,6 +89,7 @@ export const {
   saveUser,
   specialCommission,
   addMoreFn,
+  addMoreFuncton,
 } = userSlice.actions;
 
 export default userSlice.reducer;
