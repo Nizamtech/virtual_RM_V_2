@@ -9,8 +9,6 @@ import TestForm from "./TestForm";
 const fieldArrayName = "array";
 
 const Edit = ({ onSubmit, setTestData }) => {
-  const data = useSelector((state) => state.reducer.commissionData);
-  console.log("Dattataa", data);
   return (
     <div>
       <TestForm onSubmit={onSubmit} setTestData={setTestData} />
@@ -18,9 +16,7 @@ const Edit = ({ onSubmit, setTestData }) => {
   );
 };
 
-export default function TestForm2() {
-  const [testData, setTestData] = useState([]);
-  const [d, setD] = useState([]);
+export default function TestForm2({ setTestData, handleData }) {
   const { control, handleSubmit, getValues } = useForm();
   const { fields, append, update, remove } = useFieldArray({
     control,
@@ -31,11 +27,6 @@ export default function TestForm2() {
   });
 
   const onSubmit = (data) => console.log("data44", data);
-  console.log("Dddd", d);
-
-  const handleData = () => {
-    setD([...d, testData]);
-  };
 
   // const onSubmit = (data) => {
   //   console.log(data);
@@ -47,6 +38,21 @@ export default function TestForm2() {
       <form>
         {fields.map((field, index) => (
           <fieldset key={field.id}>
+            <div className=" grid grid-cols-5 bg-black text-white py-2 px-3 font-bold uppercase place-items-center">
+              <div>
+                <h1> Card Type</h1>
+              </div>
+              <div>
+                <h1> From</h1>
+              </div>
+              <div>
+                <h1> To</h1>
+              </div>
+              <div>
+                <h1> Commission</h1>
+              </div>
+              {/* <div>Action</div> */}
+            </div>
             <Edit
               onSubmit={onSubmit}
               setTestData={setTestData}
@@ -62,21 +68,25 @@ export default function TestForm2() {
           </fieldset>
         ))}
         <br />
-        <button
-          type="button"
-          onClick={() => {
-            append({
-              firstName: "",
-              lastName: "",
-              working: false,
-            });
-            handleData();
-          }}
-        >
-          Add more
-        </button>{" "}
+        <div className="flex justify-end items-end">
+          {" "}
+          <button
+            type="button"
+            onClick={() => {
+              append({
+                firstName: "",
+                lastName: "",
+                working: false,
+              });
+              handleData();
+            }}
+            className=" bg-sky-400 px-5 py-2 rounded-xl text-white text-lg "
+          >
+            Add more
+          </button>
+        </div>
         <br />
-        <input type="submit" />
+        {/* <input type="submit" /> */}
       </form>
     </div>
   );

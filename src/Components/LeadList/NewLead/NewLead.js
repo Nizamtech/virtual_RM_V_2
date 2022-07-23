@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import axios from "axios";
 import { SuccessAlert } from "../../../Shared/Alert/SuccessAlert";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const NewLead = () => {
+  const { id } = useParams();
   const [profession, setProfession] = useState("");
   const [salaryType, setSalaryType] = useState("");
   const [status, setStatus] = useState("");
@@ -50,8 +51,6 @@ const NewLead = () => {
     };
     loadVRMAgent();
   }, []);
-
-  console.log(vrmAgentData);
 
   let instituteName = data?.map(function (item) {
     return { value: item?.name, label: item?.name };
@@ -102,6 +101,10 @@ const NewLead = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let vrmUser;
+    if (id) {
+      vrmUser = vrmAgentData?.find((item) => item?.id == id);
+    }
     const data = {
       ...selectedOption,
       profession: profession?.value,
@@ -110,7 +113,7 @@ const NewLead = () => {
       interested_bank: interestBank?.value,
       interested_product: interestProducts?.value,
       company_name: company?.value,
-      user: vrm?.value,
+      user: id ? vrmUser?.id : vrm?.value,
       // rental_income: 0,
       // yearly_transaction: 0,
       // yearlyTransaction: yearlyTransaction,
@@ -133,7 +136,7 @@ const NewLead = () => {
 
   return (
     <div className=" m-3 p-3 h-screen">
-      <div className="mx-2 w-full lg:w-1/2 ">
+      <div className="mx-2 w-full  flex justify-items-center justify-center">
         <form onSubmit={handleSubmit}>
           <label> Name</label>
           <input
@@ -265,14 +268,18 @@ const NewLead = () => {
             className="my-2"
           />
 
-          <label>VRM Agent</label>
-          <Select
-            required
-            name="vrmagent"
-            onChange={setVRM}
-            options={option2}
-            className="my-2"
-          />
+          {!id && (
+            <div>
+              <label>VRM Agent</label>
+              <Select
+                required
+                name="vrmagent"
+                onChange={setVRM}
+                options={option2}
+                className="my-2"
+              />
+            </div>
+          )}
           <button
             className="my-4 mx-auto w-60 text-white bg-[#3ac47d] border-[#3ac47d]  text-lg px-5 py-3 rounded-md font-exo flex justify-center items-center"
             type="submit"

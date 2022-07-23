@@ -30,7 +30,7 @@ const CreateUserForm = () => {
     await axios
       .post(`${process.env.REACT_APP_HOST_URL}/api/user/register/`, user)
       .then((response) => {
-        console.log(response);
+        console.log("userData", response);
         if (response.status === 201) {
           SuccessAlert("User Created", "success");
           router("/manageuser");

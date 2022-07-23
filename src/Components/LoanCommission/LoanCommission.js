@@ -74,7 +74,7 @@ const LoanCommission = ({ vrmUser, commission }) => {
         .then((result) => {
           if (result.status === 201) {
             SuccessAlert("Successfully Added", "success");
-            navigate(-1);
+            navigate("/lclist");
           }
         });
     }

@@ -47,13 +47,27 @@ function TestForm({ onSubmit, setTestData }) {
                 key={item.id}
                 className="grid grid-cols-5 place-content-center place-items-center"
               >
-                <input {...register(`cardComission.${index}.to`)} />
-                <input {...register(`cardComission.${index}.from`)} />
-                <input {...register(`cardComission.${index}.productType`)} />
+                <input
+                  {...register(`cardComission.${index}.to`)}
+                  className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                />
+                <input
+                  {...register(`cardComission.${index}.from`)}
+                  className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                />
+                <input
+                  {...register(`cardComission.${index}.productType`)}
+                  className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                />
                 {/* <input {...register(`cardComission.${index}.commission`)} /> */}
 
                 <Controller
-                  render={({ field }) => <input {...field} />}
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                    />
+                  )}
                   name={`cardComission.${index}.commission`}
                   control={control}
                 />

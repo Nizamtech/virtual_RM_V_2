@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import LeadListFilter from "./LeadListFilter";
-import LeadListTable from "./LeadListTable";
 
 import axios from "axios";
 import Swal from "sweetalert2";
+import LeadListFilter from "../LeadList/LeadListFilter";
+import LeadListTable from "../LeadList/LeadListTable";
 
-const LeadList = ({ vrmID, data }) => {
+const VRMLeads = ({ vrmID, data }) => {
   // const { id } = useParams();
   const [leadList, setLeadList] = useState([]);
   const [vrmAgent, setVrmAgent] = useState("");
@@ -24,12 +24,12 @@ const LeadList = ({ vrmID, data }) => {
     },
   ]);
 
-  const [api, setApi] = useState("api/lead");
+  const [api, setApi] = useState(`api/lead/?${vrmID && `user=${vrmID}`}`);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_URL}/${api}`)
       .then((response) => response.json())
       .then((data) => setLeadList(data));
-  }, [api]);
+  }, [api, vrmID]);
 
   const handleFilter = () => {
     const data = {
@@ -98,4 +98,4 @@ const LeadList = ({ vrmID, data }) => {
   );
 };
 
-export default LeadList;
+export default VRMLeads;

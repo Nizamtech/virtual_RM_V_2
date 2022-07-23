@@ -15,6 +15,7 @@ const LeadListFilter = ({
   handleFilter,
   setandSign,
   setMobile,
+  vrmID,
 }) => {
   const [ins, setIns] = useState([]);
   const [vrmAgentData, setVrmAgentData] = useState([]);
@@ -69,21 +70,29 @@ const LeadListFilter = ({
   const option2 = vrmAgentData?.map((item) => {
     return { value: item.id, label: item?.first_name + item?.last_name };
   });
+
+  console.log("vrmAgentData", vrmAgentData);
   return (
-    <div className=" flex  ">
+    <div>
       <div>
-        <div className=" grid grid-cols-6 gap-3 place-content-center place-items-center my-2 p-2 ">
-          <div className="w-full">
-            <h1 className=" ml-1 my-1 text-lg">VRM Agent</h1>
-            <Select
-              required
-              name="vrmAgent"
-              // onClick={handleSelect}
-              onChange={setVrmAgent}
-              options={option2}
-              className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
-            />
-          </div>
+        <div
+          className={`grid ${
+            vrmID ? "grid-cols-6" : "grid-cols-7"
+          }  gap-3 place-content-center place-items-center my-2 p-2 w-full`}
+        >
+          {!vrmID && (
+            <div className="w-full">
+              <h1 className=" ml-1 my-1 text-lg">VRM Agent</h1>
+              <Select
+                required
+                name="vrmAgent"
+                // onClick={handleSelect}
+                onChange={setVrmAgent}
+                options={option2}
+                className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
+              />
+            </div>
+          )}
           <div className="w-full">
             <h1 className=" ml-1 my-1 text-lg">Status</h1>
             <Select
@@ -132,13 +141,15 @@ const LeadListFilter = ({
 
             <RangeCalender />
           </div>
+          <div>
+            <button onClick={handleFilter} className="mt-8">
+              <h1 className=" bg-green-400 py-[10px] px-5 rounded-lg text-white font-bold">
+                Go
+              </h1>
+            </button>
+          </div>
         </div>
       </div>
-      <button onClick={handleFilter} className=" mt-12 right-12 absolute">
-        <h1 className=" bg-green-400 py-[10px] px-5 rounded-lg text-white font-bold">
-          Go
-        </h1>
-      </button>
     </div>
   );
 };

@@ -3,12 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { Router, useLocation, useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
+import TestForm2 from "../Test2/TestForm2";
 import EditCardCommission from "./EditCardCommission";
 
 const EditCardCommissionList = ({ specialData }) => {
   const { id } = useParams();
   const router = useNavigate();
-
+  const [testData, setTestData] = useState({});
+  const [d, setD] = useState([]);
   const [error, setError] = useState(false);
   const [cardCommissionData, setCardCommissionData] = useState([]);
   const [productTypeData, setProductTypeData] = useState([]);
@@ -17,35 +19,56 @@ const EditCardCommissionList = ({ specialData }) => {
   const [inputList, setInputList] = useState([
     { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
+
+  const handleData = () => {
+    setD([...d, testData?.cardComission]);
+  };
+
+  console.log("institute", institute);
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data;
 
-    // if (institute?.value) {
-    //   setError(false);
-    let API;
-    if (specialData) {
-      data = {
-        commission: [...cardType],
-        bank_name: institute || cardCommissionData?.bank_name,
-      };
-      API = `api/agent/commission`;
-    } else {
-      data = {
-        product_type: [...cardType],
-        bank_name: institute || cardCommissionData?.bank_name,
-      };
-      API = `api/card_commission`;
-    }
-    await axios
-      .put(`${process.env.REACT_APP_HOST_URL}/${API}/${id}/`, data)
-      .then((result) => {
-        if (result.status === 200) {
-          SuccessAlert("Successfully Update", "success");
-          router(-1);
-        } else SuccessAlert("Something Wrong", "error");
-      });
-    // } else setError(true);
+    // if (d.length > 0) {
+    //   const ddd = d.filter((item) => item);
+    //   console.log(ddd);
+    // }
+    // const data = {
+    //   commission: [...d, testData?.cardComission],
+    //   // bank_name: institute || cardCommissionData?.bank_name,
+    // };
+    // console.log(data);
+
+    if (institute) {
+      setError(false);
+      let API;
+      let ddd = {};
+      if (d.length > 0) {
+        ddd = d.filter((item) => item);
+      }
+      if (specialData) {
+        data = {
+          commission: [...cardType, ...ddd, testData?.cardComission],
+          bank_name: institute || cardCommissionData?.bank_name,
+        };
+        API = `api/agent/commission`;
+      } else {
+        data = {
+          product_type: [...cardType, ...ddd, testData?.cardComission],
+          bank_name: institute || cardCommissionData?.bank_name,
+        };
+        API = `api/card_commission`;
+      }
+      console.log("akdfjakfj", data);
+      await axios
+        .put(`${process.env.REACT_APP_HOST_URL}/${API}/${id}/`, data)
+        .then((result) => {
+          if (result.status === 200) {
+            SuccessAlert("Successfully Update", "success");
+            router(-1);
+          } else SuccessAlert("Something Wrong", "error");
+        });
+    } else setError(true);
   };
 
   return (
@@ -63,7 +86,7 @@ const EditCardCommissionList = ({ specialData }) => {
         setProductTypeData={setProductTypeData}
         specialData={specialData}
       />
-
+      <TestForm2 setTestData={setTestData} handleData={handleData} />
       <div className=" flex justify-between items-center ">
         <input
           onClick={handleSubmit}

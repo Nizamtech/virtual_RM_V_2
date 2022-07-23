@@ -76,9 +76,6 @@ function EditCardCommission({
     ]);
   };
 
-  console.log(cardCommissionData);
-
-  console.log(cardType);
   return (
     <div>
       <div>

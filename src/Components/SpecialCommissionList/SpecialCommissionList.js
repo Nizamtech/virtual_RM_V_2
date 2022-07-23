@@ -8,20 +8,20 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 const api = `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`;
 
 const SpecialCommissionList = ({ data }) => {
+  console.log("data", data);
   const [commissions, setCommission] = useState([]);
   const [value, setValue] = useState("all");
   const [api, setApi] = useState("api/agent/commission");
   useEffect(() => {
     if (data) {
       setCommission(data);
+      console.log("in", commissions);
     } else {
       axios.get(`${process.env.REACT_APP_HOST_URL}/${api}`).then((res) => {
         setCommission(res.data.results);
       });
     }
-  }, [data, api]);
-
-  console.log(commissions);
+  }, [data, api, commissions]);
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -33,7 +33,7 @@ const SpecialCommissionList = ({ data }) => {
     console.log(URL);
     setApi(URL);
   };
-  console.log(value);
+
   const deleteAlert = (api, id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -58,7 +58,7 @@ const SpecialCommissionList = ({ data }) => {
 
   return (
     <div className=" h-screen p-3 m-3">
-      <div className=" flex justify-between items-center mx-4">
+      <div className=" flex justify-between items-center mx-4 mt-5">
         <h1 className=" text-lg text-gray-500">Special Commission</h1>
         <select
           onChange={handleChange}

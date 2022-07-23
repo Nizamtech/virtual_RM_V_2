@@ -10,6 +10,7 @@ import LeadList from "../LeadList/LeadList";
 import LeadListTable from "../LeadList/LeadListTable";
 import PaymentStatusTable from "../PaymentStatus/PaymentStatusTable";
 import VRMCommissionList from "../VRMCommission/VRMCommissionList";
+import VRMLeads from "../VRMLeads/VRMLeads";
 import Tabs from "./Tabs";
 import VRMTab from "./VRMTab";
 import VRMTabCom from "./VRMTabCom";
@@ -42,7 +43,7 @@ const VRMAccount = () => {
     {
       id: "Leads",
       label: "Leads",
-      content: <LeadList />,
+      content: <VRMLeads vrmID={vrmID} data={vrmUser} />,
     },
     {
       id: "Commission",
@@ -71,8 +72,13 @@ const VRMAccount = () => {
               />
             </div>
             <div className=" mx-2">
-              <h1 className=" text-lg text-slate-900">{vrmUser?.username}</h1>
-              <h1 className=" text-sm text-gray-600">{vrmUser?.location}</h1>
+              <h1 className=" text-lg text-slate-900">
+                {vrmUser?.first_name + " " + vrmUser?.last_name}
+              </h1>
+              <h1 className=" text-sm text-gray-600">
+                {/* {vrmUser?.location} */}
+                Dhaka, Banani
+              </h1>
               <div className=" flex  items-center ">
                 <h1>{vrmUser?.status_name}</h1>
                 {/* <h1 className="ml-2 w-2 h-2 rounded-full bg-green-500 border-green-500 ring-1 ring-green-300 "></h1> */}

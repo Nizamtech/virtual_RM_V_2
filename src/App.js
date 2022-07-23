@@ -95,9 +95,11 @@ function App() {
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />
             <Route path="/account" element={<Account />} />
             <Route path="/leadlist" element={<LeadList />} />
+            {/* <Route path="/leadlist/:leadID" element={<LeadList />} /> */}
             <Route path="/leadlist/:id" element={<EditLeadList />} />
             <Route path="/newagent" element={<Agent />} />
             <Route path="/newlead" element={<NewLead />} />
+            <Route path="/newlead/:id" element={<NewLead />} />
             <Route path="/paymentstatus" element={<PaymentStatus />} />
             <Route path="/paymenthistory/:id" element={<PaymentHistory />} />
             <Route path="/feature" element={<Feature />} />

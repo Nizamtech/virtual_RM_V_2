@@ -56,9 +56,9 @@ const Account = ({ data }) => {
   }, []);
 
   const statusData = [
-    { label: "Active", value: "Active" },
-    { label: "Hold", value: "Hold" },
-    { label: "suspense", value: "suspense" },
+    { label: "Active", value: 1 },
+    { label: "Hold", value: 2 },
+    { label: "Suspend", value: 3 },
   ];
   const handlechange = (e) => {
     const { name, value } = e.target;

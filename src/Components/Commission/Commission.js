@@ -7,28 +7,28 @@ import VRMCommissionList from "../VRMCommission/VRMCommissionList";
 const Commission = ({ data }) => {
   const [commissions, setCommission] = useState([]);
 
-  console.log(data?.id);
   useEffect(() => {
     axios
       .get(
         `${process.env.REACT_APP_HOST_URL}/api/agent/commission/?agent=${data?.id}`
       )
       .then((res) => {
-        console.log("commission", res);
         setCommission(res.data.results);
       });
   }, [data?.id]);
 
   return (
-    <div className=" h-screen overflow-scroll m-3 p-3">
-      <Link
-        to={`/specialcommission/${data?.id}`}
-        className=" bg-green-400 float-right right-10 relative py-2 px-4 text-white rounded-lg"
-      >
-        Add special Commission
-      </Link>
+    <div className=" h-screen overflow-scroll m-3 p-3 ">
+      <div className=" mb-4">
+        <Link
+          to={`/specialcommission/${data?.id}`}
+          className=" bg-green-400 float-right right-10 relative py-2 px-4 text-white rounded-lg "
+        >
+          Add special Commission
+        </Link>
+      </div>
       <div className=" mt-5">
-        {commissions.length > 0 ? (
+        {commissions ? (
           <SpecialCommissionList data={commissions} />
         ) : (
           <h1 className=" text-2xl text-red-500 grid place-content-center place-items-center">

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { userData } from "../../MockData/userData";
 import UserTable from "./UserTable";
 import { useParams } from "react-router-dom";
 import EditUser from "./EditUser";
-import UserForm from "../CreateUser/UserForm";
-import CreateUser from "../CreateUser/CreateUser";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -50,7 +47,7 @@ const ManageUser = () => {
           .then((res) => {
             if (res.status === 204) {
               const singleUser = users?.filter((item) => item?.id !== id);
-              console.log(singleUser);
+
               setUsers(singleUser);
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
             }

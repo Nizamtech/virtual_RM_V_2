@@ -19,7 +19,7 @@ const EditTeam = () => {
     }
     if (!checked) {
       const restData = singleTeam.filter((item) => item !== parseInt(name));
-      console.log("filter data", restData);
+
       setSingleTeam(restData);
     }
     // if (name === "allSelect") {
@@ -72,11 +72,10 @@ const EditTeam = () => {
       permissions: singleTeam,
       description: description || singlePermission?.name,
     };
-    console.log(data);
+
     axios
       .patch(`${process.env.REACT_APP_HOST_URL}/api/team/${id}/`, data)
       .then((response) => {
-        console.log(response);
         if (response.status === 200) {
           SuccessAlert("Team Permission Updated", "success");
           router(-1);

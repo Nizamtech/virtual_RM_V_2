@@ -18,49 +18,35 @@ const ViewUser = () => {
     loadUser();
   }, [id]);
 
+  console.log(user);
   return (
     <div className=" h-screen m-3 p-3 ">
-      <div className="grid place-items-center">
-        <div className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+      <div className="grid place-content-center place-items-center max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div className="flex justify-end px-4 pt-4"></div>
+        <div className="flex flex-col items-center pb-10">
           <img
-            className="object-cover w-full h-[390px] rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-            src="https://flowbite.com/docs/images/blog/image-4.jpg"
-            alt=""
+            className="mb-3 w-24 h-24 rounded-full shadow-lg"
+            src="https://images.unsplash.com/photo-1474176857210-7287d38d27c6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+            alt="Bonnie image"
           />
-          <div className="flex flex-col justify-between leading-normal w-96">
-            <div className=" p-4 w-full">
-              <div>
-                <h1 className=" text-gray-400 text-sm ">User Name</h1>
-                <h1 className=" text-sky-400 text-lg leading-none">
-                  {user?.username}{" "}
-                </h1>
-              </div>
-              <div className=" mt-2">
-                <h1 className=" text-gray-400 text-sm">Email</h1>
-                <h1 className=" text-sky-400 text-lg leading-none">
-                  {user?.email}{" "}
-                </h1>
-              </div>
-              <div className=" mt-2">
-                <h1 className=" text-gray-400 text-sm">Phone</h1>
-                <h1 className=" text-sky-400 text-lg leading-none">
-                  {user?.phone}{" "}
-                </h1>
-              </div>
-              <div className=" mt-2">
-                <h1 className=" text-gray-400 text-sm">Team Name</h1>
-                <h1 className=" text-sky-400 text-lg leading-none">
-                  {user?.team || "N/A"}{" "}
-                </h1>
-              </div>
-              <div className=" mt-2">
-                <p className=" text-gray-400 text-sm">Joining Date</p>
-                <p className=" text-sky-400 text-lg leading-none">
-                  {user?.created_at}{" "}
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+            {user?.first_name + " " + user?.last_name}
+          </h5>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            User: {user?.username}
+          </span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Email: {user?.email}
+          </span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Phone: {user?.phone}
+          </span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Joined: {user?.created_at}
+          </span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            Team Name: {user?.team || "N/A"}
+          </span>
         </div>
       </div>
     </div>

@@ -15,8 +15,6 @@ const VRMList = () => {
   }, []);
 
   const deleteAlert = (api, id) => {
-    console.log(api + id);
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -37,7 +35,7 @@ const VRMList = () => {
       }
     });
   };
-  console.log(users);
+
   return (
     <div className=" h-screen p-3 m2">
       <VrmListTable deleteAlert={deleteAlert} users={users} />
