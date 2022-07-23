@@ -13,6 +13,8 @@ function EditCardCommission({
   setProductTypeData,
   productTypeData,
   specialData,
+  setExpireDate,
+  status,
 }) {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -108,6 +110,25 @@ function EditCardCommission({
             <label className=" text-red-400 my-1">Select Institute</label>
           )}
         </div>
+        {status && (
+          <div className=" mt-2 mb-4">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-first-name"
+            >
+              Expire Date
+            </label>
+
+            <input
+              type="date"
+              onChange={(e) => {
+                setExpireDate(e?.target?.value);
+              }}
+              className=" h-12 p-2 w-full"
+              name="expire_date"
+            />
+          </div>
+        )}
         <div className=" grid grid-cols-5 bg-black text-white py-2 px-3 font-bold uppercase place-items-center">
           <div>
             <h1> Card Type</h1>

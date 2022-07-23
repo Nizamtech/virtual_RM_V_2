@@ -14,9 +14,12 @@ const LoanCommission = ({ vrmUser, commission }) => {
   const [commissionn, setCommission] = useState(0);
 
   useEffect(() => {
-    fetch("https://admin.aamartaka.com/api/v1/institutes/")
+    fetch("https://admin.aamartaka.com/api/v1/loans/institutes/")
       .then((response) => response.json())
-      .then((res) => setInst(res.results));
+      .then((res) => {
+        const data = res?.filter((item) => item?.is_partner === true);
+        setInst(data);
+      });
   }, []);
 
   useEffect(() => {

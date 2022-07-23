@@ -8,10 +8,10 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 const api = `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`;
 
 const SpecialCommissionList = ({ data }) => {
-  console.log("data", data);
   const [commissions, setCommission] = useState([]);
   const [value, setValue] = useState("all");
   const [api, setApi] = useState("api/agent/commission");
+
   useEffect(() => {
     if (data) {
       setCommission(data);
@@ -21,7 +21,7 @@ const SpecialCommissionList = ({ data }) => {
         setCommission(res.data.results);
       });
     }
-  }, [data, api, commissions]);
+  }, [data, api]);
 
   const handleChange = (e) => {
     const { value } = e.target;

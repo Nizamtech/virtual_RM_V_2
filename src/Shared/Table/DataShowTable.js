@@ -51,7 +51,8 @@ const DataShowTable = ({ item, handleDelete }) => {
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                        {team?.created_by}
+                        {/* {team?.created_by} */}
+                        Super Admin
                       </span>
                     </td>
 

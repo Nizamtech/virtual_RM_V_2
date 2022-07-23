@@ -15,13 +15,14 @@ const CardCommission = ({ vrmUser, commission }) => {
   ]);
 
   useEffect(() => {
-    fetch("https://admin.aamartaka.com/api/v1/institutes/")
+    fetch("https://admin.aamartaka.com/api/v1/loans/institutes/")
       .then((response) => response.json())
       .then((res) => {
-        const rest = res.results;
+        const data = res?.filter((item) => item?.is_partner === true);
+        // const rest = res.results;
         // const result = rest.filter((item) => item.is_partner === true);
         // console.log(result);
-        setData(rest);
+        setData(data);
       });
   }, []);
 

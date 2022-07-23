@@ -6,10 +6,11 @@ import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import TestForm2 from "../Test2/TestForm2";
 import EditCardCommission from "./EditCardCommission";
 
-const EditCardCommissionList = ({ specialData }) => {
+const EditCardCommissionList = ({ status, specialData }) => {
   const { id } = useParams();
   const router = useNavigate();
   const [testData, setTestData] = useState({});
+  const [expireDate, setExpireDate] = useState("");
   const [d, setD] = useState([]);
   const [error, setError] = useState(false);
   const [cardCommissionData, setCardCommissionData] = useState([]);
@@ -85,6 +86,8 @@ const EditCardCommissionList = ({ specialData }) => {
         productTypeData={productTypeData}
         setProductTypeData={setProductTypeData}
         specialData={specialData}
+        setExpireDate={setExpireDate}
+        status={status}
       />
       <TestForm2 setTestData={setTestData} handleData={handleData} />
       <div className=" flex justify-between items-center ">

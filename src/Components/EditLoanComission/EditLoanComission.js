@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import { useNavigate } from "react-router-dom";
-const EditLoanComission = ({ specialData }) => {
+const EditLoanComission = ({ status, specialData }) => {
   const [loanCommission, setLoanCommission] = useState([]);
   const { id } = useParams();
 
@@ -15,6 +15,7 @@ const EditLoanComission = ({ specialData }) => {
   const [loan_name, setLoanName] = useState("");
   const [from_range, setFrom] = useState(0);
   const [to_range, setTo] = useState(0);
+  const [expireDate, setExpireDate] = useState("");
   const [commissionn, setCommission] = useState(0);
 
   useEffect(() => {
@@ -121,6 +122,25 @@ const EditLoanComission = ({ specialData }) => {
               ))}
           </select>
         </div>
+        {status && (
+          <div className=" mt-2 mb-4">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-first-name"
+            >
+              Expire Date
+            </label>
+
+            <input
+              type="date"
+              onChange={(e) => {
+                setExpireDate(e?.target?.value);
+              }}
+              className=" h-12 p-2 w-full"
+              name="expire_date"
+            />
+          </div>
+        )}
         <div className="sm:rounded-lg  mt-3 h-screen  ">
           <table className=" min-w-full text-sm text-left text-gray-500 dark:text-gray-400  ">
             <thead className="text-xs  uppercase bg-slate-800 text-white dark:bg-gray-700 dark:text-gray-400">

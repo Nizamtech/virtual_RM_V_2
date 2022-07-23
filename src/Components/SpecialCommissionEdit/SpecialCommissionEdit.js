@@ -21,17 +21,18 @@ const SpecialCommissionEdit = () => {
   console.log(id, specialCommission);
   return (
     <div className="  h-screen m- p-3">
-      <h1> SpecialCommissionEdit</h1>
-
       {specialCommission?.product === 1 && (
         <div>
-          <EditCardCommissionList specialData={specialCommission} />
+          <EditCardCommissionList
+            status={true}
+            specialData={specialCommission}
+          />
         </div>
       )}
 
       {specialCommission?.product === 2 && (
         <div>
-          <EditLoanComission specialData={specialCommission} />
+          <EditLoanComission status={true} specialData={specialCommission} />
         </div>
       )}
     </div>
