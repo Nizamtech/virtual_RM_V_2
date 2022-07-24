@@ -178,3 +178,15 @@ details > summary::-webkit-details-marker {
   border: none;
   padding: 20px;
 }
+.anim {
+  animation: slide-from-bottom 0.8s ease-in-out;
+}
+@keyframes slide-from-bottom {
+  0% {
+    margin-bottom: -50%;
+  }
+  100% {
+    justify-content: center;
+    justify-items: center;
+  }
+}
