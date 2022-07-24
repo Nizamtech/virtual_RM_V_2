@@ -27,13 +27,13 @@ const LeadListFilter = ({
 
   useEffect(() => {
     const laodIns = () => {
-      fetch("https://admin.aamartaka.com/api/v1/institutes/")
+      fetch("https://admin.aamartaka.com/api/v1/loans/institutes/")
         .then((response) => response.json())
         .then((res) => {
-          const rest = res.results;
-          // const result = rest.filter((item) => item.is_partner === true);
+          // const rest = res.results;
+          const result = res.filter((item) => item.is_partner === true);
           // console.log(result);
-          setIns(rest);
+          setIns(result);
         });
     };
     const loadVRMAgent = () => {

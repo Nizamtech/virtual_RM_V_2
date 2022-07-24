@@ -73,8 +73,11 @@ const PaymentHistoryTable = ({ data }) => {
                   Total Disversement Time
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Action
+                  Status
                 </th>
+                {/* <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  Action
+                </th> */}
               </tr>
             </thead>
 
@@ -119,6 +122,11 @@ const PaymentHistoryTable = ({ data }) => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                      <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                        {item?.status}
+                      </span>
+                    </td>
+                    {/* <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
                         <button
                           onClick={() => {
@@ -129,7 +137,7 @@ const PaymentHistoryTable = ({ data }) => {
                           Payment Confirmation
                         </button>
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
             </tbody>

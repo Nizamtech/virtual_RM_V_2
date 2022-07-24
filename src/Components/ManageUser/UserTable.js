@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { deleteAlert } from "../../Shared/Alert/deleteAlert";
 import { Link } from "react-router-dom";
+import UserModal from "./UserModal";
 const UserTable = ({ data, deleteAlert }) => {
-  console.log(data);
+  const [showModal, setShowModal] = useState(false);
+  const [id, setId] = useState(null);
+  const [name, setName] = useState(null);
+  const handleShow = (id, item) => {
+    setId(id);
+    setName(item?.first_name + "" + item?.last_name);
+  };
   return (
     <div className="flex flex-col mt-8">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -79,9 +86,16 @@ const UserTable = ({ data, deleteAlert }) => {
                     </td>
 
                     <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                      <Link to={`/vieweuser/${item?.id}`}>
+                      <buttion
+                        onClick={() => {
+                          handleShow(item?.id, item);
+                          setShowModal(true);
+                        }}
+                        //  to={`/vieweuser/${item?.id}`}
+                      >
                         <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
-                      </Link>
+                      </buttion>
+
                       <Link to={`/manageuser/${item?.id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -115,6 +129,13 @@ const UserTable = ({ data, deleteAlert }) => {
                         </svg>
                       </button>
                     </td>
+                    <UserModal
+                      showModal={showModal}
+                      setShowModal={setShowModal}
+                      // data={item}
+                      name={name}
+                      id={id}
+                    />
                   </tr>
                 ))}
             </tbody>

@@ -151,7 +151,7 @@ function EditCardCommission({
             return (
               <div className=" grid grid-cols-5 bg-white mb-2">
                 <select
-                  className="border border-gray-300 mr-2 my-2 rounded"
+                  className="border border-gray-300 mr-2 my-2 rounded "
                   onChange={(e) => handleInputChange(e, i)}
                   name="product_type"
                   id="cars"
@@ -171,7 +171,7 @@ function EditCardCommission({
                 </select>
 
                 <input
-                  className="ml10 p-2 border border-gray-300 mr-2 my-2 rounded "
+                  className="ml-10 p-2 border border-gray-300 mr-2 my-2 rounded "
                   type="number"
                   onInput={(e) => {
                     if (e.target.value.length > e.target.maxLength)
@@ -194,7 +194,7 @@ function EditCardCommission({
                   ))}
                 </datalist>
                 <input
-                  className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                  className="ml-10 p-2  border border-gray-300 mr-2 my-2 rounded"
                   type="number"
                   onInput={(e) => {
                     if (e.target.value.length > e.target.maxLength)
@@ -225,7 +225,7 @@ function EditCardCommission({
                       );
                   }}
                   maxlength="3"
-                  className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                  className="ml-10 p-2  border border-gray-300 mr-2 my-2 rounded"
                   name="commission"
                   placeholder="Enter Commission"
                   value={x.commission}

@@ -44,6 +44,7 @@ import CardCommissionCardView from "./Components/CardCommissionCardView/CardComm
 import LoanCommissionView from "./Components/LoanCommissionView/LoanCommissionView";
 import SubmittedLead from "./Components/SubmittedLead/SubmittedLead";
 import SubmittedLeadView from "./Components/SubmittedLead/SubmittedLeadView";
+import PaymentRequest from "./Components/PaymentRequest/PaymentRequest";
 
 function App() {
   const { token, user_data } = useSelector((state) => state.reducer.user);
@@ -101,6 +102,7 @@ function App() {
             <Route path="/newlead" element={<NewLead />} />
             <Route path="/newlead/:id" element={<NewLead />} />
             <Route path="/paymentstatus" element={<PaymentStatus />} />
+            <Route path="/paymentrequest" element={<PaymentRequest />} />
             <Route path="/paymenthistory/:id" element={<PaymentHistory />} />
             <Route path="/feature" element={<Feature />} />
             <Route path="/addfeature" element={<AddFeature />} />

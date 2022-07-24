@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, useFieldArray, Controller, useWatch } from "react-hook-form";
 import ReactDOM from "react-dom";
 
@@ -8,7 +8,7 @@ import { addMoreFuncton } from "../../Redux/Slices/userSlice";
 import { useState } from "react";
 
 function TestForm({ onSubmit, setTestData }) {
-  const dispatch = useDispatch();
+  const [cardTypeData, setCardTypeData] = useState([]);
   // dispatch(addMoreFuncton(testData));
 
   const { register, control, handleSubmit, reset, watch, getValues } = useForm({
@@ -29,6 +29,12 @@ function TestForm({ onSubmit, setTestData }) {
       name: "cardComission",
     });
 
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_HOST_URL}/benefit/card_type/`)
+      .then((response) => response.json())
+      .then((data) => setCardTypeData(data?.results));
+  }, []);
+
   function handleChange() {
     const data = getValues();
     // console.log(data);
@@ -45,27 +51,44 @@ function TestForm({ onSubmit, setTestData }) {
             return (
               <li
                 key={item.id}
-                className="grid grid-cols-5 place-content-center place-items-center"
+                className="grid gap-6 grid-cols-5 place-content-center place-items-center"
               >
-                <input
-                  {...register(`cardComission.${index}.to`)}
-                  className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
-                />
+                <select
+                  {...register(`cardComission.${index}.from`)}
+                  className="ml-10 p-2  border border-gray-300 mr-2 my-2 rounded w-full"
+                  name="product_type"
+                  id="cars"
+                >
+                  <option defaultValue="Select" value="Select">
+                    select
+                  </option>
+                  {cardTypeData &&
+                    cardTypeData.map((item) => (
+                      <option defaultValue={item?.name} value={item?.name}>
+                        {item?.name}
+                      </option>
+                    ))}
+                </select>
                 <input
                   {...register(`cardComission.${index}.from`)}
-                  className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                  className="mx-10 p-2  border border-gray-300 mr-2 my-2 rounded w-full"
                 />
                 <input
-                  {...register(`cardComission.${index}.productType`)}
-                  className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                  {...register(`cardComission.${index}.to`)}
+                  className="mx-10 p-2  border border-gray-300 mr-2 my-2 rounded w-full"
                 />
+
+                {/* <input
+                  {...register(`cardComission.${index}.productType`)}
+                  className="mx-10 p-2  border border-gray-300 mr-2 my-2 rounded "
+                /> */}
                 {/* <input {...register(`cardComission.${index}.commission`)} /> */}
 
                 <Controller
                   render={({ field }) => (
                     <input
                       {...field}
-                      className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
+                      className="mx-10 p-2  border border-gray-300 mr-2 my-2 rounded w-full"
                     />
                   )}
                   name={`cardComission.${index}.commission`}
