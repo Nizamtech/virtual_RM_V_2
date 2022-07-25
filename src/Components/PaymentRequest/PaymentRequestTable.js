@@ -1,49 +1,6 @@
 import React, { useState } from "react";
 import PaymentModal from "../PaymentStatus/PaymentModal/PaymentModal";
 
-const mockData = [
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-];
-
 const PaymentRequestTable = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState(null);
@@ -51,6 +8,7 @@ const PaymentRequestTable = ({ data }) => {
   const handleRequestMoney = (id) => {
     setId(id);
   };
+  console.log(data);
   return (
     <div className="flex flex-col mt-8">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">

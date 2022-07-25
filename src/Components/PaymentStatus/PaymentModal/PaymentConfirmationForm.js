@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const PaymentConfirmationForm = ({
@@ -10,27 +11,58 @@ const PaymentConfirmationForm = ({
   data,
 }) => {
   const router = useNavigate();
+  const [paymentReqData, setPaymentReqData] = useState({});
   const [transactionId, setTransactionId] = useState(null);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    setPaymentReqData(data);
+  }, [id, data]);
+
+  console.log(id, paymentReqData);
   const handleChange = (e) => {
     const { name } = e.target;
     console.log(name);
     if (name === "transactionId") {
       setTransactionId(e.target.value);
     }
+    if (e.target.files && e.target.files[0]) {
+      let img = e.target.files[0];
+      setImage(img);
+    }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    let newData;
+
     const loadData = async () => {
-      const newData = {
-        status: status,
-        Transaction_ID: transactionId,
+      if (transactionId) {
+        newData = {
+          status: status,
+          transaction_id: transactionId,
+        };
+      }
+      if (image) {
+        newData = new FormData();
+        newData.append("pay_slip", image);
+        newData.append("status", status);
+      }
+
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
       };
+
       const res = await axios.patch(
         `${process.env.REACT_APP_HOST_URL}/api/payment/${id}/`,
-        newData
+        newData,
+        `${image && config}`
       );
       if (res.status === 200) {
         setStatus(null);
+        setPaymentReqData(data);
         router("/paymentstatus");
       }
       console.log(res);
@@ -58,8 +90,8 @@ const PaymentConfirmationForm = ({
 
       {/* mobile Banking  */}
       {status === "Confirm" &&
-        (data?.request_method?.payment_method === "bkash" ||
-          data?.request_method?.payment_method === "Nagad") && (
+        (paymentReqData?.request_method?.payment_method === "bkash" ||
+          paymentReqData?.request_method?.payment_method === "Nagad") && (
           <div className=" mt-2">
             <div className=" my-2">
               <div className=" mb-3">
@@ -68,10 +100,10 @@ const PaymentConfirmationForm = ({
                 </h1>
                 <span>
                   <span className=" px-3  py-1 rounded bg-green-400 my-2 text-white">
-                    {data?.request_method?.payment_method}
+                    {paymentReqData?.request_method?.payment_method}
                   </span>
                   <span className="mx-4">
-                    {data?.request_method?.mobile_number}
+                    {paymentReqData?.request_method?.mobile_number}
                   </span>
                 </span>
               </div>
@@ -90,49 +122,50 @@ const PaymentConfirmationForm = ({
           </div>
         )}
       {/* bank  */}
-      {status === "Confirm" && data?.request_method?.payment_method === "Bank" && (
-        <div className="mt-3 ">
-          <div className=" my-2">
-            <div className=" mb-3">
-              <h1 className=" block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
-                Payment Method{" "}
+      {status === "Confirm" &&
+        paymentReqData?.request_method?.payment_method === "Bank" && (
+          <div className="mt-3 ">
+            <div className=" my-2">
+              <div className=" mb-3">
+                <h1 className=" block mb-2 text-base font-medium text-gray-900 dark:text-gray-400">
+                  Payment Method{" "}
+                </h1>
+                <span className=" px-3  py-1 rounded bg-green-400 my-2 text-white">
+                  {paymentReqData?.request_method?.payment_method}
+                </span>
+              </div>
+              <h1>
+                <span className=" font-bold "> Account Holder Name:</span>{" "}
+                {paymentReqData?.request_method?.Account_Holder_Name}{" "}
               </h1>
-              <span className=" px-3  py-1 rounded bg-green-400 my-2 text-white">
-                {data?.request_method?.payment_method}
-              </span>
+              <h1>
+                <span className=" font-bold ">Bank Name:</span>{" "}
+                {paymentReqData?.request_method?.bank_name}{" "}
+              </h1>
+              <h1>
+                <span className=" font-bold "> Bank Account Number:</span>{" "}
+                {paymentReqData?.request_method?.Bank_Account_Number}{" "}
+              </h1>
+              <h1>
+                <span className=" font-bold "> Branch Name: </span>{" "}
+                {paymentReqData?.request_method?.Branch_Name}{" "}
+              </h1>
             </div>
-            <h1>
-              <span className=" font-bold "> Account Holder Name:</span>{" "}
-              {data?.request_method?.Account_Holder_Name}{" "}
-            </h1>
-            <h1>
-              <span className=" font-bold ">Bank Name:</span>{" "}
-              {data?.request_method?.bank_name}{" "}
-            </h1>
-            <h1>
-              <span className=" font-bold "> Bank Account Number:</span>{" "}
-              {data?.request_method?.Bank_Account_Number}{" "}
-            </h1>
-            <h1>
-              <span className=" font-bold "> Branch Name: </span>{" "}
-              {data?.request_method?.Brnach_Name}{" "}
-            </h1>
+            <label
+              for="formFile"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Pay Slip Upload
+            </label>
+            <input
+              name="paySlip"
+              onChange={handleChange}
+              className="form-control  block w-full  px-3py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
+              type="file"
+              id="formFile"
+            />
           </div>
-          <label
-            for="formFile"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Pay Slip Upload
-          </label>
-          <input
-            name="paySlip"
-            onChange={handleChange}
-            className="form-control  block w-full  px-3py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-            type="file"
-            id="formFile"
-          />
-        </div>
-      )}
+        )}
       {status === "Confirm" && (
         <button
           type="submit"
