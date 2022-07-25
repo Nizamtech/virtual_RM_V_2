@@ -45,6 +45,7 @@ import LoanCommissionView from "./Components/LoanCommissionView/LoanCommissionVi
 import SubmittedLead from "./Components/SubmittedLead/SubmittedLead";
 import SubmittedLeadView from "./Components/SubmittedLead/SubmittedLeadView";
 import PaymentRequest from "./Components/PaymentRequest/PaymentRequest";
+import Test1 from "./Components/Test1/Test1";
 
 function App() {
   const { token, user_data } = useSelector((state) => state.reducer.user);
@@ -127,6 +128,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test" element={<TestCardComission />} />
+            <Route path="/test1" element={<Test1 />} />
           </Routes>
         </Layout>
       </div>

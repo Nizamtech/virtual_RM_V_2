@@ -1,9 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { cardType } from "../../Redux/Slices/userSlice";
 import Modal from "../../Shared/Modal/Modal";
 
 const Dashboard = () => {
+  const daataa = useSelector((state) => state.reducer.card_type);
+  const dispatch = useDispatch();
+
+  console.log(daataa);
+
   const [showModal, setShowModal] = useState(false);
   // const handleClose = () => setShowModal(false);
   // const handleShow = () => setShowModal(true);
@@ -18,7 +24,7 @@ const Dashboard = () => {
       <h1>This is Dashboard</h1>
       <button
         onClick={() => {
-          setShowModal(true);
+          dispatch(cardType(5));
         }}
       >
         Showwww

@@ -4,6 +4,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const api = `${process.env.REACT_APP_HOST_URL}/api/lead/`;
 const LeadListTable = ({ data, deleteAlert }) => {
+  console.log(data);
   return (
     <div className="flex flex-col mt-8 ">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -85,7 +86,7 @@ const LeadListTable = ({ data, deleteAlert }) => {
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500 ">
                         <h1 className=" bg-green-300 m-1 p-1 rounded">
-                          {item?.interested_product}
+                          {item?.interested_product_name}
                         </h1>
                       </div>
                     </td>

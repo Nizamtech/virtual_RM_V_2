@@ -23,7 +23,7 @@ const LeadList = ({ vrmID, data }) => {
       key: "selection",
     },
   ]);
-
+  console.log(productType);
   const [api, setApi] = useState("api/lead");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_URL}/${api}`)
