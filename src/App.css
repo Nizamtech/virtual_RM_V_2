@@ -178,3 +178,26 @@ details > summary::-webkit-details-marker {
   border: none;
   padding: 20px;
 }
+.anim {
+  animation: slide-from-bottom 0.8s ease-in-out;
+}
+@keyframes slide-from-bottom {
+  0% {
+    margin-bottom: -50%;
+  }
+  100% {
+    justify-content: center;
+    justify-items: center;
+  }
+}
+input[type="file"] {
+  display: inline-block;
+
+  cursor: pointer;
+}
+input::file-selector-button {
+  border: 0.5px solid #ccc;
+  color: rgb(148, 146, 146);
+  padding: 0.5em;
+  border-radius: 3px;
+}

@@ -1,14 +1,31 @@
 import React, { useEffect, useState } from "react";
-function CardCommissionTest({ inputList, setInputList }) {
+import { useDispatch, useSelector } from "react-redux";
+import { loadCardDataFunc } from "../../../lib/LoadCardData";
+import { cardType } from "../../../Redux/Slices/userSlice";
+function CardCommissionTest({
+  inputList,
+  setInputList,
+  institute,
+  setBankName,
+}) {
   // const [data, setData] = useState([]);
 
   const [cardTypeData, setCardTypeData] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_HOST_URL}/benefit/card_type/`)
-      .then((response) => response.json())
-      .then((data) => setCardTypeData(data?.results));
-  }, []);
+    // fetch(`${process.env.REACT_APP_HOST_URL}/benefit/card_type/`)
+    //   .then((response) => response.json())
+    //   .then((data) => setCardTypeData(data?.results));
+    loadCardDataFunc(institute).then((res) => {
+      const rest = res?.data?.results;
+      const instName = rest.find((item) => item?.name);
+      setBankName(instName?.institute_name);
+      const filter = rest.map((item) => {
+        return item.name;
+      });
+      setCardTypeData(filter);
+    });
+  }, [institute]);
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -74,8 +91,8 @@ function CardCommissionTest({ inputList, setInputList }) {
                 <option value="">Select </option>
                 {cardTypeData &&
                   cardTypeData.map((item) => (
-                    <option defaultValue={item?.name} value={item?.name}>
-                      {item?.name}
+                    <option defaultValue={item} value={item}>
+                      {item}
                     </option>
                   ))}
               </select>

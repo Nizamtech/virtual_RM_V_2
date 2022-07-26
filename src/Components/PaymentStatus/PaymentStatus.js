@@ -9,7 +9,7 @@ const PaymentStatus = () => {
   useEffect(() => {
     const loadData = async () => {
       const res = await axios.get(
-        `${process.env.REACT_APP_HOST_URL}/api/payment/`
+        `${process.env.REACT_APP_HOST_URL}/api/payment/?status=Confirm`
       );
       setData(res?.data?.results);
     };

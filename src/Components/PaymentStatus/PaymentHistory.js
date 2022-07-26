@@ -16,7 +16,7 @@ const PaymentHistory = () => {
     };
     loadData();
   }, [id]);
-  console.log(data);
+  console.log("pament History", data);
   return (
     <div className=" h-screen m-3 p-3">
       <PaymentHistoryTable data={data} />

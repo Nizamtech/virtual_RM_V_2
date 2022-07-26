@@ -201,6 +201,19 @@ const Sidebar = () => {
 
           <li>
             <NavLink
+              to="/paymentrequest"
+              className={`${
+                loccation.pathname.includes("paymentrequest") && "activeLink"
+              } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+            >
+              <FaMoneyCheck size={30} />
+              <span className="flex-1 ml-3 text-base font-normal ">
+                Payment Request
+              </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/paymentstatus"
               className={`${
                 loccation.pathname.includes("paymentstatus") && "activeLink"
@@ -208,7 +221,7 @@ const Sidebar = () => {
             >
               <FaMoneyCheck size={30} />
               <span className="flex-1 ml-3 text-base font-normal ">
-                Payment Status
+                Payment Details
               </span>
             </NavLink>
           </li>
@@ -257,6 +270,17 @@ const Sidebar = () => {
               <span className="flex-1 ml-3 text-base font-normal ">
                 Special Commission
               </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/test1"
+              className={`${
+                loccation.pathname.includes("test1") && "activeLink"
+              } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+            >
+              <GiPayMoney size={30} />
+              <span className="flex-1 ml-3 text-base font-normal ">Test</span>
             </NavLink>
           </li>
 

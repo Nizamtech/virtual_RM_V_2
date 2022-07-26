@@ -64,10 +64,11 @@ const NewLead = () => {
   });
 
   const options = [
-    { value: "Personal Loan", label: "Personal Loan" },
-    { value: "Car Loan", label: "Car Loan" },
-    { value: "Home Loan", label: "Home Loan" },
-    { value: "Credit Cart", label: "Credit Cart" },
+    { value: 1, label: "Credit Card" },
+    { value: 2, label: "Personal Loan" },
+    { value: 3, label: "Home Loan" },
+    { value: 4, label: "Car Loan" },
+    { value: 4, label: "Land Loan" },
   ];
   const professionData = [
     { value: "salaried", label: "Salaried" },
@@ -112,6 +113,7 @@ const NewLead = () => {
       status: status?.value,
       interested_bank: interestBank?.value,
       interested_product: interestProducts?.value,
+      // interested_product_name: interestProducts?.value || "",
       company_name: company?.value,
       user: id ? vrmUser?.id : vrm?.value,
       // rental_income: 0,
@@ -128,6 +130,7 @@ const NewLead = () => {
           SuccessAlert("Lead Created Successfully", "success");
           router(-1);
         } else {
+          console.log(result);
           SuccessAlert("Something Wrong", "error");
           router(-1);
         }

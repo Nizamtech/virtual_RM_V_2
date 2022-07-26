@@ -10,10 +10,12 @@ const CardCommission = ({ vrmUser, commission }) => {
   const [institute, setInstitute] = useState(null);
   const [error, setError] = useState(false);
   const [data, setData] = useState([]);
+  const [bankName, setBankName] = useState("");
   const [inputList, setInputList] = useState([
     { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
 
+  console.log(institute);
   useEffect(() => {
     fetch("https://admin.aamartaka.com/api/v1/loans/institutes/")
       .then((response) => response.json())
@@ -31,7 +33,7 @@ const CardCommission = ({ vrmUser, commission }) => {
 
     const data = {
       product_type: [...inputList],
-      bank_name: institute,
+      bank_name: bankName,
     };
     if (vrmUser?.id) {
       console.log("innnn");
@@ -40,13 +42,13 @@ const CardCommission = ({ vrmUser, commission }) => {
       const newData = {
         expire_date: commission?.expire_date,
         agent: vrmUser?.id,
-        bank_name: institute,
+        bank_name: bankName,
         product: commission?.name,
         commission: [...inputList],
       };
 
       console.log(vrmUser?.id, newData);
-      if (institute) {
+      if (bankName) {
         await axios
           .post(
             `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`,
@@ -61,7 +63,8 @@ const CardCommission = ({ vrmUser, commission }) => {
       } else setError(true);
     } else {
       console.log("out");
-      if (institute) {
+
+      if (bankName) {
         setError(false);
         await axios
           .post(`${process.env.REACT_APP_HOST_URL}/api/card_commission/`, data)
@@ -73,6 +76,10 @@ const CardCommission = ({ vrmUser, commission }) => {
           });
       } else setError(true);
     }
+  };
+  const handleInstitute = (e) => {
+    const { name, value } = e.target;
+    setInstitute(value);
   };
 
   return (
@@ -88,13 +95,11 @@ const CardCommission = ({ vrmUser, commission }) => {
         <select
           className="w-full my-2 border-gray-300 rounded h-10 p-2"
           name="institite"
-          onChange={(e) => setInstitute(e.target.value)}
+          onChange={handleInstitute}
         >
           <option>Select</option>
           {data &&
-            data.map((item) => (
-              <option value={item?.name}>{item?.name}</option>
-            ))}
+            data.map((item) => <option value={item?.id}>{item?.name}</option>)}
         </select>
         {error && (
           <label className=" text-red-400 my-1">Select Institute</label>
@@ -107,6 +112,7 @@ const CardCommission = ({ vrmUser, commission }) => {
         inputList={inputList}
         setInputList={setInputList}
         error={error}
+        setBankName={setBankName}
       />
 
       <div className=" flex justify-between items-center ">
