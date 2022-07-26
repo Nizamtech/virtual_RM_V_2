@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
+import { loadCardDataFunc } from "../../lib/LoadCardData";
 function EditCardCommission({
   setInstitute,
   error,
@@ -18,13 +19,29 @@ function EditCardCommission({
 }) {
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const [bankId, setBankId] = useState();
   const [cardTypeData, setCardTypeData] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_HOST_URL}/benefit/card_type/`)
-      .then((response) => response.json())
-      .then((data) => setCardTypeData(data?.results));
-  }, []);
+    // fetch(`https://admin.aamartaka.com/api/v1/credit_card/?`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setCardTypeData(data?.results);
+    //   });
+
+    const bankDetails = data?.find(
+      (item) => cardCommissionData?.bank_name === item.name
+    );
+
+    loadCardDataFunc(bankDetails?.id).then((res) => {
+      const rest = res?.data?.results;
+      const filter = rest.map((item) => {
+        return item.name;
+      });
+      console.log(filter);
+      setCardTypeData(filter);
+    });
+  }, [cardCommissionData?.bank_name, data]);
 
   // load Card Commission Data
   useEffect(() => {
@@ -38,7 +55,6 @@ function EditCardCommission({
         .then((data) => {
           setCardCommissionData(data);
           setCardType(data?.product_type);
-          console.log(data?.product_type);
         });
     }
   }, [specialData, id]);
@@ -52,13 +68,11 @@ function EditCardCommission({
   };
 
   useEffect(() => {
-    fetch("https://admin.aamartaka.com/api/v1/institutes/")
+    fetch("https://admin.aamartaka.com/api/v1/loans/institutes/")
       .then((response) => response.json())
       .then((res) => {
-        const rest = res.results;
-        // const result = rest.filter((item) => item.is_partner === true);
-        // console.log(result);
-        setData(rest);
+        const result = res.filter((item) => item.is_partner === true);
+        setData(result);
       });
   }, []);
 
@@ -71,7 +85,6 @@ function EditCardCommission({
 
   // handle click event of the Add button
   const handleAddClick = () => {
-    console.log("added");
     setCardType([
       ...cardType,
       { product_type: "", from: 0, commission: 0, to: 0 },
@@ -164,8 +177,8 @@ function EditCardCommission({
                   </option>
                   {cardTypeData &&
                     cardTypeData.map((item) => (
-                      <option defaultValue={item?.name} value={item?.name}>
-                        {item?.name}
+                      <option defaultValue={item} value={item}>
+                        {item}
                       </option>
                     ))}
                 </select>

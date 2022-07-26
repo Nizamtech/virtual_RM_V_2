@@ -25,7 +25,6 @@ const EditCardCommissionList = ({ status, specialData }) => {
     setD([...d, testData?.cardComission]);
   };
 
-  console.log("institute", institute);
   const handleSubmit = async (e) => {
     e.preventDefault();
     let data;
@@ -40,7 +39,7 @@ const EditCardCommissionList = ({ status, specialData }) => {
     // };
     // console.log(data);
 
-    if (institute) {
+    if (institute || cardCommissionData?.bank_name) {
       setError(false);
       let API;
       let ddd = {};
@@ -55,9 +54,14 @@ const EditCardCommissionList = ({ status, specialData }) => {
         API = `api/agent/commission`;
       } else {
         const d = [...cardType];
-        const e = d.concat(ddd);
-        const f = e.concat(testData?.cardComission);
-        console.log("f", f);
+        let e;
+        let f;
+        if (ddd) {
+          e = d.concat(ddd);
+        }
+        if (testData?.cardComission) {
+          f = e.concat(testData?.cardComission);
+        }
         data = {
           product_type: f,
           bank_name: institute || cardCommissionData?.bank_name,
