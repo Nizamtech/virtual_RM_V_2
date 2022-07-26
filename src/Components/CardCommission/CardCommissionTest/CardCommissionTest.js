@@ -20,6 +20,7 @@ function CardCommissionTest({ inputList, setInputList }) {
     } else {
       list[index][name] = value;
     }
+
     setInputList(list);
   };
 
