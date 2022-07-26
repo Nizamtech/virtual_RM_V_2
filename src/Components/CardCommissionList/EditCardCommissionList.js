@@ -54,8 +54,12 @@ const EditCardCommissionList = ({ status, specialData }) => {
         };
         API = `api/agent/commission`;
       } else {
+        const d = [...cardType];
+        const e = d.concat(ddd);
+        const f = e.concat(testData?.cardComission);
+        console.log("f", f);
         data = {
-          product_type: [...cardType, ...ddd, testData?.cardComission],
+          product_type: f,
           bank_name: institute || cardCommissionData?.bank_name,
         };
         API = `api/card_commission`;
