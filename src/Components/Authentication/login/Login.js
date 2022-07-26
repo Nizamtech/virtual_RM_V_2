@@ -29,7 +29,7 @@ const Login = () => {
       password: loginData?.password,
     };
     const login = async () => {
-      dispatch(isLoaDing(true));
+      // dispatch(isLoaDing(true));
 
       const res = await axios.post(
         `${process.env.REACT_APP_HOST_URL}/accounts/login/`,
@@ -37,9 +37,10 @@ const Login = () => {
       );
       if (res.status === 200) {
         console.log(res);
-        dispatch(saveUser(res?.data));
+        sessionStorage.setItem("aamartaka", JSON.stringify(res?.data));
+        dispatch(saveUser());
         navigate(from);
-        dispatch(isLoaDing(false));
+        // dispatch(isLoaDing(false));
       }
     };
     login();

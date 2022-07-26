@@ -34,7 +34,16 @@ export const userSlice = createSlice({
       state.addMoreData = [...state.addMoreData, action.payload];
     },
     saveUser: (state, action) => {
-      state.user = action.payload;
+      state.isLoaDing = true;
+      const user = sessionStorage.getItem("aamartaka");
+      state.user = JSON.parse(user);
+      console.log("calling me", user);
+      if (user) {
+        state.isLoaDing = false;
+      }
+
+      // const user = JSON.parse(sessionStorage.getItem("aamartaka"));
+      // state.user = action.payload;
     },
     isLoaDing: (state, action) => {
       state.isLoaDing = action.payload;

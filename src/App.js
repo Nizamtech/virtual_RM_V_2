@@ -39,20 +39,23 @@ import Login from "./Components/Authentication/login/Login";
 import SpecialCommissionEdit from "./Components/SpecialCommissionEdit/SpecialCommissionEdit";
 import SpecialCommissionView from "./Components/SpecialCommissionView/SpecialCommissionView";
 import PrivateRoute from "./Components/Authentication/login/PrivateRoute/PrivateRoute";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CardCommissionCardView from "./Components/CardCommissionCardView/CardCommissionCardView";
 import LoanCommissionView from "./Components/LoanCommissionView/LoanCommissionView";
 import SubmittedLead from "./Components/SubmittedLead/SubmittedLead";
 import SubmittedLeadView from "./Components/SubmittedLead/SubmittedLeadView";
 import PaymentRequest from "./Components/PaymentRequest/PaymentRequest";
 import Test1 from "./Components/Test1/Test1";
+import { saveUser } from "./Redux/Slices/userSlice";
+import { useEffect } from "react";
 
 function App() {
-  const { token, user_data } = useSelector((state) => state.reducer.user);
-  console.log("from App", user_data);
+  const user = sessionStorage.getItem("aamartaka");
+
+  console.log("from App", user?.user_data);
   return (
     <div className="grid grid-cols-12 mt-5 mx-5">
-      {user_data?.username && (
+      {user && (
         <div className=" hidden lg:block col-span-2 overflow-x-hidden ">
           <Sidebar />
         </div>
@@ -60,7 +63,7 @@ function App() {
 
       <div
         className={`${
-          user_data?.username ? "lg:col-span-10" : "lg:col-span-12"
+          user && user ? "lg:col-span-10" : "lg:col-span-12"
         }  col-span-12 `}
       >
         <Layout>
@@ -73,13 +76,62 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route path="/createteam/" element={<CreateTeam />} />
-            <Route path="/createteam/:id" element={<EditTeam />} />
-            <Route path="/manageteam" element={<ManageTeam />} />
-            <Route path="/manageuser" element={<ManageUser />} />
-            <Route path="/manageuser/:userId" element={<ManageUser />} />
-            <Route path="/vieweuser/:id" element={<ViewUser />} />
-            <Route path="/createuser" element={<CreateUser />} />
+            <Route
+              path="/createteam/"
+              element={
+                <PrivateRoute>
+                  <CreateTeam />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/createteam/:id"
+              element={
+                <PrivateRoute>
+                  <EditTeam />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/manageteam"
+              element={
+                <PrivateRoute>
+                  <ManageTeam />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/manageuser"
+              element={
+                <PrivateRoute>
+                  <ManageUser />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/manageuser/:userId"
+              element={
+                <PrivateRoute>
+                  <ManageUser />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/vieweuser/:id"
+              element={
+                <PrivateRoute>
+                  <ViewUser />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/createuser"
+              element={
+                <PrivateRoute>
+                  <CreateUser />
+                </PrivateRoute>
+              }
+            />
             <Route path="/cardcommission" element={<CardCommission />} />
             <Route path="/cclist" element={<CardCommissionList />} />
             <Route path="/cclist/:id" element={<EditCardCommissionList />} />

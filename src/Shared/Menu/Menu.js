@@ -9,6 +9,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 const Menu = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
+
+  const handleLogout = () => {
+    console.log("hello");
+    sessionStorage.removeItem("aamartaka");
+  };
+
   return (
     <div className=" ">
       <div className="flex flex-wrap ">
@@ -25,16 +31,15 @@ const Menu = () => {
 
                 <ul className="flex justify-between items-center">
                   <li className="nav-item">
-                    <a
+                    <div
                       className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-black hover:opacity-75"
-                      href="#pablo"
                       onClick={() => setMenuOpen(!menuOpen)}
                     >
                       <FontAwesomeIcon
                         icon={faCog}
                         className="text-lg leading-lg  "
                       />
-                    </a>
+                    </div>
                   </li>
                 </ul>
               </div>
@@ -63,13 +68,13 @@ const Menu = () => {
           </div>
 
           <hr className=" border-dotted my-2" />
-          <div className=" flex items-center">
+          <button onClick={handleLogout} className=" flex items-center">
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className="text-lg leading-lg w-4 h-4  "
             />
             <h1 className=" my-2  font-medium text-sm  mx-4">Logout</h1>
-          </div>
+          </button>
         </div>
       )}
     </div>
