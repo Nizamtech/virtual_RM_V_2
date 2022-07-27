@@ -49,6 +49,7 @@ import Test1 from "./Components/Test1/Test1";
 import { saveUser } from "./Redux/Slices/userSlice";
 import { useEffect, useState } from "react";
 import LoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew/LoanCommissionNew";
+import EditLoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew/EditLoanCommissionNew";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -186,6 +187,7 @@ function App() {
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test" element={<TestCardComission />} />
             <Route path="/test1" element={<LoanCommissionNew />} />
+            <Route path="/test1/:id" element={<EditLoanCommissionNew />} />
           </Routes>
         </Layout>
       </div>

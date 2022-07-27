@@ -41,7 +41,6 @@ const EditLoanComission = ({ status, specialData }) => {
       const data = {
         commissionn: commission,
         from_range: from,
-
         institute_name: specialData?.bank_name,
         loan_name: product_type,
         to_range: to,

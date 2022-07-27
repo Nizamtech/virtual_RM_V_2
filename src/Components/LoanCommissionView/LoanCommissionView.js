@@ -17,7 +17,9 @@ const LoanCommissionView = () => {
       .then((res) => {
         setCommission([res.data]);
       });
-  }, []);
+  }, [id]);
+
+  console.log(commissions);
 
   const deleteAlert = (api, id) => {
     console.log(api + id);
@@ -87,34 +89,44 @@ const LoanCommissionView = () => {
                           <div className="flex items-center">
                             <div className="ml-4">
                               <div className="text-sm font-medium leading-5 text-gray-900">
-                                {item?.institute_name}
+                                {item?.bank_name}
                               </div>
                             </div>
                           </div>
                         </td>
 
                         <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <div className="text-sm leading-5 text-gray-500">
-                            {item?.loan_name}
-                          </div>
+                          {item?.product_type?.map((i) => (
+                            <div className="text-sm leading-5 text-gray-500">
+                              {i?.product_type}
+                            </div>
+                          ))}
                         </td>
 
                         <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <div className="text-sm leading-5 text-gray-500">
-                            {item?.from_range}
-                          </div>
+                          {item?.product_type?.map((i) => (
+                            <div className="text-sm leading-5 text-gray-500">
+                              {i?.from}
+                            </div>
+                          ))}
                         </td>
 
                         <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <div className="text-sm leading-5 text-gray-500">
-                            {item?.to_range}
-                          </div>
+                          {item?.product_type?.map((i) => (
+                            <div className="text-sm leading-5 text-gray-500">
+                              {i?.to}
+                            </div>
+                          ))}
                         </td>
 
                         <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                            {item?.commissionn}
-                          </span>
+                          {item?.product_type?.map((i) => (
+                            <div>
+                              <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                {i?.commission}
+                              </span>
+                            </div>
+                          ))}
                         </td>
 
                         <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
