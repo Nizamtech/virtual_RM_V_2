@@ -83,7 +83,10 @@ const EditLoanCommissionNew = ({ specialData }) => {
       };
     }
     await axios
-      .put(`${process.env.REACT_APP_HOST_URL}/${API}/${id}/`, data)
+      .patch(
+        `${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`,
+        data
+      )
       .then((result) => {
         if (result.status === 200) {
           SuccessAlert("Successfully Update", "success");
