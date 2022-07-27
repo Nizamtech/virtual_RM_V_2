@@ -47,11 +47,16 @@ import SubmittedLeadView from "./Components/SubmittedLead/SubmittedLeadView";
 import PaymentRequest from "./Components/PaymentRequest/PaymentRequest";
 import Test1 from "./Components/Test1/Test1";
 import { saveUser } from "./Redux/Slices/userSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import LoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew/LoanCommissionNew";
 
 function App() {
-  const user = sessionStorage.getItem("aamartaka");
+  const [user, setUser] = useState([]);
 
+  useEffect(() => {
+    const userdata = sessionStorage.getItem("aamartaka");
+    setUser(userdata);
+  }, [user]);
   console.log("from App", user?.user_data);
   return (
     <div className="grid grid-cols-12 mt-5 mx-5">
@@ -180,7 +185,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test" element={<TestCardComission />} />
-            <Route path="/test1" element={<Test1 />} />
+            <Route path="/test1" element={<LoanCommissionNew />} />
           </Routes>
         </Layout>
       </div>

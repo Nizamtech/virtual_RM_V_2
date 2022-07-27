@@ -16,6 +16,7 @@ const LeadListFilter = ({
   setandSign,
   setMobile,
   vrmID,
+  handleReset,
 }) => {
   const [ins, setIns] = useState([]);
   const [vrmAgentData, setVrmAgentData] = useState([]);
@@ -44,12 +45,7 @@ const LeadListFilter = ({
     loadVRMAgent();
     laodIns();
   }, []);
-  const cardCommissionData = [
-    { value: "Silver", label: "Silver" },
-    { value: "Platinum, Dhaka-1230", label: "Platinum" },
-    { value: "Gold", label: "Gold" },
-    { value: "Classic", label: "Classic" },
-  ];
+
   const statusData = [
     { label: "New", value: "New" },
     { label: "CNI", value: "CNI" },
@@ -72,7 +68,6 @@ const LeadListFilter = ({
     return { value: item.id, label: item?.first_name + item?.last_name };
   });
 
-  console.log("vrmAgentData", vrmAgentData);
   return (
     <div>
       <div>
@@ -142,10 +137,15 @@ const LeadListFilter = ({
 
             <RangeCalender />
           </div>
-          <div>
-            <button onClick={handleFilter} className="mt-8">
+          <div className="flex justify-between items-center">
+            <button onClick={handleFilter} className="mt-8 ml-2">
               <h1 className=" bg-green-400 py-[10px] px-5 rounded-lg text-white font-bold">
                 Go
+              </h1>
+            </button>
+            <button onClick={handleReset} className="mt-8 ml-1">
+              <h1 className=" bg-red-400 py-[10px] px-3 rounded-lg text-white font-bold">
+                Reset
               </h1>
             </button>
           </div>

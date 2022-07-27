@@ -15,7 +15,7 @@ const LeadList = ({ vrmID, data }) => {
   const [bank, setBank] = useState("");
   const [andSign, setandSign] = useState([]);
   const [mobile, setMobile] = useState("");
-  const [vrmAgentData, setVrmAgentData] = useState([]);
+
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -23,7 +23,7 @@ const LeadList = ({ vrmID, data }) => {
       key: "selection",
     },
   ]);
-  console.log(productType);
+
   const [api, setApi] = useState("api/lead");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_URL}/${api}`)
@@ -39,17 +39,24 @@ const LeadList = ({ vrmID, data }) => {
       mobile_no: mobile,
       user: vrmAgent?.value,
     };
-    console.log(data);
 
     const URL = `api/lead/?${status && `status=${data?.statusValue}`}&${
       productType && `interested_product=${data?.productTypeValue}`
     }&${bank && `interested_bank=${data?.bankValue}`}&${
       vrmAgent && `user=${data?.user}`
     }&${mobile && `mobile_no=${mobile}`}`;
-    console.log(URL);
+
     setApi(URL);
   };
 
+  const handleReset = () => {
+    setVrmAgent("");
+    setStatus("");
+    setProductType("");
+    setBank("");
+    setMobile("");
+    setApi("api/lead");
+  };
   const deleteAlert = (api, id) => {
     console.log(api + id);
     console.log(id);
@@ -74,8 +81,6 @@ const LeadList = ({ vrmID, data }) => {
     });
   };
 
-  console.log("lldol", data);
-
   return (
     <div className=" h-screen mx-3 p-3">
       <div className=" float-right bg-green-400 px-4 py-2 rounded-lg text-white font-bold">
@@ -83,6 +88,7 @@ const LeadList = ({ vrmID, data }) => {
         <Link to={vrmID ? `/newlead/${data?.id}` : `/newlead`}>New Lead</Link>
       </div>
       <LeadListFilter
+        handleReset={handleReset}
         setandSign={setandSign}
         setVrmAgent={setVrmAgent}
         setStatus={setStatus}

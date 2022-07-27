@@ -63,7 +63,7 @@ const SpecialCommissionView = () => {
             {loan.length > 0 ? (
               <SCView data={loan} />
             ) : (
-              <h1 className=" mt-5 text-3xl text-red-500">
+              <h1 className="h-[90v] grid place-content-center place-items-center mt-5 text-3xl text-gray-400">
                 {" "}
                 There is no Loan Commissin{" "}
               </h1>

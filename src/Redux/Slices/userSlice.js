@@ -11,6 +11,7 @@ const initialState = {
   commissionData: [],
   inputList: [{ product_type: "", from: 0, commission: 0, to: 0 }],
   cardtype: [],
+  cardList: [],
 };
 
 export const userSlice = createSlice({
@@ -73,16 +74,12 @@ export const userSlice = createSlice({
       state.inputList = list;
     },
 
-    // const handleRemoveClick = (index) => {
-    //   const list = [...inputList];
-    //   list.splice(index, 1);
-    //   setInputList(list);
-    //   dispatch(specialCommission(list));
-    // };
-
     addMoreFuncton: (state, action) => {
       console.log(action.payload);
       // state.commissionData = action.payload;
+    },
+    cardList: (state, action) => {
+      state.cardList = action.payload;
     },
 
     cardType: (state, action) => {
@@ -120,6 +117,7 @@ export const {
   addMoreFn,
   addMoreFuncton,
   cardType,
+  cardList,
 } = userSlice.actions;
 
 export default userSlice.reducer;

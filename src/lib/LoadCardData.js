@@ -11,6 +11,5 @@ export const loadCardDataFunc = async (id) => {
     `https://admin.aamartaka.com/api/v1/credit_card/?institute=${id}`,
     config
   );
-  console.log(data);
   return data;
 };

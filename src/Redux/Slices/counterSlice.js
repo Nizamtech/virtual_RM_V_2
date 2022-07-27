@@ -25,6 +25,9 @@ export const counterSlice = createSlice({
     saveData: (state, action) => {
       state.user = action.payload;
     },
+    saveData: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
