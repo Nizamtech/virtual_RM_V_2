@@ -75,7 +75,9 @@ function EditLoanCommissionCard({
                 name="product_type"
                 id="cars"
               >
-                <option value="">Select </option>
+                <option defaultValue={x?.product_type} value={x?.product_type}>
+                  {x?.product_type || "Select"}{" "}
+                </option>
                 {loanType &&
                   loanType.map((item) => (
                     <option defaultValue={item?.name} value={item?.name}>
@@ -87,6 +89,7 @@ function EditLoanCommissionCard({
                 From
               </h1>
               <input
+                defaultValue={x?.from}
                 className="ml10 p-2 border border-gray-300 mr-2 my-2 rounded "
                 type="number"
                 onInput={(e) => {
@@ -112,6 +115,7 @@ function EditLoanCommissionCard({
                 To
               </h1>
               <input
+                defaultValue={x?.to}
                 type="number"
                 className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
                 onInput={(e) => {
@@ -137,6 +141,7 @@ function EditLoanCommissionCard({
                 Commission
               </h1>
               <input
+                defaultValue={x?.commission}
                 className="ml10 p-2  border border-gray-300 mr-2 my-2 rounded"
                 onInput={(e) => {
                   if (e.target.value.length > e.target.maxLength)
@@ -148,7 +153,7 @@ function EditLoanCommissionCard({
                 maxlength="3"
                 name="commission"
                 placeholder="Enter Commission"
-                value={x.commission}
+                value={x?.commission}
                 onChange={(e) => handleInputChange(e, i)}
               />
               <div className="btn-box flex flex-col items-center justify-center">
