@@ -1,52 +1,9 @@
 import React, { useState } from "react";
 import PaymentModal from "./PaymentModal/PaymentModal";
 
-const mockData = [
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-  {
-    id: 13254,
-    requestAmount: 4000,
-    requestedDate: "13 -6 - 2022",
-    paymentDisverse: 300,
-    paymentDisverseDate: "12 - 6 - 2022",
-    totalDisversementTime: 5,
-  },
-];
-
 const PaymentHistoryTable = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
-
+  console.log(data);
   return (
     <div className="flex flex-col mt-8">
       <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -64,13 +21,16 @@ const PaymentHistoryTable = ({ data }) => {
                   Requested Date
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Payment disverse
+                  Payment Disbursed
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Payment disverse Date
+                  Payment Disbursed Date
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Total Disversement Time
+                  Total Disbursed Time
+                </th>
+                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                  Bank / Method Name
                 </th>
                 <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                   Status
@@ -119,6 +79,11 @@ const PaymentHistoryTable = ({ data }) => {
                           {item?.payment_disbursed_time}{" "}
                           <span> Working hr</span>
                         </h1>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                      <div className="text-sm leading-5 text-gray-500">
+                        {item?.request_method?.payment_method}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">

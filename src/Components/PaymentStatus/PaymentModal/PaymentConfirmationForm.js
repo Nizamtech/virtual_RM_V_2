@@ -15,6 +15,15 @@ const PaymentConfirmationForm = ({
   const [transactionId, setTransactionId] = useState(null);
   const [image, setImage] = useState(null);
 
+  // console.log("paymentReqData", paymentReqData?.created_at);
+  const created_Date = new Date(
+    paymentReqData?.created_at
+  ).toLocaleDateString();
+  const today = new Date().toLocaleDateString();
+  // const totalDay = today.setDate(today.getDate - created_Date);
+
+  console.log("dlkfj", today - created_Date);
+  console.log("dlkfj", Date(today - created_Date));
   useEffect(() => {
     setPaymentReqData(data);
   }, [id, data]);

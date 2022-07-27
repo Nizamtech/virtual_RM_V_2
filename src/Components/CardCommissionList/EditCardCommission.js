@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Select from "react-select";
+import { useSelector, useDispatch } from "react-redux";
 import { loadCardDataFunc } from "../../lib/LoadCardData";
+import { cardList } from "../../Redux/Slices/userSlice";
 function EditCardCommission({
   setInstitute,
   error,
@@ -9,19 +10,14 @@ function EditCardCommission({
   setCardType,
   cardCommissionData,
   setCardCommissionData,
-  setInputList,
-  inputList,
-  setProductTypeData,
-  productTypeData,
   specialData,
   setExpireDate,
   status,
 }) {
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const [bankId, setBankId] = useState();
   const [cardTypeData, setCardTypeData] = useState([]);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     // fetch(`https://admin.aamartaka.com/api/v1/credit_card/?`)
     //   .then((response) => response.json())
@@ -38,7 +34,8 @@ function EditCardCommission({
       const filter = rest.map((item) => {
         return item.name;
       });
-      console.log(filter);
+
+      dispatch(cardList(filter));
       setCardTypeData(filter);
     });
   }, [cardCommissionData?.bank_name, data]);

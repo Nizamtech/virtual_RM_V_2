@@ -256,7 +256,7 @@ const Account = ({ data }) => {
                       >
                         {data?.upazila || "Select"}
                       </option>
-                      <option>Select </option>
+
                       {rest &&
                         rest.map((item) => (
                           <option value={item?.name}>{item.name}</option>

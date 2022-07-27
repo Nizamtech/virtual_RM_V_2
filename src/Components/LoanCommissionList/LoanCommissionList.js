@@ -18,6 +18,8 @@ const LoanCommissionList = () => {
       });
   }, []);
 
+  console.log(commissions);
+
   const deleteAlert = (api, id) => {
     console.log(api + id);
     console.log(id);
@@ -86,7 +88,7 @@ const LoanCommissionList = () => {
                           <div className="flex items-center">
                             <div className="ml-4">
                               <div className="text-sm font-medium leading-5 text-gray-900">
-                                {item?.institute_name}
+                                {item?.bank_name}
                               </div>
                             </div>
                           </div>
@@ -124,7 +126,10 @@ const LoanCommissionList = () => {
                                 className="h-6 w-6"
                               />
                             </Link>
-                            <Link to={`/editloan/${item?.id}`}>
+                            <Link
+                              // to={`/editloan/${item?.id}`}
+                              to={`/test1/${item?.id}`}
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="w-6 h-6 text-blue-400"

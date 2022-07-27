@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { useForm, useFieldArray, Controller, useWatch } from "react-hook-form";
 import ReactDOM from "react-dom";
-
 import "./style.css";
-import { useDispatch } from "react-redux";
 import { addMoreFuncton } from "../../Redux/Slices/userSlice";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function TestForm({ onSubmit, setTestData }) {
+  const cardList = useSelector((state) => state.reducer.cardList);
   const [cardTypeData, setCardTypeData] = useState([]);
-  // dispatch(addMoreFuncton(testData));
 
   const { register, control, handleSubmit, reset, watch, getValues } = useForm({
     defaultValues: {
@@ -54,19 +53,18 @@ function TestForm({ onSubmit, setTestData }) {
                 className="grid gap-6 grid-cols-5 place-content-center place-items-center"
               >
                 <select
-                  {...register(`cardComission.${index}.from`)}
+                  placeholder="Select"
+                  {...register(`cardComission.${index}.product_type`)}
                   className="ml-10 p-2  border border-gray-300 mr-2 my-2 rounded w-full"
                   name="product_type"
-                  id="cars"
                 >
-                  <option defaultValue="Select" value="Select">
-                    select
+                  <option selected disabled>
+                    Select
                   </option>
-                  {cardTypeData &&
-                    cardTypeData.map((item) => (
-                      <option defaultValue={item?.name} value={item?.name}>
-                        {item?.name}
-                      </option>
+
+                  {cardList &&
+                    cardList.map((item) => (
+                      <option value={item}>{item}</option>
                     ))}
                 </select>
                 <input
@@ -94,28 +92,38 @@ function TestForm({ onSubmit, setTestData }) {
                   name={`cardComission.${index}.commission`}
                   control={control}
                 />
-                <button type="button" onClick={() => remove(index)}>
-                  Delete
-                </button>
+
+                <section className=" flex justify-center items-center">
+                  {index !== 0 && (
+                    <button
+                      type="button"
+                      onClick={() => remove(index)}
+                      className=" bg-[#fc544b] border-[#fc544b] shadow-red-400  hover:shadow-2xl rounded  py-2 text-white w-full md:w-16"
+                    >
+                      Delete
+                    </button>
+                  )}
+                  {index === 0 && (
+                    <button
+                      className=" bg-green-400 deleteBtn hover:shadow-2xl rounded w-full md:w-16 "
+                      type="button"
+                      onClick={() => {
+                        append({
+                          to: 0,
+                          from: 0,
+                          commission: 0,
+                          product_type: "",
+                        });
+                      }}
+                    >
+                      Add
+                    </button>
+                  )}
+                </section>
               </li>
             );
           })}
         </ul>
-        <section>
-          <button
-            type="button"
-            onClick={() => {
-              append({
-                to: 0,
-                from: 0,
-                commission: 0,
-                product_type: "",
-              });
-            }}
-          >
-            Add
-          </button>
-        </section>
         {/* <button
     type="button"
     onClick={() => {

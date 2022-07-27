@@ -116,6 +116,8 @@ const EditLeadList = () => {
   };
   // console.log(loadDataaa);
   // loadDataaa.map((item) => console.log(item));
+
+  console.log("leadData", leadData);
   return (
     <div className=" m-3 p-3 h-screen">
       <div className="mx-2 w-full lg:w-1/2 ">
@@ -274,12 +276,14 @@ const EditLeadList = () => {
               defaultValue={leadData?.interested_product}
               value={leadData?.interested_product}
             >
-              {leadData?.interested_product}
+              {leadData?.interested_product_name}
             </option>
-            <option value="Personal Loan">Personal Loan</option>
-            <option value="Car Loan">Car Loan</option>
-            <option value="Home Loan">Home Loan</option>
-            <option value="Credit Cart">Credit Cart</option>
+
+            <option value="1">Credit Cart</option>
+            <option value="2">Personal Loan</option>
+            <option value="3">Home Loan</option>
+            <option value="4">Car Loan</option>
+            <option value="5">Land Loan</option>
           </select>
 
           <label className="ml-1 my-2"> Status</label>

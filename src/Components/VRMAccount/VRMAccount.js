@@ -14,6 +14,9 @@ import VRMLeads from "../VRMLeads/VRMLeads";
 import Tabs from "./Tabs";
 import VRMTab from "./VRMTab";
 import VRMTabCom from "./VRMTabCom";
+import { BiPhone } from "react-icons/bi";
+import { AiOutlineMail } from "react-icons/ai";
+import { FaRegHandshake } from "react-icons/fa";
 
 const VRMAccount = () => {
   const { vrmID } = useParams();
@@ -92,69 +95,21 @@ const VRMAccount = () => {
             </h1>
             <div>
               <div className="sm:whitespace-normal flex items-center my-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  icon-name="mail"
-                  data-lucide="mail"
-                  class="lucide lucide-mail w-4 h-4 mr-2"
-                >
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-                <h1 className=" text-sm text-gray-600 w-4 h-4 mr-2">
+                <BiPhone size={18} />
+                <h1 className=" text-sm text-gray-600 w-4 h-4 mr-2 mx-2">
                   {vrmUser?.phone}
                 </h1>
               </div>
               <div className="truncate sm:whitespace-normal flex items-center my-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  icon-name="instagram"
-                  data-lucide="instagram"
-                  class="lucide lucide-instagram w-4 h-4 mr-2"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-                <h1 className=" text-sm text-gray-600 w-4 h-4 mr-2">
+                <AiOutlineMail size={18} />
+                <h1 className=" text-sm text-gray-600 w-4 h-4 mr-2 mx-2 ">
                   {vrmUser?.email}
                 </h1>
               </div>
               <div className="truncate sm:whitespace-normal flex items-center my-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  icon-name="twitter"
-                  data-lucide="twitter"
-                  class="lucide lucide-twitter w-4 h-4 mr-2"
-                >
-                  <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.28-.03-.56-.08-.83A7.72 7.72 0 0023 3z"></path>
-                </svg>
-                <h1 className=" text-sm text-gray-600  h-4 mr-2">
-                  Joind: {vrmUser?.created_at}
+                <FaRegHandshake size={18} />
+                <h1 className=" text-sm text-gray-600  h-4 mr-2 mx-2">
+                  Joined: {vrmUser?.created_at}
                 </h1>
               </div>
             </div>

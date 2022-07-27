@@ -45,7 +45,7 @@ const SpecialCommissionList = ({ data }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${api}${id}/`).then((res) => {
+        axios.delete(`${api}/${id}`).then((res) => {
           if (res.status === 204) {
             const rest = commissions?.filter((item) => item?.id !== id);
             setCommission(rest);

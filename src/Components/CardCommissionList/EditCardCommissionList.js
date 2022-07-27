@@ -16,11 +16,17 @@ const EditCardCommissionList = ({ status, specialData }) => {
   const [cardCommissionData, setCardCommissionData] = useState([]);
   const [productTypeData, setProductTypeData] = useState([]);
   const [cardType, setCardType] = useState([]);
+  // const [cardTypeList, setCardTypeList] = useState([]);
   const [institute, setInstitute] = useState(cardCommissionData?.bank_name);
   const [inputList, setInputList] = useState([
     { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
 
+  const ddd = d.filter((item) => item);
+  console.log(ddd);
+  console.log("testData?.cardComission", testData?.cardComission);
+  console.log("d", d);
+  // console.log("loaded Data an lod Edit Data", cardType);
   const handleData = () => {
     setD([...d, testData?.cardComission]);
   };
@@ -47,8 +53,17 @@ const EditCardCommissionList = ({ status, specialData }) => {
         ddd = d.filter((item) => item);
       }
       if (specialData) {
+        const d = [...cardType];
+        let e;
+        let f;
+        if (ddd) {
+          e = d.concat(ddd);
+        }
+        if (testData?.cardComission) {
+          f = e.concat(testData?.cardComission);
+        }
         data = {
-          commission: [...cardType, ...ddd, testData?.cardComission],
+          commission: f,
           bank_name: institute || cardCommissionData?.bank_name,
         };
         API = `api/agent/commission`;
@@ -97,7 +112,11 @@ const EditCardCommissionList = ({ status, specialData }) => {
         setExpireDate={setExpireDate}
         status={status}
       />
-      <TestForm2 setTestData={setTestData} handleData={handleData} />
+      <TestForm2
+        setTestData={setTestData}
+        handleData={handleData}
+        cardType={cardType}
+      />
       <div className=" flex justify-between items-center ">
         <input
           onClick={handleSubmit}
