@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 import CardCommission from "../CardCommission/CardCommission";
 import LoanCommission from "../LoanCommission/LoanCommission";
 import LoanCommissionNew from "../LoanCommission/LoanCommissionNew/LoanCommissionNew";
@@ -34,12 +35,13 @@ const SpecialCommission = () => {
 
   return (
     <div className=" h-screen m-3 p-3 ">
+      <HeadingTitle title="Add Special Commission " />
       <div className=" w-full flex justify-between items-center">
         <div className=" mx-2 w-1/2">
-          <label className="mt-2">Product Type</label>
+          <label className=" text-lg text-gray-400 my-5">Product Type</label>
           <select
             onClick={handleCommission}
-            className="option h-12 p-2 w-full"
+            className="option h-12 p-2 w-full border border-gray-300 mt-5"
             name="name"
           >
             <option>Product Type</option>
@@ -48,11 +50,11 @@ const SpecialCommission = () => {
           </select>
         </div>
         <div className="mx-2 w-1/2">
-          <label className="mt-2">Expire date </label>
+          <label className=" text-lg text-gray-400 my-5 ">Expire date </label>
           <input
             type="date"
             onChange={handleCommission}
-            className=" h-12 p-2 w-full"
+            className=" h-12 p-2 w-full border border-gray-300 mt-5"
             name="expire_date"
           />
         </div>

@@ -24,6 +24,9 @@ import { TbActivityHeartbeat } from "react-icons/tb";
 import { AiOutlineLogout } from "react-icons/ai";
 import { BsListCheck } from "react-icons/bs";
 import { GiPayMoney } from "react-icons/gi";
+import { TbCurrencyTaka } from "react-icons/tb";
+import { GiTakeMyMoney } from "react-icons/gi";
+import { GiMoneyStack } from "react-icons/gi";
 const Sidebar = () => {
   const loccation = useLocation();
 
@@ -199,7 +202,41 @@ const Sidebar = () => {
             </NavLink>
           </li>
 
-          <li>
+          <div className="ml-2 flex w-full justify-center">
+            <TbCurrencyTaka className=" text-white" size={30} />
+            <Collapsible
+              className="mx-3 px-1 w-full text-base font-normal "
+              trigger={["Payment", <BsChevronDown />]}
+            >
+              <li className="  bg-[#1B399D] text-white w-full my-2 pb-2">
+                <NavLink
+                  to="/paymentrequest"
+                  className={`${
+                    loccation.pathname.includes("paymentrequest") &&
+                    "activeLink"
+                  } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+                >
+                  <GiTakeMyMoney size={30} />
+                  <span className="flex-1 ml-3 text-base font-normal ">
+                    Payment Request
+                  </span>
+                </NavLink>
+                <NavLink
+                  to="/paymentstatus"
+                  className={`${
+                    loccation.pathname.includes("paymentstatus") && "activeLink"
+                  } use"  flex items-center p-2 text-base font-normal text-white rounded-lg dark:text-white hover:bg-[#294AB3]  dark:hover:bg-gray-700"`}
+                >
+                  <GiMoneyStack size={30} />
+                  <span className="flex-1 ml-3 text-base font-normal ">
+                    Payment Details
+                  </span>
+                </NavLink>
+              </li>
+            </Collapsible>
+          </div>
+
+          {/* <li>
             <NavLink
               to="/paymentrequest"
               className={`${
@@ -224,7 +261,7 @@ const Sidebar = () => {
                 Payment Details
               </span>
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink
               to="/feature"
