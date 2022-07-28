@@ -9,10 +9,6 @@ function EditLoanCommissionCard({
   setProductType,
   id,
 }) {
-  // const [data, setData] = useState([]);
-
-  const [cardTypeData, setCardTypeData] = useState([]);
-
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -40,8 +36,6 @@ function EditLoanCommissionCard({
       { product_type: "", from: 0, commission: 0, to: 0 },
     ]);
   };
-
-  console.log(productType);
 
   return (
     <div>
@@ -170,7 +164,7 @@ function EditLoanCommissionCard({
                     onClick={handleAddClick}
                     className=" bg-green-400 deleteBtn hover:shadow-2xl rounded w-full md:w-16 "
                   >
-                    Add
+                    Add.
                   </button>
                 )}
               </div>

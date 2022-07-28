@@ -127,8 +127,8 @@ const LoanCommissionList = () => {
                               />
                             </Link>
                             <Link
-                              // to={`/editloan/${item?.id}`}
-                              to={`/test1/${item?.id}`}
+                              to={`/editloan/${item?.id}`}
+                              // to={`/test1/${item?.id}`}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

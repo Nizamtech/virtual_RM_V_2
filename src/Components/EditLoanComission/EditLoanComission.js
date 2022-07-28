@@ -45,6 +45,7 @@ const EditLoanComission = ({ status, specialData }) => {
         loan_name: product_type,
         to_range: to,
       };
+      console.log(2);
       setLoanCommission(data);
     } else {
       axios
@@ -53,6 +54,7 @@ const EditLoanComission = ({ status, specialData }) => {
           console.log("Sp", res?.data);
           setLoanCommission(res?.data);
         });
+      console.log(2);
     }
   }, [specialData, id]);
 

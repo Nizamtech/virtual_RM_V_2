@@ -146,10 +146,10 @@ function App() {
               element={<CardCommissionCardView />}
             />
             <Route path="/vrmedit/:id" element={<EditVRMList />} />
-            <Route path="/loancommission" element={<LoanCommission />} />
+            <Route path="/loancommission" element={<LoanCommissionNew />} />
             <Route path="/lclist" element={<LoanCommissionList />} />
             <Route path="/viewloan/:id" element={<LoanCommissionView />} />
-            <Route path="/editloan/:id" element={<EditLoanComission />} />
+            <Route path="/editloan/:id" element={<EditLoanCommissionNew />} />
             <Route path="/vrmlist" element={<VRMList />} />
             <Route path="/vrmlist/:id" element={<VRMListEdit />} />
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />

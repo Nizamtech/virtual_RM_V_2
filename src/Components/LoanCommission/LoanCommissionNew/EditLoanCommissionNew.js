@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SuccessAlert } from "../../../Shared/Alert/SuccessAlert";
 import EditLoanCommissionCard from "./EditLoanCommissionCard";
 
-const EditLoanCommissionNew = ({ specialData }) => {
+const EditLoanCommissionNew = ({ status, specialData }) => {
   const { id } = useParams();
   const [loanCommission, setLoanCommission] = useState([]);
   let navigate = useNavigate();
@@ -16,16 +16,23 @@ const EditLoanCommissionNew = ({ specialData }) => {
     { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
 
-  console.log("productType", inst);
+  // console.log("loanCommission", loanCommission);
+  console.log("{ loanCommission?.bank_name}", loanCommission?.bank_name);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`)
-      .then((response) => response.json())
-      .then((data) => {
-        setLoanCommission(data);
-        setProductType(data?.product_type);
-      });
-  }, [id]);
+    if (specialData) {
+      setProductType(specialData?.commission);
+      setLoanCommission(specialData);
+    } else {
+      fetch(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`)
+        .then((response) => response.json())
+        .then((data) => {
+          setLoanCommission(data);
+          console.log("(data?.product_type", data);
+          setProductType(data?.product_type);
+        });
+    }
+  }, [specialData, id]);
 
   useEffect(() => {
     const loadinstitute = async () => {
@@ -56,37 +63,20 @@ const EditLoanCommissionNew = ({ specialData }) => {
     let API;
 
     if (specialData) {
-      // API = `api/agent/commission`;
-      // const newData = {
-      //   to: to_range || loanCommission?.to_range,
-      //   from: from_range || loanCommission?.from_range,
-      //   commission: commissionn || loanCommission?.commissionn,
-      //   product_type: loan_name || loanCommission?.loan_name,
-      // };
-      // data = {
-      //   commission: [newData],
-      //   bank_name: institute_name || loanCommission?.institute_name,
-      // };
+      API = `api/agent/commission`;
+      data = {
+        commission: productType,
+        bank_name: loanCommission?.bank_name || inst,
+      };
     } else {
       API = `api/loan_commission`;
-      // data = {
-      //   institute_name: institute_name || loanCommission?.institute_name,
-      //   loan_name: loan_name || loanCommission?.loan_name,
-      //   from_range: from_range || loanCommission?.from_range,
-      //   to_range: to_range || loanCommission?.to_range,
-      //   commissionn: commissionn || loanCommission?.commissionn,
-      // };
-
       data = {
-        bank_name: inst,
+        bank_name: loanCommission?.bank_name || inst,
         product_type: productType,
       };
     }
     await axios
-      .patch(
-        `${process.env.REACT_APP_HOST_URL}/api/loan_commission/${id}/`,
-        data
-      )
+      .patch(`${process.env.REACT_APP_HOST_URL}/${API}/${id}/`, data)
       .then((result) => {
         if (result.status === 200) {
           SuccessAlert("Successfully Update", "success");
@@ -96,7 +86,7 @@ const EditLoanCommissionNew = ({ specialData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className=" h-screen m-3 p-3">
+    <div className=" h-screen m-3 p-3">
       <div className="w-full mb-6 md:mb-0  ">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -110,7 +100,9 @@ const EditLoanCommissionNew = ({ specialData }) => {
           name="institite"
           onChange={(e) => setInst(e.target.value)}
         >
-          <option>Select</option>
+          <option value={loanCommission?.bank_name}>
+            {loanCommission?.bank_name}
+          </option>
           {data &&
             data.map((item) => (
               <option value={item?.name}>{item?.name}</option>
@@ -128,12 +120,15 @@ const EditLoanCommissionNew = ({ specialData }) => {
         setProductType={setProductType}
         id={id}
       />
-      <input
+      <button
+        onClick={handleSubmit}
         className=" px-4 py-1 text-white bg-sky-400 rounded-lg"
-        type="submit"
-        value="Update"
-      />
-    </form>
+        // type="submit"
+        // value="Update"
+      >
+        Update
+      </button>
+    </div>
   );
 };
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import EditCardCommissionList from "../CardCommissionList/EditCardCommissionList";
 import EditLoanComission from "../EditLoanComission/EditLoanComission";
+import EditLoanCommissionNew from "../LoanCommission/LoanCommissionNew/EditLoanCommissionNew";
 
 // product =1 cardType
 
@@ -32,7 +33,10 @@ const SpecialCommissionEdit = () => {
 
       {specialCommission?.product === 2 && (
         <div>
-          <EditLoanComission status={true} specialData={specialCommission} />
+          <EditLoanCommissionNew
+            status={true}
+            specialData={specialCommission}
+          />
         </div>
       )}
     </div>
