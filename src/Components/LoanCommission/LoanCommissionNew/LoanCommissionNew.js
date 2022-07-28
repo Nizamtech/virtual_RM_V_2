@@ -5,9 +5,7 @@ import axios from "axios";
 import { SuccessAlert } from "../../../Shared/Alert/SuccessAlert";
 import { useNavigate } from "react-router-dom";
 
-let renderCount = 0;
-
-function LoanCommissionNew({ vrmUser }) {
+function LoanCommissionNew({ vrmUser, commission }) {
   const navigate = useNavigate();
   const [inst, setInst] = useState([]);
   const [loan, setLoan] = useState([]);
@@ -32,38 +30,31 @@ function LoanCommissionNew({ vrmUser }) {
     });
 
   const onSubmit = async (data) => {
-    const newData = {
-      bank_name: institute,
-      product_type: data?.loan_commission,
-    };
-    console.log(newData);
     if (vrmUser?.id) {
-      // const loan = {
-      //   product_type: loan_name.value,
-      //   from: parseInt(from_range),
-      //   to: parseInt(to_range),
-      //   commission: parseInt(commissionn),
-      // };
-      // const newData = {
-      //   expire_date: commission?.expire_date,
-      //   agent: vrmUser?.id,
-      //   bank_name: institute_name.value,
-      //   product: commission?.name,
-      //   commission: [loan],
-      // };
-      // console.log(newData);
-      // await axios
-      //   .post(
-      //     `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`,
-      //     newData
-      //   )
-      //   .then((result) => {
-      //     if (result.status === 201) {
-      //       SuccessAlert("Successfully Added", "success");
-      //       navigate("/specialcommissionList");
-      //     }
-      //   });
+      const newData = {
+        expire_date: commission?.expire_date,
+        agent: vrmUser?.id,
+        bank_name: institute,
+        product: commission?.name,
+        commission: data?.loan_commission,
+      };
+      console.log("access", newData);
+      await axios
+        .post(
+          `${process.env.REACT_APP_HOST_URL}/api/agent/commission/`,
+          newData
+        )
+        .then((result) => {
+          if (result.status === 201) {
+            SuccessAlert("Successfully Added", "success");
+            navigate("/specialcommissionList");
+          }
+        });
     } else {
+      const newData = {
+        bank_name: institute,
+        product_type: data?.loan_commission,
+      };
       await axios
         .post(`${process.env.REACT_APP_HOST_URL}/api/loan_commission/`, newData)
         .then((result) => {
@@ -95,7 +86,8 @@ function LoanCommissionNew({ vrmUser }) {
     loadinstitute();
   }, []);
 
-  console.log(loan);
+  console.log("11", vrmUser);
+  console.log("22", commission);
 
   return (
     <div className=" h-screen m-3 p-3">

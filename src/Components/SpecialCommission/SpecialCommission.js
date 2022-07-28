@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import CardCommission from "../CardCommission/CardCommission";
 import LoanCommission from "../LoanCommission/LoanCommission";
+import LoanCommissionNew from "../LoanCommission/LoanCommissionNew/LoanCommissionNew";
 
 const SpecialCommission = () => {
   const { id } = useParams();
@@ -59,7 +60,7 @@ const SpecialCommission = () => {
 
       {commission && commission?.name === "2" && (
         <div>
-          <LoanCommission vrmUser={vrmUser} commission={commission} />
+          <LoanCommissionNew vrmUser={vrmUser} commission={commission} />
         </div>
       )}
       {commission && commission?.name === "1" && (
