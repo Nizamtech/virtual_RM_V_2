@@ -54,6 +54,9 @@ import EditLoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew
 function App() {
   const [user, setUser] = useState([]);
 
+  const reload = window.location;
+  console.log("reload", reload);
+
   useEffect(() => {
     const userdata = sessionStorage.getItem("aamartaka");
     setUser(userdata);

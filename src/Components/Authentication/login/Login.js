@@ -36,10 +36,13 @@ const Login = () => {
         data
       );
       if (res.status === 200) {
-        console.log(res);
         sessionStorage.setItem("aamartaka", JSON.stringify(res?.data));
         dispatch(saveUser());
-        navigate(from);
+        // window.location.reload();
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+
         // dispatch(isLoaDing(false));
       }
     };
