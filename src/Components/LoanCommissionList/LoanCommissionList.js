@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 
 const api = `${process.env.REACT_APP_HOST_URL}/api/loan_commission/`;
 
@@ -45,6 +46,7 @@ const LoanCommissionList = () => {
   };
   return (
     <div className=" h-screen p-3 m-3">
+      <HeadingTitle title="Loan Commission List" />
       <div className=" h-screen p-3 m-3">
         <div className="flex flex-col mt-8">
           <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import EditUser from "./EditUser";
 import Swal from "sweetalert2";
 import axios from "axios";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 
 const ManageUser = () => {
   const [users, setUsers] = useState([]);
@@ -59,9 +60,15 @@ const ManageUser = () => {
   return (
     <div className=" h-screen p-3 overflow-scroll scroll ">
       {userId ? (
-        <EditUser data={singleUser} id={userId} />
+        <>
+          <HeadingTitle title="Edit User" />
+          <EditUser data={singleUser} id={userId} />
+        </>
       ) : (
-        <UserTable deleteAlert={deleteAlert} data={users} />
+        <>
+          <HeadingTitle title="User List" />
+          <UserTable deleteAlert={deleteAlert} data={users} />
+        </>
       )}
     </div>
   );

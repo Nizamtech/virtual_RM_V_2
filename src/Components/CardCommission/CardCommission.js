@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Router, useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 import CardCommissionTest from "./CardCommissionTest/CardCommissionTest";
 
 const CardCommission = ({ vrmUser, commission }) => {
@@ -84,6 +85,7 @@ const CardCommission = ({ vrmUser, commission }) => {
 
   return (
     <div className="h-screen  overflow-scroll p-3 my-3 ">
+      <HeadingTitle title="Add Card  Commission" />
       <div className="w-full mb-6 md:mb-0  ">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

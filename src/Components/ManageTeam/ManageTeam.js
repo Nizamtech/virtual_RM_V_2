@@ -46,6 +46,7 @@ const ManageTeam = () => {
 
   return (
     <div className=" h-screen p-3">
+      <h1 className=" ml-2 text-2xl text-gray-500 mt-3"> Team List </h1>
       <DataShowTable handleDelete={handleDelete} item={teamData} />
     </div>
   );

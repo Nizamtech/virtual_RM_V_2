@@ -8,6 +8,7 @@ import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { convertToHTML } from "draft-convert";
 import { useNavigate } from "react-router-dom";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 const AddFeature = () => {
   const router = useNavigate();
   const [inst, setInst] = useState([]);
@@ -102,6 +103,7 @@ const AddFeature = () => {
 
   return (
     <div className=" my-3 p3 mx-6">
+      <HeadingTitle title="Add New Feature" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full mb-6 md:mb-0 z-50">
           <label

@@ -5,6 +5,7 @@ import LeadListTable from "./LeadListTable";
 
 import axios from "axios";
 import Swal from "sweetalert2";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 
 const LeadList = ({ vrmID, data }) => {
   // const { id } = useParams();
@@ -83,6 +84,7 @@ const LeadList = ({ vrmID, data }) => {
 
   return (
     <div className=" h-screen mx-3 p-3">
+      <HeadingTitle title="Lead List" />
       <div className=" float-right bg-green-400 px-4 py-2 rounded-lg text-white font-bold">
         {" "}
         <Link to={vrmID ? `/newlead/${data?.id}` : `/newlead`}>New Lead</Link>

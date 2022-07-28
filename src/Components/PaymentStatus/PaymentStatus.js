@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 import PaymentStatusTable from "./PaymentStatusTable";
 
 const PaymentStatus = () => {
@@ -18,6 +19,7 @@ const PaymentStatus = () => {
 
   return (
     <div className=" h-screen m-3 p-3">
+      <HeadingTitle title="Payment Details" />
       <PaymentStatusTable data={data} />
     </div>
   );

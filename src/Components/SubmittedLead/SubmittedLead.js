@@ -1,4 +1,5 @@
 import React from "react";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 import SubmittedLeadTable from "./SubmittedLeadTable";
 const data = [
   {
@@ -71,7 +72,7 @@ const data = [
 const SubmittedLead = () => {
   return (
     <div className="h-screen m-3 p-3">
-      <h1 className=" text-lg text-sky-400">Submitted Lead</h1>
+      <HeadingTitle title="Submitted Lead" />
       <SubmittedLeadTable data={data} />
     </div>
   );

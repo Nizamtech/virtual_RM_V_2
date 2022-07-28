@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 const api = `${process.env.REACT_APP_HOST_URL}/api/card_commission/`;
 
 const CardCommissionList = () => {
@@ -41,6 +42,7 @@ const CardCommissionList = () => {
 
   return (
     <div className=" h-screen p-3 m-3">
+      <HeadingTitle title=" Card Commission List" />
       <div className="flex flex-col mt-8">
         <div className="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">

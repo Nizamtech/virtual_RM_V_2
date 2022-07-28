@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import VrmListTable from "./VrmListTable";
 import axios from "axios";
 import Swal from "sweetalert2";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 
 const VRMList = () => {
   const [users, setUsers] = useState([]);
@@ -38,6 +39,7 @@ const VRMList = () => {
 
   return (
     <div className=" h-screen p-3 m2">
+      <HeadingTitle title="VRM User List" />
       <VrmListTable deleteAlert={deleteAlert} users={users} />
     </div>
   );
