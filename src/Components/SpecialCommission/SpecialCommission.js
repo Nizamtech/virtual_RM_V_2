@@ -38,7 +38,9 @@ const SpecialCommission = () => {
       <HeadingTitle title="Add Special Commission " />
       <div className=" w-full flex justify-between items-center">
         <div className=" mx-2 w-1/2">
-          <label className=" text-lg text-gray-400 my-5">Product Type</label>
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            Product Type
+          </label>
           <select
             onClick={handleCommission}
             className="option h-12 p-2 w-full border border-gray-300 mt-5"
@@ -50,7 +52,9 @@ const SpecialCommission = () => {
           </select>
         </div>
         <div className="mx-2 w-1/2">
-          <label className=" text-lg text-gray-400 my-5 ">Expire date </label>
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+            Expire date{" "}
+          </label>
           <input
             type="date"
             onChange={handleCommission}

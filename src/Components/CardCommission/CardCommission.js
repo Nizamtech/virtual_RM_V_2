@@ -85,7 +85,7 @@ const CardCommission = ({ vrmUser, commission }) => {
 
   return (
     <div className="h-screen  overflow-scroll p-3 my-3 ">
-      <HeadingTitle title="Add Card  Commission" />
+      {!vrmUser && <HeadingTitle title="Add Card  Commission" />}
       <div className="w-full mb-6 md:mb-0  ">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"

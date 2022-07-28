@@ -92,7 +92,8 @@ function LoanCommissionNew({ vrmUser, commission }) {
 
   return (
     <div className=" h-screen m-3 p-3">
-      <HeadingTitle title="Add Loan Commission " />
+      {!vrmUser && <HeadingTitle title="Add Loan Commission " />}
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="w-full mb-6 md:mb-0">
           <label
