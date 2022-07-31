@@ -6,20 +6,25 @@ import PaymentHistoryTable from "./PaymentHistoryTable";
 const PaymentHistory = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const [name, setName] = useState({});
 
   useEffect(() => {
     const loadData = async () => {
       const res = await axios.get(
         `${process.env.REACT_APP_HOST_URL}/api/payment/?agent=${id}`
       );
-      setData(res?.data.results);
+
+      const result = res?.data?.results;
+      const singleUserData = result?.find((item) => item?.agent == id);
+      setName(singleUserData);
+      setData(res?.data?.results);
     };
     loadData();
   }, [id]);
-  console.log("pament History", data);
+
   return (
     <div className=" h-screen m-3 p-3">
-      <PaymentHistoryTable data={data} />
+      <PaymentHistoryTable name={name} data={data} />
     </div>
   );
 };

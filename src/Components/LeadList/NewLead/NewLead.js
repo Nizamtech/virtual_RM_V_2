@@ -3,6 +3,7 @@ import Select from "react-select";
 import axios from "axios";
 import { SuccessAlert } from "../../../Shared/Alert/SuccessAlert";
 import { useNavigate, useParams } from "react-router-dom";
+import HeadingTitle from "../../../Shared/HeadingTitle/HeadingTitle";
 const NewLead = () => {
   const { id } = useParams();
   const [profession, setProfession] = useState("");
@@ -16,6 +17,7 @@ const NewLead = () => {
   const [company, setCompany] = useState("");
   const [vrmAgentData, setVrmAgentData] = useState([]);
   const [data, setData] = useState([]);
+  const [vRMUser, setVRMUser] = useState([]);
 
   const [selectedOption, setSelectedOption] = useState({
     name: "",
@@ -49,8 +51,14 @@ const NewLead = () => {
         .then((response) => response.json())
         .then((data) => setVrmAgentData(data?.results));
     };
+    const loadSingleVRMAgent = () => {
+      fetch(`${process.env.REACT_APP_HOST_URL}/api/agent/register/${id}`)
+        .then((response) => response.json())
+        .then((data) => setVRMUser(data));
+    };
     loadVRMAgent();
-  }, []);
+    loadSingleVRMAgent();
+  }, [id]);
 
   let instituteName = data?.map(function (item) {
     return { value: item?.name, label: item?.name };
@@ -105,6 +113,7 @@ const NewLead = () => {
     let vrmUser;
     if (id) {
       vrmUser = vrmAgentData?.find((item) => item?.id == id);
+      setVRMUser(vrmUser);
     }
     const data = {
       ...selectedOption,
@@ -136,9 +145,17 @@ const NewLead = () => {
         }
       });
   };
-
+  console.log("vrmAgentData", vRMUser);
   return (
     <div className=" m-3 p-3 h-screen">
+      <div className=" flex  items-center">
+        <HeadingTitle title="New Lead" />{" "}
+        {vRMUser?.id && (
+          <h1 className="mt-0 ml-2 text-2xl text-sky-500 mb-5 ">
+            / {vRMUser?.first_name + " " + vRMUser?.last_name}
+          </h1>
+        )}
+      </div>
       <div className="mx-2 w-full  flex justify-items-center justify-center">
         <form onSubmit={handleSubmit}>
           <label> Name</label>

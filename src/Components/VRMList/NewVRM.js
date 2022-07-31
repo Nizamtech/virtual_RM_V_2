@@ -3,6 +3,7 @@ import Select from "react-select";
 import { SuccessAlert } from "../../Shared/Alert/SuccessAlert";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
 
 const NewVRM = () => {
   const router = useNavigate();
@@ -39,7 +40,7 @@ const NewVRM = () => {
 
   return (
     <div className=" h-screen m-3 p-3 ">
-      {" "}
+      <HeadingTitle title="Add New VRM" />
       <form onSubmit={handleSubmit} className=" mx-2">
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">

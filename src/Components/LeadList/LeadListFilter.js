@@ -48,6 +48,7 @@ const LeadListFilter = ({
   }, []);
 
   const statusData = [
+    { label: "Select", value: "" },
     { label: "New", value: "New" },
     { label: "CNI", value: "CNI" },
     { label: "Non Eligible", value: "Non Eligible" },

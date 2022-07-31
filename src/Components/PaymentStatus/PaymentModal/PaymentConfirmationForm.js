@@ -16,14 +16,13 @@ const PaymentConfirmationForm = ({
   const [image, setImage] = useState(null);
 
   // console.log("paymentReqData", paymentReqData?.created_at);
-  const created_Date = new Date(
-    paymentReqData?.created_at
-  ).toLocaleDateString();
-  const today = new Date().toLocaleDateString();
+  const created_Date = new Date(paymentReqData?.created_at);
+  const today = new Date();
   // const totalDay = today.setDate(today.getDate - created_Date);
 
-  console.log("dlkfj", today - created_Date);
-  console.log("dlkfj", Date(today - created_Date));
+  const total_time = today.getTime() - created_Date.getTime();
+  const total_day = Math.trunc(total_time / (1000 * 3600 * 24));
+
   useEffect(() => {
     setPaymentReqData(data);
   }, [id, data]);
@@ -50,12 +49,19 @@ const PaymentConfirmationForm = ({
         newData = {
           status: status,
           transaction_id: transactionId,
+          payment_disbursed_date: created_Date?.toLocaleDateString(),
+          total_hr: total_day,
         };
       }
       if (image) {
         newData = new FormData();
         newData.append("pay_slip", image);
         newData.append("status", status);
+        newData.append(
+          "payment_disbursed_date",
+          created_Date?.toLocaleDateString()
+        );
+        newData.append(" total_hr", total_day);
       }
 
       const config = {
