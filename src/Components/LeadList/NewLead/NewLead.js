@@ -49,7 +49,10 @@ const NewLead = () => {
     const loadVRMAgent = () => {
       fetch(`${process.env.REACT_APP_HOST_URL}/api/agent/register/`)
         .then((response) => response.json())
-        .then((data) => setVrmAgentData(data?.results));
+        .then((data) => {
+          setVrmAgentData(data?.results);
+          console.log(data);
+        });
     };
     const loadSingleVRMAgent = () => {
       fetch(`${process.env.REACT_APP_HOST_URL}/api/agent/register/${id}`)
@@ -68,7 +71,11 @@ const NewLead = () => {
   });
 
   const option2 = vrmAgentData?.map((item) => {
-    return { value: item.id, label: item?.first_name + item?.last_name };
+    return {
+      value: item.id,
+      label:
+        item?.username + "  " + `(${item?.first_name}  ${item?.last_name})`,
+    };
   });
 
   const options = [
@@ -145,7 +152,8 @@ const NewLead = () => {
         }
       });
   };
-  console.log("vrmAgentData", vRMUser);
+  // console.log("",vrmAgentData);
+  console.log("vrmAgentData", vrmAgentData);
   return (
     <div className=" m-3 p-3 h-screen">
       <div className=" flex  items-center">
