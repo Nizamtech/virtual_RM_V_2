@@ -50,6 +50,7 @@ import { saveUser } from "./Redux/Slices/userSlice";
 import { useEffect, useState } from "react";
 import LoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew/LoanCommissionNew";
 import EditLoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew/EditLoanCommissionNew";
+import NewVRM from "./Components/VRMList/NewVRM";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -154,6 +155,7 @@ function App() {
             <Route path="/viewloan/:id" element={<LoanCommissionView />} />
             <Route path="/editloan/:id" element={<EditLoanCommissionNew />} />
             <Route path="/vrmlist" element={<VRMList />} />
+            <Route path="/newvrm" element={<NewVRM />} />
             <Route path="/vrmlist/:id" element={<VRMListEdit />} />
             <Route path="/vrmaccount/:vrmID" element={<VRMAccount />} />
             <Route path="/account" element={<Account />} />

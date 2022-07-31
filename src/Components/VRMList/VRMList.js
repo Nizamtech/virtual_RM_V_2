@@ -3,6 +3,7 @@ import VrmListTable from "./VrmListTable";
 import axios from "axios";
 import Swal from "sweetalert2";
 import HeadingTitle from "../../Shared/HeadingTitle/HeadingTitle";
+import { Link } from "react-router-dom";
 
 const VRMList = () => {
   const [users, setUsers] = useState([]);
@@ -39,7 +40,18 @@ const VRMList = () => {
 
   return (
     <div className=" h-screen p-3 m2">
-      <HeadingTitle title="VRM User List" />
+      <div className=" flex justify-between items-center">
+        <HeadingTitle title="VRM User List" />
+        <div>
+          <Link
+            to="/newvrm"
+            className=" bg-green-400 rounded-lg text-white px-4 py-2"
+          >
+            {" "}
+            New VRM
+          </Link>
+        </div>
+      </div>
       <VrmListTable deleteAlert={deleteAlert} users={users} />
     </div>
   );

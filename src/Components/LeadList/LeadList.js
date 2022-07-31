@@ -16,15 +16,13 @@ const LeadList = ({ vrmID, data }) => {
   const [bank, setBank] = useState("");
   const [andSign, setandSign] = useState([]);
   const [mobile, setMobile] = useState("");
+  const [value, onChange] = useState([new Date(), new Date()]);
 
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: "selection",
-    },
-  ]);
-
+  const dete = {
+    startDate: value[0].toLocaleDateString(),
+    endDate: value[1].toLocaleDateString(),
+  };
+  console.log(dete);
   const [api, setApi] = useState("api/lead");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_URL}/${api}`)
@@ -96,10 +94,11 @@ const LeadList = ({ vrmID, data }) => {
         setStatus={setStatus}
         setProductType={setProductType}
         setBank={setBank}
-        setState={setState}
         handleFilter={handleFilter}
         setMobile={setMobile}
         vrmID={vrmID}
+        value={value}
+        onChange={onChange}
       />
       <LeadListTable deleteAlert={deleteAlert} data={leadList} />
     </div>

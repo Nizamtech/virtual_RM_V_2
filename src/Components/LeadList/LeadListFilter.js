@@ -11,12 +11,13 @@ const LeadListFilter = ({
   setStatus,
   setProductType,
   setBank,
-  setState,
   handleFilter,
   setandSign,
   setMobile,
   vrmID,
   handleReset,
+  value,
+  onChange,
 }) => {
   const [ins, setIns] = useState([]);
   const [vrmAgentData, setVrmAgentData] = useState([]);
@@ -135,7 +136,7 @@ const LeadListFilter = ({
           <div className="w-full ">
             <h1 className=" ml-1 my-1 text-lg">Date </h1>
 
-            <RangeCalender />
+            <RangeCalender value={value} onChange={onChange} />
           </div>
           <div className="flex justify-between items-center">
             <button onClick={handleFilter} className="mt-8 ml-2">
