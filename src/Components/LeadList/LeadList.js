@@ -18,11 +18,13 @@ const LeadList = ({ vrmID, data }) => {
   const [mobile, setMobile] = useState("");
   const [value, onChange] = useState([new Date(), new Date()]);
 
-  const dete = {
+  const date = {
     startDate: value[0].toLocaleDateString(),
     endDate: value[1].toLocaleDateString(),
   };
-  console.log(dete);
+
+  console.log(date);
+
   const [api, setApi] = useState("api/lead");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_HOST_URL}/${api}`)
@@ -43,7 +45,8 @@ const LeadList = ({ vrmID, data }) => {
       productType && `interested_product=${data?.productTypeValue}`
     }&${bank && `interested_bank=${data?.bankValue}`}&${
       vrmAgent && `user=${data?.user}`
-    }&${mobile && `mobile_no=${mobile}`}`;
+    }&${date && `created_at=${date}`}
+    &${mobile && `mobile_no=${mobile}`}`;
 
     setApi(URL);
   };
@@ -80,6 +83,7 @@ const LeadList = ({ vrmID, data }) => {
     });
   };
 
+  console.log(leadList);
   return (
     <div className=" h-screen mx-3 p-3">
       <HeadingTitle title="Lead List" />

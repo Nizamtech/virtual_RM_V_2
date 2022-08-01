@@ -117,9 +117,9 @@ const SubmittedLeadView = () => {
                       Profession Type
                     </th>
 
-                    <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    {/* <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                       Follow Up
-                    </th>
+                    </th> */}
                     <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                       Assign Member:
                     </th>
@@ -171,11 +171,11 @@ const SubmittedLeadView = () => {
                         {submittedLead?.profession_type_name}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                    {/* <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">
                         {submittedLead?.application_followup?.user}
                       </div>
-                    </td>
+                    </td> */}
 
                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                       <div className="text-sm leading-5 text-gray-500">

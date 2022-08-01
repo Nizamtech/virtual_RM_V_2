@@ -19,7 +19,7 @@ const SpecialCommissionEdit = () => {
         setSpecialCommission(res.data);
       });
   }, [id]);
-  console.log(id, specialCommission);
+
   return (
     <div className="  h-screen m- p-3">
       {specialCommission?.product === 1 && (

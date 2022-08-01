@@ -16,9 +16,6 @@ const EditLoanCommissionNew = ({ status, specialData }) => {
     { product_type: "", from: 0, commission: 0, to: 0 },
   ]);
 
-  // console.log("loanCommission", loanCommission);
-  console.log("{ loanCommission?.bank_name}", loanCommission?.bank_name);
-
   useEffect(() => {
     if (specialData) {
       setProductType(specialData?.commission);

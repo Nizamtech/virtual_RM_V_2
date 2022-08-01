@@ -167,6 +167,7 @@ details > summary::-webkit-details-marker {
 .Collapsible__trigger.is-open svg {
   transform: rotate(180deg);
 }
+
 .Collapsible {
   width: 100%;
   padding-left: 4px;
@@ -200,4 +201,15 @@ input::file-selector-button {
   color: rgb(148, 146, 146);
   padding: 0.5em;
   border-radius: 3px;
+}
+
+.show-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 200px;
+  background: white;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
 }

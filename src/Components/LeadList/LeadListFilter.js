@@ -27,6 +27,11 @@ const LeadListFilter = ({
     setandSign(e.value);
   };
 
+  const select = [{ name: "", value: "", id: 0 }];
+  const select2 = [
+    { username: "", last_name: "", first_name: "", value: "", id: "" },
+  ];
+
   useEffect(() => {
     const laodIns = () => {
       fetch("https://admin.aamartaka.com/api/v1/loans/institutes/")
@@ -35,13 +40,13 @@ const LeadListFilter = ({
           // const rest = res.results;
           const result = res.filter((item) => item.is_partner === true);
           // console.log(result);
-          setIns(result);
+          setIns([...select, result]);
         });
     };
     const loadVRMAgent = () => {
       fetch(`${process.env.REACT_APP_HOST_URL}/api/agent/register/`)
         .then((response) => response.json())
-        .then((data) => setVrmAgentData(data?.results));
+        .then((data) => setVrmAgentData([...select2, data?.results]));
     };
     loadVRMAgent();
     laodIns();
@@ -56,6 +61,7 @@ const LeadListFilter = ({
     { value: "Submitted", label: "Submitted" },
   ];
   const productTypeData = [
+    { label: "Select", value: "" },
     { value: 1, label: "Credit Card" },
     { value: 2, label: "Personal Loan" },
     { value: 3, label: "Home Loan" },
@@ -63,11 +69,14 @@ const LeadListFilter = ({
     { value: 4, label: "Land Loan" },
   ];
 
-  const option = ins?.map((item) => {
-    return { value: item.name, label: item.name };
+  const option = ins?.flat()?.map((item) => {
+    return { value: item.name, label: item.name || "Select" };
   });
-  const option2 = vrmAgentData?.map((item) => {
-    return { value: item.id, label: item?.first_name + item?.last_name };
+  const option2 = vrmAgentData?.flat()?.map((item) => {
+    return {
+      value: item.id,
+      label: item?.first_name + item?.last_name || "Select",
+    };
   });
 
   return (
@@ -117,10 +126,11 @@ const LeadListFilter = ({
             <h1 className=" ml-1 my-1 text-lg">Bank Type</h1>
             <Select
               required
-              name="vrmAgent"
+              name="bank"
               // onClick={handleSelect}
               onChange={setBank}
               options={option}
+              selectedValue={{ label: "Select", value: "" }}
               className="w-full border-nonetext-gray-700  rounded  mb-1 leading-tight focus:outline-none focus:bg-white"
             />
           </div>

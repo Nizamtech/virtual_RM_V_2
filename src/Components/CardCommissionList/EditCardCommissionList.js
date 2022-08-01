@@ -23,9 +23,9 @@ const EditCardCommissionList = ({ status, specialData }) => {
   ]);
 
   const ddd = d.filter((item) => item);
-  console.log(ddd);
-  console.log("testData?.cardComission", testData?.cardComission);
-  console.log("d", d);
+  // console.log(ddd);
+  // console.log("testData?.cardComission", testData?.cardComission);
+  // console.log("d", d);
   // console.log("loaded Data an lod Edit Data", cardType);
   const handleData = () => {
     setD([...d, testData?.cardComission]);
@@ -83,7 +83,7 @@ const EditCardCommissionList = ({ status, specialData }) => {
         };
         API = `api/card_commission`;
       }
-      console.log("akdfjakfj", data);
+
       await axios
         .put(`${process.env.REACT_APP_HOST_URL}/${API}/${id}/`, data)
         .then((result) => {

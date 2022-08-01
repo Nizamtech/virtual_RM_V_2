@@ -14,11 +14,15 @@ function Content({ children, active, id }) {
 }
 
 export default function Tabs({ items, data }) {
-  const [active, setActive] = useState(items[0]);
+  const [active, setActive] = useState({
+    id: "Dahboard",
+    label: "Dahboard",
+    content: "Dashboard",
+  });
 
-  // useEffect(() => {
-  //   setActive(items[0]);
-  // }, []);
+  useEffect(() => {
+    setActive(items[0]);
+  }, [items]);
 
   return (
     <>

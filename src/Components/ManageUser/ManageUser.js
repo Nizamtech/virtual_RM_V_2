@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UserTable from "./UserTable";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import EditUser from "./EditUser";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -62,11 +62,21 @@ const ManageUser = () => {
       {userId ? (
         <>
           <HeadingTitle title="Edit User" />
+
           <EditUser data={singleUser} id={userId} />
         </>
       ) : (
         <>
-          <HeadingTitle title="User List" />
+          <div className=" flex justify-between items-center">
+            <HeadingTitle title="User List" />
+            <Link
+              className=" bg-green-400 rounded-lg px-6 py-2 text-white"
+              to="/createuser"
+            >
+              Create User{" "}
+            </Link>
+          </div>
+
           <UserTable deleteAlert={deleteAlert} data={users} />
         </>
       )}

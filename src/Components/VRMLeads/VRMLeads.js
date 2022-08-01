@@ -39,20 +39,17 @@ const VRMLeads = ({ vrmID, data }) => {
       mobile_no: mobile,
       user: vrmAgent?.value,
     };
-    console.log(data);
 
     const URL = `api/lead/?${status && `status=${data?.statusValue}`}&${
       productType && `interested_product=${data?.productTypeValue}`
     }&${bank && `interested_bank=${data?.bankValue}`}&${
       vrmAgent && `user=${data?.user}`
     }&${mobile && `mobile_no=${mobile}`}`;
-    console.log(URL);
+
     setApi(URL);
   };
 
   const deleteAlert = (api, id) => {
-    console.log(api + id);
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -73,8 +70,6 @@ const VRMLeads = ({ vrmID, data }) => {
       }
     });
   };
-
-  console.log("lldol", data);
 
   return (
     <div className=" h-screen mx-3 p-3">

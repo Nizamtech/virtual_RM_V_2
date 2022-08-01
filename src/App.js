@@ -51,6 +51,8 @@ import { useEffect, useState } from "react";
 import LoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew/LoanCommissionNew";
 import EditLoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew/EditLoanCommissionNew";
 import NewVRM from "./Components/VRMList/NewVRM";
+import Test4 from "./Components/Test4/Test4";
+import TogleSidebar from "./Shared/TogleSidebar/TogleSidebar";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -70,12 +72,13 @@ function App() {
           <Sidebar />
         </div>
       )}
-
+      <TogleSidebar />
       <div
         className={`${
           user && user ? "lg:col-span-10" : "lg:col-span-12"
         }  col-span-12 `}
       >
+        {" "}
         <Layout>
           <Routes>
             <Route
@@ -192,6 +195,7 @@ function App() {
             <Route path="/test2" element={<Test2 />} />
             <Route path="/test" element={<TestCardComission />} />
             <Route path="/test1" element={<LoanCommissionNew />} />
+            <Route path="/test4" element={<Test4 />} />
             <Route path="/test1/:id" element={<EditLoanCommissionNew />} />
           </Routes>
         </Layout>

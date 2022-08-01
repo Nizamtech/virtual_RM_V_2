@@ -95,10 +95,10 @@ const LeadListTable = ({ data, deleteAlert }) => {
                       </div>
                     </td>
                     <td className=" flex justify-between px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-gray-200">
-                      <button>
+                      {/* <button>
                         {" "}
                         <FontAwesomeIcon icon={faEye} className="h-6 w-6" />
-                      </button>
+                      </button> */}
                       <Link to={`/leadlist/${item.id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

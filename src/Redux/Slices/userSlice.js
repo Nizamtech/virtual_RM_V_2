@@ -12,6 +12,7 @@ const initialState = {
   inputList: [{ product_type: "", from: 0, commission: 0, to: 0 }],
   cardtype: [],
   cardList: [],
+  sidebar: false,
 };
 
 export const userSlice = createSlice({
@@ -100,11 +101,15 @@ export const userSlice = createSlice({
       };
       loadData();
     },
+    handleSideBar: (state, action) => {
+      state.sidebar = !state.sidebar;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
 export const {
+  handleSideBar,
   RemoveClick,
   AddClick,
   inputChange,

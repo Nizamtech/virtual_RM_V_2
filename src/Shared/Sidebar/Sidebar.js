@@ -35,7 +35,7 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-54  " aria-label="Sidebar ">
+    <aside className="w-54  h-screen  " aria-label="Sidebar ">
       <div className="overflow-y-auto overflow-x-hidden py-4  bg-[#1E40AF] rounded dark:bg-gray-800">
         <img
           src="https://assets.aamartaka.com/static/img/logo.188499c90b19.png"
