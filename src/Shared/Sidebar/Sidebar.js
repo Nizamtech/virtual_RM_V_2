@@ -27,7 +27,11 @@ import { GiPayMoney } from "react-icons/gi";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { GiMoneyStack } from "react-icons/gi";
+import { FaTimes } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { handleSideBar } from "../../Redux/Slices/userSlice";
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const loccation = useLocation();
 
   let activeStyle = {
@@ -35,13 +39,20 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-54  h-screen  " aria-label="Sidebar ">
-      <div className="overflow-y-auto overflow-x-hidden py-4  bg-[#1E40AF] rounded dark:bg-gray-800">
-        <img
-          src="https://assets.aamartaka.com/static/img/logo.188499c90b19.png"
-          alt=""
-          className=" h-10 mx-auto"
-        />
+    <aside className=" w-54  h-screen  " aria-label="Sidebar ">
+      <div className="overflow-y-auto overflow-x-hidden py-4  bg-[#1E40AF]  dark:bg-gray-800">
+        <div className=" flex justify-center items-center">
+          <img
+            src="https://assets.aamartaka.com/static/img/logo.188499c90b19.png"
+            alt=""
+            className=" h-10 mx-auto"
+          />
+          <div className="p-4 flex justify-between items-center">
+            <button onClick={() => dispatch(handleSideBar())}>
+              <FaTimes className=" block lg:hidden text-xl text-white" />
+            </button>
+          </div>
+        </div>
 
         <hr className=" border-dotted my-2" />
 
@@ -66,6 +77,7 @@ const Sidebar = () => {
             >
               <li className="  bg-[#1B399D] text-white w-full my-2 pb-2">
                 <NavLink
+                  onClick={() => dispatch(handleSideBar())}
                   to="/createteam"
                   className={`${
                     loccation.pathname.includes("createteam") && "activeLink"
@@ -77,6 +89,7 @@ const Sidebar = () => {
                   <span className="ml-3">Create Team</span>
                 </NavLink>
                 <NavLink
+                  onClick={() => dispatch(handleSideBar())}
                   to="/manageteam"
                   className={`${
                     loccation.pathname.includes("manageteam") && "activeLink"
@@ -87,6 +100,7 @@ const Sidebar = () => {
                   <span className="ml-3">Manage Team</span>
                 </NavLink>
                 <NavLink
+                  onClick={() => dispatch(handleSideBar())}
                   to="/createuser"
                   className={`${
                     loccation.pathname.includes("createuser") && "activeLink"
@@ -97,6 +111,7 @@ const Sidebar = () => {
                   <span className="ml-3">Create User</span>
                 </NavLink>
                 <NavLink
+                  onClick={() => dispatch(handleSideBar())}
                   to="/manageuser"
                   className={`${
                     loccation.pathname.includes("manageuser") && "activeLink"

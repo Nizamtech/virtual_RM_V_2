@@ -10,14 +10,10 @@ const TogleSidebar = () => {
   //   const { toggleSidebar,  } = useGlobalContext();
 
   return (
-    <aside className={`show-sidebar ${sidebar ? "flex" : "hidden"}`}>
-      <div className="p-4 flex justify-between items-center">
-        {/* <h3 className="text-2xl">Sidebar</h3> */}
-        <button onClick={() => dispatch(handleSideBar())}>
-          <FaTimes />
-        </button>
-      </div>
-
+    <aside
+      style={{ zIndex: 60 }}
+      className={`show-sidebar mt-2.5 h-screen  ${sidebar ? "flex" : "hidden"}`}
+    >
       <Sidebar />
     </aside>
   );

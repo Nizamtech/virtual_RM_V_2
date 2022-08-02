@@ -18,7 +18,7 @@ const Dashboard = () => {
   };
 
   const data = useSelector((state) => state.reducer);
-  console.log("from Dashboard", data);
+
   return (
     <div className=" h-screen p-3 my-3">
       <h1>This is Dashboard</h1>

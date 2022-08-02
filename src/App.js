@@ -53,26 +53,26 @@ import EditLoanCommissionNew from "./Components/LoanCommission/LoanCommissionNew
 import NewVRM from "./Components/VRMList/NewVRM";
 import Test4 from "./Components/Test4/Test4";
 import TogleSidebar from "./Shared/TogleSidebar/TogleSidebar";
+import Chat from "./Components/Chat/Chat";
 
 function App() {
   const [user, setUser] = useState([]);
-
-  const reload = window.location;
-  console.log("reload", reload);
 
   useEffect(() => {
     const userdata = sessionStorage.getItem("aamartaka");
     setUser(userdata);
   }, [user]);
-  console.log("from App", user?.user_data);
+
   return (
-    <div className="grid grid-cols-12 mt-5 mx-5">
+    <div className="grid grid-cols-12 mt-5 mx-5 ">
       {user && (
-        <div className=" hidden lg:block col-span-2 overflow-x-hidden ">
+        <div className=" hidden lg:block col-span-2 overflow-x-hidden example  ">
           <Sidebar />
         </div>
       )}
-      <TogleSidebar />
+      <div className=" block lg:hidden example ">
+        <TogleSidebar />
+      </div>
       <div
         className={`${
           user && user ? "lg:col-span-10" : "lg:col-span-12"
@@ -196,6 +196,7 @@ function App() {
             <Route path="/test" element={<TestCardComission />} />
             <Route path="/test1" element={<LoanCommissionNew />} />
             <Route path="/test4" element={<Test4 />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="/test1/:id" element={<EditLoanCommissionNew />} />
           </Routes>
         </Layout>

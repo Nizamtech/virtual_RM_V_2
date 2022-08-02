@@ -171,7 +171,7 @@ const CreateUserForm = () => {
       </div>
 
       <button
-        className="bg-green-400 py-3 px-4 float-right rounded-lg my-4 w-32 text-white text-lg "
+        className="bg-green-400 py-2 px-4 float-right rounded-lg my-4 w-32 text-white text-lg "
         type="submit"
       >
         Submit
